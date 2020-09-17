@@ -1,0 +1,106 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'VIEW RESTAURANT' | translate}}
+                        </h1>
+                    </div>
+                    <div class="row form-group" style="display: flex;justify-content: flex-end" >
+                     <div class="col-md-2" >
+                    <button type="button" class="btn btn-success btn-lg" style="width: 50%; height: 80%;padding-top: 1%;margin-left: 50% "  routerLink="/restaurant-management" >Back</button>
+                    </div>
+                  </div>
+
+                     <!-- tab section -->
+                     <div class="tab-section">
+                        <div class="tab">
+                            <button class="tablinks" [ngClass]="tabView == 'companyDetails' ? 'active': ''"
+                                (click)="viewTab('companyDetails')">Company Details</button>
+                            <button class="tablinks" [ngClass]="tabView == 'restaurentDetails' ? 'active': ''"
+                                (click)="viewTab('restaurentDetails')">Restaurant Details</button>
+                                <button class="tablinks" [ngClass]="tabView == 'itemDetails' ? 'active': ''"
+                                (click)="viewTab('itemDetails')">Item Details</button>
+                                 <button class="tablinks" [ngClass]="tabView == 'bankDetails' ? 'active': ''"
+                                (click)="viewTab('bankDetails')">Bank Details</button>
+                        </div>
+                    </div>
+
+                    <div class="box-header  box-hearder-564">
+                        <form class="" [formGroup]="form">
+                             <div class="row form-group" style="display: flex;justify-content: flex-end" >
+                     <div class="col-md-2" >
+                    <button type="button" class="btn btn-success btn-lg" style="width: 50%; height: 80%;padding-top: 1%;margin-left: 50% "  routerLink="/restaurant-management" >Edit</button>
+                    </div>
+                  </div>
+                            <div class="cusine" >
+                                <div class="col-md-12" >
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3"> Bank Name</label>
+                                            <span class="col-md-1">:</span>
+                                            <p>Sbi Bank</p>
+                                        </div>
+                                        <div  class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3 text-nowrap"> Account Number</label>
+                                            <span class="col-md-1"> : </span>
+                                            <p>90849378473847837483</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3"> IFSC Code</label>
+                                            <span class="col-md-1">:</span>
+                                            <p>9834UT4UUR8UF84F</p>
+                                            
+                                        </div>
+                                        <div  class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3 text-nowrap">Account Holder Name</label>
+                                            <span class="col-md-1"> : </span>
+                                            <p>NISHTHA MISHRA</p>
+                                          
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3" style="white-space: nowrap"> Select Document</label>
+                                            <span class="col-md-1">:</span>
+                                            <p>Passbook</p>
+                                        </div>
+                                        <div  class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3 text-nowrap">Document Image</label>
+                                            <span class="col-md-1"> : </span>
+                                            <p>passbook.jpg</p>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                           
+                            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+
+                                   
+                            </div>
+                        </form>
+                    </div>
+                    
+                 
+                
+                 
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer class="footer-text ">
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+
+</footer>

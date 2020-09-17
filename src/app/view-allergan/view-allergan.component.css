@@ -1,0 +1,50 @@
+
+.int {
+    width: 100%;
+    height: 41px;
+    max-width: 453px;
+}
+
+.textareaa {
+    width: 100%;
+    max-width: 453px;
+    /* text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; */
+    word-break: break-all;
+}
+.allergans-div{
+    width: 100%;
+    max-width: 500px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    padding: 15px;
+    margin-left: 3px;
+}
+.bbbtn{
+    width: 100%;
+    max-width: 120px;
+    float: right;
+}
+button.btn.btn-primary.btn-block.btn-flat.cusine {
+    background-color: red;
+    border: 1px solid red;
+    width: 100px;
+    margin-top: 30px;
+    border-radius: 5px;
+    height: 44px;
+}
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background-color: #fd1b00;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}

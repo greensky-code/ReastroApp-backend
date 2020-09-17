@@ -1,0 +1,96 @@
+<app-header>
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+  
+    <!-- Main content -->
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'RATE CARD MANAGEMENT' | translate}}
+                        </h1>
+                    </div>
+                    <!-- hgghghghg -->
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                            <div class=" has-search">
+                                <input type="text" class="form-control" (keyup.enter)="searchSubmit()" placeholder="{{'Searchbyrolename' | translate}}" maxlength="50"
+                                    [(ngModel)]="searchRole" (keyup)="searchRoles($event.target.value)" maxlength="50" style="border-radius: 20px;">
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-9" st>
+                            <!-- <div class="btn-div"> -->
+                                <!-- <div style="display: flex;width: 31%;">
+                                    <button type="button" class="btn bg-olive" (click)="searchSubmit()" [disabled]="disabled==true">{{'Submit' | translate}}</button>
+                                    <button type="button" class="btn margin margin1" (click)="reset()">{{'Reset' | translate}}</button>
+                                </div> -->
+                                <div style="display: flex; justify-content: flex-end ">
+                                    <button type="button" class="btn bg-olive margin" style="margin:10px  0px;background-color: #068000!important;" [routerLink]="['/add-rate-card']">{{'ADD' | translate}}</button>
+                                    <!-- <button type="button" class="btn margin margin1" (click)="export()" *ngIf="manageroles?.length!=0">{{'Export' | translate}}</button> -->
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'City' | translate}}</th>
+                                    <th>{{'Pick up' | translate}}</th>
+                                    <th>{{'Drop Off' | translate}}</th>
+                                    <th>{{'5 Star Rating Pay' | translate}}</th>
+                                    <th style="width: 30%;">{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}:index as i" -->
+                                <!-- <tr *ngFor="let data of manageroles | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <th scope="row">{{data.id}}</th>
+                                    <td class="table-width">{{data?.name || '--'}}</td>
+                                    <td>{{data?.created_by || '--'}}</td>
+                                    <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' ||'--') || '--'}}</td>
+                                    <td *ngIf="data?.is_active ==true">Active</td>
+                                    <td *ngIf="data?.is_active !=true">Inactive</td> -->
+                                    <tr>
+                                        <td>Bareilly</td>
+                                        <td>10 INR</td>
+                                        <td>10 INR</td>
+                                        <td>5 INR</td>
+                                    <td class="action">
+                                        <button class="skyblue-btn" [routerLink]="['/rate-assizned-zone']" >{{'Assigned Zones' | translate}}</button>
+                                        <button class="submit" [routerLink]="['/edit-rate-card']" >{{'Edit' | translate}}</button>
+                                        <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
+                                        [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Delete' | translate}}</button>
+                                        <button class="detail" (click)="deleteid(data?.id)" data-toggle="modal" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer')&& (data?.name!='Manager')">{{'Delete' | translate}}</button>
+                                    </td>
+                                <!-- </tr> -->
+                            </tbody>
+                        </table>
+                        <div class="dnf">
+                            <!-- <h3 *ngIf="manageroles?.length==0">Data not found!</h3> -->
+                        </div>
+                    </div>
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="pagination($event)" style="float:right;" *ngIf="manageroles?.length!=0">
+                        </pagination-controls>
+                    </div>
+                  
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+ 
+    <!-- /.content -->
+</div>
+<div class="footer-section">
+    <app-footer></app-footer>
+</div>

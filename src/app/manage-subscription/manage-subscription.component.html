@@ -1,0 +1,356 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                           {{'ManageSubscriptions' | translate}}
+
+                        </h1>
+                    </div>
+                    <div class="three-box">
+                        <div class="row sndRow">
+
+                            <div class="col-md-4">
+                                <div class="cusmanage-box">
+                                    <div class="text-yearly">
+                                        <p><strong>{{'TrialPlan' | translate}}</strong> </p>
+                                        <p>{{trail?.total_trial_days}} Days</p>
+                                        <button class="btn bg-oliveup" data-target="#trail"
+                                            data-toggle="modal">{{'Update' | translate}}</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="cusmanage-box">
+                                    <div class="text-yearly">
+                                        <p><strong>{{'MonthlyPlan' | translate}}</strong> </p>
+                                        <p>{{monthly?.price}} THB</p>
+                                        <button class="btn bg-oliveup" data-target="#monthly"
+                                            data-toggle="modal">{{'Update' | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="cusmanage-box">
+                                    <div class="text-yearly">
+                                        <p><strong>{{'YearlyPlan' | translate}}</strong> </p>
+                                        <p>{{yearly?.price}} THB{{'' | translate}}</p>
+                                        <button class="btn bg-oliveup" data-target="#yearly"
+                                            data-toggle="modal">{{'Update' | translate}}</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <label>{{'PlanHistory' | translate}}</label>
+                    <div class="box-bodysub zui table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th> ID</th>
+                                    <th>{{'Type' | translate}}</th>
+                                    <th>{{'Amount/Trialdays' | translate}}</th>
+                                    <th>{{'StartDate' | translate}}</th>
+                                    <th>{{'EndDate' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let items of subscriptionlist | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <td>{{items?.id}}</td>
+                                    <td>{{items?.subscription_type || '--' }}</td>
+                                    <td *ngIf="items?.subscription_type != 'Trial'">{{items?.price || '--' }}</td>
+                                    <td *ngIf="items?.subscription_type == 'Trial'">{{items?.total_trial_days || '--' }}
+                                    </td>
+                                    <td>{{(items?.created_at | date : 'dd/MM/yyyy, H:mm') || '--'}}</td>
+                                    <td>{{(items?.end_date | date : 'dd/MM/yyyy, H:mm') || '--'}}</td>
+                                    <td class="table-width" *ngIf="items?.is_active == true">{{'Active' | translate}}</td>
+                                    <td class="table-width" *ngIf="items?.is_active == false">{{'Inactive' | translate}}</td>
+
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <h2 *ngIf=" subscriptionlist?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2>
+                    </div>
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="getsubscription($event) " 
+                            *ngIf="subscriptionlist?.length != 0">
+                        </pagination-controls>
+                    </div>
+                </div>
+                <!-- /.box -->
+
+
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>  
+</div>
+<footer class="footer-text">
+
+    <strong>{{'Copyright' | translate}} &copy; 2020 <a href="javascript:;">{{'FoodDelivery' | translate}}</a>.</strong> &nbsp; {{'Allrightsreserved' | translate}}
+
+</footer>
+<!-- /.content -->
+
+<!-- ------------------------------------ trail subscription modal----------------------- -->
+<div class="modal" id="trail" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modalm" role="document">
+        <div class="modal-content modals">
+
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">{{'TrialPlan' | translate}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
+
+
+            </div>
+
+
+            <div class="form-box">
+
+                <div class="form-group has-feedback codeSpace">
+                    <div [formGroup]="trailform">
+
+                        <div class="col-md-12">
+                            <label class="col-md-4">{{'TotalTrialdays' | translate}}</label>
+                            <input type="text" class="col-md-8 form-control" formControlName="number" maxlength="3" 
+                                (keypress)="isNumber($event)">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-7 error"
+                                *ngIf="trailform.get('number').hasError('required') && trailform.get('number').touched">
+                                <span style="color: red;
+                                margin-left: -57px;">Trial days are required.</span></div>
+                            <div *ngIf="trailform.get('number').hasError('pattern') && trailform.get('number').dirty"
+                                style="color:red;margin-left: 155px;">
+
+                                Please enter valid days.
+
+                            </div>
+                            <div *ngIf="trailform.value.number > 365" style="text-align: center;color: red;
+                                    margin-left: 102px;"> Trial days should be less than or equal to 365.
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-12 space">
+                            <label class="col-md-4">{{'Description' | translate}}</label>
+                            <textarea class="col-md-8 textareaa form-control" maxlength="500"
+                                formControlName="desc"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-xs-4 lognBrn">
+
+                            <button type="submit" class="btn btn-flat space"
+                                [disabled]="!trailform.valid || trailform.value.number > 365" data-dismiss="modal"
+                                (click)="generate('trail')">{{'Submit' | translate}}</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ------------------------------------ monthly subscription modal----------------------- -->
+<div class="modal" id="monthly" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modalm" role="document">
+        <div class="modal-content modals">
+
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">{{'MonthlyPlan' | translate}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
+
+
+            </div>
+
+
+            <div class="form-box">
+
+                <div class="form-group has-feedback codeSpace">
+                    <div [formGroup]="monthlyform">
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 ">{{'Amount' | translate}}</label>
+                            <input type="text" class="col-md-8 form-control" formControlName="number" maxlength="10" 
+                                (keypress)="isNumber($event)">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-7 error"
+                                *ngIf="monthlyform.get('number').hasError('required') && monthlyform.get('number').touched">
+                                <span style="color:red;margin-left: -59px;">Amount required.</span></div>
+
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-7 error"
+                                *ngIf="monthlyform.get('number').hasError('paginate') && monthlyform.get('number').touched">
+                                <span style="color:red;margin-left: -59px;">Zoro not required.</span></div>
+
+
+                        </div>
+
+                        <div class="col-md-12 space">
+                            <label class="col-md-4">{{'Description' | translate}}</label>
+                            <textarea class="col-md-8 textareaa form-control" maxlength="500"
+                                formControlName="desc"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-xs-4 lognBrn">
+
+                            <button type="submit" class="btn  btn-flat space" [disabled]="!monthlyform.valid"
+                                data-dismiss="modal" (click)="generate('monthly')">{{'Submit' | translate}}</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ------------------------------------ yearly subscription modal----------------------- -->
+<div class="modal" id="yearly" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modalm" role="document">
+        <div class="modal-content modals">
+
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">{{'YearlyPlan' | translate}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
+
+
+            </div>
+
+
+            <div class="form-box">
+
+                <div class="form-group has-feedback codeSpace">
+                    <div [formGroup]="yearlyform">
+
+                        <div class="col-md-12">
+                            <label class="col-md-4">{{'Amount' | translate}}</label>
+                            <input type="text" class="col-md-8 form-control" formControlName="number" maxlength="10"
+                                (keypress)="isNumber($event)">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-7 error"
+                                *ngIf="yearlyform.get('number').hasError('required') && yearlyform.get('number').touched">
+                                <span style="color:red;margin-left: -59px;">Amount is required.</span></div>
+                        </div>
+
+
+                        <div class="col-md-12 space">
+                            <label class="col-md-4">{{'Description' | translate}}</label>
+                            <textarea class="col-md-8 textareaa form-control" maxlength="500"
+                                formControlName="desc"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-xs-4 lognBrn">
+
+                            <button type="submit" class="btn  btn-flat space" [disabled]="!yearlyform.valid"
+                                data-dismiss="modal" (click)="generate('yearly')">{{'Submit' | translate}}</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+
+                <h2 *ngIf="subscriptionValue=='trail'">{{'TrialPlan' | translate}}</h2>
+                <h2 *ngIf="subscriptionValue=='monthly'">{{'MonthlyPlan' | translate}}</h2>
+                <h2 *ngIf="subscriptionValue=='yearly'">{{'YearlyPlan' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p *ngIf="subscriptionValue=='trail'">Are you sure you want to update trail plan?</p>
+                <p *ngIf="subscriptionValue=='monthly'">Are you sure you want to update monthly plan?</p>
+                <p *ngIf="subscriptionValue=='yearly'">Are you sure you want to update yearly plan?</p>
+            </div>
+
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit"
+                    >{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">{{'Verify' | translate}}</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

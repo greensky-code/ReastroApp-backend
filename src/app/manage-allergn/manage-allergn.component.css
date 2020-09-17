@@ -1,0 +1,94 @@
+.box-header h1 {
+    margin: 0;
+}
+
+.skyblue-btn {
+    background-color: #9fc5f8;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    height: 30px;
+    max-width: 51px;
+    margin-right: 10px;
+}
+
+.submit {
+    background-color: #638f00;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    max-width: 55px;
+    height: 30px;
+    margin-left: 0px;
+}
+
+td.wght.zui-sticky-col button {
+    margin-right: 4px;
+}
+
+td.wght.zui-sticky-col button.detail {
+    min-width: 55px;
+    max-width: 57px;
+    font-size: 11px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.block-btns1{
+    background-color: #638f00;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+}
+.block-btns2{
+    background-color: #8d908f;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+    
+}
+.block-btns3{
+    background-color: #ff2f00;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+    
+}
+.block-btns4{
+    background-color: #fda400;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+    
+}
+
+.has-feedback label {
+    margin-left: 57px;
+}
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}

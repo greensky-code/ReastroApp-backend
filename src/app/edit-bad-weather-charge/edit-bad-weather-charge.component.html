@@ -1,0 +1,100 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="pl-3">
+                <h1 style="font-size: 24px;">
+                    {{'badweatherChargemanagement' | translate}}
+                </h1>
+            </div>
+           
+
+
+            <div class="box-header  box-hearder-564">
+                <form class="" >
+                    <div class="cusine" >
+                        <div class="row mb-3">
+                            <div class="col-md-10 d-flex align-items-center">
+                                <label class="col-md-3"> Select City</label>
+                                <span class="col-md-1">:</span>
+                                <select name="" class="col-md-8 form-control" id="">
+                                    <option value="">Select City</option>
+                                </select>
+                            </div>
+                           
+                        </div>
+                        <div class="row mb-3">
+                            <div  class="col-md-10 d-flex align-items-center">
+                                <label class="col-md-3 text-nowrap">Bad Weather Charge</label>
+                                <span class="col-md-1"> : </span>
+                                <input type="text" class="col-md-8 int form-control"  placeholder="INR"
+                                (keypress)="service.preventSpace($event)" >
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6 d-flex">
+                                <input type="checkbox" class="pl-5 w_20">
+                                <label class="ml-5">
+                                    <p>ZONE 1 </p> </label>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 d-flex">
+                                <input type="checkbox" class="pl-5 w_20">
+                                <label class="ml-5">
+                                    <p>ZONE 2 </p> </label>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 d-flex">
+                                <input type="checkbox" class="pl-5 w_20">
+                                <label class="ml-5">
+                                    <p>ZONE 3 </p> </label>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 d-flex">
+                                <input type="checkbox" class="pl-5 w_20">
+                                <label class="ml-5">
+                                    <p>ZONE 4 </p> </label>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 d-flex">
+                                <input type="checkbox" class="pl-5 w_20">
+                                <label class="ml-5">
+                                    <p>ZONE 5 </p> </label>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 d-flex">
+                                <input type="checkbox" class="pl-5 w_20">
+                                <label class="ml-5">
+                                    <p>ZONE 6 </p> </label>
+                            </div>
+                        </div>
+
+                        <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                            <button type="submit" routerLink = "/bad-weather-charge-management"  class="btn btn-flat cusine bg-olive">{{'UPDATE' | translate}}</button>
+
+                            <button type="submit" routerLink = "/bad-weather-charge-management"  class="btn btn-flat ml-3 cusine bg-olive">{{'CANCEL' | translate}}</button>
+                               
+                        </div>
+
+                    </div>
+                   
+                   
+                </form>
+            </div>
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>
+
+
+
+

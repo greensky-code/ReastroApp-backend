@@ -1,0 +1,152 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'WALLET UPDATE REQUESTS'  | translate}}
+
+                        </h1>
+                    </div>
+
+                    <div class="row sndRow p-4">
+                        <div class="col-md-3 green-col" style="margin-top: 0.5%">
+                            <label></label>
+                            <div class=" has-search">
+                                    <input type="text" class="form-control" (keyup.enter)="searchSubmit()" placeholder="{{'Search by Driver name & ID' | translate}}" maxlength="50"
+                                        [(ngModel)]="searchRole" (keyup)="searchRoles($event.target.value)" maxlength="50" style="border-radius: 20px;">
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                </div>
+                        </div>
+                         <div class="col-md-2 green-col" >
+                                                      <label>{{'Filter By Zone'| translate}}</label>
+                                              <select class="form-control">
+                                                  <option value="">Filter By Zone</option>               
+                                                  <option value="Delhi">Zone 1</option>              
+                                                  <option value="Noida">Zone 2</option>              
+                                                  <option value="Gurgaon">Zone 3</option>              
+                                              </select>
+                                          </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'FromDate'| translate}}</label>
+                            <input type="date" class="form-control dt1"  (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'ToDate'| translate}}</label>
+                            <input type="date" class="form-control dt2" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" >
+                        </div>
+                        <div class="col-md-3" style="padding-top: 1.6%">
+                            <div class="btn-div">
+                                <button type="button" class="btn bg-olive mr-3"  [disabled]="disables==false">{{'Submit' | translate}}</button>
+                             
+                                <button type="button" class="btn margin margin1" >{{'Reset' | translate}}</button>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" aria-describedby="" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th scope="col">{{'S.No.' | translate}}</th>
+                                    <th scope="col">{{'Zones' | translate}}</th>
+                                    <th scope="col">{{'Driver Name' | translate}}</th>
+                                    <th scope="col">{{'Phone Number ' | translate}}</th>
+                                    <th scope="col">{{'Request Date & Time' | translate}}</th>
+                                    <th scope="col">{{'Requested Amount' | translate}}</th>
+                                    <th scope="col">{{'Action' | translate}}</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let data of cousins_list | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                 -->
+                                    <tr>
+                                        <td>1100</td>
+                                        <td>Zone 1</td>
+                                        <td>Nishtha Mishra</td>
+                                        <td>+91 9584754754</td>
+                                        <td>06/07/2020, 5:00 PM</td>
+                                        <td>500 INR</td>
+                                        <td class="action">
+                                        <button class="submit" style="background-color: green" >{{'Approve' | translate}}</button>
+                                        
+                                        <button class="submit" style="background-color: red" (click)="walletModal()">{{'Reject' | translate}}</button>
+                                        <!-- <button class="detail" (click)="deleteid(data?.id)" data-toggle="modal" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer')&& (data?.name!='Manager')">{{'Delete' | translate}}</button> -->
+                                    </td>
+                                   
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- <h2 *ngIf="cousins_list?.length==0 " style="text-align:center; ">{{'Datanotfound!' | translate}}</h2> -->
+                    </div>
+                 
+
+
+                    <!-- <div class="pageination ">
+                        <pagination-controls (pageChange)="pagination($event) "  *ngIf="manageStaff?.length !=0 ">
+                        </pagination-controls>
+                    </div> -->
+
+
+                </div>
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+
+    <!-- /.content -->
+
+</div>
+
+<footer class="footer-text ">
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+
+</footer>
+
+<!-- modal -->
+<div class="modal" id="walletModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header" >
+                <h2>{{'REJECT' | translate}}</h2>
+               
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <div class="row form-group">
+                  <div class="col-md-3">
+                      <label style="white-space: nowrap">Select Reasons:</label>              
+                  </div>
+                    
+                      <select class="col-md-8"> 
+                        <option value=""Select reasons></option>  
+                        <option value="">Reason 1</option>          
+                        <option value="">Reason 2</option>          
+                        <option value="">Reason 3</option>          
+                      </select>              
+                  
+                </div>
+            </div>
+         
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style="background: red;color: #fff;">{{'Cancel' | translate}}</button>
+                <button type="button"  class="submit" (click)="reason()"
+                    style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Submit' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+

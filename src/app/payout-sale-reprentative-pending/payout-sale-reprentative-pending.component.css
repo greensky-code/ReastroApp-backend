@@ -1,0 +1,35 @@
+.box-header h1 {
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.btn.margin1 {
+    color: white;
+    width: 100%;
+    background: #8d908f;
+    height: 32px;
+    padding: 0;
+    /* margin: 10px 10px; */
+    max-width: 130px;
+    margin-top: 0px;
+    margin-right: 15px;
+}
+
+.block-btns1{
+    background-color: #638f00;
+        color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 83px;
+    height: 30px;
+    margin-right: 10px;
+}
+.block-btns2{
+    background-color: #e4e419;
+        color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 80px;
+    height: 30px;
+    margin-right: 10px;
+}

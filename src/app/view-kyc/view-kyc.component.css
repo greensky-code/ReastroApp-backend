@@ -1,0 +1,309 @@
+    @media (min-width: 1200px) {
+        .container {
+            display: flex;
+            border: solid;
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .form-horizontal .control-label {
+            text-align: left;
+            width: 204px;
+        }
+    }
+    
+    .well {
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        /* background-color: #f5f5f5; */
+        border: 1px solid #e3e3e3 !important;
+        /* border-radius: 4px; */
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+        /* width: 100%; */
+        background-color: white;
+        border: white;
+        margin: 10px;
+    }
+    .xx{
+        float: right;
+        margin-right: 20px;
+        color: black;
+    }
+    
+    
+    .remark-para{
+        border: 1px solid #808080a6;
+    height: 25px;
+    padding: 0px 5px;
+    width: 100%;
+    }
+
+    .lb {
+        display: flex;
+        justify-content: start;
+        margin-left: 7%;
+        margin-top: 7%;
+    }
+    
+    .btn {
+        display: flex;
+        justify-content: center;
+        margin-top: -4%;
+        margin-left: -4%;
+    }
+    
+    .bt {
+        width: 14%;
+        background-color: green;
+        color: white;
+        border: black;
+        height: 35px;
+        border-radius: 5px;
+    }
+    /* new css */
+    /* input.form-control.ng-untouched.ng-pristine.ng-valid {
+        width: 100%;
+        max-width: 80%;
+        margin-left: 69px;
+        border-radius: 0;
+    } */
+    
+    .rejected {
+        display: flex;
+        margin-left: 25%;
+    }
+    
+    .btnt {
+        margin-left: 7px;
+        height: 27px;
+        border: solid;
+        width: 90px;
+    }
+    
+    .rejected p {
+        color: red;
+    }
+    /* .bt{
+        width: 9%;
+        background-color: green;
+        color: white;
+        border: black;
+    } */
+    
+    .bt1 {
+        width: 15%;
+        background-color: red;
+        color: white;
+        border: black;
+        margin-left: 20px;
+        height: 35px;
+        border-radius: 5px;
+    }
+    
+    .rejected {
+        display: flex;
+        margin-left: 36%;
+    }
+    
+    .btnt {
+        margin-left: 7px;
+        height: 27px;
+        border: solid;
+        width: 90px;
+    }
+    
+    .mdl {
+        margin-left: 2px;
+        width: 418px;
+        margin-top: 5%;
+        height: 30px;
+    }
+    
+    .mdldiv {
+        margin-left: 15%;
+    }
+    
+    .int {
+        width: 50%;
+        height: 150px;
+    }
+    
+    .divRemark {
+        margin-top: 10px;
+        margin-left: 15%;
+    }
+    
+    .btns {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .btnss {
+        background: red;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: Source Sans Pro !important;
+    font-weight: 400;
+    height: 40px;
+    margin-left: 10px;
+    max-width: 110px;
+    margin-top: 35px;
+    }
+    
+    .imgs {
+        widows: 20%;
+        height: 20%;
+    }
+    
+    .resubnt {
+        background: #638f00;
+        border: none;
+        color: white;
+        border-radius: 3px;
+        margin-top: 17px auto;
+        margin: 11px auto;
+        margin-left: 8px;
+    }
+    
+    .dumyImg {
+        width: 100%;
+        max-width: 81px;
+        height: auto;
+        min-height: 76px;
+        max-height: 76px;
+        object-fit: unset;
+        cursor: pointer;
+    }
+    h4.rejected.app-rove {
+        margin: auto;
+        width: 100%;
+        max-width: fit-content;
+        margin-bottom: 10px;
+    }
+    /* .main-top1 {
+        border: 3px solid black;
+    } */
+    span.rejected.rej-ected {
+        margin: auto;
+        width: 100%;
+        max-width: fit-content;
+    }
+    form.well.form-horizontal.ng-untouched.ng-pristine.ng-valid {
+        padding: 8px 20px;
+    }
+    
+    @media (min-width: 1200px) {
+        .container {
+            width: 93%;
+        }
+    }
+    
+    .cncl {
+        background-color: red;
+        color: white;
+        padding: 6px;
+        border: none;
+        border-radius: 5px;
+        margin-left: 17px;
+    }
+    
+    .text-Break {
+        word-break: break-all;
+    }
+    
+    .border-contactilne {
+        border-bottom: 2px solid #608c00;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+    
+    .text-Break p {
+        max-width: 196px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
+    }
+    /* .text-Break p:hover {
+    width: 100%;
+    max-width: 196px;
+    white-space: normal;
+} */
+    
+    .border-contactilne.border-nonecls {
+        border-bottom: transparent;
+    }
+    
+    .modal-image img {
+        width: 100%;
+    }
+    
+    .reason {
+        margin-top: 6%;
+        margin-left: 13%;
+    }
+    
+    .eror {
+        color: red;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .error {
+        width: 97%;
+    }
+    
+    .matg {
+        margin-top: 19px;
+        margin-bottom: 15px;
+    }
+    
+    .int:focus {
+        outline: none;
+        border: 1px solid green;
+    }
+
+    .buttons{
+        display: flex;
+        justify-content: center;
+        padding: 14px;
+    }
+
+    button.btn.btn-primary.btn-block.btn-flat {
+        /* border: 1px solid green; */
+        background: green;
+        border: none;
+        height: 41px;
+        max-width: 120px;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        margin-top: 35px;
+        padding: 7px;
+        font-family: "Adelle";
+            font-weight: bold;
+        /* height: 44px; */
+        /* max-width: 123px;; */ 
+     
+     
+    }
+    .resons{
+        width: 100%;
+        word-break: break-all;
+        max-width: 300px;
+    }
+    .remarks {
+        border-style: groove;
+        width: 100%;
+        height: auto;
+        min-height: 150px;
+        overflow-y: scroll;
+        max-height: 150px;
+    }

@@ -1,0 +1,123 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="box-header">
+                <h1 style="font-size: 24px;">
+                    {{'AddCusines' | translate}}
+                </h1>
+            </div>
+            <div class="box-header  box-hearder-564">
+                <form class="" [formGroup]="cusineform">
+                    <div class="cusine">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <label class="col-md-4"> {{'CusineName' | translate}}:</label>
+                                <input type="text" class="col-md-8 int form-control"
+                                    (keypress)="service.preventSpace($event)" formControlName="cusine"
+                                    (keypress)="omit_special_char($event)">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-8 error" style="margin-right: 16px;"
+                                *ngIf="cusineform.get('cusine').hasError('required') && cusineform.get('cusine').touched">
+                                <span style="color:red">Cusine Name is required.</span></div>
+                            <div *ngIf="cusineform.get('cusine').hasError('maxlength') && cusineform.get('cusine').dirty"
+                                style="    color: red;
+                        display: flex;
+                        justify-content: center;
+                        margin-right: 17%;">
+                                Maxlength of characters should be 256.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 cusine">
+                        <div class="row">
+                            <label class="col-md-4"> {{'Description' | translate}}:</label>
+                            <textarea class="col-md-8 textareaa form-control" maxlength="255" rows="10"
+                                (keypress)="service.preventSpace($event)" formControlName="desc"></textarea>
+                        </div>
+                        <div class="col-md-8 error" style="margin-right: 16px;"
+                            *ngIf="cusineform.get('desc').hasError('required') && cusineform.get('desc').touched">
+                            <span style="color:red">Description is required.</span></div>
+                    </div>
+
+                    <div class="bx mt-4-btn"  style="display: flex;justify-content: center;width: 100%;">
+                        <button type="submit" class="btn btn-flat cusine btn-flat" [disabled]="!cusineform.valid"
+                            (click)="generate('cusins')">{{'Submit' | translate}}</button>
+                    </div>
+
+                    <div class="bx mt-4-btn" *ngIf = "two_food_delivery" style="display: flex;justify-content: center;width: 100%;">
+                        <button type="submit" class="btn btn-flat cusine btn-flat" [disabled]="!cusineform.valid"
+                            (click)="generate('cusins')">{{'Add' | translate}}</button>
+                            <button type="submit" class="btn btn-flat ml-5 cusine btn-flat" 
+                            style="background-color: red"  (click) = "back()"
+                           >{{'Cancel' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2>{{'Add cusine' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <p>{{'Are you sure you want to add this cusine??' | translate}}</p>
+            </div>
+         
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button"  class="submit"
+                    style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

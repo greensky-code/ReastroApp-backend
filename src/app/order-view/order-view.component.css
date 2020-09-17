@@ -1,0 +1,67 @@
+.circlStand3 {
+    text-align: center;
+    width: 100px;
+    color: #638f00;
+}
+.circlStand3 a {
+    color: red;
+}
+.arowss {
+    width: 100%;
+    max-width: 100px;
+}
+.crcl li {
+    padding: 25px 10px;
+}
+
+.crcl li .circlStand1 {
+    padding: 25px 20px;
+}
+ul.crcl {
+    display: flex;
+    margin: 5px auto;
+    padding: 0;
+    justify-content: center;
+}
+li.circlStand.circlStand2.active {
+    padding: 25px 29px;
+}
+.circlStand {
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #638f00;
+    color: #638f00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circlStand.active {
+    background: #638f00;
+    color: white;
+}
+.row.sndRow {
+    margin-top: 30px;
+}
+.order {
+    font-size: 13px;
+}
+.hundrd {
+    font-size: 13px;
+    font-weight: 500;
+}
+ul.crcl1 {
+    display: flex;
+    margin: 5px auto;
+}
+
+.circlStand1{
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #638f00;
+    color: white;
+    background-color:#638f00;
+}

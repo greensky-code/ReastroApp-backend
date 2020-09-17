@@ -1,0 +1,408 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+  <div class="content footer-div">
+    <div class="box-header button-text-div">
+      <h1 class="mt-0 mb-0" style="font-size: 24px;">
+        Support
+      </h1>
+      <div class="backbutton" [routerLink]="['/manage-drivers']">
+        <button type="button" class="bkbtn">Back</button>
+      </div>
+    </div>
+    <section class="">
+      <div class="tabs tabs-style-tzoid ">
+        <nav>
+          <ul>
+            <li><a href="#1a" (click)="makeActive('1a')" [ngClass]="{'active': (selectedTab === '1a') }"
+                data-toggle="tab"><span class="amn " style="color:black">Merchant to Admin</span></a></li>
+            <li><a href="#2a" (click)="makeActive('2a')" [ngClass]="{'active': (selectedTab === '2a') }"
+                data-toggle="tab"><span>Customer to Admin</span></a></li>
+            <li><a href="#3a" (click)="makeActive('3a','bank')" [ngClass]="{'active': (selectedTab === '3a') }"
+                data-toggle="tab"><span>Driver to Admin</span></a></li>
+          </ul>
+        </nav>
+        <div class="tab-content clearfix steps" style="border: solid;">
+          <div class="tab-pane active" id="1a">
+            <div class="container">
+              <h3 class=" text-center">Merchant to Admin</h3>
+              <div class="messaging">
+                <div class="inbox_msg">
+                  <div class="inbox_people">
+
+                    <div class="profile-listing " *ngIf="loadList == true">
+                      <div class="buttonload">
+                        <ul class="customerlist">
+                          <i class="fa fa-spinner fa-spin"></i> <span class="customer-text">Loading...</span>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="profile-listing " *ngIf="loadList == false && getChatListData.length == 0">
+                      <div class="buttonload">
+                        <ul class="customerlist">
+                          <i class="fa fa-user"></i><span class="customer-text">No Customer Found.</span>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="inbox_chat" >
+                  
+                      <div *ngFor="let item of getChatListData" (click)="getChatHistory(item)">
+
+                        <div class="chat_list" [ngClass]="{'profile-active': item?.id === getHistoryUser?.id }" >
+                          <div class="chat-dflex">
+                            <div class="chat_people">
+                            <div class="chat_img">
+                              <img *ngIf="item?.user?.profile_image" class="circle-profilechat"
+                                [src]="item?.user?.profile_image">
+                              <img *ngIf="!item?.user?.profile_image" class="circle-profilechat"
+                                src="assets/adminLTE/dist/img/amit.png">
+                              <div *ngIf="item.user.is_online == true" class="greencircle"></div>
+                            </div>
+                            <div class="chat_ib">
+                              <h5>{{item?.user?.first_name || 'Pradeep'}} <span class="chat_date">Dec 25</span></h5>
+                           
+                            </div>
+                            </div>
+                          </div>
+                          <div>
+                            <ul class="customerlist">
+                              <li class="list-full-width" *ngIf="item.unread_msgs > 0">
+                                <div class="two-wadges">{{item?.unread_msgs}}</div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mesgs">
+                    <div class="msg_history" #scrollMe (click)="readMessage()">
+                      <div class="buttonload1" *ngIf="loadHistory == true">
+                        <i class="fa fa-spinner fa-spin"></i> <span>Loading...</span>
+                      </div>
+                      <div *ngFor="let item of userChatHistory;let i = index">
+                        <div class="incoming_msg" *ngIf="webSocket.merchantId != item?.sender">
+                          <div class="incoming_msg_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="received_msg">
+                            <div class="received_withd_msg">
+                              <p>{{item?.message}}</p>
+                              <span class="time_date"> 11:01 AM | June 9</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="outgoing_msg" *ngIf="webSocket.merchantId == item?.sender">
+                          <div class="sent_msg">
+                            <p>{{item?.message}}</p>
+                            <span class="time_date"> 11:01 AM | June 9</span>
+                          </div>
+                        </div>
+                        <div class="outgoing_msg" *ngIf="lastSendStatus == true && userChatHistory.length == i+1">
+                          <div style="text-align: end;color: rgb(100, 146, 0);">
+                            <i class="fa fa-spinner fa-spin"></i><span>Sending...</span>
+                        </div>
+                          <div class="sent_msg">
+                            <p>{{lastSendMessage?.message}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="type_msg" [formGroup]="chatMessageForm" (keydown.enter)="sendMassageToCustomer()">
+                      <div class="input_msg_write">
+                        <input type="text" class="write_msg" placeholder="Type a message" formControlName="textMessage"/>
+                        <button class="msg_send_btn" type="button" (click)="sendMassageToCustomer()"><i class="fa fa-paper-plane-o"
+                            aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="2a">
+            <div class="container">
+              <h3 class=" text-center">Customet to Admin</h3>
+              <div class="messaging">
+                <div class="inbox_msg">
+                  <div class="inbox_people">
+                    <div class="headind_srch">
+                      <div class="recent_heading">
+                      </div>
+                    </div>
+                    <div class="inbox_chat">
+                      <div class="chat_list active_chat">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mesgs">
+                    <div class="msg_history">
+                      <div class="incoming_msg">
+                        <div class="incoming_msg_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                          <div class="received_withd_msg">
+                            <p>Test which is a new approach to have all
+                              solutions</p>
+                            <span class="time_date"> 11:01 AM | June 9</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="outgoing_msg">
+                        <div class="sent_msg">
+                          <p>Test which is a new approach to have all
+                            solutions</p>
+                          <span class="time_date"> 11:01 AM | June 9</span>
+                        </div>
+                      </div>
+                      <div class="incoming_msg">
+                        <div class="incoming_msg_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                          <div class="received_withd_msg">
+                            <p>Test, which is a new approach to have</p>
+                            <span class="time_date"> 11:01 AM | Yesterday</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="outgoing_msg">
+                        <div class="sent_msg">
+                          <p>Apollo University, Delhi, India Test</p>
+                          <span class="time_date"> 11:01 AM | Today</span>
+                        </div>
+                      </div>
+                      <div class="incoming_msg">
+                        <div class="incoming_msg_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                          <div class="received_withd_msg">
+                            <p>We work directly with our designers and suppliers,
+                              and sell direct to you, which means quality, exclusive
+                              products, at a price anyone can afford.</p>
+                            <span class="time_date"> 11:01 AM | Today</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="type_msg">
+                      <div class="input_msg_write">
+                        <input type="text" class="write_msg" placeholder="Type a message" />
+                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
+                            aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="3a">
+            <div class="container">
+              <h3 class=" text-center">Driver to Admin</h3>
+              <div class="messaging">
+                <div class="inbox_msg">
+                  <div class="inbox_people">
+                    <div class="headind_srch">
+                      <div class="recent_heading">
+                      </div>
+                    </div>
+                    <div class="inbox_chat">
+                      <div class="chat_list active_chat">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>Amit Sharma <span class="chat_date">Dec 25</span></h5>
+                            <p>Test, which is a new approach to have all solutions
+                              astrology under one roof.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mesgs">
+                    <div class="msg_history">
+                      <div class="incoming_msg">
+                        <div class="incoming_msg_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                          <div class="received_withd_msg">
+                            <p>Test which is a new approach to have all
+                              solutions</p>
+                            <span class="time_date"> 11:01 AM | June 9</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="outgoing_msg">
+                        <div class="sent_msg">
+                          <p>Test which is a new approach to have all
+                            solutions</p>
+                          <span class="time_date"> 11:01 AM | June 9</span>
+                        </div>
+                      </div>
+                      <div class="incoming_msg">
+                        <div class="incoming_msg_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                          <div class="received_withd_msg">
+                            <p>Test, which is a new approach to have</p>
+                            <span class="time_date"> 11:01 AM | Yesterday</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="outgoing_msg">
+                        <div class="sent_msg">
+                          <p>Apollo University, Delhi, India Test</p>
+                          <span class="time_date"> 11:01 AM | Today</span>
+                        </div>
+                      </div>
+                      <div class="incoming_msg">
+                        <div class="incoming_msg_img"> <img src="assets/adminLTE/dist/img/amit.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                          <div class="received_withd_msg">
+                            <p>We work directly with our designers and suppliers,
+                              and sell direct to you, which means quality, exclusive
+                              products, at a price anyone can afford.</p>
+                            <span class="time_date"> 11:01 AM | Today</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="type_msg">
+                      <div class="input_msg_write">
+                        <input type="text" class="write_msg" placeholder="Type a message" />
+                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
+                            aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,142 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+ <section class="content footer-div">
+ <div class=" align-items-center bodywraper">
+            <div class=" setingTop">
+                <div class="">
+                    <div class="form-box">
+                            <div class="box-header">
+                                    <h3 class="">{{'EditRole' | translate}}</h3>
+                                </div>
+                       
+
+                                <div class="box-header">
+                        <div class="form-namecenter">
+                        
+                            <div>
+                                <label class="name-label" style="color:black">  {{'Permission' | translate}}:</label>
+                            </div>
+                            <div class=" manage-content-box1" style="padding-bottom: 2%;">
+                                <div style="display: flex;justify-content: space-between;padding: 2% 6% 0% 6%;">
+                                    <div>
+                                        <label>All</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" [checked]="isAllChecked()" (change)="checkAll($event)" />
+                                    </div>
+                                </div>
+                                <div *ngFor="let items of rolelist" style="display: flex;justify-content: space-between;padding: 2% 6% 0% 6%;">
+                                    <div>
+                                        <label>{{items?.name}}</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="items" value="{{items?.id}}" [(ngModel)]="items.status"
+                                        />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="bx mt-4" >
+                                    <button class="btn" style="width: 29%;padding: 7px;"  [disabled]="permissionEmpty==true" (click)="generate('permission')">{{'Submit' | translate}}</button>
+        
+                                </div>
+
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+</div>
+<app-footer></app-footer>
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2>{{'Permission' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <p >{{'Areyousureyouwanttoeditthisrole?' | translate}}</p>
+            </div>
+           
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit" style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+          
+                <h2 >{{'Permission' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+       
+                <p>{{'Areyousureyouwanttoeditthisrole?' | translate}}</p>
+            </div>
+        
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="unblockmodal()" class="submit" style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 Step Verification</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">Google Authentication Code</label>
+                    <div class="otp-field">
+                   
+
+
+                        
+
+                            <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" 
+                    style="width:57px; height:57px;" [config]="{length:6}" (keypress)="numberOnly($event)" type="number" ></ng-otp-input>
+
+                          
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode" (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

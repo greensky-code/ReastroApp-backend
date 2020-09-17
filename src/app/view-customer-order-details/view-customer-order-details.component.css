@@ -1,0 +1,346 @@
+.button {
+    background-color: green;
+    /* padding: 6px; */
+    color: white;
+    margin-left: 7px;
+    height: 33px;
+    width: 13%;
+}
+
+.box-title {
+    height: 33px;
+    margin-left: 2%;
+    width: 13%;
+}
+
+.registermerchantbtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bg-olive1 {
+    background-color: #3c8dbc !important;
+}
+
+input.dt1.ng-pristine.ng-valid.ng-touched {
+    height: 32px;
+    /* margin-right: 15px; */
+}
+
+input.dt1.ng-pristine.ng-valid.ng-touched {
+    height: 32px;
+    /* margin-right: 15px; */
+}
+
+.dt1 {
+    width: 100%;
+    height: 32px;
+    margin-right: 15px;
+}
+
+.dt2 {
+    width: 100%;
+    height: 32px;
+    margin-right: 15px;
+}
+
+
+/* span.fa.fa-search.form-control-feedback {
+    position: absolute;
+    left: 6px;
+    top: 7px;
+}
+input.manage-input.ng-pristine.ng-valid.ng-touched {
+    position: relative;
+    border-radius: 50px;
+    width: 172px;
+} */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.form-group.has-search {
+    position: relative;
+    width: 100%;
+}
+
+span.fa.fa-search.form-control-feedback {
+    position: absolute;
+    left: 18px;
+    top: 6px;
+}
+
+@media(max-width:1280px) {
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>td,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>thead>tr>th {
+        padding: 0px;
+    }
+}
+
+.wght {
+    display: flex;
+}
+
+.rghtSde {
+    width: 100%;
+    float: right;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.two {
+    display: flex;
+    padding: 0;
+    width: 560px;
+    justify-content: space-between;
+}
+
+.view {
+    width: 169px;
+    float: right;
+    /* margin-right: 10px; */
+}
+
+.sndRow {
+    width: 100%;
+    margin-left: 0px;
+}
+
+.has-search.form-control.active,
+.has-search.form-control.focus {
+    border-radius: 18px!important;
+}
+
+
+/* .tab-content>.active {
+
+    display: block;
+    height: 500px !important;
+} */
+
+.tab-content.clearfix {
+    height: 500px;
+}
+
+.detail {
+    background-color: #e4e419;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+}
+
+.kyc {
+    background-color: #638f00;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+.submit {
+    background-color: #638f00;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+@media(max-width:1280px) {
+    select.btn.bg-olive.drrop-type.ng-untouched.ng-pristine.ng-valid {
+        font-size: 13px;
+    }
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+.btn.bg-olive.dropdt {
+    height: 33px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(54, 41, 41, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+    /* width: 20px;*/
+    height: 20px;
+    margin-top: 8px;
+    border-width: thin;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+@media(max-width:1440px) {
+    .sndRow {
+        width: 100%!important;
+        margin-left: 0px;
+    }
+}
+
+.sndRow {
+    width: 100%!important;
+    margin-left: 0px;
+}
+
+.btn.margin1 {
+    color: white;
+    width: 100%;
+    background: #8d908f;
+    height: 32px;
+    padding: 0;
+    margin: 10px 10px;
+    max-width: 150px;
+}
+
+.btn.margin.view-btn {
+    background: orange;
+    color: white;
+    padding: 0;
+    width: 100%;
+    height: 32px;
+    max-width: 180px;
+    margin: 10px 0px;
+}
+
+.idMerchant th {
+    font-size: 12px;
+}
+
+.row.sndRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box-header h1 {
+    margin: 0;
+}
+@media(max-width:1440px) {
+    .bg-olive {
+        max-width: 130px;
+    }
+    .btn.margin1 {
+        max-width: 130px;
+    }
+    .btn.margin.view-btn {
+        max-width: 130px;
+    }
+    .two {
+        width: 405px;
+    }
+}
+@media(max-width:1366px) {
+    .bg-olive {
+        margin: 10px 5px;
+    }
+    .btn.margin.view-btn {
+        max-width: 115px;
+    }
+    .btn.margin1 {
+        max-width: 115px;
+    }
+    .bg-olive {
+        max-width: 135px;
+    }
+    .two {
+        width: 391px;
+    }
+    table#example2 {
+        min-width: 990px;
+    }
+    .btn.margin1 {
+        max-width: 120px;
+    }
+}
+
+
+
+.btn.two:focus,
+.btn.two:active {
+    outline: none;
+    box-shadow: none;
+}
+
+#blockmodal .modal-dialog {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+#blockmodal1 .modal-dialog {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+#exampleModal2 .modal-dialog {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.form-control-feedback {
+    top: 26px!important;
+}
+
+.bg-olive {
+    background-color: green !important;
+    width: 100%;
+    height: 32px;
+    padding: 0px;
+    max-width: 154px;
+    margin: 10px 0px ;
+}
+
+.btn.margin2 {
+    color: white;
+    width: 100%;
+    background: #8d908f;
+    height: 32px;
+    padding: 0;
+    margin: 10px 10px ;
+    max-width: 154px;
+}
+
+.filter {
+    margin-top: 5px;
+}
+
+.combo {
+    margin-top: 45px;
+}
+
+.filter:focus {
+    outline: none;
+    border-color: #638f00!important;
+}
+.btn-div {
+    margin-top: 4px;
+}

@@ -1,0 +1,102 @@
+
+<app-header>
+                  </app-header>
+                  <app-menubar></app-menubar>
+                  <div>
+                      <div class="content-wrapper">
+                          <section class="content footer-div">
+                              <div class="box-header">
+                                  <h3 class="mt-0 mb-0">
+                                      {{'ADD QUESTION' | translate}}
+                                  </h3>
+                              </div>
+                              
+                              <form class=" custom-Form" [formGroup]="addStaffForm" style="background-color: #f5f5f5; border: 1px solid #e3e3e3;
+                                                              margin: 0px 70px 0;padding: 15px;">
+                                
+                                <div class="row form-group">
+                                    <div class="col-md-3">
+                                        <label for="">Question:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                                    <input type="text" class="form-control" placeholder="mins">
+                                                 </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-3">
+                                        <label for="">Answer:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                                    <textarea cols="80" rows="2" class="form-control" placeholder="write here....."></textarea>
+                                                 </div>
+                                </div>
+                                  
+                                
+                                
+                  
+                                
+                                <div class="row form-group">
+                                <div class="col-md-3">
+                                                      <label for="">Share with:</label>
+                                                  </div>
+                                                  <div>
+                                                          <div class="col-md-2">
+                                                             <input type="checkbox">               
+                                                          </div> 
+                                                          <div class="col-md-6">
+                                                             <p style="white-space: nowrap">Customer</p>               
+                                                          </div>
+
+                                                                   </div>
+                                                      </div>
+
+                                                      <div class="row form-group">
+                                <div class="col-md-3">
+                                     
+                                                  </div>
+                                                  <div>
+                                                          <div class="col-md-2">
+                                                             <input type="checkbox">               
+                                                          </div> 
+                                                          <div class="col-md-6">
+                                                             <p style="white-space: nowrap">Driver</p>               
+                                                          </div>
+
+                                                                   </div>
+                                                      </div>
+
+                                                      <div class="row form-group">
+                                <div class="col-md-3">
+                                     
+                                                  </div>
+                                                  <div>
+                                                          <div class="col-md-2">
+                                                             <input type="checkbox">               
+                                                          </div> 
+                                                          <div class="col-md-6">
+                                                             <p style="white-space: nowrap">Restaurant</p>               
+                                                          </div>
+
+                                                                   </div>
+                                                      </div>
+
+                                                                    
+                                    
+                               
+                  
+                                  
+                                  <div class="row form-group" style=" justify-content: space-around;text-align: center" >
+                                      <div class="col-md-6" >
+                                          <button  style="width: 25%" class="btn btn-success btn-sm form-control" [routerLink]="['/help-support']"  type="button">SEND</button>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <button  style="width: 25%;background-color: red" class="btn btn-danger btn-sm" [routerLink]="['/help-support']" type="button">CANCEL</button>
+                                      </div>
+                                      
+                                  </div>
+                  
+                              </form>
+                          </section>
+                      </div>
+                      <app-footer></app-footer>
+                  </div>

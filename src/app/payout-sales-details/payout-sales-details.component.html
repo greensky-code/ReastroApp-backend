@@ -1,0 +1,132 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <div class="backbutton" [routerLink]="['/payout-sale-reprentative-pending']" style="float: right;padding-top: 23px;">
+        <button type="button" class="bkbtn">{{'Back' | translate}}</button>
+    </div>
+
+    <div class="col-md-12 custom" style="padding-top: 23px;">
+
+
+        <section class="merchant container">
+            <div class="col-md-12">
+               
+                <div class="col-md-2">
+                    <label>{{'MerchantName' | translate}}:</label>
+
+                </div>
+                <div class="col-md-2">
+                    <p>{{salepayout_data?.name || '--'}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>{{'Phone' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{salepayout_data?.phone || '--'}}</p>
+                </div>
+
+
+                <div class="col-md-2">
+                    <label>{{'TotalOrder' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{salepayout_data?.total_reference || '0'}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>{{'AmountPending' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{salepayout_data?.amount_pending || '0'}}</p>
+                </div>
+         
+            <div class="col-md-12" style="    border-style: groove;padding-top: 18px;margin-top: 22px;" *ngFor="let data of salepayout_data?.merchant_data">
+
+
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <label>{{'MerchnatID' | translate}}:</label>
+
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{data?.id || '--'}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <label>{{'MerchnatName' | translate}}:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{data?.business_name || '--'}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <label>{{'Phone' | translate}}:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{data?.mobile || '--'}}</p>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <label>{{'email' | translate}}:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{data?.email || '--'}}</p>
+                    </div>
+
+
+
+                    <div class="col-md-2">
+                        <label> {{'CreatedAt' | translate}}:</label>
+
+                    </div>
+                    <div class="col-md-2">
+                        <td > {{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                    </div>
+                    <div class="col-md-2">
+                        <label> {{'SubmitKYC' | translate}}</label>
+
+                    </div>
+                    <div class="col-md-2">
+                        <td > {{(data?.kyc_submit_date | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                    </div>
+                  
+                 
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <label> {{'Status' | translate}}</label>
+    
+                        </div>
+                       <div class="col-md-2">
+                            <td > {{data?.kyc_status || '--' }}</td>
+                        </div> 
+                        <div class="col-md-2">
+                            <label> {{'CreatedBy' | translate}}</label>
+    
+                        </div>
+                        <div class="col-md-2">
+                            <td > {{data?.created_by || '--' }}</td>
+                        </div> 
+                        <div class="col-md-2">
+                            <label>{{'Approved/RejectedBy' | translate}}</label>
+    
+                        </div>
+                        <div class="col-md-2">
+                            <td > {{data?.approved_or_rejected_by || '--' }}</td>
+                        </div> 
+                    </div>
+                  
+                   
+
+                </div>
+             
+            </div>
+
+        </section>
+
+    </div>
+    <section>
+
+    </section>
+
+
+
+</div>

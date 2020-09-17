@@ -1,0 +1,83 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="pl-3">
+                <h1 style="font-size: 24px;">
+                    {{'notifications' | translate}}
+                </h1>
+            </div>
+          
+ 
+            <div class="row sndRow pl-3">
+                <div class="col-md-2 green-col">
+                    <label>{{'FromDate'| translate}}</label>
+                    <input type="date" class="form-control dt1"  (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                </div>
+                <div class="col-md-2 green-col">
+                    <label>{{'ToDate'| translate}}</label>
+                    <input type="date" class="form-control dt2" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" >
+                </div>
+
+                <div class="col-md-3" style="padding-top: 1.2%;">
+                    <div class="btn-div pt-1">
+                        <button type="button" class="btn bg-olive mr-3"  [disabled]="disables==false">{{'Submit' | translate}}</button>
+                     
+                        <button type="button" class="btn margin margin1" >{{'Reset' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="box-header  box-hearder-564">
+                <form class="" >
+                    <div class="cusine" >
+                        <div class="col-md-12" >
+
+                            <div class="col-md-12 secTab ">
+                               <span>   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                            </span>
+                            <div class="d-flex justify-content-end">
+                                <p> 02/02/2020</p>
+                                <p class="ml-2">4:00 AM</p>
+                            </div>
+                            </div>
+                        </div>  
+                        <div class="col-md-12" >
+
+                            <div class="col-md-12 secTab ">
+                               <span>   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                            </span>
+                            <div class="d-flex justify-content-end">
+                                <p> 02/02/2020</p>
+                                <p class="ml-2">4:00 AM</p>
+                            </div>
+                            </div>
+                        </div>  
+                        <div class="col-md-12" >
+
+                            <div class="col-md-12 secTab ">
+                               <span>   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                            </span>
+                            <div class="d-flex justify-content-end">
+                                <p> 02/02/2020</p>
+                                <p class="ml-2">4:00 AM</p>
+                            </div>
+                            </div>
+                        </div>                 
+                    </div>
+                   
+                   
+                </form>
+            </div>
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>
+
+
+
+

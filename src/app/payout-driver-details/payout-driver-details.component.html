@@ -1,0 +1,114 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <div class="backbutton" [routerLink]="['/payout-driver']" style="float: right;padding-top: 23px;">
+        <button type="button" class="bkbtn">{{'Back' | translate}}</button>
+    </div>
+    <div class="col-md-12 custom">
+
+        <section class="merchant container">
+            <div class="col-md-10">
+                <div class="col-md-2">
+                    <label>{{'DriverName' | translate}}:</label>
+
+                </div>
+                <div class="col-md-2">
+                    <p>{{payout_data?.first_name || '--'}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>{{'DriverPhone' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{payout_data?.mobile || '--'}}</p>
+                </div>
+
+
+                <div class="col-md-2">
+                    <label>{{'TotalOrder' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{payout_data?.total_order || '0'}}</p>
+                </div>
+
+
+
+                <div class="col-md-2">
+                    <label> {{'AmountPending' | translate}}:</label>
+
+                </div>
+                <div class="col-md-2">
+                    <p>{{payout_data?.amount_pending || '0'}}</p>
+                </div>
+                
+
+            </div>
+            <div class="col-md-2">
+                <button class="detail">{{'Pay' | translate}}</button>
+            </div>
+            <div class="col-md-12" style="border-style: groove;padding-top: 27px;" *ngFor="let orders of payout_data?.orders">
+
+
+                <div class="col-md-10">
+                    <div class="col-md-2">
+                        <label>{{'OrderID' | translate}}:</label>
+
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{orders?.id}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <label> {{'DeliveryCharge' | translate}}:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{orders?.delivery_charges || '0.00'}}</p>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <label>{{'DelivaryLocation' | translate}}:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{orders?.delivery_location || '--'}}</p>
+                    </div>
+
+
+
+                    <div class="col-md-2">
+                        <label>{{'OrderAmount' | translate}}:</label>
+
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{orders?.order_value || '--'}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <label>{{'DeliveryTime' | translate}}:</label>
+    
+                    </div>
+                    <div class="col-md-2">
+                        <!-- <p>{{orders?.delivery_time|| '--'}}</p> -->
+                      <td > {{(orders?.delivery_time | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                    </div>
+                    <div class="col-md-2">
+                        <label> {{'RestaurantName' | translate}}:</label>
+    
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{orders?.restaurant_name || '--'}}</p>
+                    </div>
+
+                </div>
+                <!-- <div class="col-md-2">
+                    <button class="detail">Pay</button>
+                </div> -->
+            </div>
+
+        </section>
+
+    </div>
+    <section>
+
+    </section>
+
+
+
+</div>

@@ -1,0 +1,189 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'ManageSalesrepresentative' | translate}}
+                        </h1>
+                    </div>
+                    <div class="rghtSde two-btnsubmit margin-rightbox"></div>
+                    <div class="row sndRow">
+                        <div class="col-md-6">
+                            <div class="col-md-6" style="border-radius: 18px!important; padding-left: 0">
+                                <div class=" has-search">
+                                    <label></label>
+                                    <input type="text" class="form-control" (keyup)="enterValue()"
+                                        placeholder="{{'Searchbyname/email/phone' | translate}}" [(ngModel)]="searchName"
+                                        maxlength="50" style="border-radius: 20px;">
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="btn-div two-btnsubmit aligned">
+                                    <button type="button" class="btn bg-olive" (click)="searchSubmit()" [disabled]="disabled==false">{{'Submit' | translate}}</button>
+                                    <button type="button" class="btn margin margin1" (click)="reset()">{{'Reset' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rghtSde two-btnsubmit margin-rightbox">
+                        <div class="btn two">
+                            <button type="button" class="btn bg-olive"
+                                [routerLink]="['/add-sale-representative']">{{'CreateaSalesRepresentative' | translate}}</button>
+                            <button type="button" class="btn margin margin1" (click)="export()"
+                                *ngIf="sale_data?.length!= 0">{{'Export' | translate}}
+                            </button>
+                           
+                        </div>
+                    </div>
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover manage-tabel">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th> {{'ID' | translate}}</th>
+                                    <th>{{'Name' | translate}}</th>
+                                    <th>{{'email' | translate}}</th>
+                                    <th> {{'Phone' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                    <th>{{'CreatedAt' | translate}}</th>
+                                    <th>{{'ReferenceCode' | translate}}</th>
+                                    <th>{{'TotalReference' | translate}}</th>
+                                    <th>{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let data of sale_data | paginate : {itemsPerPage:10, currentPage:page, totalItems:total}:index as i">
+                                    <td class="table-width">{{data?.id || '--'}}</td>
+                                    <td class="table-width" title="{{data?.first_name}} {{data?.last_name}}">
+                                        {{data?.first_name || '--'}}</td>
+                                    <td class="table-width" title="{{data?.email ||'--'}}">
+                                        {{data?.email || '--'}}</td>
+                                    <td>{{data?.mobile || '--'}}</td>
+                                    <td *ngIf="data?.is_active==true">Active</td>
+                                    <td *ngIf="data?.is_active!=true">Inactive</td>
+                                    <td title="{{data?.created_at ||'--'}}">
+                                        {{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--'}}</td>
+                                    <td> {{(data?.reference_code)|| '--'}}</td>
+                                    <td> {{(data?.total_refrence) || '0'}}</td>
+                                    <td >
+                                        <div style="display: flex;">
+                                        <button class="block-btns1"
+                                            [routerLink]="['/sale-representative-details',data?.id]">{{'Details' | translate}}
+                                        </button>
+                                        <button class="block-btn" (click)="block(data?.id,is_active)"
+                                            *ngIf="data?.is_active==true">{{'Block' | translate}}</button>
+                                        <button class="block-btns1" (click)="unblock(data?.id,is_active)"
+                                            *ngIf="data?.is_active!=true"
+                                            >{{'Unblock' | translate}}</button>
+                                            <button class="block-btns1" (click)="deleteFunction(data?.id,is_active)" style="background-color: #fd1b00;"
+                                         
+                                            >{{'Delete' | translate}}</button>
+                                            </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 *ngIf="sale_data?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2>
+                    </div>
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="sale_list($event)"   *ngIf="sale_data?.length != 0">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+</div>
+<footer class="footer-text">
+    <strong>{{'Copyright' | translate}} &copy;  {{'2020' | translate}}<a href="javascript:;">{{'FoodDelivery' | translate}}</a>.</strong> &nbsp;{{'Allrightsreserved' | translate}}
+</footer>
+<!-- -----------------------block modal---------------------- -->
+<div class="modal" id="blockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle" *ngIf="this.status == 'block'">{{'Block' | translate}}</h2>
+                <h2 class="modalstyle" *ngIf="status == 'delete'">{{'Delete' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;" *ngIf="this.status == 'block'">
+                {{'Areyousureyouwanttoblockthissalesrepresentative?' | translate}}
+            </div>
+            <div class="modal-body" style="text-align: center;" *ngIf="status == 'delete'">
+                {{'Are you sure you want to delete this salesrepresentative?' | translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style="    background-color: #fd1b00; color:#fff; width: 100px;">{{'No' | translate}}</button>
+                <button type="button" data-dismiss="modal" (click)="blockmodal()" class="submit"
+                    style="display: flex; justify-content: space-evenly;border: #638f00;color:#fff; width: 100px;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -----------------------unblock modal---------------------- -->
+<div class="modal" id="unblockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">{{'Unblock' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+               {{'AreyousureyouwanttoUnblockthissalesrepresentative?' | translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style=" background-color: #fd1b00; color:#fff; width: 100px;">{{'No' | translate}}</button>
+                <button type="button" data-dismiss="modal" (click)="unblockmodal()" class="submit"
+                    style="display: flex; justify-content: space-evenly;border: #638f00;color:#fff; width: 100px;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -------------------------------------Google auth modal---------------- -->
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="resets()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                    
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

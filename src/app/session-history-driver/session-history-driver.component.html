@@ -1,0 +1,190 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'SESSION HISTORY' | translate}}
+                        </h1>
+                    </div>
+
+                     <!-- tab section -->
+                     <div class="tab-section">
+                        <div class="tab">
+                            <button class="tablinks" [ngClass]="tabView == 'drivers' ? 'active': ''"
+                                (click)="viewTab('drivers')">{{'DRIVER SESSION HISTORY' | translate}}</button>
+                            <button class="tablinks" [ngClass]="tabView == 'restaurants' ? 'active': ''"
+                                (click)="viewTab('restaurants')">{{'RESTAURANT SESSION HISTORY' | translate}}</button>
+                        </div>
+                    </div>
+
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                            <div class="has-search">
+                                <label></label>
+                                <input type="text" class="form-control" placeholder="{{'Search by driver name & Id' | translate}}" (keyup)="searchcuisineName($event.target.value);" maxlength="50"  style="border-radius: 20px;">
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3 green-col">
+                            <label>{{'FilterbyCity' | translate}}</label>
+                            <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                                <option value="">{{'FilterbyCity'| translate}}</option>
+                                <option value="Pending">{{'Delhi'| translate}}</option>
+                                <option value="Submitted">{{'Noida'| translate}}</option>
+                                
+                                            </select>
+                        </div>
+                        <div class="col-md-3 green-col">
+                            <label>{{'FilterbyZone' | translate}}</label>
+                            <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                                <option value="">{{'FilterbyZone'| translate}}</option>
+                                <option value="Pending">{{'Zone 1'| translate}}</option>
+                                <option value="Submitted">{{'Zone 2'| translate}}</option>
+                                
+                                            </select>
+                        </div>
+                        <div class="col-md-3 green-col">
+                                    <label>{{'Filter by Day' | translate}}</label>
+                                    <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                                        <option value="">{{'Filter by Day'| translate}}</option>
+                                        <option value="Pending">{{'Monday'| translate}}</option>
+                                        <option value="Submitted">{{'Tuesday'| translate}}</option>
+                                        
+                                                    </select>
+                                </div>
+
+                        <div class="col-md-3 green-col">
+                            <label>{{'FromDate'| translate}}</label>
+                            <input type="date" class="form-control dt1"  (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                        </div>
+                        <div class="col-md-3 green-col">
+                            <label>{{'ToDate'| translate}}</label>
+                            <input type="date" class="form-control dt2" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" >
+                        </div>
+                       
+                        <div class="col-md-3" style="padding-top: 1.2%;">
+                            <div class="btn-div">
+                                <button type="button" class="btn bg-olive mr-3"  [disabled]="disables==false">{{'Submit' | translate}}</button>
+                                <button type="button" class="btn margin margin1" >{{'Reset' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                 
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" aria-describedby="" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th scope="col">{{'sn' | translate}}</th>
+                                    <th scope="col">{{'City' | translate}}</th>
+                                    <th scope="col">{{'zone' | translate}}</th>
+                                    <th scope="col">{{'driverName' | translate}}</th>
+                                    <th scope="col">{{'Date' | translate}}</th>
+                                    <th scope="col">{{'Online Time' | translate}}</th>
+                                    <th scope="col">{{'Offline Time' | translate}}</th>
+                                    <th scope="col">{{'Working Hour' | translate}}</th>
+                                    <th scope="col">{{'Total Delivered Orders' | translate}}</th>
+                                    <th scope="col">{{'Cancelled Orders' | translate}}</th>
+                                    <th scope="col">{{'Achieved Touchpoints' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let data of cousins_list | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                 -->
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Ram Nagar</td>
+                                        <td>Zone 1 </td>
+                                        <td>Rakesh Kumar</td>
+                                        <td>06/07/2020</td>
+                                        <td>10 AM</td>
+                                        <td>5 PM</td>
+                                        <td>6 </td>
+                                        <td>10 </td>
+                                        <td>1 </td>
+                                        <td>8 </td>
+                                  
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <h2 *ngIf="cousins_list?.length==0 " style="text-align:center; ">{{'Datanotfound!' | translate}}</h2> -->
+                    </div>
+                    <!-- <div class="pageination ">
+                        <pagination-controls (pageChange)="pagination($event) "  *ngIf="manageStaff?.length !=0 ">
+                        </pagination-controls>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer class="footer-text ">
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+
+</footer>
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 > {{'Delete' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <p >{{'Areyousureyouwanttodeletethiscuisine?' | translate}}</p>
+              
+            </div>
+        
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit" >{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                
+
+                    <div class="otp-field">
+            
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" (keypress)="numberOnly($event)" type="number"
+                        style="width:57px; height:57px;" [config]="{length:6}" ></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat"  [disabled]="!varificationCode" (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

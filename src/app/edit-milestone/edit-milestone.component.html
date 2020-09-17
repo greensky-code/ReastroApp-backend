@@ -1,0 +1,55 @@
+
+<app-header>
+                  </app-header>
+                  <app-menubar></app-menubar>
+                  <div>
+                      <div class="content-wrapper">
+                          <section class="content footer-div">
+                              <div class="box-header">
+                                  <h3 class="mt-0 mb-0">
+                                      {{'EDIT MILESTONE' | translate}}
+                                  </h3>
+                              </div>
+                              <form class=" custom-Form" [formGroup]="addStaffForm" style="background-color: #f5f5f5; border: 1px solid #e3e3e3;
+                                                              margin: 20px 70px 0;padding: 15px">
+                                 <div class="row form-group">
+                                    <div class="col-md-3">
+                                        <label for="">Milestone Name:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                                    <input type="text" class="form-control" placeholder="Milestone Name">
+                                                 </div>
+                                </div>
+                                  <div class="row form-group">
+                                    <div class="col-md-3">
+                                        <label for="">Touchpoints:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                                    <input type="text" class="form-control" placeholder="Touchpoints">
+                                                 </div>
+                                </div>
+                  
+                                <div class="row form-group">
+                                    <div class="col-md-3">
+                                        <label for="">Milestone Completion Amount:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                                    <input type="text" class="form-control" placeholder="INR">
+                                                 </div>
+                                </div>
+                  
+                                  
+                                  <div class="row form-group" style="margin: 35px 0">
+                                      <div class="col-md-6" style="text-align: center">
+                                          <button class="btn btn-success btn-sm" style="padding-left: 20px;padding-right: 20px;" type="button">UPDATE</button>
+                                      </div>
+                                      <div class="col-md-6" style="text-align: center">
+                                          <button class="btn btn-danger btn-sm" type="button" [routerLink]="['/milestone-management']">CANCEL</button>
+                                      </div>
+                                  </div>
+                  
+                              </form>
+                          </section>
+                      </div>
+                      <app-footer></app-footer>
+                  </div>

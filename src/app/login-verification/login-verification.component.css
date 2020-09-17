@@ -1,0 +1,73 @@
+.col-xs-4{
+    width: 100%;
+    }
+    .login-box.register-box{
+        width: 460px!important;
+        margin: 13% auto!important;
+    }
+    .login-box-body{
+        background: #fff;
+        padding: 37px;
+        border-top: 0;
+        color: #666;
+        box-shadow: 3px 3px 33px 13px #aba6a64a;
+    }
+    .lognBrn button{
+        font-size: 22px;
+        line-height: 25px;
+        color: #ffffff;
+        font-family: "Adelle";
+        font-weight: bold;
+        height: 53px;
+        border-radius: 4px;
+        background-color: #638f00;
+        width: 100%;
+        max-width: 403px;
+        }
+        .googlCode{
+            width:100%;
+            max-width:100px;
+            margin: 0 auto;
+        }
+        .googlCode img{
+            width:100%;
+        }
+        .codeSpace{
+            margin-top:17px;
+        }
+        .qrCode{
+            width:100%;
+            max-width:100px;
+            margin: 0 auto;
+        }
+        .barCode img{
+            width: 40%;
+            margin-left: 30%;
+        }
+        .selct{
+            margin-right: 26px;
+            width: 118px;
+            margin-top: 10px;
+            height: 29px;
+        }
+        /* .otp-field{
+            width:  57px!important;
+            height: 57px!important;
+            border-radius: 4px;
+            border: 1px solid #c5c5c5;
+            text-align: center;
+            font-size: 32px;
+        } */
+        /* div#c_kyf5u6hnmydk22x60wn{
+            width:  57px!important;
+            height: 57px!important;
+        } */
+        .otp-field{margin-left:15px;
+        }
+.btn-primary:active{
+    background-color: #638f00!important;
+}
+.keys{
+    display: flex;
+    justify-content: center;
+}

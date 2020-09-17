@@ -1,0 +1,450 @@
+
+
+  <app-header></app-header>
+  <app-menubar></app-menubar>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        {{'dashboard'| translate}}
+      </h1>
+ 
+    </section>
+    <!-- <section class="content">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6 green-col">
+              <div class="small-box bg-aqua blue-card">
+                <div class="inner totalbis">
+                   <p class="title">{{'TotalBusiness'| translate}}</p>
+                   <h3 class="value">{{dashboadData?.total_business || '0'}}</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 green-col">
+              <div class="small-box bg-green green-card">
+                <div class="inner">
+                <p class="title">{{'BusinesswithKYCApproved'| translate}}</p>
+                <h3 class="value">{{dashboadData?.kyc_approved || '0'}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6 green-col">
+              <div class="small-box bg-aqua blue-card">
+                <div class="inner">
+                 <p class="title">{{'BusinessKYCPending'| translate}}</p>
+                 <h3 class="value">{{dashboadData?.kyc_pending || '0'}}</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 green-col">
+                <div class="small-box bg-aqua blue-card">
+                  <div class="inner totalbis">
+                    <p class="title">{{'ActiveBusinesses'| translate}}</p>
+                    <h3>{{dashboadData?.active_business || '0'}}</h3>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="small-box bg-red red-card">
+            <div class="inner totalbis">
+              <p class="title">{{'BusinessonTrial'| translate}}</p>
+              <h3 class="value">{{dashboadData?.on_trial || '0'}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+      <section class="content">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6 green-col">
+              <div class="small-box bg-aqua current-green-1">
+                <div class="inner heightauto">
+                  <p class="title">{{'RecentKYCRequestPending'| translate}}</p>
+                  <h3 class="value">{{dashboadData?.kyc_request_pending || '0'}}</h3> 
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 green-col">
+              <div class="small-box bg-green current-green-1">
+                <div class="inner heightauto">
+                 <p class="title">{{'CurrentMonthNewAnnualSubscription'| translate}}</p>
+                  <p>{{'No.ofSubscription'| translate}}: {{dashboadData?.current_month_new_annual_subscription?.number || '0'}}</p>
+                  <p>{{'Amount'| translate}}: {{dashboadData?.current_month_new_annual_subscription?.amount || '0'}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6 green-col">
+              <div class="small-box bg-aqua current-green-2">
+                <div class="inner">
+                  <p class="title">{{'AnnualSubscriptionDuethisMonth'| translate}}</p>
+                  <p>{{'No. of Subscription'| translate}}: {{dashboadData?.ammunal_subscription_due_this_month.number || '0'}}</p>
+                  <p>{{'Amount'| translate}}: {{dashboadData?.ammunal_subscription_due_this_month.amount || '0'}}</p>
+                  <h3 class="value">0</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 green-col">
+              <div class="small-box bg-yellow current-green-2">
+                <div class="inner boxbg-yellow">
+                  <p class="title">{{'CurrentMonthNewMonthlySubscription'| translate}}</p>
+                  <p>{{'No.ofSubscription'| translate}}: {{dashboadData?.current_month_new_monthly_subscription.number || '0'}}</p>
+                  <p>{{'Amount'| translate}}: {{dashboadData?.current_month_new_monthly_subscription.amount || '0'}}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ">
+          <div class="small-box bg-red current-green-1">
+            <div class="inner heightauto">
+             <p class="title">{{'CurrentMonthMonthlySubscriptionDue'| translate}}</p>
+              <p>{{'No.ofSubscription'| translate}}: {{dashboadData?.current_month_monthly_subscription_due.number || '0'}}</p>
+              <p>{{'Amount'| translate}}: {{dashboadData?.current_month_monthly_subscription_due.amount || '0'}}</p>
+              <h3>0</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 green-col">
+            <div class="small-box bg-green bule-last">
+                <div class="inner">
+                <p class="title">{{'TotalCustomers'| translate}}</p>
+                <h3 class="value">{{dashboadData?.total_customer || '0'}}</h3> 
+                 
+                </div>
+              </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 green-col">
+          <div class="small-box bg-aqua bule-last">
+            <div class="inner">
+               <p class="title">{{'ActiveCustomers'| translate}}</p>
+               <h3 class="value">{{dashboadData?.active_customer || '0'}}</h3>             
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 green-col">
+          <div class="small-box bg-yellow ">
+            <div class="inner">
+             <p class="title">{{'CurrentMonthOrder'| translate}}</p>
+             <h3 class="value">{{dashboadData?.current_month_order || '0'}}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+          <div class="small-box bg-red ">
+            <div class="inner">
+            <p class="title">{{'LastMonthOrder'| translate}}</p>
+            <h3 class="value">{{dashboadData?.last_month_order || '0'}}</h3>            
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6 green-col">
+              <div class="small-box bg-green">
+                  <div class="inner">
+                  <p class="title">{{'TotalSalesRepresentative'| translate}}</p>
+                  <h3 class="value">{{dashboadData?.total_sales_representative || '0'}}</h3>                 
+                  </div>
+                </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 green-col">
+            <div class="small-box bg-aqua bule-last">
+              <div class="inner">
+                <p class="title">{{'TotalReference'| translate}}</p>
+                <h3 class="value">{{dashboadData?.total_refrences || '0'}}</h3>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 green-col">
+            <div class="small-box bg-yellow">
+              <div class="inner">
+                 <p class="title">{{'TotalStaff'| translate}}</p>
+                 <h3 class="value">{{dashboadData?.total_staff || '0'}}</h3> 
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+         
+          </div>
+        </div>
+      </section>
+      <section class="content">
+          <div class="row">
+            <div class="col-lg-3 col-sm-6 green-col">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                     <p class="title">{{'TotalDrivers'| translate}}</p>
+                     <h3 class="value">{{dashboadData?.total_drivers || '0'}}</h3> 
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 green-col">
+              <div class="small-box bg-aqua bule-last">
+                <div class="inner">
+                <p class="title">{{'ActiveDrivers'| translate}}</p>
+                <h3 class="value">{{dashboadData?.active_drivers || '0'}}</h3>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 green-col">
+              <div class="small-box bg-yellow">
+                <div class="inner">
+                <p class="title">{{'OnlineDrivers'| translate}}</p>
+                <h3 class="value">{{dashboadData?.online_driver || '0'}}</h3> 
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="small-box bg-red">
+                    <div class="inner">
+                     <p class="title">{{'CurrentWeekDriverpayout'| translate}}</p>
+                     <h3 class="value">{{dashboadData?.current_weel_driver_payout || '0'}}</h3>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </section> -->
+
+     <!-- This is for 2_food_delivery Dashboard -->
+        <section class="content">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-6 green-col">
+                  <div class="small-box bg-aqua current-green-1">
+                    <div class="inner heightauto">
+                      <h3 class="value">500</h3> 
+                      <p class="title">{{'TotalCustomer'| translate}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 green-col">
+                  <div class="small-box bg-green current-green-1">
+                    <div class="inner heightauto">
+                      <h3 class="value">400</h3> 
+                     <p class="title">{{'totalDRIVERS'| translate}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="row">
+                <div class="col-md-6 green-col">
+                  <div class="small-box bg-aqua current-green-1">
+                    <div class="inner heightauto">
+                      <h3 class="value">300</h3>
+                      <p class="title">{{'totalRestaurents'| translate}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 green-col">
+                  <div class="small-box bg-yellow current-green-1">
+                    <div class="inner heightauto">
+                      <h3 class="value">50</h3>
+                      <p class="title">{{'totalCUISINE'| translate}}</p>
+                    </div>
+                  </div>
+    
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 ">
+              <div class="small-box bg-red current-green-1">
+                <div class="inner heightauto">
+                  <h3 class="value">8</h3>
+                 <p class="title">{{'totalZOne'| translate}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="outer_border">
+          <div class="row sndRow p-3">
+            <div class="col-md-2 green-col">
+                <label>{{'FilterbyCity' | translate}}</label>
+                <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                    <option value="">Select City</option>
+                    <option value="Pending">{{'Pending'| translate}}</option>
+                    <option value="Submitted">{{'Submitted'| translate}}</option>
+                    <option value="Approved">{{'Approved'| translate}}</option>
+                    <option value="Rejected">{{'Rejected'| translate}}</option>
+                                </select>
+            </div>
+
+            <div class="col-md-2 green-col">
+              <label>{{'FilterbyZone' | translate}}</label>
+              <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                <option value="">Select Zone</option> 
+                <option value="Zone 1">Zone 1</option>
+                  <option value="Pending">Zone 2</option>
+                  <option value="Rejected">Zone 3</option>
+                              </select>
+          </div>
+          <div class="col-md-2 green-col">
+            <label>{{'filterByDay' | translate}}</label>
+            <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                <option value="">Today</option>
+                <option value="Pending">Yesterday</option>
+                </select>
+        </div>
+
+            <div class="col-md-2 green-col">
+                <label>{{'StartDate'| translate}}</label>
+                <input type="date" class="form-control dt1"  >
+            </div>
+            <div class="col-md-2 green-col">
+                <label>{{'ToDate'| translate}}</label>
+                <input type="date" class="form-control dt2" >
+            </div>
+            <div class="col-md-2" style="padding-top: 1.2%;">
+                <div class="btn-div">
+                    <button type="button" class="btn bg-olive mr-3"  >{{'Submit' | translate}}</button>
+                 
+                    <button type="button" class="btn margin margin1" >{{'Reset' | translate}}</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-md-12 green-col">
+                <div class="small-box bg-aqua current-green-1">
+                  <div class="inner heightauto">
+                    <h3 class="value">500</h3> 
+                    <p class="title">Today's Orders Received</p>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-md-12 green-col">
+                <div class="small-box bg-aqua current-green-1">
+                  <div class="inner heightauto">
+                    <h3 class="value">300</h3>
+                    <p class="title">Today's Orders Processing</p>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+          <div class="col-md-3 green-col">
+            <div class="small-box bg-yellow current-green-1">
+              <div class="inner heightauto">
+                <h3 class="value">50</h3>
+                <p class="title">Today's Orders Delivered</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-3 ">
+            <div class="small-box bg-red current-green-1">
+              <div class="inner heightauto">
+                <h3 class="value">8</h3>
+               <p class="title">Today's Orders Cancelled</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <h3>
+          Top 5 Perfomance
+        </h3>
+        <div class="outer_border">
+          <div class="row sndRow p-3">
+            <div class="col-md-2 green-col">
+                <label>{{'FilterbyCity' | translate}}</label>
+                <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                    <option value="">Select City</option>
+                    <option value="Pending">{{'Pending'| translate}}</option>
+                    <option value="Submitted">{{'Submitted'| translate}}</option>
+                    <option value="Approved">{{'Approved'| translate}}</option>
+                    <option value="Rejected">{{'Rejected'| translate}}</option>
+                                </select>
+            </div>
+
+            <div class="col-md-2 green-col">
+              <label>{{'FilterbyZone' | translate}}</label>
+              <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                <option value="">Select Zone</option> 
+                <option value="Zone 1">Zone 1</option>
+                  <option value="Pending">Zone 2</option>
+                  <option value="Rejected">Zone 3</option>
+                              </select>
+          </div>
+          <div class="col-md-2 green-col">
+            <label>{{'filterByMonth' | translate}}</label>
+            <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                <option value="">January</option>
+                <option value="Pending">February</option>
+                </select>
+        </div>
+
+            <div class="col-md-2 green-col">
+                <label>{{'StartDate'| translate}}</label>
+                <input type="date" class="form-control dt1"  >
+            </div>
+            <div class="col-md-2 green-col">
+                <label>{{'ToDate'| translate}}</label>
+                <input type="date" class="form-control dt2" >
+            </div>
+            <div class="col-md-2" style="padding-top: 1.2%;">
+                <div class="btn-div">
+                    <button type="button" class="btn bg-olive mr-3"  >{{'Submit' | translate}}</button>
+                 
+                    <button type="button" class="btn margin margin1" >{{'Reset' | translate}}</button>
+                </div>
+            </div>
+
+            <div class="row sndRow p-3">
+              <div class="col-md-4">
+                <div class="graphBlock">
+                  <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+              </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="graphBlock">
+                  <div id="chartContainer2" style="height: 370px; width: 100%;margin-left: 200px;"></div>
+              </div>
+              </div>
+              <div class="col-md-4">
+                <div class="graphBlock">
+                  <div id="chartContainer3" style="height: 370px; width: 100%;margin-left:450px"></div>
+              </div>
+              </div>
+             
+            </div>
+        </div>
+        </div>
+  </div>
+  <app-footer></app-footer>
+

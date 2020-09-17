@@ -1,0 +1,396 @@
+<div class="sidbv">
+    <aside class="main-sidebar">
+        <section class="sidebar">
+
+            <div class="profile">
+             
+             
+                <div class="userTet">
+                </div>
+            </div>
+     
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="treeview" [routerLink]="['/dashboard']" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" *ngIf="permissions[4].has_permission==true">
+                    <a >
+                        <i class="fa fa-tachometer"></i>
+                        <span>{{'Dashboard' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/manage-role']" [ngClass]="{'active': ('selectedTab' == '2a') }" routerLinkActive="active" *ngIf="permissions[0].has_permission==true" >
+                
+                    <a [ngClass]="{'active': ('isActive' == 'manage-role')}">
+                        <strong class="fa fa-user"></strong>
+                        <span>{{'RolesManagement' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/manage-staff']" routerLinkActive="active" *ngIf="permissions[22].has_permission==true">
+                    <a>
+                        <strong class="fa fa-user"></strong>
+                        <span>{{'StaffManagement' | translate}}</span>
+                    </a>
+                </li>
+                <!-- <li class="treeview" [routerLink]="['/manage-merchant']" routerLinkActive="active" *ngIf="permissions[11].has_permission==true">
+                    <a>
+                        <i class="fa fa-unlock-alt"></i>
+                        <span> {{'MerchantManagement' | translate}}</span>
+                    </a>
+                </li> -->
+                <li class="treeview" [routerLink]="['/manage-drivers']" routerLinkActive="active" *ngIf="permissions[6].has_permission==true">
+                    <a>
+                        <strong class="fa fa-cogs"></strong>
+                        <span>{{'DriversManagement' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/customer-managment']" routerLinkActive="active"  *ngIf="permissions[3].has_permission==true">
+                    <a>
+                        <strong class="fa fa-tasks"></strong>
+                        <span>{{'CustomersManagement' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/restaurant-management']" routerLinkActive="active"  *ngIf="permissions[3].has_permission==true">
+                    <a>
+                        <strong class="fa fa-tasks"></strong>
+                        <span>{{'restaurantmanagement' | translate}}</span>
+                    </a>
+                </li>
+                <!-- <li class="treeview" [routerLink]="['/manage-subscription']" routerLinkActive="active" *ngIf="permissions[23].has_permission==true">
+                    <a>
+                        <i class="fa fa-files-o"></i>
+                        <span>{{'SubscriptionManagement' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/manage-sale']" routerLinkActive="active" *ngIf="permissions[0].has_permission==true">
+                    <a>
+                        <i class="fa fa-files-o"></i>
+                        <span> {{'SalesRepresentative' | translate}}</span>
+                    </a>
+                </li> -->
+                <li class="treeview" [routerLink]="['/order-history']" routerLinkActive="active" *ngIf="permissions[20].has_permission==true">
+                    <a>
+                        <strong class="fa fa-files-o"></strong>
+                        <span>{{'Order Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/manage-offer']" routerLinkActive="active" *ngIf="permissions[14].has_permission==true">
+                    <a>
+                        <strong class="fa fa-files-o"></strong>
+                        <span>{{'OffersManagement' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/refund-management']" routerLinkActive="active" *ngIf="permissions[14].has_permission==true">
+                    <a>
+                        <strong class="fa fa-files-o"></strong>
+                        <span>{{'Refund Management' | translate}}</span>
+                    </a>
+                </li>
+              
+                <li class="treeview" [routerLink]="['/manage-cuisine']" routerLinkActive="active" *ngIf="permissions[2].has_permission==true">
+                    <a>
+                        <strong class="fa fa-user"></strong>
+                        <span>{{'ManageCuisines' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/category-management']" routerLinkActive="active" >
+                    <a>
+                        <strong class="fa fa-user"></strong>
+                        <span>{{'categoryManag' | translate}}</span>
+                    </a>
+                </li>
+
+                <!-- <li class="treeview" [routerLink]="['/delivery-charge']">
+                    <a>
+                        <i class="fa fa-truck" aria-hidden="true"></i>
+                        <span> {{'DeliveryCharge' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/manage-allergen']" routerLinkActive="active" *ngIf="permissions[5].has_permission==true">
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'ManageAllergans' | translate}}</span>
+                    </a>
+                </li> -->
+             
+                <!-- <li class="treeview" [routerLink]="['/manage-faq']" routerLinkActive="active" *ngIf="permissions[7].has_permission==true">
+                    <a>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <span>{{'ManageFAQ' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/help-question']" routerLinkActive="active" *ngIf="permissions[8].has_permission==true">
+                    <a>
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <span>{{'ManageHelpQuestion' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/blog-management']" routerLinkActive="active" *ngIf="permissions[0].has_permission==true">
+                    <a>
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                        <span>{{'BlogManagement' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/manage-news']" routerLinkActive="active" *ngIf="permissions[0].has_permission==true">
+                    <a>
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                        <span>{{'NewsManagement' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/report-section']" routerLinkActive="active" *ngIf="permissions[13].has_permission==true">
+                    <a>
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                        <span>{{'ReportManagement' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/payout-driver']" routerLinkActive="active" *ngIf="permissions[16].has_permission==true">
+                    <a>
+                        <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        <span>{{'PayoutDriver' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/payout-sale-reprentative-pending']" routerLinkActive="active" *ngIf="permissions[21].has_permission==true">
+                    <a>
+                        <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        <span>{{'SaleReprentativePending' | translate}}</span>
+                    </a>
+                </li> -->
+                <!-- <li class="treeview" [routerLink]="['/report-restaurant']" routerLinkActive="active" *ngIf="permissions[18].has_permission==true">
+                    <a>
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                        <span>{{'ReportRestaurant' | translate}}</span>
+                    </a>
+                </li> -->
+                
+                
+                <li class="treeview" [routerLink]="['/support-setting']" routerLinkActive="active" *ngIf="permissions[24].has_permission==true">
+                    <a>
+                        <strong class="fa fa-cogs"></strong>
+                        <span>{{'SupportSetting' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/shipping-charge']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Shipping Charge' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/night-charge-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'nightChargeManage' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/bad-weather-charge-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'badweatherChargemanagement' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/coupon-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'couponManag' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/activity-log-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'activitylogManage' | translate}}</span>
+                        </a>
+                </li>
+
+                <li class="treeview" [routerLink]="['/reviews-management-restaurent']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'reviewmanagementrestaurent' | translate}}</span>
+                        </a>
+                </li>
+                <li class="treeview" [routerLink]="['/payout-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'payoutmanagement' | translate}}</span>
+                        </a>
+                </li>
+                <li class="treeview" [routerLink]="['/report-management-orders']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'reportmanagementorders' | translate}}</span>
+                        </a>
+                </li>
+                <li class="treeview" [routerLink]="['/report-management-restaurent-rating']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'reportmanagementrestaurentrating' | translate}}</span>
+                        </a>
+                </li>
+                <li class="treeview" [routerLink]="['/report-management-driver-rating']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'reportmanagementdriverrating' | translate}}</span>
+                        </a>
+                </li>
+                <li class="treeview" [routerLink]="['/total-earning-report']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'totalearningReport' | translate}}</span>
+                        </a>
+                </li>
+                <li class="treeview" [routerLink]="['/report-management-restaurent-earning']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'RESTAURANTSEARNINGREPORT' | translate}}</span>
+                        </a>
+                </li>
+                <li class="treeview" [routerLink]="['/report-management-driver-earning']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'driverearningReport' | translate}}</span>
+                        </a>
+                </li>
+
+                <li class="treeview" [routerLink]="['/payout-history-driver']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'payoutHistory' | translate}}</span>
+                        </a>
+                </li>
+
+                <li class="treeview" [routerLink]="['/pincode-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Pin Code Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/penalty-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Penalty Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/rate-card-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Rate Card Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/milestone-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Milestone Management' | translate}}</span>
+                    </a>
+                </li>
+
+                <li class="treeview" [routerLink]="['/notifications']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'notifications' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/notification-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'notificationManagement' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/notification-history']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'notificationhistory' | translate}}</span>
+                    </a>
+                </li>
+
+                <li class="treeview" [routerLink]="['/selfie-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Selfie Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/account-ledger']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Account ledger Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/payout-history-driver']" routerLinkActive="active" *ngIf="permissions[14].has_permission==true">
+                    <a>
+                        <strong class="fa fa-files-o"></strong>
+                        <span>{{'Payout History Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/session-history-driver']" routerLinkActive="active" *ngIf="permissions[14].has_permission==true">
+                    <a>
+                        <strong class="fa fa-files-o"></strong>
+                        <span>{{'Session History Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/tip-charity']" routerLinkActive="active" *ngIf="permissions[14].has_permission==true">
+                    <a>
+                        <strong class="fa fa-files-o"></strong>
+                        <span>{{'Tip & Charity Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/banner-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Banner Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/ticket-management']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>{{'Ticket Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/report-setting-management']" routerLinkActive="active" *ngIf="permissions[25].has_permission==true">
+                    <a>
+                        <strong class="fa fa-cogs"></strong>
+                        <span>{{'Report-Setting' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/help-support']" routerLinkActive="active" *ngIf="permissions[25].has_permission==true">
+                    <a>
+                        <strong class="fa fa-cogs"></strong>
+                        <span>{{'Help & Support Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/refer-friend']" routerLinkActive="active"  >
+                    <a>
+                        <i class="fa fa-user"></i>
+                        <span>{{'Refer Friend Management' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/wallet-update']" routerLinkActive="active" *ngIf="permissions[14].has_permission==true">
+                    <a>
+                        <strong class="fa fa-files-o"></strong>
+                        <span>{{'Wallet Update Requests' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/tax-setting']" routerLinkActive="active" *ngIf="permissions[25].has_permission==true">
+                    <a>
+                        <strong class="fa fa-cogs"></strong>
+                        <span>{{'TaxSetting' | translate}}</span>
+                    </a>
+                </li>
+                <!-- <li class="treeview" [routerLink]="['/chat-room']" routerLinkActive="active" *ngIf="permissions[0].has_permission==true">
+                    <a>
+                        <i class="fa fa-comments-o" aria-hidden="true"></i>
+                        <span>{{'SupportChat' | translate}}</span>
+                    </a>
+                </li> -->
+                <li class="treeview" [routerLink]="['/inquiries']" routerLinkActive="active" *ngIf="permissions[1].has_permission==true">
+                    <a>
+                        <strong class="fa fa-files-o"></strong>
+                        <span>{{'Inquiries' | translate}}</span>
+                    </a>
+                </li>
+                <li class="treeview" [routerLink]="['/legal-terms']" routerLinkActive="active"  *ngIf="permissions[10].has_permission==true">
+                    <a>
+                        <strong class="fa fa-question-circle" aria-hidden="true"></strong>
+                        <span>{{'Legal,Terms&Conditions' | translate}}</span>
+                    </a>
+                </li>
+            
+        </ul>
+        </section>
+
+    </aside>
+    
+</div>

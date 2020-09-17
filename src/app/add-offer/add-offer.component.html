@@ -1,0 +1,198 @@
+<app-header>
+</app-header>
+<app-menubar></app-menubar>
+<div>
+    <div class="content-wrapper">
+        <section class="content footer-div">
+            <div class="box-header">
+                <h3 class="mt-0 mb-0">{{'AddOffer' | translate}}</h3>
+            </div>
+            <div class="box-header">
+                <div class=" custom-Form"
+                    style="background-color: #f5f5f5; border: 1px solid #e3e3e3;    padding: 15px;">
+                    <div class="row">
+                        <form [formGroup]="offerform">
+                            <div class=" col-md-6">
+                                <div class="row form-group">
+                                    <label class="col-md-4 control-label">{{'OfferName' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <input formControlName="offername" class="form-control"
+                                                (keypress)="service.preventSpace($event)" required="true" value=""
+                                                type="text"></div>
+                                        <div
+                                            *ngIf="offerform.get('offername').hasError('required') && offerform.get('offername').touched">
+                                            <span style="color:red">Offer name is required.</span></div>
+                                        <div *ngIf="offerform.get('offername').hasError('maxlength') && offerform.get('offername').dirty"
+                                            style="color:red">
+                                            Maxlength of offer name should be 255.
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class=" col-md-6">
+                                <div class="row form-group">
+                                    <label class="col-md-4 control-label">{{'OfferCode' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <input formControlName="offercode" (keypress)="checkSpace($event)"
+                                                class="form-control" value="" type="text"></div>
+                                        <div
+                                            *ngIf="offerform.get('offercode').hasError('required') && offerform.get('offercode').touched">
+                                            <span style="color:red">*Offer code is required.</span></div>
+                                        <div *ngIf="offerform.get('offercode').hasError('maxlength') && offerform.get('offercode').dirty"
+                                            style="color:red">
+                                            *Maxlength of offer Code should be 10.
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-6">
+                                <div class="row form-group">
+                                    <label class="col-md-4 control-label"
+                                        style="padding-top: 0;">{{'OfferType' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <select class="form-control select-kyc gender-select"
+                                                (change)="selsec($event.target.value)" formControlName="offertype">
+                                                <option disabled value="">Select Offer Type </option>
+                                                <option value="PERCENTAGE">Percentage </option>
+                                                <option value="FLAT THB">Flat </option>
+
+                                            </select>
+                                        </div>
+                                        <div
+                                            *ngIf="offerform.get('offertype').hasError('required') && offerform.get('offertype').touched">
+                                            <span style="color:red">*Offertype is required.</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class=" col-md-6">
+                                <div class="row form-group">
+                                    <label class="col-md-4 control-label"
+                                        for="mobile_number">{{'OfferValue' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div style="width: 100%;">
+                                            <input type="text" class="form-control" formControlName="number"
+                                                (keypress)="isNumber($event)" [placeholder]="place" maxlength="3">
+                                            <div
+                                                *ngIf="offerform.get('number').hasError('required') && offerform.get('number').touched">
+                                                <span style="color:red">*Offer Value is required.</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-6" *ngIf="offerType=='PERCENTAGE'">
+                                <div class="row form-group">
+                                    <label class="col-md-4 control-label"
+                                        for="mobile_number">{{'MaxOfferValue' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div style="width: 100%;">
+
+                                            <input type="text" class="form-control" formControlName="maxoffer"
+                                                placeholder="0 THB" (keypress)="isNumber($event)" maxlength=5>
+
+
+                                            <div *ngIf="offerform.get('maxoffer').hasError('max') && offerform.get('maxoffer').dirty"
+                                                style="color:red">
+                                                *Max offer Value should be greater than Min offer Value.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-6" *ngIf="offerType=='FLAT THB' || offerType=='PERCENTAGE' ">
+                                <div class="row form-group">
+                                    <label class="col-md-4 control-label"
+                                        for="mobile_number">{{'MinOrderValue' | translate}}(Optional):</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div style="width: 100%;">
+                                            <input type="text" class="form-control" formControlName="minoffer"
+                                                placeholder="0 THB" (keypress)="isNumber($event)" maxlength="10">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                        <div class=" col-md-6">
+                            <div class="row form-group">
+                                <label class="col-md-4 control-label"
+                                    for="mobile_number">{{'StartDate' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div style="width: 100%;">
+                                        <input type="date" class="form-control dt1" [(ngModel)]="offer.toDate"
+                                            (ngModelChange)="fromMaxDate($event)"
+                                            min="{{toMaxDate | date:'yyyy-MM-dd'}}"
+                                            max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-md-6">
+                            <div class="row form-group">
+                                <label class="col-md-4 control-label"
+                                    for="mobile_number">{{'EndDate' | translate}}</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div style="width: 100%;">
+                                        <input type="date" class="form-control dt1" [(ngModel)]="offer.fromDate"
+                                            (ngModelChange)="getDate($event)" max="{{formDate | date:'yyyy-MM-dd'}}"
+                                            min="{{toMaxDate | date:'yyyy-MM-dd'}}">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 btn submit-div">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat"
+                                [disabled]="!offerform.valid"
+                                (click)="generate('offer')">{{'Submit' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

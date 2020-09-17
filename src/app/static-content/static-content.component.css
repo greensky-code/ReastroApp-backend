@@ -1,0 +1,36 @@
+
+button.btn.btn-primary.btn-block.btn-flat.cusine {
+    background: green;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    margin-top: 30px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}
+.setingTop.availabilty-input textarea {
+    width: 100%;
+}
+.cusine{
+    margin: 0;
+}
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}

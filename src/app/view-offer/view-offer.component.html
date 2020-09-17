@@ -1,0 +1,108 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class="">
+                  
+           
+            <div class="">
+               
+                <div class="box">
+                    <div class="backbutton" [routerLink]="['/manage-offer']" style="float: right;">
+                        <button type="button" class="bkbtn">{{'Back'| translate}}</button>
+                    </div>
+                    <div class="row custom-width">
+                        <div class="col-md-2">
+                            <label >{{'OfferID' | translate}}:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{offer_detail?.id || '--'}} </p>
+                        </div>
+                        <div class="col-md-2">
+                            <label >{{'OfferName' | translate}}:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{offer_detail?.name || '--'}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <label >{{'Max offer value' | translate}}:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{offer_detail?.max_offer_value || '0'}}</p>
+                        </div>
+                    </div>
+                    <div class="row custom-width">
+                        <div class="col-md-2">
+                            <label >{{'Min order value' | translate}}:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{offer_detail?.min_order_value || '0'}} </p>
+                        </div>
+                        <div class="col-md-2">
+                            <label >{{'Start date' | translate}}:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{offer_detail?.start_date || '--'}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <label >{{'End date' | translate}}:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{offer_detail?.end_date || '--'}}</p>
+                        </div>
+                    </div>
+                    <div class="row custom-width">
+                        <div class="col-md-2">
+                            <label >{{'Offer type' | translate}}:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{offer_detail?.offer_type || '--'}} </p>
+                        </div>
+                     
+                    </div>
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th> {{'MerchantID' | translate}}</th>
+                                    <th>{{'BusinessName' | translate}}</th>
+                                    <th>{{'StartDate' | translate}}</th>
+                                    <th>{{'EndDate' | translate}}</th>
+                        
+                                    <th>{{'Status' | translate}}</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let items of offer_details | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <td>{{'--'}}</td>
+                                    <td>{{items?.business_name || '--' }}</td>
+                           
+                                    <td>{{(items?.offer_start_date | date : 'dd/MM/yyyy, H:mm') || '--'}}</td>
+                                    <td>{{(items?.offer_end_date | date : 'dd/MM/yyyy, H:mm') || '--'}}</td>
+                                    <td *ngIf="items?.is_active==true">Active</td>
+                                    <td *ngIf="items?.is_active!=true">Inactive</td>
+                    
+                                 
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 *ngIf="admin_offer?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2>
+                      
+                        <h2 *ngIf="offer_details?.length == 0" style="text-align:center;">Data not Found!</h2>
+                    </div>
+                   
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+    <!-- /.content -->
+</div>
+<footer class="footer-text">
+    <strong>{{'Copyright' | translate}} &copy; 2020 <a href="javascript:;">{{'FoodDelivery' | translate}}</a>.</strong> 	&nbsp;{{'All rights reserved.' | translate}}
+</footer>

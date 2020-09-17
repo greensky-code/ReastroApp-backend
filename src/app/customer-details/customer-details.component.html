@@ -1,0 +1,296 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+
+<div class="content-wrapper">
+    <div class="box-header button-text-div">
+        <h1 class="mt-0 mb-0" style="font-size: 24px;">
+            {{'CustomerDetails' | translate}}
+
+            </h1>
+            <div class="backbutton" [routerLink]="['/customer-managment']">
+                <button type="button" class="bkbtn">{{'Back' | translate}}</button>
+            </div>
+        </div>
+     
+   
+    <div class="standrd">
+        <section class="merchant ">
+            <div class="row custom-width">
+                <div class="col-md-2">
+                    <label>{{'CustomerID' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{retriveCustomerData?.id || '--'}} </p>
+                </div>
+                <div class="col-md-2">
+                    <label>{{'Phone' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p type="text">
+                        {{retriveCustomerData?.mobile || '--' }}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>{{'LastOrderon' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{(retriveCustomerData?.last_order_date | date : 'dd/MM/yyyy') || '--'}}</p>
+                </div>
+            </div>
+            <div class="row custom-width">
+                <div class="col-md-2">
+                    <label>{{'LastDeliveryAddress' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p class="table-width" title="{{retriveCustomerData?.last_delivery_address ||'--'}}">{{retriveCustomerData?.last_delivery_address ||'--'}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>{{'CustomerName' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p class="table-width" title="{{retriveCustomerData?.first_name || '--' }}">{{retriveCustomerData?.first_name || '--' }}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>{{'email' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p class="table-width" title="{{retriveCustomerData?.email || '--' }}">{{retriveCustomerData?.email || '--' }}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>{{'LastOrderAmount' | translate}}:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{retriveCustomerData?.last_order_amount || '--' }}</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="tabs tabs-style-tzoid ">
+                <nav>
+                    <ul id="myul">
+                        <li><a class="active" (click)="makeActive('1a')" [ngClass]="{'active': (selectedTab == '1a') }" href="#1a" data-toggle="tab"><span>{{'OrderHistory' | translate}}</span></a></li>
+                        <li><a (click)="makeActive('2a')" [ngClass]="{'active': (selectedTab == '2a') }" href="#2a" data-toggle="tab"><span>{{'SavedAddress' | translate}}</span></a></li>
+                        <li><a (click)="makeActive('3a')" [ngClass]="{'active': (selectedTab == '3a') }" href="#3a" data-toggle="tab"><span>{{'ConversationwithRestaurant' | translate}}</span></a></li>
+                        <li><a (click)="makeActive('4a')" [ngClass]="{'active': (selectedTab == '4a') }" href="#4a" data-toggle="tab"><span>{{'ConverstationwithSupport' | translate}}</span></a></li>
+                   
+                    </ul>
+                </nav>
+                <div class="tab-content clearfix steps" style="border: solid;">
+                    <div class="tab-pane active" id="1a">
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive">
+                             
+                                <table id="example1" class="table table-bordered table-striped mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'OrderId' | translate}}</th>
+                                            <th>{{'RestaurantName' | translate}}</th>
+                                            <th>{{'RestaurantAddress' | translate}}</th>
+                                            <th>{{'Items' | translate}}</th>
+                                            <th>{{'OrderAmount' | translate}}</th>
+                                            <th>{{'OrderDate/Time' | translate}}</th>
+                                            <th>{{'OrderStatus' | translate}}</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of order_history">
+                                            <td>{{item?.order_id || '--'}}</td>
+                                            <td class="table-width" title="{{item?.restaurant_name || '--'}}">{{item?.restaurant_name || '--'}}</td>
+                                            <td class="table-width" title="{{item?.restaurant_address?.street}}
+                                            {{item?.restaurant_address?.city}}
+                                            {{item?.restaurant_address?.r_province}}
+                                            {{item?.restaurant_address?.r_country}}">{{item?.restaurant_address?.street}},
+                                                {{item?.restaurant_address?.city}},
+                                                {{item?.restaurant_address?.r_province}},
+                                                {{item?.restaurant_address?.r_country}}
+                                        
+                                            </td>
+                                            <td class="table-width" ><p *ngFor="let data of item?.order_items">{{data?.item_name || '--'}}</p></td>
+                                            <td>{{item?.order_value || '--'}}</td>
+                                            <td>{{(item?.delivery_date_time| date : 'dd/MM/yyyy , H:mm' ||'--') || '--'}}</td>
+                                            <td>{{item?.order_status || '--'}}</td>
+
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                                <h2 *ngIf="order_history?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane" id="2a">
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'House/Flat.no' | translate}}</th>
+                                            <th>{{'Landmark' | translate}}</th>
+                                            <th>{{'Location' | translate}}</th>
+                                            <th>{{'AddressType' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of customeraddress">
+                                            <td class="table-width" >{{item?.house}}</td>
+                                            <td class="table-width">{{item?.landmark || '--'}}</td>
+                                            <td class="table-width">{{item?.location || '--'}}</td>
+                                            <td >{{item?.address_type || '--'}}</td>
+                                      
+
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                                <h2 *ngIf="customeraddress?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="3a">
+
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="scroll-view">
+                                <div class="box-tabbody" *ngFor="let item of chat_list">
+                                    <div class="row sndRow custom-width">
+                                        <label class="col-md-3">Restaurant Name :</label>
+                                        <p class="col-md-9">{{item?.receiver_detail?.resturant_name || '--'}}</p>
+                                        <label class="col-md-3">OrderID:</label>
+                                        <p class="col-md-9">{{item?.order_id || '--'}}</p>
+                                        <label class="col-md-3">Order Date:</label>
+                                        <p class="col-md-9">{{marchantdata?.mobile || '--'}}</p>
+                                        <div class="col-md-12">
+                                            <button class="submit" (click)="chathistory(item?.order_pk)">View 
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <h2 *ngIf="chat_list?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2>
+
+                            <!-- /.box-body -->
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="4a">
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="row">
+    
+    
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of orderlistdata">
+                                                    <td>{{data?.order_id ||'--'}}</td>
+                                                    <td>{{data?.created_at ||'--' | date : 'dd-MM-yy'}}</td>
+                                                    <td>{{data?.name ||'--'}}</td>
+                                                    <td>{{data?.place_user?.email ||'--'}}</td>
+                                                    <td>{{data?.land_mark ||'--'}}</td>
+                                                    <td>{{data?.order_value ||'--'}}</td>
+                                                    <td>{{data?.order_status ||'--'}}</td>
+                                                    <td>
+                                                        <button (click)="viewOrderdata(data)" class="submit">View</button>
+                                                    </td>
+                                                </tr>
+    
+    
+                                            </tbody>
+    
+                                        </table>
+                                        <h2 *ngIf="orderlistdata?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2> 
+    
+                                    </div>
+    
+    
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+          
+                <!-- /content -->
+            </div>
+
+        </section>
+
+
+    </div>
+
+</div>
+
+<footer class="footer-text">
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:;">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+
+</footer>
+
+
+
+
+
+
+<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #638f00;">
+                <h5 class="modal-title" id="exampleModalLabel" style="text-align:center"><b>Chat</b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body" style="padding: 0px;">
+
+                <div class="datainfo">
+
+                    <div class="chat-div">
+                        <div *ngFor="let chat of chat_historydata">
+                            <div class="left-chat" *ngIf="chat?.message_sender == retriveCustomer_id">
+                                <div class="chat">
+                                    <p>{{chat?.message}}</p>
+                                </div>
+                                <span></span>
+                            </div>
+
+                            <div class="right-chat" *ngIf="chat?.message_sender != retriveCustomer_id">
+                                <div class="chat2">
+                                    <p>{{chat?.message}}</p>
+                                </div>
+                                <span></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--  -->
+
+                </div>
+
+                <div class="modal-footer" style="background-color: #638f00;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>

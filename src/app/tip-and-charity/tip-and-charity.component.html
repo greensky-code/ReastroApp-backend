@@ -1,0 +1,83 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            
+            <div class="row">
+                  <div class="col-md-6">
+            <div class="box-header  box-hearder-564">
+                              <form class="" [formGroup]="myForm" >
+                                    <div style="text-align: center" >
+                <h1 style="font-size: 24px;">
+                    {{'TIP MANAGEMENT' | translate}}
+                </h1>
+            </div>
+                                    <div class="row mb-3" style="margin-top: 5%">
+                                        <label class="col-md-4"> {{'Description' | translate}}:</label>
+                                        <p > amount will be transferred.</p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Amount 1' | translate}}:</label>
+                                        <p>200 INR</p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Amount 2' | translate}}:</label>
+                                        <p>300 INR</p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Amount 3' | translate}}:</label>
+                                        <p>400 INR</p>
+                                    </div>
+                                    
+                                    <div class="bx mt-4-btn" style="display: flex;justify-content:space-around;width: 100%">
+                        <button type="submit" class="btn btn-success  Penalty"   
+                              routerLink ="/tip-management"
+                           >{{'Change' | translate}}</button>
+                            
+                    </div>
+                                </form>
+               
+            </div>
+</div>
+<div class="col-md-6">
+<div class="box-header  box-hearder-564">
+             <form class="" [formGroup]="form" >
+                                                <div style="text-align: center" >
+                <h1 style="font-size: 24px;">
+                    {{'DONATION MANAGEMENT' | translate}}
+                </h1>
+            </div>
+                                    <div class="row mb-3"  style="margin-top: 5%">
+                                        <label class="col-md-2"> {{'Donate' | translate}}:</label>
+                                        <div class="col-md-2">
+                                          <input type="text" placeholder="INR" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                          <input type="text" placeholder="to feeding India foundation" class="form-control">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bx mt-4-btn" style="display: flex;justify-content:space-around;width: 100%">
+                        <button type="submit" class="btn btn-success  Penalty"   
+                              routerLink ="/night-charge-management"
+                           >{{'Update' | translate}}</button>
+                            
+                    </div>
+                                </form>
+                    
+                
+</div>
+</div>
+</div>
+            
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>
+
+
+
+

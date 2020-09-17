@@ -1,0 +1,91 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                           {{'VIEW CUSTOMER ORDERS' | translate}}
+                        </h1>
+                    </div>
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col">
+                            <label>{{'FromDate' | translate}} </label>
+                            <input type="date" class="form-control dt1" [(ngModel)]="fromDate" (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                        </div>
+                        <div class="col-md-3 green-col">
+                            <label> {{'ToDate' | translate}}</label>
+                            <input type="date" class="form-control dt2" [(ngModel)]="toDate" (ngModelChange)="fromMaxDate($event)"  min="{{formDate | date:'yyyy-MM-dd'}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label> </label>
+                            <div class="btn-div">
+                            <button type="button" class="btn bg-olive" (click)="submitdata()" [disabled]="disabled==false">{{'Submit' | translate}}</button>
+                            <button type="button" class="btn margin margin2" (click)="reset()">{{'Reset' | translate}}</button>
+                            <button type="button" class="btn bg-olive" [routerLink]="['/customer-managment']" >{{'Back' | translate}}</button>
+
+                        </div>
+                        </div>
+                       
+                    </div>
+                 
+                  
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'OrderID' | translate}}</th>
+                                    <th>{{'OrderDate' | translate}}</th>
+                                    <th>{{'Delivery Address' | translate}}</th>
+                                    <th> {{'Restaurant Name (Address)' | translate}}</th>
+                                    <th> {{'Order Status' | translate}}</th>
+                                    <th>{{'OrderPrice' | translate}}</th>
+                                    <th>{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let data of  order_listdetails | paginate : {itemsPerPage:10, currentPage:page, totalItems:total}:index as i">
+                                    <td class="table-width">{{data?.order_id || '--' }}</td>
+                                    <td class="table-width">{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                    <td class="table-width" title="{{data?.customer_name}}">{{data?.customer_first_name || '--' }}</td>
+                                    <td class="table-width" title="{{data?.customer_email ||'--' }}">
+                                        {{data?.customer_email || '--' }}</td>
+                                    <td>{{data?.customer_mobile || '--' }}</td>
+                                    <td class="table-width" title="{{data?.restaurant_name ||'--' }}">
+                                        {{data?.restaurant_name || '--' }}</td>
+                                    <td title="{{data?.order_value ||'--' }}">
+                                        {{data?.order_value|| '--' }}</td>
+                                    <td>{{data?.order_status|| '--' }}</td> -->
+                                    <tr>
+                                        <td>O01</td>
+                                        <td>18-08-20</td>
+                                        <td>Okhla, New Delhi</td>
+                                        <td>Dominoz Pizza (Kalkaji, New Delhi)</td>
+                                        <td>Accepted</td>
+                                        <td>100 INR</td>
+                                        <!-- <td></td> -->
+                                    <td>
+                                        <button class="block-btns1" [routerLink]="['/order-view']" >{{'View' | translate}}
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <h2 *ngIf="order_listdetails?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2> -->
+                    </div>
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="getorder_history($event) " *ngIf="order_listdetails?.length != 0">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<footer class="footer-text">
+    <strong>{{'Copyright' | translate}} &copy; 2020
+        <a href="javascript:;">{{'FoodDelivery' | translate}}</a></strong> 	&nbsp;{{'Allrightsreserved' | translate}}
+</footer>

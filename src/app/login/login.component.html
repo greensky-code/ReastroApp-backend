@@ -1,0 +1,90 @@
+<header class="main-header">
+    <a class="logo" style="background-color:#638f00;">
+        <span class="logo-mini"><b>FD</b></span>
+        <span class="logo-lg"><img src="assets/adminLTE/dist/img/logonew.png"></span>
+    </a>
+    <nav class="navbar navbar-static-top" style="background-color: #638f00;">
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav custom-navbar">
+                <li>
+                    <select class="form-control custom-slct" style="margin-top:5px;width: 100%;"
+                        (change)="selectlang($event)" [value]="language">
+                        <option value="{{items?.language}}" [selected]="items?.language===languages" *ngFor="let items of arry">{{items?.name}}</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- <body class="hold-transition"> -->
+<div class="login-body">
+    <div class="login-box">
+        <div class="login-box-body box-bdy">
+
+           
+            <h4 class="login-box-msg" style="text-align:center"><strong>{{'login'| translate}}</strong></h4>
+            <form action="../../index2.html" method="post" [formGroup]="loginForm">
+                <div class="form-group">
+                    <div class="has-feedback">
+                        <input type="email" id="email" class="form-control" placeholder="{{'email'| translate}}"
+                            (keydown.space)="$event.preventDefault();" formControlName="email">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div
+                        *ngIf="loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)">
+                        <div *ngIf="loginForm.controls['email'].hasError('required')"><span
+                                style="color:red">{{'pleaseenteremailid' | translate}}</span></div>
+                        <div *ngIf="loginForm.controls['email'].hasError('pattern')"><span
+                                style="color:red">{{'pleaseentervalidemailid' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="has-feedback" style="display: flex;align-items: center;justify-content: flex-end;">
+                        <input type="{{type}}" id="password" class="form-control" id="myInput"
+                            (keydown.space)="$event.preventDefault();" placeholder="{{'password' | translate}}"
+                            formControlName="password">
+                        <a style="position: absolute;padding-right: 12px;" (click)="toggleShow()">
+                            <i *ngIf="show == false" class="fa fa-eye-slash"></i>
+                            <i *ngIf="show == true" class="fa fa-eye"></i>
+                        </a>
+                    </div>
+                    <div *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+                        <span style="color:red">{{'pleaseenterpassword' | translate}}</span></div>
+                    <p style="cursor: pointer;color: #000;width: 100%;text-align: right; margin-top: 10px;"><u
+                            class="p1" [routerLink]="['/forgot-password']">{{'forgotpassword' | translate}}?</u></p>
+
+                    <label style="color:black" class="robot">{{'pleaseverifyyouarenotarobot' | translate}}</label>
+                    <div class="">
+                        <re-captcha (resolved)="resolved($event)" siteKey="6LemULgUAAAAAGaOIlo6yjV73PWJfAI6CmJwbFtq"> >
+                        </re-captcha>
+                    </div>
+                </div>
+                <div class="row">
+                
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" [disabled]="!loginForm.valid"
+                            class="btn btn-block btn-flat" (click)="login()">{{'login'| translate}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    <app-footer></app-footer>
+
+    
+
+
+
+
+    
+   
+
+
+
+
+
+
+
+

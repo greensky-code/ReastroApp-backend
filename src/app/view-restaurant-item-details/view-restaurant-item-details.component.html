@@ -1,0 +1,169 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'VIEW RESTAURANT' | translate}}
+                        </h1>
+                    </div>
+                    <div class="row form-group" style="display: flex;justify-content: flex-end" >
+                        <div class="col-md-2" style="margin-right: 30%">
+                        <p style="color: green">APPROVED</p>
+                        </div>
+    
+                         <div class="col-md-2" >
+                        <button type="button" class="btn btn-success btn-lg" style="width: 50%; height: 80%;padding-top: 1%;margin-left: 50% "  routerLink="/restaurant-management" >Back</button>
+                        </div>
+    
+                        </div>
+
+                     <!-- tab section -->
+                     <div class="tab-section">
+                        <div class="tab">
+                            <button class="tablinks" [ngClass]="tabView == 'companyDetails' ? 'active': ''"
+                                (click)="viewTab('companyDetails')">Company Details</button>
+                            <button class="tablinks" [ngClass]="tabView == 'restaurentDetails' ? 'active': ''"
+                                (click)="viewTab('restaurentDetails')">Restaurant Details</button>
+                                <button class="tablinks" [ngClass]="tabView == 'itemDetails' ? 'active': ''"
+                                (click)="viewTab('itemDetails')">Item Details</button>
+                                 <button class="tablinks" [ngClass]="tabView == 'bankDetails' ? 'active': ''"
+                                (click)="viewTab('bankDetails')">Bank Details</button>
+                        </div>
+                    </div>
+
+                    <div class="box-header  box-hearder-564">
+                        <form class="" [formGroup]="form">
+                            <h3 class="p-3 pl-5">Menu Item Details</h3>
+                            <div class="col-md-2" style="margin-left: 89%;">
+                            <button type="button" class="btn btn-success btn-lg" style="width: 60%; height: 60%;padding-top: 1% "  routerLink="/add-menu-item" >Add Item</button> 
+                            </div>
+                            <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th> {{'Item ID' | translate}}</th>
+                                    <th>{{'Item Name' | translate}}</th>
+                                    <th>{{'Item Category' | translate}}</th>
+                                    <th> {{'Item Price' | translate}}</th>
+                                    <th>{{'Special Price' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                    <!-- <th>{{'LastOrderon' | translate}}</th> 
+                                    <th>{{'LastOrderAmount' | translate}}</th> -->
+
+                                    <th >{{'Action' | translate}}</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let items of customer | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <td>{{items?.id}}</td>
+                                    <td>{{items?.first_name || '--'}}</td>
+                                    <td>{{items?.mobile || '--'}}</td>
+                                    <td>{{items?.email || '--'}}</td>
+                                    <td>{{(items?.created_at | date : 'dd/MM/yyyy, H:mm') || '--'}}</td>
+                                    <td *ngIf="items?.is_active==true">Active</td>
+                                    <td *ngIf="items?.is_active!=true">Inactive</td>
+                                    <td>{{(items?.last_order_date | date : 'dd/MM/yyyy, H:mm') || '--'}}</td>
+                                    <td>{{items?.last_order_amount || '--'}}</td> -->
+                                    <tr> 
+                                        <td>C01</td>
+                                        <td>Sandwich</td>
+                                        <td>Recommended</td>
+                                        <td>80 INR</td>
+                                        <td>60 INR</td>
+                                        <td>Enabled</td>
+                                        
+                                        
+                                    <td>
+                                        <div style="display: flex">              
+                                        <button class="block-btns1" [routerLink]="['/add-menu-item']"> 
+                                            {{'View' | translate}}</button>
+                                            
+                                                <label class="switch" style="margin-right: 3%;padding-top: 2%;" (click)="disable()">
+                                                    <input type="checkbox" >
+                                                    <span class="slider round"></span>
+                                                    </label>
+                                           
+                                            <button class="block-btns1" style="background-color: red" (click)="delete()" > 
+                                                {{'Delete' | translate}}</button>
+                                    </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        
+                        <!-- <h2 *ngIf="customer?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2> -->
+                    
+
+
+
+                    </div>
+                           
+                            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                                
+                                   
+                            </div>
+
+                        </form>
+                    </div>
+                    
+                 
+                
+                 
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer class="footer-text ">
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+
+</footer>
+
+<!-- ----------------------------------------delete modal---------------------------------------------- -->
+<div class="modal" id="customer" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modals">
+                <div class="modal-header">
+                    <h2 class="modalstyle">{{'Delete' | translate}}</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    {{'Are you sure you want to delete this Customer?' | translate}}
+                </div>
+                <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                    <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;" >{{'No' | translate}}</button>
+                    <button type="button" class="submit"  (click)="deletemodal()">{{'Yes' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ----------------------------------------disable modal---------------------------------------------- -->
+    <div class="modal" id="disable" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modals">
+                <div class="modal-header">
+                    <h2 class="modalstyle">{{'Disable' | translate}}</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    {{'Are you sure you want to delete this Customer?' | translate}}
+                </div>
+                <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                    <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;" >{{'No' | translate}}</button>
+                    <button type="button" class="submit"  (click)="deletemodal1()">{{'Yes' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>

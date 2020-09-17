@@ -1,0 +1,64 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+   <div class="content">
+    <div class="box-header">
+        <h1 class="mt-0" style="font-size: 24px;">
+            {{'DeliveryCharge' | translate}}
+
+        </h1>
+    </div>
+    <div *ngFor="let data of fixCharge">
+    <section class=" dl1">
+        <div class="col-md-6 mb-3">
+            <div class="cusmanage-box">
+                <div class="text-yearly">
+                    
+                       
+                   
+                    <div>
+                        <p class="active-p"><strong *ngIf="data?.is_active ==true" style="float: right;">{{'Active' | translate}}</strong></p>
+                        <p class="active-p"><strong *ngIf="data?.is_active ==false" style="float: right;">{{'Inactive' | translate}}</strong></p>
+                        <p><strong *ngIf="data?.type =='Radius'">{{'Radius' | translate}}</strong> </p>
+                        <p><strong *ngIf="data?.type =='Fix Charge'">{{'FixCharge' | translate}}</strong> </p>
+                    </div>
+                 
+                        <div *ngIf="data.type=='Radius'">
+                        <div *ngFor="let data of fixCharge" >
+                            <div *ngIf="data.type=='Radius'"  style="display: flex;justify-content: space-evenly;">
+                                <p class="col-md-4">{{'FreeDelivery' | translate}}</p>
+                                <p class="col-md-4"><strong class="col-md-6">{{'Upto' | translate}}</strong >{{data?.free_delivery_upto}}&nbsp;KM</p>
+                            </div>
+                        </div>
+                        <div *ngFor="let rs of data.charges" style="display: flex;justify-content: space-evenly;">
+                            <p class="col-md-3">{{rs?.deliveryCharge || '--'}}</p><strong class="col-md-2">{{'THB' | translate}}</strong>
+                            <p class="col-md-4"><strong class="col-md-6">{{'Upto' | translate}}</strong >{{rs?.OrderUpto || '--'}}&nbsp;KM</p>
+                        </div>
+                        <button type="button" class="btn btn-success" [routerLink]="['/change-delivery-charges',{id:fixCharge[0]?.id,value:'Radius'}]">{{'Change' | translate}}</button>
+
+                        </div>
+                        <div *ngIf="data.type=='Fix Charge'">
+                            <div *ngFor="let data of fixCharge" >
+                                <div *ngIf="data.type=='Fix Charge'"  style="display: flex;justify-content: space-evenly;">
+                                    <p class="col-md-4">{{'FreeDelivery' | translate}}</p>
+                                    <p class="col-md-4"><strong class="col-md-6">{{'Upto' | translate}}</strong >{{data?.free_delivery_upto}}&nbsp;THB</p>
+                                </div>
+                            </div>
+                            <div *ngFor="let rs of data.charges" style="display: flex;justify-content: space-evenly;">
+                                <p class="col-md-3">{{rs?.deliveryCharge || '--'}}</p><strong class="col-md-2">{{'THB' | translate}}</strong>
+                                <p class="col-md-4"><strong class="col-md-6">{{'Upto' | translate}}</strong >{{rs?.OrderUpto || '--'}}&nbsp;THB</p>
+                            </div>
+                            <button type="button" class="btn btn-success" [routerLink]="['/change-delivery-charges',{id:fixCharge[1]?.id,value:'Fix Charge'}]">{{'Change' | translate}}</button>
+
+                            </div>
+                   
+
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+   </div>
+
+</div>
+<app-footer></app-footer>

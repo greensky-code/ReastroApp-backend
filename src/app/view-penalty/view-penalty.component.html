@@ -1,0 +1,83 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="box-header">
+                <h1 style="font-size: 24px;">
+                    {{'VIEW PENALTY' | translate}}
+                </h1>
+            </div>
+            <div class="box-header  box-hearder-564">
+                <form class="" [formGroup]="form">
+                    <div class="cusine" >
+                        <div class="col-md-12" >
+                            <div class="row mb-3">
+                                <label class="col-md-4"> {{'City' | translate}}:</label>
+                                    <p >Delhi</p>
+                               
+                            </div>
+                            <div class="row mb-3">
+                                    <label class="col-md-4"> {{'Zone' | translate}}:</label>
+                                        <p >Zone 1</p>
+                                   
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-md-4"> {{'Driver' | translate}}:</label>
+                                        <p >Suresh kumar</p>
+                                   
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-md-4"> {{'Penalty Reason' | translate}}:</label>
+                                        <p >Other issues</p>
+                                   
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-md-4"> {{'Description' | translate}}:</label>
+                                        <p >Loreum ipsum lorem ipsum  Lorem ipsum</p>
+                                   
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-md-4"> {{'Description' | translate}}:</label>
+                                        <p >Loreum ipsum lorem ipsum  Lorem ipsum</p>
+                                   
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-md-4"> {{'Penalty Amount' | translate}}:</label>
+                                        <p >30 INR</p>
+                                   
+                                </div>
+                        </div>
+                        <!-- <div class="col-md-12">
+                            <div class="col-md-8 error" style="margin-right: 16px;"
+                                *ngIf="form.get('category').hasError('required') && form.get('category').touched">
+                                <span style="color:red">Category Name is required.</span></div>
+                            <div *ngIf="form.get('category').hasError('maxlength') && form.get('category').dirty"
+                                style="    color: red;
+                        display: flex;
+                        justify-content: center;
+                        margin-right: 17%;">
+                                Maxlength of characters should be 256.
+                            </div>
+                        </div> -->
+                       
+                    </div>
+                   
+                    <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%">
+                       
+                            <button type="submit" class="Penalty" 
+                            style="background-color: green; color: white;padding: 10px 38px"  routerLink ="/penalty-management"
+                           >{{'Back' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>
+
+
+
+

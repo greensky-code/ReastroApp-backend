@@ -1,0 +1,81 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="pl-3">
+                <h1 style="font-size: 24px;">
+                    {{'notificationManagement' | translate}}
+                </h1>
+            </div>
+          
+ 
+            <div class="row sndRow pl-3">
+                <div class="col-md-12" style="padding-top: 1.2%;">
+                    <div class="justify-content-end btn-div pt-1 pr-4">
+                        <button type="button" class="btn bg-olive mr-3" >{{'history' | translate}}</button>                     
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="box-header  box-hearder-564">
+                <form class="" >
+                    <div class="cusine" >
+                        <div class="col-md-12" >
+
+                            <div class="col-md-6 green-col">
+                                <label>{{'TITLE'| translate}}</label>
+                                <input type="text" class="form-control dt1" >
+                            </div>
+                            <div class="col-md-4 green-col">
+                                <label>{{'image'| translate}}</label>
+                                <input type="text" class="form-control dt1" placeholder="jpg/jpeg/png 2MB">
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <button type="button" style="margin-top: 20%" class="btn bg-olive mr-3" >{{'Upload' | translate}}</button>                     
+                            </div>
+                        </div>                       
+                    </div>
+
+                    <div class="row sndRow pl-3">
+                        <div class="col-md-12 green-col p-5">
+                            <label>{{'NOTIFICATIONCONTENT'| translate}}</label>
+                                <textarea name="" id="" cols="30" rows="5" class="form-control dt1"></textarea>
+                        </div>
+                    </div>
+                    <div class="pl-5">
+                        <label> {{'Recipients'| translate}}</label>
+                    </div>
+                    <div class="pl-5 mt-1">
+                        <input type="checkbox" name="" id="">
+                        <label class="ml-2"  > {{'All'| translate}}</label>
+                    </div>
+                    <div class="pl-5 mt-1">
+                        <input type="checkbox" name="" id="">
+                        <label class="ml-2"  > {{'AllCustomers'| translate}}</label>
+                    </div> 
+                    <div class="pl-5 mt-1">
+                        <input type="checkbox" name="" id="">
+                        <label class="ml-2"  > {{'AllDrivers'| translate}}</label>
+                    </div>
+                     <div class="pl-5 mt-1">
+                        <input type="checkbox" name="" id="">
+                        <label class="ml-2"  > {{'AllRestaurants'| translate}}</label>
+                    </div>
+                    <div class="row sndRow pl-3">
+                        <div class="col-md-12" style="padding-top: 1.2%;">
+                            <div class="justify-content-center btn-div pt-1 pr-4">
+                                <button type="button" class="btn bg-olive mr-3" >{{'Send' | translate}}</button>                     
+                            </div>
+                        </div>
+                    </div>
+                   
+                </form>
+            </div>
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>

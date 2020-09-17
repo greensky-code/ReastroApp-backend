@@ -1,0 +1,145 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" box-header">
+            <h2 class="cusine mt-0 mb-0" style="font-size: 30px;" style="font-size: 24px;">{{'Legal,Terms&Conditions' | translate}}</h2>
+        </div>
+        <div class="box-header">
+        <div class="col-md-12 secTab ">
+            <div class="col-md-3 midd">
+                {{'Terms&Conditions-User' | translate}}:
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEdited' | translate}} : {{terms_users?.term_user?.updated_at | date:'M/d/yy'}}
+            </div>
+            <div class="col-md-3 midd">
+              {{'LastEditedBy' | translate}}: {{terms_users?.term_user?.updated_by || '--' }}
+            </div>
+            <div class="col-md-3 mid">
+                <button class="block-btns1" [routerLink]="['/service/Customer','en','0']">{{'Edit' | translate}}</button>
+                <button class="block-btns2" [routerLink]="['/service/Customer','th',terms_user_id]">{{'Translate' | translate}} </button>
+            </div>
+        </div>
+        <div class="col-md-12 secTab" >
+            <div class="col-md-3 midd">
+                {{'Terms&Conditions-Merchant' | translate}}:
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEdited' | translate}} : {{terms_users?.term_merchant?.updated_at | date:'M/d/yy'}}
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEditedBy' | translate}}: {{terms_users?.term_merchant?.updated_by || '--' }}
+            </div>
+            <div class="col-md-3 mid">
+                <button class="block-btns1" [routerLink]="['/service/Merchant','en','0']">{{'Edit' | translate}}</button>
+                <button class="block-btns2" [routerLink]="['/service/Merchant','th',merchant_id]">{{'Translate' | translate}} </button>
+            </div>
+        </div>
+
+        <div class="col-md-12 secTab" >
+            <div class="col-md-3 midd">
+                {{'Terms&Conditions-Driver' | translate}}:
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEdited' | translate}}: {{terms_users?.term_driver?.updated_at | date:'M/d/yy'}}
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEditedBy' | translate}}: {{terms_users?.term_driver?.updated_by || '--' }}
+            </div>
+            <div class="col-md-3 mid">
+                <button class="block-btns1" [routerLink]="['/service/Driver','en','0']">{{'Edit' | translate}}</button>
+                <button class="block-btns2" [routerLink]="['/service/Driver','th',driver_id]">{{'Translate' | translate}} </button>
+            </div>
+        </div>
+        
+        <div class="col-md-12 secTab">
+            <div class="col-md-3 midd">
+               {{'PrivacyPolicy' | translate}}:
+            </div>
+            <div class="col-md-3 midd">
+               {{'LastEdited ' | translate}}: {{(terms_users?.privacy?.updated_at | date:'M/d/yy') || '--'}}
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEditedBy' | translate}}: {{terms_users?.privacy?.updated_by || '--' }}
+            </div>
+            <div class="col-md-3 mid">
+                <button class="block-btns1" [routerLink]="['/service/privacypolicy','en','0']">{{'Edit' | translate}}</button>
+                <button class="block-btns2" [routerLink]="['/service/privacypolicy','th',provacy_id]">{{'Translate' | translate}} </button>
+            </div>
+        </div>
+        <div class="col-md-12 secTab">
+            <div class="col-md-3 midd">
+              {{'Cancellation&RefundPolicy' | translate}}:
+            </div>
+            <div class="col-md-3 midd">
+                 {{'LastEdited' | translate}}: {{(terms_users?.cancel_refund?.updated_at | date:'M/d/yy') || '--'}}
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEditedBy' | translate}}:  {{terms_users?.cancel_refund?.updated_by || '--' }}
+            </div>
+            <div class="col-md-3 mid">
+                <button class="block-btns1" [routerLink]="['/service/refund','en','0']">{{'Edit' | translate}}</button>
+                <button class="block-btns2" [routerLink]="['/service/refund','th',refund_id]">{{'Translate' | translate}} </button>
+            </div>
+        </div>
+        <div class="col-md-12 secTab">
+            <div class="col-md-3 midd">
+               {{'AboutUs' | translate}}:
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEdited' | translate}}: {{(terms_users?.about_us?.updated_at | date:'M/d/yy') || '--'}}
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEditedBy' | translate}}: {{terms_users?.about_us?.updated_by || '--' }}
+            </div>
+            <div class="col-md-3 mid">
+                <button class="block-btns1" [routerLink]="['/service/aboutus','en','0']">{{'Edit' | translate}}</button>
+                <button class="block-btns2" [routerLink]="['/service/aboutus','th',aboutUs_id]">{{'Translate' | translate}} </button>
+            </div>
+        </div>
+        <div class="col-md-12 secTab">
+            <div class="col-md-3 midd">
+                {{'AvailabilityInformation' | translate}}:
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEdited' | translate}}: {{(terms_users?.availability_information?.updated_at | date:'M/d/yy') || '--'}}
+            </div>
+            <div class="col-md-3 midd">
+                {{'LastEditedBy' | translate}}: {{terms_users?.availability_information?.updated_by || '--' }}
+            </div>
+            <div class="col-md-3 mid">
+                <button class="block-btns1" [routerLink]="['/service/availability','en','0']">{{'Edit' | translate}} </button>
+                <button class="block-btns2" [routerLink]="['/service/availability','th',availability_id]">{{'Translate' | translate}} </button>
+            </div>
+        </div>
+        </div>
+    </section>
+</div>
+<div class="footer-section">
+    <app-footer></app-footer>
+</div>
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 >Delete Driver </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <p >Are you sure you want to delete this driver?</p>
+              
+            </div>
+            
+          
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit" >{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

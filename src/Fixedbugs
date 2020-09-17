@@ -1,0 +1,189 @@
+Date : 07/04/2020 bugs 
+
+Manage merchant>submit KYC> KYC always be in capital letters Done
+KYC submit msg> "Are you sure you want to submit KYC of this merchant?” Done
+Add sales R> national ID format issue Done
+FAQ> This text should be in capital everywhere.Done
+Delete driver alert> header should be "Delete Driver”Done
+Footer issue--2 dots, no space in text, screens below: Done
+Customer management Done
+Sales R
+Manage cuisine (Only dots) Done
+Delete cuisine> success msg is not coming Done
+
+----------------------------------------
+
+
+
+
+
+----------------------------------------
+
+
+Dashboard data- staff counting is wrong Done
+
+Active drivers counting wrong Done
+
+Total business/business with kyc counting wrong Done
+
+Total SR counting wrong- check all data it should be correct. Done
+
+
+
+Manage role> export> status in panel is Inactive but in sheet it's active & deactivated. Done
+
+Manage role> export> time is not showing Done
+
+
+Roles management>edit/block/delete/add> loader with success msg showing late. “Api response code kai bad hi to ayega message"
+
+Manage staff> status filter is not working Done
+
+Manage staff> Date filter is not working  alreadsy Done
+
+Manage staff> search filter not working alreadsy Done
+
+Manage staff> in panel name column is there but in sheet it's first, middle, last name & time is not showing  alreadsy Done
+
+Staff management>edit/block/delete/add> loader with success msg showing late.  alreadsy Done
+
+
+
+————————————*****************———————
+
+Manage merchant--
+
+Submit KYC> passpost title> space between two words Done
+
+Registration no> Limit to no.? Done 
+
+Fill all the fields but still submit button is disable alreaday Done
+
+Export> time missing & approved by column data is wrong Done
+
+
+
+
+Manage driver---
+
+Submit kyc> type of vehicle title- manage space Done
+
+Submit kyc> license number, passport image title- manage space Done
+
+Instead of insurance, title would be insurance company Done
+
+Email is optional still asking to fill all the detaila. Done
+
+——————————**************————————————
+
+Manage Subscription---
+
+Check spelling—Trial Done
+
+Sales R.
+
+Create>passport image title- manage space Done
+
+Create> submit> 1st time showing fill all details then successfully acnt created. Done
+
+Sales R> status- trure & false..Show active, inactive only Done 
+
+Order history--
+
+Filter by restaurant> selct by name will be there instead of role Done 
+
+Details> back button> remove colon Done 
+
+Details> orders/item/rating all 3tabs filter UI is little bit different Done
+
+
+
+
+
+————————***************————————————
+
+Still facing same issue in 2FA “Done"
+
+Subscription management> header- trial spelling Done
+
+Driver> submit kyc> insurance company> I should be in capital. Done
+
+Driver> view> type of vehicle title-Manage space Done
+
+Driver> reject KYC> not working Done
+
+Roles management>edit/block/delete/add> loader with success msg showing late. Done
+
+Manage staff> Date filter is not working”Done"
+
+Manage staff> select status filter> reset> still filter status is showing in dropdown Done
+
+Dashboard data- Business counting wrong yeaterday Done
+
+Total SR counting wrong Yeasterday Done 
+
+Sales R> All pages same data showing Done
+
+
+
+———————************************————————————
+
+. Delete driver is missing Done
+.Delete cusines Done
+
+
+.Editor not loading when edit content “Deepak Sir"
+
+Admin panel
+
+ Dashboard fotter  text is coming wrong Done
+
+ Phone number is showing "phone number is required” “Done"
+
+
+National ID format((-))remove  “Done"
+
+ KYC for form alignment “Designer"
+
+10.Plate number validation - Thai “Done” 
+
+
+Update bank name from Thailand and apply validation given by Deepak "Done"
+Create Sales representative - not allowed to enter space in account holder name field “Done"
+All action of admin must be followed by 2FA
+
+ ”Role management google authentication Done,  
+
+staff management  google authentication Done
+
+, merchant management google authentication Done  but other section in progress “ google authentication Done
+
+Manage Topic 2Fa is broken “Done”
+
+Manage FAQ UI broken and delete not working “Done"
+
+Add FAQ form UI broken “Done”
+
+
+
+==================================================
+
+
+=====================13-may-2020======================
+
+1. Dashboard page is not in THAI
+2. Fix  add offere form field when Flat is selected then offer value and min order value must appear and unit in THB. When Percentage is selected then Offer value must be in percentage, Min order value in THB and Max offer Value in THB
+3. Validation on start and end date. Start date must be equal or greater then current date. End must be greater the start date
+4. Offer code must be unique
+5.Mange cusine 2FA is missing
+6.Manage Topic Status is active but button shows publish instead of unpublish
+7.2FA invalid validation must appear on popup only
+8.Trim question on FAQ list
+9.FAQ can only be traslated when topic has the translation
+10.Topic can only be deleted if there is no FAQ for that topic
+11.Diable the topic drop down in english /thai when we edit the the FAQ
+12.FAQ shall have Ckeditor description 
+13.Trim quetsion in help question list
+14.Manage helpquestion  Status is active but button shows publish instead of unpublish
+15.Add blog - Tag must be a select 2 field
+16.Add blog - Submit button disabled

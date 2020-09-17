@@ -1,0 +1,177 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+  
+    <div class="content footer-div row">
+            <div class="box-header button-text-div">
+                    <h1 class="mt-0 mb-0" style="font-size: 24px;">
+                        Staff Profile
+            
+                        </h1>
+                        <div class="backbutton" [routerLink]="['/manage-staff']">
+                            <button type="button" class="bkbtn">Back</button>
+                        </div>
+                    </div>
+     
+        <div class="col-md-12" style="padding: 10px 10px;">
+      
+        <section class="merchant  m-argin">
+            <div class="tabs-style-tzoid">
+             
+                <div>
+                    <h2 class="role-heading"><u>Basic Details</u></h2>
+                </div>
+            </div>
+            <div class="row custom-width">
+                <div class="col-md-2">
+                    <label>Staff ID:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{retriveStaffdata?.id || '--'}} </p>
+                </div>
+                <div class="col-md-2">
+                    <label>Name:</label>
+                </div>
+                <div class="col-md-2">
+                    <p type="text">
+                        {{retriveStaffdata?.first_name || '--' }}
+                        {{retriveStaffdata?.middle_name}}
+                        {{retriveStaffdata?.last_name || '--' }}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>Gender:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{retriveStaffdata?.gender || 'N/A'}}</p>
+                </div>
+            </div>
+            <div class="row custom-width">
+                <div class="col-md-2">
+                    <label>Status:</label>
+                </div>
+                <div class="col-md-2">
+                    <p class="business-text" class="table-width" *ngIf="retriveStaffdata?.is_active==true">Active</p>
+                    <p class="business-text" class="table-width" *ngIf="retriveStaffdata?.is_active!=true">Inactive</p>
+                </div>
+                <div class="col-md-2">
+                    <label>Email:</label>
+                </div>
+                <div class="col-md-2 breck">
+                    <p class="a">{{retriveStaffdata?.email || 'N/A'}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label>Phone:</label>
+                </div>
+                <div class="col-md-2">
+                    <p>{{retriveStaffdata?.mobile || 'N/A'}}</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="tabs tabs-style-tzoid no-mar">
+                <nav>
+                    <ul id="myul">
+                        <li><a (click)="makeActive('1a')" [ngClass]="{'active': (selectedTab == '1a') }" href="#1a" data-toggle="tab"><span>Login History</span></a></li>
+                        <li><a (click)="makeActive('2a')" [ngClass]="{'active': (selectedTab == '2a') }" href="#2a" data-toggle="tab"><span>Activity Log</span></a></li>
+
+
+
+
+                    </ul>
+                </nav>
+                <div class="tab-content clearfix steps" style="border: solid;">
+                    <div class="tab-pane active" id="1a">
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="example2" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Last Date</th>
+                                            <th>Login IP</th>
+                                            <th>Login Location</th>
+                                            <th>Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of log_history">
+                                            <td>{{item?.created_at | date : 'dd/MM/yyyy, H:mm' ||'N/A'}}</td>
+                                            <td>{{item?.ip || '--'}}</td>
+                                            <td>{{item?.location || '--'}}</td>
+                                            <td>{{item?.status || '--'}}</td>
+
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <h3 *ngIf="log_history?.length==0" style="text-align: center;">Data not found!</h3>
+                            <!-- /.box-body -->
+                        </div>
+
+          
+                    </div>
+                    <div class="tab-pane" id="2a">
+                        <div class="box">
+                            <h3  style="text-align: center;">Data not found!</h3>
+                            <!-- /.box-header -->
+
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+                <!-- /content -->
+            </div>
+            <!-- /tabs -->
+        </section>
+
+        <section>
+
+        </section>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<!-- Modal -->
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Bank Passbook</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img src="{{passbookImage}}" style="width: 100%;">
+            </div>
+
+            <!-- Modal footer -->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+            <!-- this button is hidden, used to close from typescript -->
+            <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
+
+        </div>
+    </div>
+</div>

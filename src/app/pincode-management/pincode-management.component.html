@@ -1,0 +1,163 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'PIN CODE MANAGEMENT' | translate}}
+
+                        </h1>
+                    </div>
+
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                            <div class=" has-search">
+                                <label></label>
+                                <input type="text" class="form-control"  placeholder="Search by name/ID" [(ngModel)]="searchName" (keyup)="select($event.target.value)" maxlength="50" style="border-radius: 20px;">
+
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 green-col">
+
+                                    <label>{{'FilterbyCity' | translate}}</label>
+                                    <select class="btn drrop-type" class="filterr" >
+                                        <!-- <option value=""> {{'SelectRole' | translate}}</option>
+                                        <option *ngFor="let items of manageStaffroles">{{items?.name}}</option> -->
+                                        <option value="">Filter By City</option>             
+                                        <option value="">Delhi</option>             
+                                        <option value="">Noida</option>             
+                                        <option value="">Gurgoan</option>             
+                                    </select>
+                                </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'FilterbyStatus' | translate}}</label>
+                            <select class="btn drrop-type" class="filterr" >
+                                <option value="">{{'SelectStatus' | translate}}</option>
+                                <option value="true"> {{'Active' | translate}}</option>
+                                <option value="false">{{'Inactive' | translate}}</option>
+
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-2 green-col">
+                            <label> {{'FromDate' | translate}}</label>
+                            <input type="date" class="form-control dt1" >
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'ToDate' | translate}}</label>
+                            <input type="date" class="form-control dt2"  >
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="btn-div two-btnsubmit margin-rightbox">
+                        <button type="button" class="btn bg-olive" (click)="submitdata()" [disabled]="disables==false">{{'Submit' | translate}}</button>
+
+                        <button type="button" class="btn margin margin1" (click)="reset()">{{'Cancel' | translate}}</button>
+                    </div>
+
+
+                    <div class="rghtSde two-btnsubmit margin-rightbox">
+                        <div class="btn two">
+
+                            <button type="button" class="btn bg-olive" style="background-color: #068000 !important;"  [routerLink]="['/add-pincode-zone']">{{'ADD ZONE' | translate}}</button>
+                            
+                         
+                        </div>
+
+                    </div>
+
+
+                    <div class="box-body table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'ID' | translate}}</th>
+                                    <th>{{'City' | translate}}</th>
+                            
+                                    <th>{{'Zone' | translate}}</th>
+                                    <th>{{'Pin Codes' | translate}}</th>
+                                    <th>{{'CreatedBy' | translate}}</th>
+                                    <th>{{'CreatedAt' | translate}}</th>
+                                    <th>{{'UpdatedAt' | translate}}</th>
+                                    <th>{{'UpdatedBy' | translate}}</th>
+                                    
+                                    <th>{{'Status' | translate}}</th>
+                                    <th style="width: 30%;">{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let data of manageStaff | paginate : {itemsPerPage:10, currentPage:page, totalItems:total}: index as i">
+                                    <td class="table-width">{{data?.id || '--' }}</td>
+                                    <td class="table-width" style="padding: 10px;" title="{{data?.first_name}} {{data?.middle_name}} {{data?.last_name}}">{{data?.first_name || '--' }}</td>
+                                
+                                    <td class="table-width" style="padding: 10px;" title="{{data?.email ||'--' }}">
+                                        {{data?.email || '--' }}</td>
+                                    <td style="padding: 10px;">{{data?.mobile || '--' }}</td>
+                                    <td class="table-width" title="{{data?.created_by ||'--' }}">
+                                        {{data?.created_by || '--' }}</td>
+                                    <td style="padding: 10px;" title="{{data?.created_at ||'--' }}">
+                                        {{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                    <td>{{(data?.updated_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                    <td>{{data?.updated_by || '--' }}</td>
+                                    <td>{{data?.role || '--' }}</td>
+                                    <td *ngIf='data.is_active ===true'>Active</td>
+                                    <td *ngIf='data?.is_active ===false'>Inactive</td> -->
+                                    <tr>
+                                        <td class="table-width">S01</td>
+                                        <td class="table-width">Delhi</td>
+                                        <td class="table-width">1</td>
+                                        <td class="table-width">800004</td>
+                                        <td class="table-width">Admin</td>
+                                        <td class="table-width">18-08-20</td>
+                                        <td class="table-width">18-08-20</td>
+                                        <td class="table-width">Admin</td>
+                                        
+                                        <td class="table-width">Active</td>
+                                        
+                                    <td class="action">
+                                      
+                                        <button class="block-btns1" [routerLink]="['/view-pincode-zone']">{{'View' | translate}}
+                                        </button>
+                                        <button class="block-btns1"   [routerLink]="['/edit-pincode-zone']">{{'Edit' | translate}}
+                                        </button>
+                                        
+                                        
+                                    </td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+
+                        <!-- <h2 *ngIf="manageStaff?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2> -->
+                    </div>
+                   
+
+
+                    <div >
+                        <pagination-controls (pageChange)="manadeDetails($event)"  *ngIf="manageStaff?.length != 0">
+                        </pagination-controls>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+</div>
+<footer class="footer-text">
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:;">{{'FoodDelivery' | translate}}</a>.</strong> &nbsp;{{'Allrightsreserved' | translate}}
+
+</footer>
+

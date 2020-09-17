@@ -1,0 +1,447 @@
+<app-header>
+
+</app-header>
+<app-menubar></app-menubar>
+
+<div class="content-wrapper">
+   
+    <section class="content footer-div">
+        <div class="right-content" style="border:0px;">
+                <div class="box-header button-text-div ">
+                        <h3 >{{'ViewKYC' | translate}}</h3>
+                        <div class="backbutton" [routerLink]="['/manage-drivers']">
+                            <button type="button" class="bkbtn">{{'Back' | translate}}</button>
+                        </div>
+                    </div>
+                  
+            <span class="rejected" *ngIf="driverKYCData?.driver?.driver_kyc?.kyc_status == 'Rejected'">
+                <h4 style="color:red;  margin-top:18px;"> {{'Rejected' | translate}}</h4>
+            </span>
+            <h4 class="rejected head-ing" style="    color: green;
+             text-align: center;
+             " *ngIf="driverKYCData?.driver?.driver_kyc?.kyc_status=='Approved'"> {{'Approved' | translate}}</h4>
+        </div>
+        <div class="col-md-12" style="padding: 10px">
+        <div class="new-div">
+            <form class="form-horizontal">
+                <div class="border-contactilne">
+                        <div class="row" style="align-items: baseline;">
+                                <div class="col-md-6">
+                                    <div class="row form-group">
+                                        <label class="col-md-4 ">{{'Nationality' | translate}}:</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <p>{{driverKYCData?.driver?.r_nationality || '--'}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 ">{{'Title' | translate}}:</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <p>{{driverKYCData?.driver?.title || '--'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 ">{{'FirstName' | translate}}:</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <p>{{driverKYCData?.driver?.first_name || '--'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 ">{{'LastName' | translate}}:</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <p>{{driverKYCData?.driver?.last_name || '--'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="driverKYCData?.driver?.middle_name">
+                                        <label class="col-md-4 ">{{'MiddleName' | translate}}:</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <p style="
+                                                    margin-top: 0%;">{{driverKYCData?.driver?.middle_name || '--'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <div class="row form-group">
+                                            <label class="col-md-4 ">{{'DateofBirth' | translate}}:</label>
+                                            <div class="col-md-8 inputGroupContainer registration-col">
+                                                <div class="">
+                                                    <p>{{driverKYCData?.driver?.dob}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="col-md-4 ">{{'Gender' | translate}}:</label>
+                                            <div class="col-md-8 inputGroupContainer registration-col">
+                                                <div class="">
+                                                    <p>{{driverKYCData?.driver?.gender || '--'}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="col-md-4 ">{{'Passport/NationalID' | translate}}:</label>
+                                            <div class="col-md-8 inputGroupContainer registration-col">
+                                                <div class="">
+                                                    <p>{{driverKYCData?.driver?.passport_national_id || '--'}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 ">{{'Selfie' | translate}}:</label>
+                                            <div class="col-md-8 inputGroupContainer registration-col">
+        
+                                                <div class="">
+                                                    <a><img src="{{driverKYCData?.driver?.selfi}}" data-toggle="modal" data-target="#imageModal"
+                                                        class="dumyImg"></a>
+                                                </div>
+        
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 ">{{'NationalID/PassportImage' | translate}}:</label>
+                                            <div class="col-md-8 inputGroupContainer registration-col">
+                                                <div class="">
+                                                    <a><img src="{{driverKYCData?.driver?.national_id_image}}" data-toggle="modal" data-target="#imageModal2" class="dumyImg"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                </div>
+
+                <div class="border-contactilne">
+                        <div>
+                                <label> <h5><b><u style="color:black;font-size: 18px;" >{{'Address' | translate}}:-</u></b></h5></label>
+                            </div>
+                    <div class="row" style="align-items: baseline;">
+                        <div class="col-md-6">
+                            
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'Street' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.address?.street || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'Country' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.address?.country || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'ZipCode' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.address?.zip_code || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'City' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer registration-col">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.address?.city || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-md-4 ">{{'Province' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer registration-col">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.address?.province || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-nonecls">
+                        <div>
+                                <label> <h5><b><u style="color:black;font-size: 18px;"  >{{'VehicleDetails' | translate}}:-</u></b></h5></label>
+                            </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                           
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'Typeofvehicle' | translate}}: </label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.vehicle?.type_of_vehicle || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'PlateNumber' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.vehicle?.plate_number || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'LicenceNumber' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.vehicle?.license_number}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'InsuranceNumber' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.vehicle?.insurance_number || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'InsuranceCompany' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <p>{{driverKYCData?.vehicle?.insurance_company || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="driverKYCData?.driver?.driver_kyc?.kyc_status == 'Rejected'">
+                                <div class="form-group">
+                                    <label class="col-md-4 ">{{'ReasonofRejection' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group" *ngFor="let res of resons">
+                                            <p>{{res.reason || '--'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 ">{{'Remark' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group remark-input">
+                                            <p readonly class="remarks">{{driverKYCData?.driver?.driver_kyc?.remark || '--'}}</p>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'VehicleImage' | translate}}:</label>
+                                <!-- <div class="col-md-8 inputGroupContainer"> -->
+                                <div class="col-md-8 inputGroupContainer registration-col">
+                                    <div class="">
+                                        <a>
+                                            <img src="{{driverKYCData?.vehicle?.vehicle_image}}" data-toggle="modal" data-target="#imageModal3"
+                                                class="dumyImg">
+                                        </a>
+                                    </div>
+
+                                    <!-- <div class=""><a href="{{driverKYCData?.vehicle?.vehicle_image}}" target="_blank"><img src="{{driverKYCData?.vehicle?.vehicle_image}}" class="dumyImg"></a></div> -->
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'LicenceImage' | translate}}:</label>
+                                <!-- <div class="col-md-8 inputGroupContainer"> -->
+                                <div class="col-md-8 inputGroupContainer registration-col">
+                                    <div class="">
+                                        <a>
+                                            <img src="{{driverKYCData?.vehicle?.license_image}}" data-toggle="modal" data-target="#imageModal4"
+                                                class="dumyImg">
+                                        </a>
+                                    </div>
+
+                                    <!-- <div class=""><a href="{{driverKYCData?.vehicle?.license_image}}" target="_blank"><img src="{{driverKYCData?.vehicle?.license_image}}" class="dumyImg"></a></div>   -->
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'InsuranceImage' | translate}}:</label>
+                                <!-- <div class="col-md-8 inputGroupContainer"> -->
+                                <div class="col-md-8 inputGroupContainer registration-col">
+                                    <div class="">
+                                        <a>
+                                            <img src="{{driverKYCData?.vehicle?.insurance_image}}" data-toggle="modal" data-target="#imageModal5"
+                                                class="dumyImg">
+                                        </a>
+                                    </div>
+
+                                    <!-- <div class=""><a href="{{driverKYCData?.vehicle?.insurance_image}}" target="_blank"><img src="{{driverKYCData?.vehicle?.insurance_image}}" class="dumyImg"></a></div> -->
+                                </div>
+                                <!-- <div class=""><img  src="{{driverKYCData?.vehicle?.insurance_image}}"  class="dumyImg"></div>    -->
+
+                                <!-- </div> -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="btn topSpc" *ngIf="driverKYCData?.driver?.driver_kyc?.kyc_status=='Submitted'">
+                    <button class="bt" (click)="driverKYCApproved()" *ngIf="driverKYCData?.created_by!='Admin'">{{'Approve' | translate}}</button>
+                    <button class="bt1" data-toggle="modal" data-target="#exampleModal" (click)="getreason();" *ngIf="driverKYCData?.created_by!='Admin'">{{'Reject' | translate}}</button>
+                </div>
+            </form>
+         
+
+        </div>
+    </div>
+
+     
+
+
+
+    </section>
+  
+</div>
+<div class="footer-section">
+    <app-footer></app-footer>
+</div>
+
+
+
+<!-- Modal -->
+
+<!-- Modal -->
+<div class="modal" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered " role="document">
+        <form [formGroup]="rejectForm" autocomplete="off">
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">   -->
+                <!-- <span aria-hidden="true" class="xx">&times;</span>
+              </button> -->
+            <div class="modal-content modals" style="width: 778px;height:auto;border: solid;">
+
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                        <label class="col-md-3 reason">{{'ReasonofRejection' | translate}}:</label>
+
+                        <ng-select class="col-md-8 mdl" [multiple]="true" placeholder="Select Reason" formControlName="reason">
+                            <ng-option disabled>{{'SelectReason' | translate}}</ng-option>
+                            <ng-option value={{item?.id}} *ngFor="let item of reason_list">{{item?.reason}}</ng-option>
+
+                        </ng-select>
+
+                    </div>
+
+
+                </div> -->
+                <div class="error" *ngIf="reason.invalid && (reason.dirty || reason.touched)">
+                    <div *ngIf="reason.errors.required" class='danger eror' padding>
+                        *Please select reason.
+                    </div>
+                </div>
+                <div class="row matg">
+                    <div class="col-md-12 divRemark">
+                        <label class="col-md-3  ">{{'Remark' | translate}}:</label>
+                        <textarea type="text" class="col-md-9 int" placeholder="Type your message here..." maxlength="200" formControlName="remark"></textarea>
+                    </div>
+                </div>
+
+                <div class="error" *ngIf="rejectForm.get('remark').errors && rejectForm.get('remark').touched || rejectForm.get('remark').dirty">
+                    <div *ngIf="rejectForm.get('remark').hasError('required'); else elseBlock" class="danger eror">*Remark is required</div>
+
+                </div>
+
+
+                <div class="btns matg">
+
+                    <button type="button" class="btn btn-primary btn-block btn-flat" [disabled]="!rejectForm.valid" (click)="driverKYCReject()"
+                        data-dismiss="modal">{{'Submit' | translate}}</button>
+
+
+                    <button type="button" class="close" class="btnss" data-dismiss="modal" aria-label="Close">{{'Close' | translate}}
+
+                    </button>
+
+                </div>
+
+
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="modal" id="imageModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-image">
+                <img src="{{driverKYCData?.driver?.selfi}}">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="imageModal2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-image">
+                <img src="{{driverKYCData?.driver?.national_id_image}}">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="imageModal3" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-image">
+                <img src="{{driverKYCData?.vehicle?.vehicle_image}}">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="imageModal4" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-image">
+                <img src="{{driverKYCData?.vehicle?.license_image}}">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="imageModal5" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-image">
+                <img src="{{driverKYCData?.vehicle?.insurance_image}}">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,102 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+ <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="box-header">
+                <h1 style="font-size: 24px;">
+                    Add Topic
+                </h1>
+            </div>
+            <div class="box-header box-hearder-564">
+                <form class="" [formGroup]="topicForm">
+                    <div class="cusine">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <label class="col-md-4">Topic Name:</label>
+                                <input type="text" class="col-md-8 int form-control" formControlName="topicName" (keypress)="service.preventSpace($event)">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-8 error" style="margin-right: 16px;"
+                                *ngIf="topicForm.get('topicName').hasError('required') && topicForm.get('topicName').touched">
+                                <span style="color:red">Topic name is required.</span></div>
+                            <div *ngIf="topicForm.get('topicName').hasError('maxlength') && topicForm.get('topicName').dirty"
+                                style="    color: red;
+                        display: flex;
+                        justify-content: center;
+                        margin-right: 17%;">
+                                Maxlength of characters should be 256.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bx mt-4-btn" style="display: flex;justify-content: space-evenly;;width: 100%;">
+                        <button type="submit" class="btn  btn-flat cusine btn-flat" [routerLink]="['/topic-management']"
+                            style="background-color:#fd1b00">Cancel</button>
+                        <button type="submit" class="btn  btn-flat cusine btn-flat" [disabled]="!topicForm.valid"
+                            (click)="generate('topic')">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+ </div>
+    <app-footer></app-footer>
+</div>
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 >{{'Add topic' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <p >{{'Are you sure you want to add this topic?' | translate}}</p>
+            </div>
+           
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit" style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                   
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" (keypress)="numberOnly($event)" type="number"
+                        style="width:57px; height:57px;" [config]="{length:6}" ></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat"  [disabled]="!varificationCode" (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

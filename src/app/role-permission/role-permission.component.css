@@ -1,0 +1,51 @@
+.bx{
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    width: 29%;
+    padding: 7px;
+    background-color: green;
+    color: white;
+    /* display: flex; */
+}
+
+
+@media(max-width:1440px){
+    form.inpt1 {
+        width: 95% !important;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+.manage-content-box1 {
+    border: 1px solid #638f00;
+    /* text-align: left; */
+    /* width: 100%; */
+    /* max-width: 42%; */
+    margin: 0 auto;
+    /* padding-left: 0px; */
+}
+.form-namecenter {
+    width: 100%;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    padding: 15px;
+    max-width: 50%;
+    margin: 0;
+}
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}

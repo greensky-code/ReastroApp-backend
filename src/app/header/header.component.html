@@ -1,0 +1,43 @@
+<header class="main-header">
+    <a [routerLink]="['/dashboard']" class="logo" style="background-color:#638f00;">
+        <span class="logo-mini">
+            <b>FD</b>
+        </span>
+        <span class="logo-lg">
+            <img src="assets/adminLTE/dist/img/logonew.png">
+        </span>
+    </a>
+    <nav class="navbar navbar-static-top" style="background-color: #638f00;height: 0px; height: 80px;">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav custom-nav">
+                <li>
+                    <img class="profileImage" src="assets/adminLTE/dist/img/user.png" [popoverImage]="myPopover">
+                    <ngx-popover-content #myPopover style="background-color: #d9e6bb;" placement="bottom"
+                        [animation]="true" [imageUrl]="imageUrl" [closeOnClickOutside]="false">
+                        <div>
+                <li class="imgProfiles">
+                    <img class="imgProfile" style="height: 82px;width: 82px;" src="assets/adminLTE/dist/img/user.png">
+                </li>
+        </div>
+        <p class="logout-txt">Are you sure you want to logout ?</p>
+        <div class="profileButton">
+            <button type="button" class="but-ton col1" [routerLink]="['/change-password']">Change Password</button>
+            <button type="button" class="but-ton col2" (click)="logout()">LogOut</button>
+        </div>
+        </ngx-popover-content>
+        </li>
+        </ul>
+        <ul class="nav navbar-nav custom-navbar">
+            <li>
+                <select class="form-control custom-slct" style="margin-top:5px;width: 100%;"
+                    (change)="selectlang($event)" [value]='language'>
+                    <option value="{{items?.language}}" [selected]="items?.language===languages" *ngFor="let items of arry">{{items?.name}}</option>
+                </select>
+            </li>
+        </ul>
+        </div>
+    </nav>
+</header>

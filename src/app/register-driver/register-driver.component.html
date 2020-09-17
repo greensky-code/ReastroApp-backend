@@ -1,0 +1,114 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class="  box-header">
+            <h3 class="add-d mt-0 mb-0">Add Driver</h3>
+
+        </div>
+            <div class="  col-md-12" style="padding: 10px 10px">
+            <div style="padding: 31px 0px;" class="login-box registr">
+                <form class="" [formGroup]="phoneForm">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p for="mobile_number" class="chek">Phone :</p>
+                            <div style="width: 100%;
+                             max-width: 307px;">
+                            </div>
+                        </div>
+                        <div class="col-md-6 styp"> <input type="text" class="form-control" placeholder="" id="phoneNumber2" (keypress)="isNumber($event) " formControlName="number" maxlength="20" (keyup)="toCheckSpaceChar()">
+                            <div *ngIf="phoneForm.get('number').errors && phoneForm.get('number').enter || phoneForm.get('number').dirty">
+                                <div *ngIf="phoneForm.get('number').hasError('required'); else elseBlock" style="color: red">Phone number is required.</div>
+                                <ng-template #elseBlock>
+                                    <div *ngIf="isValidNumber != true" style="color: red">Please enter valid number.
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" style="padding: 7px;" class="btn"  [disabled]="!phoneForm.valid" (click)="generate('driver')">Submit</button>
+
+                    </div>
+                </form>
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </section>
+  
+</div>
+<app-footer></app-footer>
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 >Register Driver</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <p>Are you sure you want to register  this driver?</p>
+            </div>
+          
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit" style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 Step Verification</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">Google Authentication Code</label>
+                    <div class="otp-field">
+                    
+
+
+                      
+
+                            <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" 
+                    style="width:57px; height:57px;" [config]="{length:6}" (keypress)="numberOnly($event)" type="number" ></ng-otp-input>
+
+                   
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode" (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

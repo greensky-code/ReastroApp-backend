@@ -1,0 +1,38 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  
+   <div class="content-wrapper">
+    <section class="content footer-div">
+     
+        <div class="setingTop ">
+           
+                <div class="box-header">
+            <h3 class="cusine"> {{'ManageAllergans' | translate}}</h3>
+        </div>
+        <!-- dsfdsf -->
+        <div class="box-header">
+            <div class="allergans-div row">
+                <div class="col-md-12">
+                    <div class="row">
+                            <label class="col-md-4">{{'Allergan' | translate}} :</label>
+                            <span class="col-md-8 int">{{allergan_name || '--' }}</span></div>
+                </div>
+            <div class="col-md-12 cusine">
+                    <div class="row">
+                <label class="col-md-4"> {{'Ingredients' | translate}}:</label>
+                <span class="col-md-8 textareaa ">{{ingredients || '--' }}</span>
+            </div>
+            </div>
+            <div class="bx mt-4-btn mt-4" style="display: flex;justify-content: center;width: 100%;">
+                <button type="submit"  class="btn btn-primary btn-block btn-flat"  [routerLink]="['/manage-allergen']">{{'Cancel' | translate}}</button>
+            </div>
+            </div>
+          
+        </div>
+       
+    </div>
+    </section>
+   </div>
+    <app-footer></app-footer>
+</div>

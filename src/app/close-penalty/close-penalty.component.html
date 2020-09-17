@@ -1,0 +1,69 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <!-- <div class="box-header">
+                <h1 style="font-size: 24px;">
+                    {{'ADD PENALTY' | translate}}
+                </h1>
+            </div> -->
+            <div class="box-header  box-hearder-564">
+                <form class="" [formGroup]="form">
+                    <div class="cusine">
+                     <h1 style="font-size: 24px;color:black;text-align: center">
+                    {{'CLOSE' | translate}}
+                    
+                </h1>&nbsp;
+                        <div class="col-md-12" >
+                    
+                                <div class="row mb-3">
+                                                      <label class="col-md-4"> {{'Penalty Amount' | translate}}:</label>
+                                                       <input type="text" class="col-md-8 int form-control"
+                                                      (keypress)="service.preventSpace($event)" 
+                                                     > 
+                                                      
+                                                  </div> 
+                                <div class="row mb-3">
+                                    <label class="col-md-4"> {{'Description' | translate}}:</label>
+                                    <textarea cols="75" rows="7" class="col-md-8  form-control"></textarea>
+                                    
+                                </div>
+                                
+                            
+                        </div>
+                        <!-- <div class="col-md-12">
+                            <div class="col-md-8 error" style="margin-right: 16px;"
+                                *ngIf="form.get('category').hasError('required') && form.get('category').touched">
+                                <span style="color:red">Category Name is required.</span></div>
+                            <div *ngIf="form.get('category').hasError('maxlength') && form.get('category').dirty"
+                                style="    color: red;
+                        display: flex;
+                        justify-content: center;
+                        margin-right: 17%;">
+                                Maxlength of characters should be 256.
+                            </div>
+                        </div> -->
+                       
+                    </div>
+                   
+                    <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%">
+                        <button type="submit" class="btn btn-flat ml-5 cusine btn-flat" 
+                            style="background-color: green"  routerLink ="/night-charge-management"
+                           >{{'ADD' | translate}}</button>
+                            <button type="submit" class="btn btn-flat ml-5 cusine btn-flat" 
+                            style="background-color: red"  routerLink ="/penalty-management"
+                           >{{'Cancel' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>
+
+
+
+

@@ -1,0 +1,149 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                             {{'ManageOffers' | translate}}
+                        </h1>
+                    </div>
+                    <div class="rghtSde two-btnsubmit margin-rightbox">
+                        <div class="btn two">
+                            <button type="button" class="btn bg-olive" style=""  [routerLink]="['/add-offer']" >{{'AddOffer' | translate}}</button>
+                            <button type="button" class="btn margin margin1" (click)="exportAsXLSX()" *ngIf="offer_list?.length!= 0">{{'Export' | translate}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover ">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'OfferID' | translate}}</th>
+                                    <th>{{'OfferName' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                    <th>{{'StartDate' | translate}}</th>
+                                    <th>{{'EndDate' | translate}}</th>
+                                    <th>{{'CreatedAt' | translate}}</th>
+                                    <th>{{'CreatedBy' | translate}}</th>
+                                    <th>{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let data of offer_list | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <td class="table-width">{{data?.id || '--' }}</td>
+                                    <td class="table-width" title="{{data?.name}}">{{data?.name || '--' }}</td>
+                                    <td class="table-width" *ngIf="data?.is_active == true">Active</td>
+                                    <td class="table-width" *ngIf="data?.is_active == false">Inactive</td>
+                                    <td class="table-width" title="{{data?.start_date ||'--' }}">
+                                        {{data?.start_date || '--' }}</td>
+                                    <td style="padding: 10px;" title="{{data?.end_date ||'--' }}">
+                                        {{(data?.end_date | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                    <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                    <td>{{data?.created_by || '--' }}</td> -->
+
+                                    <tr>
+                                        <td>off01</td>
+                                        <td>Holi</td>
+                                        <td>ACtive</td>
+                                        <td>10-03-20</td>
+                                        <td>20-03-20</td>
+                                        <td>5-03-20</td>
+                                        <td>Admin</td>
+                                    <td >
+                                    
+                                        <button class="block-btns1" [routerLink]="['/view-offer-details',data?.id]">{{'View' | translate}}</button>
+                                        <button class="block-btn" style="background: #8d908f;;" (click)="disable(data?.id,data?.is_active)" *ngIf="data?.is_active==true">{{'Disable' | translate}}
+                                        </button>
+                                        <button class="block-btn" (click)="disable(data?.id,data?.is_active)" *ngIf="data?.is_active!=true">{{'Enable' | translate}}
+                                        </button>
+                                
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <h2 *ngIf="offer_list?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2> -->
+                    </div>
+            
+                    <div class="pageination"  style="padding: 12px;">
+                        <pagination-controls (pageChange)="offerlist($event)"  *ngIf="offer_list?.length != 0">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+    <!-- /.content -->
+</div>
+<footer class="footer-text">
+    <strong>{{'Copyright' | translate}} &copy; 2020
+        <a href="javascript:;">{{'FoodDelivery' | translate}}</a>.</strong> 	&nbsp;{{'Allrightsreserved' | translate}}
+</footer>
+<!-- -------------------------------------disable modal---------------- -->
+
+<!-- ----------------------------------------delete modal---------------------------------------------- -->
+
+<div class="modal" id="disablemodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">Disable</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p *ngIf="status==false">Are you sure you want disable this offer ?</p>
+                <p *ngIf="status==true">Are you sure you want enable this offer ?</p>
+            </div>
+
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background-color: #fd1b00;color: #fff;">No</button>
+                <button type="button" class="submit" style="display: flex; justify-content: space-evenly;border: #638f00;color: #ffff;" (click)="modal()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -------------------------------------enable  modal---------------- -->
+
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                 
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

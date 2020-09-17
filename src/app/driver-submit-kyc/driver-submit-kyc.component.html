@@ -1,0 +1,646 @@
+<app-header>
+
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <div class="content footer-di">
+        <div class="box-header">
+                <h3> {{'SubmitKYC' | translate}}</h3>
+            </div>
+            <div class="box-header">
+    <form class=" custom-Form" [formGroup]="submitFormKyc" style="    background-color: #f5f5f5; border: 1px solid #e3e3e3;padding: 15px; margin-bottom: 20px;">
+        <div class="row" >
+
+            <div class=" col-md-12">
+            </div>
+            <div class=" col-md-6">
+                    <div class="row form-group">
+                        <label class="col-md-5 control-label">{{'Title' | translate}}:</label>
+                        <div class="col-md-7 inputGroupContainer">
+                            <div class="input-group">
+                                <select class="form-control" formControlName="titel">
+                                            <option value="Mr." selected="selected">{{'Mr' | translate}}</option>
+                                            <option value="Mrs.">{{'Mrs' | translate}}. </option>
+                                            <option value="Ms.">{{'Ms' | translate}}. </option>
+                                            
+                                        </select>
+                            </div>
+                            <div *ngIf="submitFormKyc.get('titel').hasError('required') && submitFormKyc.get('titel').touched">
+                                <span style="color:red">Title is required.</span></div>
+                        
+    
+    
+                        </div>
+                    </div>
+                </div>
+            <div class=" col-md-6">
+                    <div class="row form-group">
+                        <label class="col-md-4 control-label">{{'FirstName' | translate}}:</label>
+                        <div class="col-md-7 inputGroupContainer">
+                            <div class="input-group">
+                                <input id="fullName" name="fullName" formControlName="FirstName" (keydown.space)="$event.preventDefault()" class="form-control" required="true" value="" type="text">
+                            </div>
+                            <div *ngIf="submitFormKyc.get('FirstName').hasError('required') && submitFormKyc.get('FirstName').touched">
+                                <span style="color:red">First name is required.</span></div>
+                            <div *ngIf="submitFormKyc.get('FirstName').hasError('maxlength') && submitFormKyc.get('FirstName').dirty" style="color:red">
+                                Maxlength of characters should be 255.
+                            </div>
+                            <div *ngIf="submitFormKyc.get('FirstName').hasError('pattern') && submitFormKyc.get('FirstName').dirty" style="color:red">
+                               Don't use number and special character.
+                            </div>
+    
+    
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-6">
+                        <div class="row form-group">
+                            <label class="col-md-5 control-label">{{'MiddleName' | translate}}:</label>
+                            <div class="col-md-7 inputGroupContainer">
+                                <div class="input-group">
+                                    <input id="fullName" name="fullName" formControlName="MiddleName" (keydown.space)="$event.preventDefault()" class="form-control" value="" type="text">
+                                </div>
+                          
+                                <div *ngIf="submitFormKyc.get('MiddleName').hasError('maxlength') && submitFormKyc.get('MiddleName').dirty" style="color:red">
+                                    Maxlength of characters should be 255.
+                                </div>
+                                <div *ngIf="submitFormKyc.get('MiddleName').hasError('pattern') && submitFormKyc.get('MiddleName').dirty" style="color:red">
+                                   Don't use number and special character.
+                                </div>
+        
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-6">
+                            <div class="row form-group">
+                                <label class="col-md-4 control-label">{{'LastName' | translate}}:</label>
+                                <div class="col-md-7 inputGroupContainer">
+                                    <div class="input-group">
+                                        <input id="fullName" name="fullName" formControlName="lastName" (keydown.space)="$event.preventDefault()" class="form-control" value="" type="text">
+                                    </div>
+                                    <div *ngIf="submitFormKyc.get('lastName').hasError('required') && submitFormKyc.get('lastName').touched">
+                                        <span style="color:red">Last name is required.</span></div>
+                                    <div *ngIf="submitFormKyc.get('lastName').hasError('maxlength') && submitFormKyc.get('lastName').dirty" style="color:red">
+                                        Maxlength of characters should be 255.
+                                    </div>
+                                    <div *ngIf="submitFormKyc.get('lastName').hasError('pattern') && submitFormKyc.get('lastName').dirty" style="color:red">
+                                       Don't use number and special character.
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-md-6">
+                                <div class="row form-group">
+                                    <label class="col-md-5 control-label">{{'DateofBirth' | translate}}:</label>
+                                    <div class="col-md-7 inputGroupContainer">
+                                        <div class="input-group">
+                                            <input id="fullName" name="fullName" formControlName="dateOfBirth" class="form-control" (change)="fromMaxDate($event.target.value)" max="{{toMaxDate | date:'yyyy-MM-dd'}}" required="true" value="" type="date" >
+                                        </div>
+                                        <div *ngIf="submitFormKyc.get('dateOfBirth').hasError('required') && submitFormKyc.get('dateOfBirth').touched">
+                                            <span style="color:red">Date of birth is required.</span></div>
+                                   
+                
+                
+                
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-6">
+                                    <div class="row form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">{{'Gender' | translate}}:</label>
+                                        <div class="col-md-7 inputGroupContainer">
+                                            <div class="input-group">
+                                                <select class="form-control" formControlName="gender">
+                                                            <option value="">{{'SelectGender' | translate}} </option>
+                                                            <option value="Male">{{'Male' | translate}} </option>
+                                                            <option value="Female">{{'Female' | translate}} </option>
+                                                            
+                                                        </select>
+                                            </div>
+                                            <div *ngIf="submitFormKyc.get('gender').hasError('required') && submitFormKyc.get('gender').touched">
+                                                <span class="eorr">Gender is required.</span></div>
+                    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6">
+                                        <div class="row form-group">
+                                            <label class="col-md-5 control-label">{{'Email(Optional)' | translate}}:</label>
+                                            <div class="col-md-7 inputGroupContainer">
+                                                <div class="input-group">
+                                             
+                                                    <input type="email" formControlName="email" class="form-control" (keydown.space)="$event.preventDefault()"  value="" >
+                                                </div>
+                                             
+                                                <div *ngIf="submitFormKyc.get('email').hasError('maxlength') && submitFormKyc.get('email').dirty" style="color:red">
+                                                    Maxlength of characters should be 255.
+                                                </div>
+                                                <div *ngIf="submitFormKyc.get('email').hasError('pattern') && submitFormKyc.get('email').dirty" style="color:red">
+                                                    Enter valid email address.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6">
+                                            <div class="row form-group">
+                                                <label class="col-md-4 control-label" style="padding-top: 0px;">{{'Selfie' | translate}}:</label>
+                                                <div class="col-md-5 inputGroupContainer registration-col uplod-div2">
+                                                    <div class="input-group grup">
+                                                        <input id="fullName" name="fullName" formControlName="selfi" placeholder="jpg/jpeg/png" class="form-control kyc-full-name" required="true" type="text" readonly>
+                                                    </div>
+                                                    <div *ngIf="submitFormKyc.get('selfi').hasError('required') && submitFormKyc.get('selfi').touched">
+                                                        <span style="color:red; ">Selfie image is required.</span></div>
+                                                        <div>
+                                                            <h6 class="hh1"> Allowed (jpg/jpeg/png 2MB)  </h6>
+                                                        </div>
+                            
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="uplod-btn">
+                                                        <button class="btn btn-green"> {{'Upload' | translate}}</button>
+                                                        <input type="file" class="form-control uplod-file"  accept="image/*" (change)="handleFileInputFrontCertificatDBD($event,'selfiimage')">
+                                                    </div>
+                                                </div>
+                            
+                                            </div>
+                                        </div>
+            <div class=" col-md-6" *ngIf="language !='th'">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label" style="padding-top: 0;">{{'Nationality' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <select class="form-control" formControlName="nationality" (change)="onSelects($event)">
+                            <option value="">{{'Selectnationality' | translate}}</option>
+                            <option value="{{i.id}}" *ngFor="let i of nationalitys">{{i.name_en}} </option>
+                        </select>
+                        </div>
+                        <div *ngIf="submitFormKyc.get('nationality').hasError('required') && submitFormKyc.get('nationality').touched">
+                            <span class="eorr">Nationality is required.</span></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6" *ngIf="language =='th'">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label" style="padding-top: 0;">{{'Nationality' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <select class="form-control" formControlName="nationality" (change)="onSelects($event)">
+                            <option value="">{{'Selectnationality' | translate}}</option>
+                            <option value="{{i.id}}" *ngFor="let i of nationalitys">{{i.name_th}} </option>
+                        </select>
+                        </div>
+                        <div *ngIf="submitFormKyc.get('nationality').hasError('required') && submitFormKyc.get('nationality').touched">
+                            <span class="eorr">Nationality is required.</span></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6" *ngIf="thaidata=='93'">
+                    <div class="row form-group">
+                        <label class="col-md-4 control-label" style="padding-top: 0px;">{{'NationalIDImage' | translate}}:</label>
+                        <div class="col-md-5    inputGroupContainer registration-col uplod-div2">
+                            <div class="input-group grup">
+                                <input id="fullName" name="fullName" formControlName="NationalidPassportImage" placeholder="jpg/jpeg/png" class="form-control kyc-full-name" required="true" type="text" readonly>
+                            </div>
+                            <div *ngIf="submitFormKyc.get('NationalidPassportImage').hasError('required') && submitFormKyc.get('NationalidPassportImage').touched">
+                                <span style="color:red;">National id image is required.</span></div>
+                                <div>
+                                    <h6 class="hh1"> Allowed (jpg/jpeg/png 2MB)  </h6>
+                                </div>
+    
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="uplod-btn">
+                                <button class="btn btn-green"> {{'Upload' | translate}}</button>
+                                <input type="file" class="form-control uplod-file"  accept="image/*" (change)="handleFileInputFrontCertificatDBD($event,'nationalId')">
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div class=" col-md-6" *ngIf="thaidata!='93'">
+                        <div class="row form-group">
+                            <label class="col-md-4 control-label" style="padding-top: 0px;">{{'PassportImage' | translate}}:</label>
+                            <div class="col-md-5    inputGroupContainer registration-col uplod-div2">
+                                <div class="input-group grup">
+                                    <input id="fullName" name="fullName" formControlName="NationalidPassportImage" placeholder="jpg/jpeg/png" class="form-control kyc-full-name"  required="true" type="text" readonly>
+                                </div>
+                                <div *ngIf="submitFormKyc.get('NationalidPassportImage').hasError('required') && submitFormKyc.get('NationalidPassportImage').touched">
+                                    <span style="color:red;">Passport  image is required.</span></div>
+                                    <div>
+                                        <h6 class="hh1"> Allowed (jpg/jpeg/png 2MB)  </h6>
+                                    </div>
+        
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="uplod-btn">
+                                    <button class="btn btn-green"> {{'Upload' | translate}}</button>
+                                    <input type="file" class="form-control uplod-file"  accept="image/*" (change)="handleFileInputFrontCertificatDBD($event,'nationalId')">
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                <div class=" col-md-6" *ngIf="thaidata!='93'">
+                        <div class="row form-group">
+                            <label class="col-md-5 control-label">{{'Passport' | translate}}:</label>
+                            <div class="col-md-7 inputGroupContainer">
+                                <div class="input-group">
+                                    <input id="fullName" name="fullName" formControlName="passPortNationalId" placeholder="DSDSFDS5345DFGDFG453" (keypress)="service.preventSpace($event)"   class="form-control" required="true" value="" type="text">
+                                </div>
+                                <div *ngIf="submitFormKyc.get('passPortNationalId').hasError('required') && submitFormKyc.get('passPortNationalId').touched">
+                                    <span style="color:red">Passport is required.</span></div>
+                                <div *ngIf="submitFormKyc.get('passPortNationalId').hasError('maxlength') && submitFormKyc.get('passPortNationalId').dirty" style="color:red">
+                                    Maxlength of characters should be 20.
+                                </div>
+                                <div *ngIf="submitFormKyc.get('passPortNationalId').hasError('pattern') && submitFormKyc.get('passPortNationalId').dirty" style="color:red">
+                                    Please enter valid password number.
+                                </div>
+                                <div>
+                                    <h6 class="hhNN">DSDSFDS5345DFGDFG453</h6>
+                                </div>
+        
+        
+                            </div>
+                        </div>
+                    </div>
+        
+        
+
+
+         
+         
+       
+            <div class=" col-md-6" *ngIf="thaidata =='93'">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label">{{'NationalID' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <input id="fullName" name="fullName" formControlName="passPortNationalId"  (keypress)="service.preventSpace($event)" placeholder="1252622525251" class="form-control" required="true" value="" type="text">
+                        </div>
+                        <div *ngIf="submitFormKyc.get('passPortNationalId').hasError('required') && submitFormKyc.get('passPortNationalId').touched">
+                            <span style="color:red">National id is required.</span></div>
+                        <div *ngIf="submitFormKyc.get('passPortNationalId').hasError('maxlength') && submitFormKyc.get('passPortNationalId').dirty" style="color:red">
+                            Maxlength of characters should be 13.
+                        </div>
+                        <div *ngIf="submitFormKyc.get('passPortNationalId').hasError('pattern') && submitFormKyc.get('passPortNationalId').dirty" style="color:red">
+                            Please enter valid national id.
+                        </div>
+                        <div>
+                            <h6 class="hhNN" >1252622525251</h6>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+     
+
+       
+          
+ 
+       
+       
+            <div class=" col-md-12">
+                <div class="kyc-heding">
+                    <u style="color:black"> {{'Address' | translate}}:-</u>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label">{{'Street' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <input id="fullName" name="fullName" formControlName="street" class="form-control" required="true" value="" type="text">
+                        </div>
+                        <div *ngIf="submitFormKyc.get('street').hasError('required') && submitFormKyc.get('street').touched">
+                            <span style="color:red">Street is required.</span></div>
+                        <div *ngIf="submitFormKyc.get('street').hasError('maxlength') && submitFormKyc.get('street').dirty"
+                        style="color:red">
+                        Maxlength of characters should be 255
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-4 control-label">{{'City' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <input id="fullName" name="fullName" formControlName="city" (keypress)="service.preventSpace($event)" class="form-control" required="true" value="" type="text">
+                        </div>
+                        <div *ngIf="submitFormKyc.get('city').hasError('required') && submitFormKyc.get('city').touched">
+                            <span style="color:red">City is required.</span></div>
+                        <div *ngIf="submitFormKyc.get('city').hasError('maxlength') && submitFormKyc.get('city').dirty" style="color:red">
+                            Maxlength of characters should be 255.
+                        </div>
+                        <div *ngIf="submitFormKyc.get('city').hasError('pattern') && submitFormKyc.get('city').dirty" style="color:red">
+                            Please don't use special characters and numbers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label" style="padding-top: 0;">{{'Country' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <select class="form-control" formControlName="country" (change)="onSelect($event)">
+                                        <option value="">{{'SelectCountry' | translate}} </option>
+                                        <option value="{{i.id}}" *ngFor="let i of countriesList">{{i.name}} </option>
+                                    </select>
+                        </div>
+                        <div *ngIf="submitFormKyc.get('country').hasError('required') && submitFormKyc.get('country').touched">
+                            <span style="color:red">Country is required.</span></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-4 control-label">{{'Province' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <select class="form-control" formControlName="province">
+                                          <option value="" >{{'Select' | translate}}</option>
+                                            <option value="{{i.id}}" *ngFor="let i of statelist">{{i.name}} </option>
+                                        </select>
+                        </div>
+                        <div *ngIf="submitFormKyc.get('province').hasError('required') && submitFormKyc.get('province').touched">
+                            <span style="color:red">Province is required.</span></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label">{{'ZipCode' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <input id="fullName" name="fullName" formControlName="zipCode" value="" type="numeric" maxLength="6" class="form-control" required="true" (keydown.space)="$event.preventDefault();" (keypress)="isNumber($event)">
+                        </div>
+                        <div *ngIf="submitFormKyc.get('zipCode').hasError('required') && submitFormKyc.get('zipCode').touched">
+                            <span style="color:red">Zip code is required.</span></div>
+                        <div *ngIf="submitFormKyc.get('zipCode').hasError('maxlength') && submitFormKyc.get('zipCode').dirty" style="color:red">
+                            Maxlength of numbers should be 8.
+                        </div>
+                        <div *ngIf="submitFormKyc.get('zipCode').hasError('pattern') && submitFormKyc.get('zipCode').dirty" style="color:red">
+                            Please use only number.
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-md-12">
+                <div class="kyc-heding">
+                    <u style="color:black">{{'VehicleDetails' | translate}}:-</u>
+                </div>
+            </div>
+        
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label  class="col-md-5 control-label">{{'Typeofvehicle' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <select class="form-control" formControlName="typeOfVehicle">
+                                          <option value="" >{{'Select' | translate}}</option>
+                                          <option value="Two wheeler" >{{'Twowheeler' | translate}}</option>
+                                          <option value="Four wheeler" >{{'Fourwheeler' | translate}}</option>
+                                        </select>
+                        </div>
+                        <div *ngIf="submitFormKyc.get('typeOfVehicle').hasError('required') && submitFormKyc.get('typeOfVehicle').touched">
+                            <span style="color:red">Type of vehicle is required.</span></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-4 control-label" style="padding-top: 0px;">{{'VehicleImage' | translate}}:</label>
+                    <div class="col-md-5    inputGroupContainer registration-col uplod-div2">
+                        <div class="input-group grup">
+                            <input id="fullName" name="fullName" formControlName="vehicleImage" placeholder="jpg/jpeg/png" class="form-control kyc-full-name" required="true" type="text" readonly>
+                        </div>
+                        <div *ngIf="submitFormKyc.get('vehicleImage').hasError('required') && submitFormKyc.get('vehicleImage').touched">
+                            <span style="color:red; ">Vehicle image is required.</span></div>
+                            <div>
+                                <h6 class="hh1"> Allowed (jpg/jpeg/png 2MB)  </h6>
+                            </div>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="uplod-btn">
+                            <button class="btn btn-green"> {{'Upload' | translate}}</button>
+                            <input type="file" class="form-control uplod-file"  accept="image/*" (change)="handleFileInputFrontCertificatDBD($event,'vehicleimage')">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label">{{'LicenseNumber' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <input type="text" id="fullName" name="fullName" formControlName="licensenumber" placeholder="DSDSFDS5345DFGDFG453" (keypress)="isNumber($event)" (keydown.space)="$event.preventDefault();" class="form-control">
+                        </div>
+                        <div *ngIf="submitFormKyc.get('licensenumber').hasError('required') && submitFormKyc.get('licensenumber').touched">
+                            <span style="color:red">License number is required.</span></div>
+                        <div *ngIf="submitFormKyc.get('licensenumber').hasError('maxlength') && submitFormKyc.get('licensenumber').dirty" style="color:red">
+                            Maxlength of license number should be 20.
+                        </div>
+                        <div *ngIf="submitFormKyc.get('licensenumber').hasError('pattern') && submitFormKyc.get('licensenumber').dirty" style="color:red">
+                            Please enter valid license number.
+                        </div>
+                        <div>
+                            <h6 class="hhNN">DSDSFDS5345DFGDFG453</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-4 control-label" style="padding-top: 0px;">{{'LicenceImage' | translate}}:</label>
+                    <div class="col-md-5    inputGroupContainer registration-col uplod-div2">
+                        <div class="input-group grup">
+                            <input id="fullName" name="fullName" formControlName="licenseImage" placeholder="jpg/jpeg/png" class="form-control kyc-full-name" required="true" type="text" readonly>
+                        </div>
+                        <div *ngIf="submitFormKyc.get('licenseImage').hasError('required') && submitFormKyc.get('licenseImage').touched">
+                            <span style="color:red; ">License image is required.</span></div>
+                            <div>
+                                <h6 class="hh1"> Allowed (jpg/jpeg/png 2MB)  </h6>
+                            </div>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="uplod-btn">
+                            <button class="btn btn-green"> {{'Upload' | translate}}</button>
+                            <input type="file" class="form-control uplod-file"  accept="image/*" (change)="handleFileInputFrontCertificatDBD($event,'licenseimage')">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label">{{'InsuranceNumber' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <input id="fullName" name="fullName" formControlName="insurancenumber" placeholder="DSDSFDS5345DFGDFG453" (keypress)="service.preventSpace($event)" (keypress)="isNumber($event)" class="form-control" required="true" value="" type="text" (keydown.space)="$event.preventDefault()">
+                        </div>
+                        <div *ngIf="submitFormKyc.get('insurancenumber').hasError('required') && submitFormKyc.get('insurancenumber').touched">
+                            <span style="color:red">Insurance number is required.</span></div>
+                        <div *ngIf="submitFormKyc.get('insurancenumber').hasError('maxlength') && submitFormKyc.get('insurancenumber').dirty" style="color:red">
+                            Maxlength of characters should be 20.
+                        </div>
+                        <div *ngIf="submitFormKyc.get('insurancenumber').hasError('pattern') && submitFormKyc.get('insurancenumber').dirty" style="color:red">
+                            Please enter valid insurance number.
+                        </div>
+                        <div>
+                            <h6 class="hhNN">DSDSFDS5345DFGDFG453</h6>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-4 control-label" style="padding-top: 0px;">{{'InsuranceImage' | translate}}:</label>
+                    <div class="col-md-5    inputGroupContainer registration-col uplod-div2">
+                        <div class="input-group grup">
+                            <input id="fullName" name="fullName" formControlName="insuranceImage" placeholder="Allowed (jpg/jpeg/png 2MB)  " class="form-control kyc-full-name" required="true" type="text" readonly>
+                        </div>
+                        <div *ngIf="submitFormKyc.get('insuranceImage').hasError('required') && submitFormKyc.get('insuranceImage').touched">
+                            <span style="color:red; ">Insurance image is required.</span></div>
+                            <div>
+                                <h6 class="hh1"> Allowed (jpg/jpeg/png 2MB)  </h6>
+                            </div>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="uplod-btn">
+                            <button class="btn btn-green"> {{'Upload' | translate}}</button>
+                            <input type="file" class="form-control uplod-file"  accept="image/*" (change)="handleFileInputFrontCertificatDBD($event,'insuranceimage')">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-5 control-label">{{'InsuranceCompany' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <input id="fullName" name="fullName" formControlName="insurancecompany" (keypress)="service.preventSpace($event)"   class="form-control" required="true" value="" type="text">
+                        </div>
+                        <div *ngIf="submitFormKyc.get('insurancecompany').hasError('required') && submitFormKyc.get('insurancecompany').touched">
+                            <span style="color:red">Insurance company is required.</span></div>
+                        <div *ngIf="submitFormKyc.get('insurancecompany').hasError('maxlength') && submitFormKyc.get('insurancecompany').dirty" style="color:red">
+                            Maxlength of characters should be 255.
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="row form-group">
+                    <label class="col-md-4 control-label">{{'PlateNumber' | translate}}:</label>
+                    <div class="col-md-7 inputGroupContainer">
+                        <div class="input-group">
+                            <input id="fullName" name="fullName" formControlName="plateNumber" placeholder="HT 1234" class="form-control" required="true" value="" type="text">
+                        </div>
+                        <div *ngIf="submitFormKyc.get('plateNumber').hasError('required') && submitFormKyc.get('plateNumber').touched">
+                            <span style="color:red">Plate number is required.</span></div>
+                        <div *ngIf="submitFormKyc.get('plateNumber').hasError('maxlength') && submitFormKyc.get('plateNumber').dirty" style="color:red">
+                            Maxlength of characters should be 15.
+                        </div>
+                        <div *ngIf="submitFormKyc.get('plateNumber').hasError('pattern') && submitFormKyc.get('plateNumber').dirty" style="color:red">
+                            Plate number is not valid.
+                        </div>
+                        <div>
+                            <h6 class="hh1">HT 1234</h6>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 btn submit-div">
+                <button type="submit" class="btn btn-primary btn-block btn-flat"   (click)="generate('driver')">{{'Submit' | translate}}</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+</div>
+</div>
+
+<app-footer></app-footer>
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 >Submit KYC </h2>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <p>Are you sure you want to submit KYC  this driver?</p>
+            </div>
+           
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit" style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                      
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

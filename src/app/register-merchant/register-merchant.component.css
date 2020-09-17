@@ -1,0 +1,158 @@
+.sp{
+    /* margin-top: 15%; */
+    margin-left: 16%;
+    margin-top: 6%;
+
+}
+.lb1{
+    margin-top: 8%;
+
+}
+.lb{
+    margin-left: 35%;
+}
+.lb2{
+    margin-left: 35%;
+}
+.check{
+    margin-top: 3%;
+    display: flex;
+    justify-content: stretch;
+}
+
+/* .container{
+    width: 45%;
+    margin-top: 8%;
+    border: solid;
+    height: 33%;
+} */
+.lb5{
+    /* margin-left: 82%; */
+    float: right;
+    margin-top: 6%;
+}
+.containers{
+    border: solid;
+    
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+}
+/* .btnf{
+    width: 9%;
+    height: 37px;
+    background-color: green;
+    color: white;
+} */
+.chebox{
+    margin-right: 0%;
+    width: 71%;
+}
+.basicd{
+    display: flex;
+    width: 88%;
+    margin-left: -11%;
+}
+.d2contens{
+    display: flex;
+    margin-left: 13%;
+    width: 75%;
+}
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+.btnsub{
+    background-color: green;
+    color: white;
+    padding: 7px;
+    font-size: 19px;
+    border: 5px;
+    width: 54%;
+    border: none;
+    margin-left: 45px;
+    border-radius: 5px;
+}
+/* .subbtndiv{
+    text-align: left;
+    margin-top: 4%;
+} */
+.subbtndiv{
+    /* text-align: left; */
+    margin-top: 4%;
+    display: flex;
+    justify-content: center;
+    margin-right: 6%;
+}
+.cheboxs{
+    width: 64%;
+  
+}
+.setingTop{ border:none;
+    width: 560px!important;
+    /* margin: 13% auto!important; */
+    /* box-shadow: 0px -1px 17px 6px #ccc; */
+    margin-left: 230px;
+}
+
+.lsetingTop{
+    background: #fff;
+    padding: 37px;
+    border-top: 0;
+    color: #666;
+    box-shadow: 3px 3px 33px 13px #aba6a64a;
+}
+.registr{
+   
+    width: 100%;
+    margin-top: 0px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    padding: 15px !important;
+}
+/* input.form-control.ng-untouched.ng-pristine.ng-valid{
+border: 1px solid black;
+    border-radius: 4px;
+} */
+/* input.cheboxs.ng-untouched.ng-pristine.ng-valid{
+    border: 1px solid black;
+    border-radius: 4px;
+} */
+.check{
+    margin-top:20px;
+}
+.chek{font-weight: 700;
+    font-size: 18px;
+}
+.styp{
+    padding-right:0px;
+}
+.btn{
+    width: 51%;
+    padding: 7px;
+    background-color: green;
+    color: white;
+    margin-right: -11px;
+    /* padding: 9px; */
+    margin-top: 19px;
+}
+@media (max-width: 1366px){
+.login-box {
+    min-height: auto!important;
+}
+}
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}

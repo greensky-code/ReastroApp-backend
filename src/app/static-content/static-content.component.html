@@ -1,0 +1,125 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <form [formGroup]="ekeditorForm">
+        <div class="setingTop" *ngIf="type=='Customer'">
+                <div class="box-header"> <h2 class="cusine" style="font-size: 24px;">{{'Terms&Conditions-User' | translate}}</h2></div>
+                <div class="box-header">
+            <ck-editor formControlName="editror" id="12a" language="en"  maxlength="512" [fullPage]="true"  ></ck-editor>
+            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                <button type="submit" class="btn btn-primary btn-block btn-flat cusine mr-3" style="background-color:red; border: 1px solid red; " [routerLink]="['/legal-terms']">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat cusine" (click)="generate('Customer')">{{'Submit' | translate}}</button>
+                </div>
+                </div>
+        </div>
+
+        
+        <div class="setingTop" *ngIf="type=='Merchant'">
+                <div class="box-header"><h2 class="cusine" style="font-size: 24px;">{{'Terms&Conditions-Merchant' | translate}}</h2></div>
+                    <div class="box-header"><ck-editor formControlName="editror" id="12b" language="en"  maxlength="512" [fullPage]="true"  ></ck-editor>
+            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                <button type="submit" class="btn btn-primary btn-block btn-flat cusine mr-3" style="background-color:red; border: 1px solid red; " [routerLink]="['/legal-terms']">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat cusine" (click)="generate('Merchant')">{{'Submit' | translate}}</button>
+                </div>
+                </div>
+        </div>
+   
+        <div class="setingTop" *ngIf="type=='Driver'">
+                <div class="box-header">
+            <h2 class="cusine" style="font-size: 24px;">{{'Terms&Conditions-Driver' | translate}}</h2></div>
+            <div class="box-header">
+             <ck-editor formControlName="editror" id="12a" language="en"  maxlength="512" [fullPage]="true"  ></ck-editor>
+            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                <button type="submit" class="btn btn-primary btn-block btn-flat cusine mr-3" style="background-color:red; border: 1px solid red; " [routerLink]="['/legal-terms']">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat cusine" (click)="generate('Driver')">{{'Submit' | translate}}</button>
+                </div>
+                </div>
+        </div>
+        <div class="setingTop" *ngIf="type=='privacypolicy'">
+                <div class="box-header">
+            <h2 class="cusine" style="font-size: 24px;" style="font-size: 24px;">{{'PrivacyPolicy' | translate}}</h2>
+            </div>
+            <div class="box-header">
+             <ck-editor formControlName="editror" id="12a" language="en"  maxlength="512" [fullPage]="true"  ></ck-editor>
+            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                <button type="submit" class="btn btn-primary btn-block btn-flat cusine mr-3" style="background-color:red; border: 1px solid red; "[routerLink]="['/legal-terms']">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat cusine" (click)="generate('Privacypolicy')">{{'Submit' | translate}}</button>
+                </div>
+                </div>
+        </div>
+        <div class="setingTop" *ngIf="type=='refund'">
+                <div class="box-header">
+            <h2 class="cusine" style="font-size: 24px;">{{'Cancellation&RefundPolicy' | translate}}</h2>
+            </div>
+            <div class="box-header">
+             <ck-editor formControlName="editror" id="12a" language="en"  maxlength="512" [fullPage]="true"  ></ck-editor>
+            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                <button type="submit" class="btn btn-primary btn-block btn-flat cusine mr-3" style="background-color:red; border: 1px solid red; "[routerLink]="['/legal-terms']">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat cusine" (click)="generate('RefundPolicy')">{{'Submit' | translate}}</button>
+                </div>
+                </div>
+        </div>
+        <div class="setingTop" *ngIf="type=='aboutus'">
+                <div class="box-header">
+            <h2 class="cusine" style="font-size: 24px;">{{'AboutUs' | translate}}</h2>
+            </div>
+            <div class="box-header">
+             <ck-editor formControlName="editror" id="12a" language="en"  maxlength="512" [fullPage]="true"  ></ck-editor>
+            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                <button type="submit" class="btn btn-primary btn-block btn-flat cusine mr-3" style="background-color:red; border: 1px solid red; "[routerLink]="['/legal-terms']">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat cusine" (click)="generate('aboutus')"  >{{'Submit' | translate}}</button>
+                </div>
+                </div>
+        </div>
+        <div class="setingTop availabilty-input" *ngIf="type=='availability'" >
+                <div class="box-header">
+            <h2 class="cusine" style="font-size: 24px;">{{'AvailabilityInformation' | translate}}</h2>
+            </div>
+            <div class="box-header">
+             <textarea type="text" formControlName="editror" class="form-control" rows="20" id="12a"  ></textarea>
+            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                <button type="submit" class="btn btn-primary btn-block btn-flat cusine mr-3" style="background-color:red; border: 1px solid red; "[routerLink]="['/legal-terms']">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat cusine" (click)="generate('AvailabilityInformation')">{{'Submit' | translate}}</button>
+                </div>
+                </div>
+        </div>
+    </form>
+    </section> 
+</div>
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modals">
+                <div class="modal-header">
+                    <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                    <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="form-box">
+                    <div class="ggcode">
+                        <p>{{errorMessage}}</p>
+    
+                    </div>
+                    <div class="form-group has-feedback codeSpace">
+                        <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                        <div class="otp-field">
+                        
+                            <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                                (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                                [config]="{length:6}"></ng-otp-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-xs-4 lognBrn">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                                (click)="verify()">Verify</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

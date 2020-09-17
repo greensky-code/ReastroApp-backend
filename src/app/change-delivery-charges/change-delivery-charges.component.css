@@ -1,0 +1,65 @@
+.inp1{
+    width: 100%;
+    max-width: 131px;
+}
+
+.updatebtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 11%;
+}
+.cusmanage-box {
+    padding-bottom: 20px;
+}
+@media(max-width:1440px){
+    .inp1 {
+        width: 100%;
+        max-width: 100px;
+    }
+}
+@media(max-width:1366px){
+    .inp1 {
+        max-width: 70px;
+    }
+}
+@media(max-width:1280px){
+    .inp1 {
+        max-width: 50px;
+    }
+}
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}
+.checkbox.checkbox-ADD .box-footer {
+    border-top: none;
+}
+.checkbox.checkbox-ADD {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
+.free-input {
+    display: flex;
+    align-items: center;
+}
+.free-input input {
+    width: 39%;
+    margin-right: 15px;
+}
+.checkbox.checkbox-ADD .box-footer {
+    padding-right: 0;
+    width: 31%;
+    display: flex;
+    justify-content: flex-end;
+}

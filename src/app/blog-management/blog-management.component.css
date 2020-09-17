@@ -1,0 +1,356 @@
+.button {
+    background-color: green;
+    /* padding: 6px; */
+    color: white;
+    margin-left: 7px;
+    height: 33px;
+    width: 13%;
+}
+
+.box-title {
+    height: 33px;
+    margin-left: 2%;
+    width: 13%;
+}
+
+.registermerchantbtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bg-olive {
+    background-color: green !important;
+    width: 100%;
+    height: 32px;
+    padding: 0px;
+    max-width: 154px;
+    margin: 10px 5px;
+}
+
+input.dt1.ng-pristine.ng-valid.ng-touched {
+    height: 25px;
+    margin-right: 15px;
+}
+
+input.dt1.ng-pristine.ng-valid.ng-touched {
+    height: 25px;
+    margin-right: 15px;
+}
+
+.dt1 {
+    width: 100%;
+    height: 30px;
+    margin-right: 15px;
+}
+
+.dt2 {
+    width: 100%;
+    height: 30px;
+    margin-right: 15px;
+}
+
+
+/* span.fa.fa-search.form-control-feedback {
+    position: absolute;
+    left: 6px;
+    top: 7px;
+}
+input.manage-input.ng-pristine.ng-valid.ng-touched {
+    position: relative;
+    border-radius: 50px;
+    width: 172px;
+} */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.form-group.has-search {
+    position: relative;
+    width: 100%;
+}
+
+span.fa.fa-search.form-control-feedback {
+    position: absolute;
+    left: 17px;
+    top: 6px;
+}
+
+.bg-olive {
+    background-color: green !important;
+    width: 100%;
+}
+
+
+/* .bg-olive{
+    background-color: green !important;
+    width: 100%;
+    } */
+
+
+/* @media(max-width:1280px){
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+        padding:0px;
+    }
+} */
+
+.wght {
+    display: flex;
+}
+
+.wght button {
+    margin: 3px;
+}
+
+.rghtSde {
+    width: 100%;
+    float: right;
+    /* max-width: 400px; */
+    align-items: center;
+    text-align: center;
+}
+
+.view {
+    width: 235px;
+    float: right;
+    margin-right: 25px;
+}
+
+.sndRow {
+    width: 100%!important;
+    margin-left: 0px;
+}
+
+.has-search.form-control.active,
+.has-search.form-control.focus {
+    border-radius: 18px!important;
+}
+
+.detail {
+    background-color: #638f00;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    width: 100px;
+}
+
+
+.kyc {
+    background-color: #638f00;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+@media(max-width:1280px) {
+    th {
+        padding: 7px!important;
+    }
+    td {
+        padding: 7px!important;
+    }
+}
+
+thead {
+    background: #222d32;
+    white-space: nowrap;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(54, 41, 41, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+    margin-top: 8px;
+    height: 20px;
+    border-width: thin;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+@media(max-width:1440px) {
+    .sndRow {
+        width: 100%!important;
+        margin-left: 0px;
+    }
+}
+
+
+/* .clnderIcon{
+width: 100%;
+max-width: 20px;
+right: 17px;
+position: absolute;
+bottom: 3px;
+}
+input.dt1.ng-pristine.ng-valid.ng-touched{
+    position: relative;
+} */
+
+.box-header h1 {
+    margin: 0;
+}
+
+.row.sndRow {
+    display: flex;
+    align-items: center;
+}
+
+button.btn.margin.margin1 {
+    color: white;
+    width: 100%;
+    background: #8d908f;
+    height: 32px;
+    padding: 0;
+    margin: 10px 0px;
+    max-width: 144px;
+}
+
+button.btn.margin.export {
+    color: white;
+    width: 100%;
+    background: #8d908f;
+    height: 32px;
+    padding: 0;
+    margin: 10px 0px;
+    max-width: 144px;
+}
+
+.btn.margin.view-btn {
+    background: orange;
+    color: white;
+    padding: 0;
+    width: 100%;
+    height: 32px;
+    max-width: 154px;
+    margin: 10px 5px;
+}
+
+.rghtSde {
+    width: 100%;
+    float: right;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.two {
+    display: flex;
+    padding: 0;
+    width: 24.7%;
+    justify-content: flex-end;
+}
+button.btn.margin.margin1.export.mb-0 {
+    margin-left: 10px;
+}
+
+.dt1 {
+    width: 100%;
+    height: 32px;
+    margin-right: 15px;
+}
+
+.dt2 {
+    width: 100%;
+    height: 32px;
+    margin-right: 15px;
+}
+
+@media(max-width:1440px) {
+    .bg-olive {
+        max-width: 130px;
+    }
+    button.btn.margin.margin1 {
+        max-width: 125px;
+    }
+    .btn.margin.view-btn {
+        max-width: 130px;
+    }
+    .two {
+        width: 24%;
+    }
+    table#example2 {
+        min-width: 1200px;
+    }
+}
+
+@media(max-width:1366px) {
+    .bg-olive {
+        margin: 10px 5px;
+    }
+    .btn.margin.view-btn {
+        max-width: 115px;
+    }
+    .btn.margin1 {
+        max-width: 115px;
+    }
+    .bg-olive {
+        max-width: 135px;
+    }
+    .two {
+        width: 25.50%;
+    }
+    table#example2 {
+        min-width: 1200px;
+    }
+}
+
+td.wght.zui-sticky-col {
+    min-height: 51px!important;
+    display: flex!important;
+    align-items: center!important;
+    justify-content: center;
+    padding: 5px!important;
+}
+
+.btn.two.three-btn:focus,
+.btn.two.three-btn:active {
+    box-shadow: none!important;
+    outline: none!important;
+}
+
+.rghtSde:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.form-control-feedback {
+    top: 26px!important;
+}
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}
+.two {
+    height: 56px;
+    align-items: flex-end !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+}

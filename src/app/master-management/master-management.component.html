@@ -1,0 +1,109 @@
+<app-header>
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+  
+
+    <!-- Main content -->
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box-header">
+                    <h1 style="font-size: 24px;">
+                        <!-- Manage Merchants -->
+                       {{'MasterManagement' | translate}}
+
+                    </h1>
+                    <!-- werweyrewyuyreiuwr -->
+                </div>
+                <div class="box">
+               
+                
+
+                    <div class="box-body table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant"> 
+                                 <th>  {{'Name' | translate}}</th>
+                                  <th>{{'UpdatedAt' | translate}}</th>
+                                  <th> {{'Action' | translate}}</th>
+
+                                </tr>
+                                <!-- dufoidsufiudiosf -->
+                            </thead>
+                            <tbody>
+                             <tr >
+                                 <td>{{'WebsiteHomePage' | translate}}</td>
+                                 <td>{{(master?.home_page?.master | date:'M/d/yy, H:mm') ||'--' }}</td>
+                                 <td>   <button class=" block-btns1" [routerLink]="['/website-home-page',{type:'homePage'}]">{{'View' | translate}}</button></td>
+                             </tr>
+                             <tr >
+                                <td> {{'WebsiteOpenRestaurantPage' | translate}}</td>
+                                <td>{{(master?.restaurant_page?.master | date:'M/d/yy, H:mm') ||'--' }}</td>
+                                <td>   <button class=" block-btns1" [routerLink]="['/open-restaurant-page']">{{'View' | translate}}</button></td>
+                            </tr>
+                            <tr >
+                                <td>{{'WebsiteRideWithUsPage' | translate}}</td>
+                                <td>{{(master?.ride_with_us_page?.master | date:'M/d/yy, H:mm') ||'--' }}</td>
+                                <td>   <button class=" block-btns1" [routerLink]="['/website-ride-page']">{{'View' | translate}}</button></td>
+                            </tr>
+                            <tr >
+                                <td>{{'WebsitePartnerWithUsPage' | translate}}</td>
+                                <td>{{(master?.partner_with_us_page?.master | date:'M/d/yy, H:mm') ||'--' }}</td>
+                                <td>   <button class=" block-btns1" [routerLink]="['/partner-with-us']">{{'View' | translate}}</button></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h2 *ngIf="payout_data?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2>
+         
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
+<footer class="footer-text">
+    
+    <strong>{{'Copyright'| translate}} &copy; 2020 <a href="javascript:;">{{'Food Delivery'| translate}}</a>.</strong> &nbsp;{{'Allrightsreserved'| translate}}
+
+</footer>
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="barCode" *ngIf="qrCode">
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" (keypress)="numberOnly($event)" type="number"
+                        style="width:57px; height:57px;" [config]="{length:6}" ></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat"  [disabled]="!varificationCode" (click)="verify()">{{'Verify'| translate}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,225 @@
+<app-header>
+
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            Manage Topics
+                        </h1>
+                    </div>
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                            <div class="has-search">
+                                <label></label>
+                                <input type="text" class="form-control" placeholder="Search by topic" maxlength="50"
+                                    [(ngModel)]="searchByTopic" (keyup)="enterKey()" style="border-radius: 20px;">
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label>Topic</label>
+                            <select class="form-control btn drrop-type" [(ngModel)]="topicStatus" (change)="changeStatus()" class="filterr">
+                                <option value="">Status</option>
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                        </div>
+
+                        <div class=" btn two three-btn">
+                            <button type="button" class="btn margin view-btn mb-0" style="background-color:green !important"
+                                (click)="searcntopics()" [disabled]="disabled==false">Apply</button>
+                            <button type="button" class="btn margin margin1 export mb-0" (click)="reset()">Reset</button>
+
+                        </div>
+
+                    </div>
+                    <div class="rghtSde">
+                        <div class=" btn two three-btn">
+                            <button type="button" class="btn margin view-btn" style="background-color:green !important"
+                                [routerLink]="['/add-topic']">Add New Topic</button>
+                        </div>
+                    </div>
+
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>S.NO</th>
+                                    <th>Topic </th>
+                                    <th>Created At</th>
+                                    <th>Created By</th>
+                                    <th>Updated At</th>
+                                    <th>Updated By</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let data of topicList | paginate : {itemsPerPage:10, currentPage:page, totalItems:total}:index as i">
+                                    <td>{{data?.id}}</td>
+                                    <td>{{data?.name || '--' }}</td>
+                                    <td>{{data?.created_at | date:'M/d/yy, H:mm'}}</td>
+                                    <td>{{data?.created_by?.first_name || '--'}}</td>
+                                    <td>{{data?.updated_at | date:'M/d/yy, H:mm'}}</td>
+                                    <td>{{data?.updated_by?.first_name || '--'}}</td>
+                                    <td *ngIf="data?.is_active == true">Active</td>
+                                    <td *ngIf="data?.is_active == false">Inactive</td>
+                                    <td style="white-space: nowrap;">
+                                        <div>
+                                            <button class="submitt" style="background-color:#8d908f"
+                                                [routerLink]="['/edit-topic',{id:data?.id}]">Edit
+                                            </button>
+                                            <button class="block-btns1" style="background-color:#fd1b00"
+                                                (click)="deleteTopic(data?.id)">Delete
+                                            </button>
+
+                                            <button class="detail" style="background-color:#8d908f"
+                                            *ngIf="data?.is_active == true"
+                                                (click)="deleteTopic(data?.id,data?.is_active)">Publish</button>
+                                                <button class="detail" style="background-color:#8d908f"
+                                                *ngIf="data?.is_active == false"
+                                                (click)="deleteTopic(data?.id,data?.is_active)">Un-publish</button>
+                                  
+                                            <button class="detail ml-3" style="background-color:#fda400"
+                                                [routerLink]="['/edit-topic',{id:data?.id,language:'th'}]">Translate</button>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                        <h2 *ngIf="topicList?.length == 0" style="text-align:center;">Data not found!</h2>
+                    </div>
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="getTopicList($event)" style="float:right;" autoHide="true"
+                            *ngIf="topicList?.length != 0">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<div class="footer-section">
+    <app-footer></app-footer>
+</div>
+
+<div class="modal" id="deleteFaq" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">Delete</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                Are you sure you want to delete this topic?
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style="background: red;color: #fff;">No</button>
+                <button type="button" class="submit"
+                    
+                    (click)="deletemodal()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="publish" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">Publish</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                Are you sure you want to publish this topic?
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style="background: red;color: #fff;">No</button>
+                <button type="button" class="submit"
+                    
+                    (click)="deletemodal('publish')">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="unpublis" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">Un-publish</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                Are you sure you want to un-publish this topic?
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style="background: red;color: #fff;">No</button>
+                <button type="button" class="submit"
+                    
+                    (click)="deletemodal('unpublis')">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- -------------------------------------Google auth modal---------------- -->
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="resets()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                
+
+                    <div class="otp-field">
+                   
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" (keypress)="numberOnly($event)" type="number"
+                        style="width:57px; height:57px;" [config]="{length:6}" ></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat"  [disabled]="!varificationCode" (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

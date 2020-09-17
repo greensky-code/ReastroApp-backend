@@ -1,0 +1,41 @@
+.small-box.bg-green p{
+    font-size: 23px;
+}
+.main-sidebar {
+    position: absolute;
+    left: 0;
+    padding-top: 50px;
+    min-height: 100%;
+    width: 231px;
+  
+}
+
+.outer_border{
+    padding: 22px;
+    border: 1px solid;
+    margin: 10px;
+}
+/* .canvas.canvasjs-chart-canvas{
+    position: inherit;
+} */
+
+.heightauto{
+    height: 150px;
+    padding: 10px;
+    padding-top: 30px;
+}
+/* .small-box.bg-aqua.blue-card{
+    width: 100%;
+    max-width: 200px;
+    height: 100px;
+    min-width: 100px;
+} */
+.inner p {
+    text-align: center;
+    word-break: break-word;
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 23px;
+    font-weight: 600;
+}
+

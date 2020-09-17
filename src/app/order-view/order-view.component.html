@@ -1,0 +1,338 @@
+<!-- <app-header></app-header>
+<app-menubar></app-menubar>
+
+<div class="content-wrapper">
+    
+    <div class="button-text-div">
+        <h1 class="mt-0 mb-0" style="font-size: 24px;margin-left: 11px;">
+            {{'OrderView' | translate}}
+                 </h1>
+        <div class="backbutton" [routerLink]="['/order-history']">
+            <button type="button" class="bkbtn" style="margin-left: 11px;">{{'Back' | translate}}</button>
+        </div>
+    </div>
+
+       
+    <section class="content footer-div">
+       
+        <div class="box"> -->
+<!--            
+           
+            <div class="order-divs">
+                <div class="stand">
+                    <ul class="crcl">
+                         circlStand  active -->
+                        <!-- <li class="circlStand" *ngIf="order_status!='Order Placed'">
+                            {{'OrderPlaced' | translate}}
+                        </li>
+                        <img src="assets/adminLTE/dist/img/images.png" *ngIf="order_status!='Order Placed'" class="arowss">
+    
+                        <li class="circlStand1" *ngIf="order_status=='Order Placed'">
+                            {{'OrderPlaced' | translate}}
+                        </li>
+                        <img *ngIf="order_status=='Order Placed'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+     -->
+                        <!-- ******************************************************************** -->
+    
+                        <!-- <li class="circlStand" *ngIf="order_status!='Order Confirmed'">
+                            {{'OrderAccepted' | translate}}
+                        </li>
+                        <img *ngIf="order_status!='Order Confirmed'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+    
+                        <li class="circlStand1" *ngIf="order_status=='Order Confirmed'">
+                            {{'OrderAccepted' | translate}}
+                        </li>
+                        <img *ngIf="order_status=='Order Confirmed'" src="assets/adminLTE/dist/img/images.png" class="arowss"> -->
+                        <!-- ************************************************************************ -->
+    
+                        <!-- <li class="circlStand" *ngIf="order_status!='Prepared'" >
+                            {{'OrderPrepared' | translate}}
+                        </li>
+                        <img *ngIf="order_status!='Prepared'"  src="assets/adminLTE/dist/img/images.png" class="arowss">
+    
+                        <li class="circlStand1" *ngIf="order_status=='Prepared'">
+                            {{'OrderPrepared' | translate}}
+                        </li>
+                        <img *ngIf="order_status=='Prepared'" src="assets/adminLTE/dist/img/images.png" class="arowss"> -->
+                        <!-- ***************************************************************** -->
+    
+                        <!-- <li class="circlStand" *ngIf="(order_status!='Order Picked')&&(order_status!='Driver Assigned')&&(order_status!='Out for Delivery')">
+                           {{'OrderDispatched' | translate}}
+                        </li>
+                        
+                        <li class="circlStand1" *ngIf="(order_status==='Order Picked') || (order_status==='Driver Assigned')||(order_status==='Out for Delivery')">
+                            {{'OrderDispatched' | translate}}
+                        </li>
+    
+    
+                        <img *ngIf="order_status!='Delivered'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+                        <li class="circlStand" *ngIf="order_status!='Delivered'">
+                            {{'OrderDelivered' | translate}}
+                        </li>
+    
+                        <img *ngIf="order_status=='Delivered'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+                        <li class="circlStand1" *ngIf="order_status=='Delivered'">
+                            {{'OrderDelivered' | translate}}
+                        </li>
+                    </ul>
+                  
+                </div>
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'Orderid' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.order_id || '--'}}</p>
+                <label class="col-md-2 order">{{'CustomerName' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.customer_first_name || '--' }}</p>
+                <label class="col-md-2 order">{{'BusinessLocation' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.business_address?.street || '--'}}&nbsp;{{viewOrder?.business_address?.city}}
+                     {{viewOrder?.business_address?.r_province}}&nbsp;{{viewOrder?.business_address?.zip_code}}
+                     &nbsp;{{viewOrder?.business_address?.r_country}}
+                </p>
+            </div>
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'OrderDate' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.created_at | date: 'dd-mm-yyyy'}}</p>
+                <label class="col-md-2 order">{{'CustomerEmail/Phone' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.customer_email || '--' }}/{{viewOrder?.customer_mobile || '--' }}</p>
+            </div>
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'Ordertotal' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.order_value || '--' }}</p>
+                <label class="col-md-2 order">{{'CustomerAddress' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.business_address?.street}},{{viewOrder?.business_address?.r_province}}<br>
+                    {{viewOrder?.business_address?.city}}
+                </p>
+                <label class="col-md-2 order">{{'DriverName' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.driver_first_name}}&nbsp;{{viewOrder?.driver_middle_name}}&nbsp;{{viewOrder?.driver_last_name}}</p>
+            </div>
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'Tax' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{(viewOrder?.tax_charges | number:'.2')|| '0.00'}}</p>
+                <label class="col-md-2 order">{{'SpecialNote' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.special_note || '--' }}
+                </p>
+            </div>
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'DeliveryCharge' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{(viewOrder?.delivery_charges | number:'.2') || '0.00' }}</p>
+                <label class="col-md-2 order">{{'Discount' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{(viewOrder?.discount | number:'.2') || '0.00' }}</p>
+            </div>
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'AmountReceived' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{(viewOrder?.amount_payable | number:'.2' ) || '0.00' }}</p>
+            </div>
+            <div class="row sndRow">
+             
+                <label class="col-md-2 order">{{'OrderStatus' | translate}}:</label>
+                <p class="col-md-2 hundrd">{{viewOrder?.order_status || '--' }}</p>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr style="background-color: #222d32;">
+                        <th>{{'OrderItemName' | translate}}</th>
+                        <th>{{'Quantity' | translate}}</th>
+                        <th>{{'OrderPrice' | translate}}</th>
+                        <th>{{'TotalPrice' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of orderItems">
+                        <td>{{item?.item_name}}</td>
+                        <td>{{item?.quantity}}</td>
+                        <td>{{item?.item_price}}</td>
+                        <td>{{item?.quantity * item?.item_price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 *ngIf="orderItems.length ==0" style="text-align: center;">{{'Datanotfound!' | translate}}</h3>
+        </div>
+    </div>
+    </section>
+
+</div>
+<footer class="footer-text">
+    <strong>{{'Copyright' | translate}} &copy; 2020
+        <a href="javascript:;">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+</footer> --> 
+
+<!-- 2_food delivery -->
+<app-header></app-header>
+<app-menubar></app-menubar>
+
+<div class="content-wrapper">
+    
+    <div class="button-text-div">
+        <h1 class="mt-0 mb-0" style="font-size: 24px;margin-left: 11px;">
+            {{'ORDER DETAILS' | translate}}
+                 </h1>
+        <div class="backbutton" [routerLink]="['/view-customer-order']">
+            <button type="button" style="background-color: green" class="bkbtn" style="margin-left: 11px;">{{'Back' | translate}}</button>
+        </div>
+    </div>
+
+       
+    <section class="content footer-div">
+       
+        <div class="box">
+           
+           
+            <div class="order-divs">
+                  <!-- <div class="stand">
+                    <ul class="crcl">
+                        <li class="circlStand" *ngIf="order_status!='Order Placed'">
+                            {{'OrderPlaced' | translate}}
+                        </li>
+                        <img src="assets/adminLTE/dist/img/images.png" *ngIf="order_status!='Order Placed'" class="arowss">
+    
+                        <li class="circlStand1" *ngIf="order_status=='Order Placed'">
+                            {{'OrderPlaced' | translate}}
+                        </li>
+                        <img *ngIf="order_status=='Order Placed'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+    
+    
+                        <li class="circlStand" *ngIf="order_status!='Order Confirmed'">
+                            {{'OrderAccepted' | translate}}
+                        </li>
+                        <img *ngIf="order_status!='Order Confirmed'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+    
+                        <li class="circlStand1" *ngIf="order_status=='Order Confirmed'">
+                            {{'OrderAccepted' | translate}}
+                        </li>
+                        <img *ngIf="order_status=='Order Confirmed'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+    
+                        <li class="circlStand" *ngIf="order_status!='Prepared'" >
+                            {{'OrderPrepared' | translate}}
+                        </li>
+                        <img *ngIf="order_status!='Prepared'"  src="assets/adminLTE/dist/img/images.png" class="arowss">
+    
+                        <li class="circlStand1" *ngIf="order_status=='Prepared'">
+                            {{'OrderPrepared' | translate}}
+                        </li>
+                        <img *ngIf="order_status=='Prepared'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+    
+                        <li class="circlStand" *ngIf="(order_status!='Order Picked')&&(order_status!='Driver Assigned')&&(order_status!='Out for Delivery')">
+                           {{'OrderDispatched' | translate}}
+                        </li>
+                        
+                        <li class="circlStand1" *ngIf="(order_status==='Order Picked') || (order_status==='Driver Assigned')||(order_status==='Out for Delivery')">
+                            {{'OrderDispatched' | translate}}
+                        </li>
+    
+    
+                        <img *ngIf="order_status!='Delivered'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+                        <li class="circlStand" *ngIf="order_status!='Delivered'">
+                            {{'OrderDelivered' | translate}}
+                        </li>
+    
+                        <img *ngIf="order_status=='Delivered'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+                        <li class="circlStand1" *ngIf="order_status=='Delivered'">
+                            {{'OrderDelivered' | translate}}
+                        </li>
+                    </ul>
+                  
+                </div>   -->
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'Orderid' | translate}}:</label>
+                <p class="col-md-2 hundrd">O1452</p>
+                <label class="col-md-2 order">{{'Order Date' | translate}}:</label>
+                <p class="col-md-2 hundrd">02/05/2020 4:40 PM </p>
+                <label class="col-md-2 order">{{'Order Price' | translate}}:</label>
+                <p class="col-md-2 hundrd">300 INR </p>
+                <label class="col-md-2 order">{{'Discount' | translate}}:</label>
+                <p class="col-md-2 hundrd">10% </p>
+                <label class="col-md-2 order">{{'GST Tax' | translate}}:</label>
+                <p class="col-md-2 hundrd">2% (10 INR)</p>
+                <label class="col-md-2 order">{{'Offer Applied' | translate}}:</label>
+                <p class="col-md-2 hundrd">Party </p>
+                <label class="col-md-2 order">{{'Shipping Charges' | translate}}:</label>
+                <p class="col-md-2 hundrd">30 INR </p>
+                <label class="col-md-2 order">{{'Night Charges' | translate}}:</label>
+                <p class="col-md-2 hundrd">10 INR </p>
+               
+            </div>
+            <!-- <div class="row sndRow">
+                
+               
+            </div> -->
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'Weather Charges' | translate}}:</label>
+                <p class="col-md-2 hundrd">0 INR</p>
+                <label class="col-md-2 order">{{'Long Distance Pay' | translate}}:</label>
+                <p class="col-md-2 hundrd">300 INR </p>
+                <label class="col-md-2 order">{{'Total Amount' | translate}}:</label>
+                <p class="col-md-2 hundrd">30 INR </p>
+                <label class="col-md-2 order">{{'Order Accept Time' | translate}}:</label>
+                <p class="col-md-2 hundrd">11 AM</p>
+                <label class="col-md-2 order">{{'In Kitchen Time' | translate}}:</label>
+                <p class="col-md-2 hundrd">11:30 AM </p>
+                <label class="col-md-2 order">{{'Pick Up Time' | translate}}:</label>
+                <p class="col-md-2 hundrd">12:15 PM </p>
+                <label class="col-md-2 order">{{'Delivered Time' | translate}}:</label>
+                <p class="col-md-2 hundrd">12:30 PM </p>
+                <label class="col-md-2 order">{{'Order Status' | translate}}:</label>
+                <p class="col-md-2 hundrd">Delivered </p>
+                <label class="col-md-2 order">{{'Payment Mode' | translate}}:</label>
+                <p class="col-md-2 hundrd">Online </p>
+            </div>
+            <!-- <div class="row sndRow">
+                
+            </div> -->
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'Driver Name' | translate}}:</label>
+                <p class="col-md-2 hundrd">Suresh Kumar</p>
+                <label class="col-md-2 order">{{'Driver Number' | translate}}:</label>
+                <p class="col-md-2 hundrd">9999999999 </p>
+                <label class="col-md-2 order">{{'Rating' | translate}}:</label>
+                <p class="col-md-2 hundrd">4 </p>
+                <label class="col-md-2 order">{{'Restaurant Name' | translate}}:</label>
+                <p class="col-md-2 hundrd">Dominoz Pizza </p>
+                <label class="col-md-2 order">{{'RatingRestaurant Address' | translate}}:</label>
+                <p class="col-md-2 hundrd">A-100 Kalkaji, New Delhi </p>
+            </div>
+            <div class="row sndRow">
+                <label class="col-md-2 order">{{'Customer Name' | translate}}:</label>
+                <p class="col-md-2 hundrd">Mohit Kumar</p>
+                <label class="col-md-2 order">{{'Phone Number' | translate}}:</label>
+                <p class="col-md-2 hundrd">7777777777 </p>
+                <label class="col-md-2 order">{{'Email ID' | translate}}:</label>
+                <p class="col-md-2 hundrd">mohit@gmail.com </p>
+                <label class="col-md-2 order">{{'Address' | translate}}:</label>
+                <p class="col-md-2 hundrd">D-115 Okhla, New Delhi </p>
+                <label class="col-md-2 order">{{'Cooking Instructions' | translate}}:</label>
+                <p class="col-md-2 hundrd">lorem ipsum lorem ipsum </p>
+            </div>
+            
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr style="background-color: #222d32;">
+                        <th>{{'Item Name' | translate}}</th>
+                        <th>{{'Quantity' | translate}}</th>
+                        <th>{{'OrderPrice' | translate}}</th>
+                        <th>{{'TotalPrice' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr *ngFor="let item of orderItems">
+                        <td>{{item?.item_name}}</td>
+                        <td>{{item?.quantity}}</td>
+                        <td>{{item?.item_price}}</td>
+                        <td>{{item?.quantity * item?.item_price}}</td>
+                    </tr> -->
+                    <tr>
+                        <td>Pizza</td>
+                        <td>2</td>
+                        <td>100 INR</td>
+                        <td>100 INR</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <h3 *ngIf="orderItems.length ==0" style="text-align: center;">{{'Datanotfound!' | translate}}</h3> -->
+        </div>
+    </div>
+    </section>
+
+</div>
+<footer class="footer-text">
+    <strong>{{'Copyright' | translate}} &copy; 2020
+        <a href="javascript:;">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+</footer>

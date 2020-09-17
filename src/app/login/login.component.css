@@ -1,0 +1,82 @@
+.col-xs-4{
+    width: 100%;
+}
+.login-box-body, .register-box-body{
+background: #fff;
+padding: 20px;
+border-top: 0;
+color: #666;
+box-shadow: 3px 3px 33px 13px #aba6a64a;}
+.lognBrn{
+    margin-top:12px;
+}
+.robot{
+    margin-top:18px;
+}
+.lognBrn button{
+font-size: 22px;
+line-height: 25px;
+color: #ffffff;
+font-family: "Adelle";
+font-weight: bold;
+height: 53px;
+border-radius: 4px;
+background-color: #638f00;
+width: 100%;
+}
+.login-box.register-box{
+    width: 683px!important;
+    margin: 13% auto!important;
+}
+.login-box-body[_ngcontent-ank-c1], .register-box-body[_ngcontent-ank-c1] {
+    background: #fff;
+    padding: 37px;
+    border-top: 0;
+    color: #666;
+    box-shadow: 3px 3px 33px 13px #aba6a64a;
+}
+.login-box{    
+    padding: 27px;
+    width: 700px!important;
+    /* min-height: calc(100vh - 230px); */
+}
+
+
+.selct{
+    margin-right: 26px;
+    width: 118px;
+    margin-top: 10px;
+    height: 29px;
+    padding: 0px 10px;
+}
+.box-bdy{
+    padding:40px;
+}
+.logb{
+    width:100%;
+}
+
+
+.custom-nav img{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    
+}
+.custom-nav {
+    margin: 0px 15px 0px 0px;
+}
+.custom-navbar {
+    margin: 0px 15px 0px 0px;
+}
+.custom-nav img{
+    margin-right: 10px;
+}
+.custom-slct{
+    height: 29px;
+}
+.robot {
+    margin-top: 18px;
+    font-size: 18px;
+    font-weight: 600;
+}

@@ -1,0 +1,537 @@
+.button {
+    background-color: green;
+    /* padding: 6px; */
+    color: white;
+    margin-left: 7px;
+    height: 33px;
+    width: 13%;
+}
+
+.box-title {
+    height: 33px;
+    margin-left: 2%;
+    width: 13%;
+}
+
+
+.registermerchantbtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bg-olive1 {
+    background-color: #3c8dbc !important;
+}
+
+input.dt1.ng-pristine.ng-valid.ng-touched {
+    height: 32px;
+    /* margin-right: 15px; */
+}
+
+input.dt1.ng-pristine.ng-valid.ng-touched {
+    height: 32px;
+    /* margin-right: 15px; */
+}
+
+.dt1 {
+    width: 100%;
+    height: 32px;
+    margin-right: 15px;
+}
+
+.dt2 {
+    width: 100%;
+    height: 32px;
+    margin-right: 15px;
+}
+
+
+/* span.fa.fa-search.form-control-feedback {
+    position: absolute;
+    left: 6px;
+    top: 7px;
+}
+input.manage-input.ng-pristine.ng-valid.ng-touched {
+    position: relative;
+    border-radius: 50px;
+    width: 172px;
+} */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.form-group.has-search {
+    position: relative;
+    width: 100%;
+}
+
+span.fa.fa-search.form-control-feedback {
+    position: absolute;
+    left: 18px;
+    top: 6px;
+}
+
+.bg-olive {
+    background-color: green !important;
+    width: 100%;
+    height: 32px;
+    padding: 0px;
+    max-width: 180px;
+    margin: 10px 0px;
+}
+
+@media(max-width:1280px) {
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>td,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>thead>tr>th {
+        padding: 0px;
+    }
+}
+
+.wght {
+    display: flex;
+}
+
+.rghtSde {
+    width: 100%;
+    float: right;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.two {
+    display: flex;
+    padding: 0;
+    width: 560px;
+    justify-content: space-between;
+}
+
+.view {
+    width: 169px;
+    float: right;
+    /* margin-right: 10px; */
+}
+
+.sndRow {
+    width: 100%;
+    margin-left: 0px;
+}
+
+.has-search.form-control.active,
+.has-search.form-control.focus {
+    border-radius: 18px!important;
+}
+
+
+/* .tab-content>.active {
+
+    display: block;
+    height: 500px !important;
+} */
+
+.tab-content.clearfix {
+    height: 500px;
+}
+
+.detail {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.details {
+    background-color: #f1ede4;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    width: 53px;
+}
+
+.kyc {
+    background-color: #638f00;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+.submit {
+    background-color: #638f00;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    max-width: 101px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+@media(max-width:1280px) {
+    select.btn.bg-olive.drrop-type.ng-untouched.ng-pristine.ng-valid {
+        font-size: 13px;
+    }
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+.btn.bg-olive.dropdt {
+    height: 33px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(54, 41, 41, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+    /* width: 20px;*/
+    height: 20px;
+    margin-top: 8px;
+    border-width: thin;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+@media(max-width:1440px) {
+    .sndRow {
+        width: 100%!important;
+        margin-left: 0px;
+    }
+}
+
+.sndRow {
+    width: 100%!important;
+    margin-left: 0px;
+}
+
+.btn.margin1 {
+    color: white;
+    width: 100%;
+    background: #8d908f;
+    height: 32px;
+    padding: 0;
+    margin: 10px 10px;
+    max-width: 180px;
+}
+
+.btn.margin.view-btn {
+    background: orange;
+    color: white;
+    padding: 0;
+    width: 100%;
+    height: 32px;
+    max-width: 180px;
+    margin: 10px 0px;
+}
+
+.idMerchant th {
+    font-size: 12px;
+}
+
+.row.sndRow {
+    display: flex;
+    align-items: center;
+}
+
+.box-header h1 {
+    margin: 0;
+}
+
+@media(max-width:1366px) {
+    .bg-olive {
+        margin: 10px 5px;
+    }
+    .btn.margin.view-btn {
+        max-width: 115px;
+    }
+    .btn.margin1 {
+        max-width: 115px;
+    }
+    .bg-olive {
+        max-width: 135px;
+    }
+    .two {
+        width: 391px;
+    }
+    table#example2 {
+        min-width: 990px;
+    }
+}
+
+@media(max-width:1440px) {
+    .bg-olive {
+        max-width: 130px;
+    }
+    .btn.margin1 {
+        max-width: 130px;
+    }
+    .btn.margin.view-btn {
+        max-width: 130px;
+    }
+    .two {
+        width: 405px;
+    }
+}
+
+.dnf {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn {
+    width: 70%;
+}
+
+.form-namecenter {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+td.wght.zui-sticky-col {
+    display: flex!important;
+    align-items: center!important;
+    justify-content: space-between;
+    padding: 0px 4px!important;
+}
+
+#blockmodal .modal-dialog {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+#unblockmodal .modal-dialog {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+#exampleModal2 .modal-dialog {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.divs {
+    margin-left: 18%;
+}
+
+.form-control-feedback {
+    top: 5px!important;
+}
+
+.modals {
+    border-radius: 28px;
+    height: auto
+}
+
+
+/* -------------------------google auth---------------------- */
+
+.col-xs-4 {
+    width: 100%;
+}
+
+.login-box.register-box {
+    width: 460px!important;
+    margin: 13% auto!important;
+}
+
+.login-box-body {
+    background: #fff;
+    padding: 37px;
+    border-top: 0;
+    color: #666;
+    box-shadow: 3px 3px 33px 13px #aba6a64a;
+}
+
+.lognBrn button {
+    font-size: 22px;
+    line-height: 25px;
+    color: #ffffff;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 53px;
+    border-radius: 4px;
+    background-color: #638f00;
+    width: 100%;
+}
+
+.googlCode {
+    width: 100%;
+    max-width: 100px;
+    margin: 0 auto;
+}
+
+.googlCode img {
+    width: 100%;
+}
+
+.codeSpace {
+    margin-top: 17px;
+}
+
+.qrCode {
+    width: 100%;
+    max-width: 100px;
+    margin: 0 auto;
+}
+
+.barCode img {
+    width: 40%;
+    margin-left: 30%;
+}
+
+.selct {
+    margin-right: 26px;
+    width: 118px;
+    margin-top: 10px;
+    height: 29px;
+}
+
+*/ .otp-field {
+    margin-left: 15px;
+}
+
+.btn-primary:active {
+    background-color: #638f00!important;
+}
+
+.keys {
+    display: flex;
+    justify-content: center;
+}
+.block-btns{
+    background-color: #f1ede4;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.lognBrn button{
+    font-size: 22px;
+    line-height: 25px;
+    color: #ffffff;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 53px;
+    border-radius: 4px;
+    background-color: #638f00;
+    width: 100%;
+    max-width: 390px;
+    margin-left: -19px;
+    border: #638f00
+    }
+
+    
+
+    .has-feedback label {
+        margin-left: 57px;
+    }
+    button.btn.btn-primary.btn-block.btn-flat {
+        background: green;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        padding: 7px;
+        font-family: "Adelle";
+        font-weight: bold;
+        height: 44px;
+        width: 100%;
+        max-width: 135px;
+    }
+    /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    

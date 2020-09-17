@@ -1,0 +1,276 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'ManageStaffs' | translate}}
+
+                        </h1>
+                    </div>
+
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                            <div class=" has-search">
+                                <label></label>
+                                <input type="text" class="form-control"  placeholder="Search by name/email/phone" [(ngModel)]="searchName" (keyup)="select($event.target.value)" maxlength="50" style="border-radius: 20px;">
+
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'FilterbyStatus' | translate}}</label>
+                            <select class="btn drrop-type" class="filterr" [(ngModel)]="user.kycRole" (change)="onSelect($event.target.value)">
+                                <option value="">{{'SelectStatus' | translate}}</option>
+                                <option value="true"> {{'Active' | translate}}</option>
+                                <option value="false">{{'Inactive' | translate}}</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-2 green-col">
+
+                            <label>{{'FilterbyRole' | translate}}</label>
+                            <select class="btn drrop-type" class="filterr" [(ngModel)]="staffRoles" (ngModelChange)="orderFilter($event)">
+                                <option value=""> {{'SelectRole' | translate}}</option>
+                                <option *ngFor="let items of manageStaffroles">{{items?.name}}</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label> {{'FromDate' | translate}}</label>
+                            <input type="date" class="form-control dt1" [(ngModel)]="driver.fromDate" (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'ToDate' | translate}}</label>
+                            <input type="date" class="form-control dt2" [(ngModel)]="driver.toDate" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" >
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="btn-div two-btnsubmit margin-rightbox">
+                        <button type="button" class="btn bg-olive" (click)="submitdata()" [disabled]="disables==false">{{'Submit' | translate}}</button>
+
+                        <button type="button" class="btn margin margin1" (click)="reset()">{{'Reset' | translate}}</button>
+                    </div>
+
+
+                    <div class="rghtSde two-btnsubmit margin-rightbox">
+                        <div class="btn two">
+
+                            <button type="button" class="btn bg-olive" style="background-color: #068000 !important;"  [routerLink]="['/add-staff']">{{'AddNewStaff' | translate}}</button>
+                            <button type="button" class="btn margin margin1" (click)="exportAsXLSX()" *ngIf="manageStaff?.length!= 0"> {{'Export' | translate}}
+                                </button>
+                         
+                        </div>
+
+                    </div>
+
+
+                    <div class="box-body table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'StaffID' | translate}}</th>
+                                    <th>{{'Name' | translate}}</th>
+                            
+                                    <th>{{'email' | translate}}</th>
+                                    <th>{{'Phone' | translate}}</th>
+                                    <th>{{'CreatedBy' | translate}}</th>
+                                    <th>{{'CreatedAt' | translate}}</th>
+                                    <th>{{'UpdatedAt' | translate}}</th>
+                                    <th>{{'UpdatedBy' | translate}}</th>
+                                    <th>{{'Role' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                    <th style="width: 30%;">{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let data of manageStaff | paginate : {itemsPerPage:10, currentPage:page, totalItems:total}: index as i">
+                                    <td class="table-width">{{data?.id || '--' }}</td>
+                                    <td class="table-width" style="padding: 10px;" title="{{data?.first_name}} {{data?.middle_name}} {{data?.last_name}}">{{data?.first_name || '--' }}</td>
+                                
+                                    <td class="table-width" style="padding: 10px;" title="{{data?.email ||'--' }}">
+                                        {{data?.email || '--' }}</td>
+                                    <td style="padding: 10px;">{{data?.mobile || '--' }}</td>
+                                    <td class="table-width" title="{{data?.created_by ||'--' }}">
+                                        {{data?.created_by || '--' }}</td>
+                                    <td style="padding: 10px;" title="{{data?.created_at ||'--' }}">
+                                        {{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                    <td>{{(data?.updated_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
+                                    <td>{{data?.updated_by || '--' }}</td>
+                                    <td>{{data?.role || '--' }}</td>
+                                    <td *ngIf='data.is_active ===true'>Active</td>
+                                    <td *ngIf='data?.is_active ===false'>Inactive</td> -->
+                                    <tr>
+                                        <td class="table-width">S01</td>
+                                        <td class="table-width">Rakesh</td>
+                                        <td class="table-width">rakesh@mailinator.com</td>
+                                        <td class="table-width">mobile</td>
+                                        <td class="table-width">Admin</td>
+                                        <td class="table-width">18-08-20</td>
+                                        <td class="table-width">18-08-20</td>
+                                        <td class="table-width">rakesh</td>
+                                        <td class="table-width">supervisor</td>
+                                        <td class="table-width">Active</td>
+                                        
+                                    <td class="action">
+                                      
+                                        <button class="block-btns1" [routerLink]="['/staff-view',data?.id]">{{'Details' | translate}}
+                                        </button>
+                                        <button class="block-btns2"   [routerLink]="['/edit-staff',data?.id]">{{'Edit' | translate}}
+                                        </button>
+                                        <button class="block-btns3" (click)="block(data?.id,is_active)" *ngIf="data?.is_active==true">{{'Block' | translate}}</button>
+                                        <button class="block-btns3" (click)="unblock(data?.id,is_active)" *ngIf="data?.is_active!=true" style="background-color:#7caf09;color: #fff">{{'Unblock' | translate}}</button>
+                                        <button class="block-btns4" (click)="deleteFunction(data?.id)" >{{'Delete' | translate}}</button>
+                                        
+                                    </td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+
+                        <!-- <h2 *ngIf="manageStaff?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2> -->
+                    </div>
+                   
+
+
+                    <div >
+                        <pagination-controls (pageChange)="manadeDetails($event)"  *ngIf="manageStaff?.length != 0">
+                        </pagination-controls>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+</div>
+<footer class="footer-text">
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:;">{{'FoodDelivery' | translate}}</a>.</strong> &nbsp;{{'Allrightsreserved' | translate}}
+
+</footer>
+
+<div class="modal" id="blockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">{{'Block' |  translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+
+            <div class="modal-body" style="text-align: center;">
+                {{'Areyousureyouwanttoblockthisstaff?' |  translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' |  translate}}</button>
+                <button type="button" class="submit"  (click)="modal()">{{'Yes' |  translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -----------------------unblock modal---------------------- -->
+
+<div class="modal" id="unblockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">{{'Unblock' |  translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+
+            <div class="modal-body" style="text-align: center;">
+                {{'Areyousureyouwanttounblockthisstaff?' |  translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' |  translate}}</button>
+                <button type="button" (click)="modal()" class="submit" >{{'Yes' |  translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------------------------------------delete modal---------------------------------------------- -->
+
+<div class="modal" id="exampleModal2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">{{'Delete' |  translate}}</h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+
+
+            <div class="modal-body" style="text-align: center;">
+          
+                {{'Areyousureyouwanttodeletethisstaff?' |  translate}}
+            </div>
+
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red ;color: #fff;">{{'No' |  translate}}</button>
+                <button type="button" class="submit" (click)="modal()">{{'Yes' |  translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- --------------------Coman Modal---------------------- -->
+
+
+<!-- -------------------------------------Google auth modal---------------- -->
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' |  translate}}</h4>
+                <button type="button" class="close" (click)="resets()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' |  translate}}</label>
+                    <div class="otp-field">
+                    
+
+
+                         
+
+                            <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" 
+                    style="width:57px; height:57px;" [config]="{length:6}" (keypress)="numberOnly($event)" type="number" ></ng-otp-input>
+
+                      
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode" (click)="verify()">{{'Verify' |  translate}}</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

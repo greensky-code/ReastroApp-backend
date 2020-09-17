@@ -1,0 +1,79 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+ <div class="content-wrapper">
+    <section class="content footer-div">
+
+        <div class=" align-items-center bodywraper">
+            <div class=" setingTop">
+                <div class="">
+                    <div class="form-box">
+                            <div class="box-header">
+                                    <h3 class="">{{'AddNewRole' | translate}}</h3>
+                                </div>
+                      
+                        <div class="box-header">
+                        <div class="form-namecenter">
+                            <form class="inpt1" [formGroup]="nameForm">
+                                <div class="name-secnew" style="margin-bottom: 2%;">
+                                    <div>
+                                        <label class="name-label" style="color:black"> {{' Role Name' | translate}}</label>
+                                    </div>
+                                    <div>
+                                        <input type="text" class="name-form1" (keypress)="service.preventSpace($event)" formControlName="name">
+                                    </div>
+                                    <div *ngIf="nameForm.get('name').hasError('required') && nameForm.get('name').touched">
+                                        <span style="color:red;margin-right: 25%;">{{'Nameisrequired' | translate}}.</span>
+                                    </div>
+                                    <div *ngIf="nameForm.get('name').hasError('maxlength') && nameForm.get('name').dirty"
+                                        style="color:red;margin-right: 51px;;">
+                                      {{'MaxlengthofofferCodeshouldbe255' | translate}}.
+                                    </div>
+                                    <div *ngIf="nameForm.get('name').hasError('pattern') && nameForm.get('name').dirty" style="color:red;margin-right: 16%;">
+                                        {{'Pleasedontusespecialcharacters' | translate}}.
+                                    </div>
+                                </div>
+
+                            </form>
+                            <div>
+                                <label class="name-label" style="color:black">{{'Permission' | translate}}</label>
+                            </div>
+                            <div class=" manage-content-box1" style="padding-bottom: 2%;">
+                                <div style="display: flex;justify-content: space-between;padding: 2% 6% 0% 6%;">
+                                    <div>
+                                        <label>All</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" [checked]="isAllChecked()" (change)="checkAll($event)" />
+                                    </div>
+                                </div>
+                                <div *ngFor="let items of rolePermissions" style="display: flex;justify-content: space-between;padding: 2% 6% 0% 6%;">
+                                    <div>
+                                        <label>{{items?.name}}</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" value="{{items?.id}}" [(ngModel)]="items.status" />
+                                    </div>
+
+                                </div>
+                                <div class="submit-button" style="justify-content:space-around">
+                                <button type="submit" class="btn btn-primary btn-block btn-flat" style="width: 29%;padding: 7px;" [disabled]="!nameForm.valid || (permissionEmpty == true)"
+                                (click)="generate('addRole')">{{'ADD' | translate}}</button>
+                                <!-- <button type="submit" class="btn btn-primary btn-block btn-flat" style="width: 29%;padding: 7px;" 
+                                routerLink="/manage-role">{{'CANCEL' | translate}}</button> -->
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="bx mt-4">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ </div>
+    <app-footer></app-footer>
+</div>
+

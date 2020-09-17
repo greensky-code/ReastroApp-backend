@@ -1,0 +1,114 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="box-header">
+                <h1 style="font-size: 24px;">
+                    {{'SupportSetting' | translate}}
+
+                </h1>
+            </div>
+            <div class="box-header box-hearder-564">
+                <form class="" [formGroup]="supportSettingform">
+                    <div class="cusine">
+                      
+
+                        <div class="col-md-12">
+                            <input type="checkbox" class="col-md-2" formControlName="checkPhone">
+                            <div class="row">
+
+                                <label class="col-md-4">{{'Phone' | translate}}:</label>
+                                <div (click)="toCheckSpaceChar()">
+                                    <input type="tel" class="col-md-8 int form-control" placeholder="" id="phoneNumber"
+                                        formControlName="number" maxlength="20" (keyup)="toCheckSpaceChar()">
+                                    <div
+                                        *ngIf="supportSettingform.get('number').errors && supportSettingform.get('number').enter || supportSettingform.get('number').dirty">
+                                        <div *ngIf="supportSettingform.get('number').hasError('required'); else elseBlock"
+                                            style="color: red">Phone number is required.</div>
+                                        <ng-template #elseBlock>
+                                            <div *ngIf="isValidNumber == false" style="color: red">Please enter valid
+                                                number.
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="padding-top: 15px;">
+                            <input type="checkbox" class="col-md-2" formControlName="checkMail">
+                            <div class="row">
+
+                                <label class="col-md-4">{{'email' | translate}}:</label>
+                                <input type="text" class="col-md-8 int form-control" formControlName="email"
+                                    (keypress)="service.preventSpace($event)" style="width: 100%;max-width: 221px;">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="checkbox" class="col-md-2" formControlName="checkLiveChat">
+                            <div class="row">
+
+                                <label class="col-md-4">{{'LiveChat' | translate}}:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="bx mt-4-btn" style="display: flex;justify-content: space-evenly;;width: 100%;">
+                        <button type="submit" class="btn  btn-flat cusine btn-flat" (click)="generate('suport')"
+                            [disabled]="!supportSettingform.valid">{{'Submit' | translate}}</button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+    </section>
+   
+</div>
+<app-footer></app-footer>
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                     
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

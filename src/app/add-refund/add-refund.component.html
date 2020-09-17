@@ -1,0 +1,87 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="box-header">
+                <h1 style="font-size: 24px;">
+                    {{'ADD REFUND' | translate}}
+                </h1>
+            </div>
+            <div class="box-header  box-hearder-564">
+                <form class="" [formGroup]="form">
+                    <div class="cusine" >
+                        <div class="col-md-12" >
+                            <div class="row mb-3" style="margin-top: -5%;">
+                                <label class="col-md-4"> {{'City' | translate}}:</label>
+
+                                <input type="text" class="col-md-8 int form-control">
+                            </div>
+                            
+                                
+                                
+                              <div class="box-header  box-hearder-565">
+                                <form class="" [formGroup]="myForm" style="margin-top: -3%;">
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Order ID' | translate}}:</label>
+                                        <p>100</p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Order Date' | translate}}:</label>
+                                        <p>02/05/2020 4:40 PM</p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Order Price' | translate}}:</label>
+                                        <p>300 INR</p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Customer Name' | translate}}:</label>
+                                        <p>Mohit Kumar</p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Restaurant Name' | translate}}:</label>
+                                        <p>Dominoz Pizza</p>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4"> {{'Restaurant Address' | translate}}:</label>
+                                        <p>A-100 Kalkaji, New Delhu </p>
+                                    </div>
+                                </form>
+                              </div>
+
+                              <div class="row mb-3">
+                                <label class="col-md-4"> {{'Amount to Refund' | translate}}:</label>
+
+                                <input type="text" class="col-md-8 int form-control">
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-md-4"> {{'Reason for Refund' | translate}}:</label>
+
+                                <input type="text" class="col-md-8 int form-control">
+                            </div> 
+                            
+                        </div>
+                        
+                       
+                    </div>
+                   
+                    <div class="bx mt-4-btn" style="display: flex;justify-content:space-around;width: 100%">
+                        <button type="submit" class="btn btn-success  Penalty"   
+                              routerLink ="/night-charge-management"
+                           >{{'REFUND' | translate}}</button>
+                            <button type="submit" class="btn btn-danger  Penalty" 
+                              routerLink ="/refund-management"
+                           >{{'Cancel' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>
+
+
+
+

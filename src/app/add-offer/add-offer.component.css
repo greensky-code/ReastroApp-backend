@@ -1,0 +1,19 @@
+button.btn.btn-primary.btn-block.btn-flat {
+    /* border: 1px solid green; */
+    background: green;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    margin-top: 35px;
+    padding: 7px;
+    font-family: "Adelle";
+        font-weight: bold;
+    height: 44px;
+    /* max-width: 123px;; */ 
+ 
+    width: 100%;
+    max-width: 135px;
+    margin: auto;
+}

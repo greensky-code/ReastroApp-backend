@@ -1,0 +1,73 @@
+a:hover, a:active, a:focus{
+    outline:none;
+}
+a{
+    outline:none;
+}
+
+li{
+    cursor: pointer;
+}
+/* .sidebar-menu>li.active .side_menu,
+.sidebar-menu:hover .side_menu,
+.sidebar-menu:focus .side_menu {
+    color: #fff;
+} */
+
+  .sidebar-menu>li:active>a,.sidebar-menu>li:hover>a,.sidebar-menu>li:focus>a {
+    color: #fff;
+    background: #4c595f !important;
+}
+/* a.side_menu.active{
+    color: #fff;
+    background: #173315;
+
+} */
+
+.treeview a.active,
+.treeview a:hover,
+.treeview a:focus{
+    color: #fff;
+    background: #4c595f !important;}
+.profile{
+    display: flex;
+    justify-content: space-around;
+}
+.proImg img{
+    width: 100%;
+    border: 1px solid white;
+    width: 100%;
+    max-width: 200px;
+}
+.main-header .logo .logo-lg img{
+    width: 100%;
+    max-width: 185px;
+}
+body.skin-blue.sidebar-mini.sidebar-collapse{
+font-size:10px;
+}
+body.skin-blue.sidebar-mini.sidebar-collapse .proImg img{
+    display: none;
+}
+.proImg p{
+    color:white;
+    font-size:20px;
+}
+/* a[_ngcontent-kom-c4]:active {
+    background-color: gray;
+} */
+/* .active {
+    background-color: gray;
+  } */
+  /* .skin-blue .sidebar-menu>li.active>a {
+    border-left-color: #3c8dbc;
+    background-color: gray!important;
+} */
+/* a.nav-link.show.ashow1.active {
+    background-color:#896634;
+    color: #fff;
+  } */
+  /* li.active{
+  
+    background-color: green;
+} */

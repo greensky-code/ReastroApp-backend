@@ -1,0 +1,740 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+       
+        <div class="content footer-div">
+           
+               
+                    <div class="button-text-div">
+                        <h1 class="mt-0 mb-0" style="font-size: 24px;">
+                            {{'MerchantDetails'| translate}}
+                
+                            </h1>
+                          
+                        <div class="backbutton" [routerLink]="['/manage-merchant']">
+                            <button type="button" class="bkbtn">{{'Back'| translate}}</button>
+                        </div>
+                    </div>
+                    
+          
+            <section class="merchant container stan-dard mt-5">
+                <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label> {{'MerchantID'| translate}}</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{accountkDetails?.id || '--'}} </p>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{'BusinessName'| translate}}:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{accountkDetails?.business_name ||'--'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{'RestaurantName'| translate}}</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{accountkDetails?.restaurant_name || '--'}}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label>{{'Cuisine'| translate}}</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p type="text" class="table-width" *ngFor="let data of merchantDetai?.cuisines" title="{{data?.name || '--' }}">
+                            {{data?.name || '--' }}</p>
+                        <p type="text" class="table-width" *ngIf="!merchantDetai?.cuisines" title="{{N/A}}">
+                            {{'--'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{'EstimatedTime'| translate}}</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{accountkDetails?.estimated_time || '--'}}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label>{{'EstimatedPrice'| translate}}</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{accountkDetails?.estimated_price || '--'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{'ActiveOffer'| translate}}</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{accountkDetails?.active_offer || '--'}}</p>
+                    </div>
+                  
+                </div>
+            </section>
+            <section>
+                <div class="tabs tabs-style-tzoid">
+                    <nav>
+                        <ul id="myul">
+                            <li>
+                                <a (click)="makeActive('1a','Account Details')" [ngClass]="{'active': (selectedTab == '1a') }" href="#1a" data-toggle="tab">
+                                    <span>{{'AccountDetails' | translate}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="makeActive('2a','Locations')" [ngClass]="{'active': (selectedTab == '2a') }" href="#2a" data-toggle="tab">
+                                    <span>{{'ViewLocations' | translate}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="makeActive('3a','Bank Details')" [ngClass]="{'active': (selectedTab == '3a') }" href="#3a" data-toggle="tab">
+                                    <span>{{'ManageBankDetails' | translate}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="[makeActive('4a','Orders'), getordertabel()]" [ngClass]="{'active': (selectedTab == '4a') }" href="#4a" data-toggle="tab">
+                                    <span>{{'Orders' | translate}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="makeActive('5a','Rating')  " [ngClass]="{'active': (selectedTab == '5a') }" href="#5a" data-toggle="tab">
+                                    <span>{{'Rating&Review' | translate}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="makeActive('6a','Category')" [ngClass]="{'active': (selectedTab == '6a') }" href="#6a" data-toggle="tab">
+                                    <span>{{'MenuCategory' | translate}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="[makeActive('7a','Items'),getordertabel()]" [ngClass]="{'active': (selectedTab == '7a') }" href="#7a" data-toggle="tab">
+                                    <span>{{'Items' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="tab-content clearfix steps" style="border: solid;">
+                        <div class="tab-pane active" id="1a">
+                            <div class="row sndRow custom-width">
+                                <label class="col-md-3">{{'email'| translate}}:</label>
+                                <p class="col-md-3">{{accountkDetails?.email || '--'}}</p>
+                                <label class="col-md-3">{{'phone'| translate}}:</label>
+                                <p class="col-md-3">{{accountkDetails?.mobile || '--'}}</p>
+                            </div>
+                            <div class="row sndRow custom-width">
+                                <!-- {{(data?.business?.kyc?.created_at | date : 'dd/MM/yyyy, H:mm') ||'--'}} -->
+                                <label class="col-md-3">{{'SubscriptionStartDate'| translate}}:</label>
+                                <p class="col-md-3" >{{(accountkDetails?.subscription_detail?.subscription_plan?.created_at | date : 'dd/MM/yyyy') || '--'}}</p>
+                                <label class="col-md-3">{{'FreeTrialEndDate'| translate}}:</label>
+                                <p class="col-md-3" >{{(accountkDetails?.subscription_detail?.free_trial_end_date | date : 'dd/MM/yyyy') || '--'}}</p>
+                            </div>
+                            <div class="row sndRow custom-width">
+                                <label class="col-md-3">{{'NextDueDate'| translate}}:</label>
+                             
+                                <p class="col-md-3" >{{(accountkDetails?.subscription_detail?.free_trial_end_date | date : 'dd/MM/yyyy') || '--'}}</p>
+                                <label class="col-md-3">{{'SubscriptionStopDate'| translate}}:</label>
+                                <p class="col-md-3" >{{(accountkDetails?.subscription_detail?.subscription_stop_date | date : 'dd/MM/yyyy') || '--'}}</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="2a">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>{{'Street'| translate}}</th>
+                                                <th>{{'City'| translate}}</th>
+                                                <th>{{'Country'| translate}}</th>
+                                                <th>{{'state'| translate}}</th>
+                                                <th>{{'ZipCode'| translate}}</th>
+                                                <th>{{'ContactPhone'| translate}}</th>
+                                                <th>{{'ContactEmail'| translate}}</th>
+                                                <th>{{'OperationHours'| translate}}</th>
+                                                <th>{{'Status'| translate}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of restaurantLocation | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totals}:index as i">
+                                                <td class="table-width" title="{{item?.street || '--'}}">{{item?.street || '--'}}</td>
+                                                <td class="table-width" title="{{item?.city || '--'}}">{{item?.city || '--'}}</td>
+                                                <td class="table-width" title="{{item?.country || '--'}}">{{item?.country || '--'}}</td>
+                                                <td class="table-width" title="{{item?.city || '--'}}">{{item?.city || '--'}}</td>
+                                                <td class="table-width" title="{{item?.zip_code || '--'}}">{{item?.zip_code || '--'}}</td>
+                                                <td class="table-width" title="{{item?.contact_phone || '--'}}">{{item?.contact_phone || '--'}}</td>
+                                                <td class="table-width" style="white-space: nowrap" title="{{item?.contact_email || '--'}}">{{item?.contact_email || '--'}}</td>
+                                                <td>
+                                                   
+                                                    <select class="form-control" style="border: none!important;
+                                                    background-color: #f4f4f4;;">
+                                                        <option  value="{{data.day}}: Start time,{{ data.start_time}} - End time,{{data.end_time}}" *ngFor="let data of item.hours.opertion_hours">{{data.day}}: Start time,{{ data.start_time}} - End time,{{data.end_time}}
+
+                                                        </option>
+
+                                                    </select>
+                                                </td>
+                                                <td *ngIf="item?.is_active==true">Active</td>
+                                                <td *ngIf="item?.is_active !=true">Inactive</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <h3 *ngIf="restaurantLocation.length == 0" style="text-align:center">{{'Datanotfound!' | translate}}
+                                    </h3>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="pageination" *ngIf="restaurantLocation">
+                                    <pagination-controls (pageChange)="getmarchantdetail($event,'Location')"  style="float:right;" *ngIf="restaurantLocation?.length != 0">
+                                    </pagination-controls>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+                            
+                        </div>
+                        <div class="tab-pane" id="3a">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr >
+                                                <th>{{'BankName'| translate}}</th>
+                                                <th>{{'BankHolderName'| translate}}</th>
+                                                <th>{{'BankAcountNumber'| translate}}</th>
+                                                <th>{{'Status'| translate}}</th>
+                                                <th>{{'Passbook'| translate}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of banckDetails | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalbank}:index as i">
+                                                <td class="table-width" title="{{data?.bank_name ||'--'}}">{{data?.r_bank_name ||'--'}}</td>
+                                                <td class="table-width" title="{{data?.account_holder_name ||'--'}}">{{data?.account_holder_name ||'--'}}</td>
+                                                <td class="table-width" title="{{data?.account_number ||'--'}}">{{data?.account_number ||'--'}}</td>
+                                                <td *ngIf='data?.is_active ===true'>Active</td>
+                                                <td *ngIf='data?.is_active ===false'>Inactive</td>
+                                                <td>
+                                                    <button class="submit" data-toggle="modal" data-target="#myModal" (click)="bankdata(data?.passbook)">{{'View' | translate}}</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <h3 *ngIf="banckDetails.length == 0" style="text-align:center">{{'Datanotfound!' | translate}}
+                                    </h3>
+                                </div>
+                                <pagination-controls (pageChange)="getmarchantdetail($event,'banckDetail')"  style="float:right;" *ngIf="banckDetails?.length != 0">
+                                </pagination-controls>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="4a">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div *ngIf="tablehide==true">
+                                            <div class="col-md-2 botomGp">
+                                                <label>{{'FilterByLocation' | translate}}:</label>
+                                            </div>
+                                            <div class="col-md-4 data">
+                                                <select   (change)="orderFilter($event.target.value,'order')">
+                                                    <option value="">{{'SelectLocation' | translate}}</option>
+                                                    <option value="{{data.id}}"  *ngFor="let data of dropDownLocation">
+                                         
+                                                        {{data?.street ||'--'}},{{data?.city ||'--'}}
+                                                        ,{{data?.zip_code ||'--'}},{{data?.province ||'--'}},
+                                                        {{data?.country ||'--'}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="custom-View custom-all" (click)="viewAllrecord()">View All orders
+                                                </button>
+                                            </div>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr >
+                                                        <th>{{'OrderId'| translate}}</th>
+                                                        <th>{{'OrderDate'| translate}}</th>
+                                                        <th>{{'CustomerName'| translate}}</th>
+                                                        <th>{{'CustomerEmail/Phone'| translate}}</th>
+                                                        <th>{{'BusinessLocation'| translate}}</th>
+                                                        <th>{{'OrderPrice'| translate}}</th>
+                                                        <th>{{'OrderStatus'| translate}}</th>
+                                                        <th>{{'Action'| translate}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of order | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalOrder}:index as i">
+                                                        <td>{{data?.order_id ||'--'}}</td>
+                                                        <td>{{data?.created_at ||'--' | date : 'dd-MM-yy'}}</td>
+                                                        <td>{{data?.customer_first_name ||'--'}}</td>
+                                                        <td>{{data?.customer_email ||'--'}}</td>
+                                                        <td class="table-width">{{data?.business_address.street || '--'}} {{data?.business_address.city}}
+                                                             {{data?.business_address.zip_code}} {{data?.business_address.province}},
+                                                            {{data?.business_address.country}}
+                                                        </td>
+                                                        <td>{{data?.order_value ||'--'}}</td>
+                                                        <td>{{data?.order_status ||'--'}}</td>
+                                                        <td>
+                                                            <button (click)="viewOrderdata(data?.id)" class="custom-View">{{'View' | translate}}</button>
+                                                        </td>
+                                                    </tr>
+                                                
+                                                </tbody>
+                                          
+                                              
+                                            </table>
+                                            <h3 *ngIf="order.length == 0" style="text-align:center">{{'Datanotfound!' | translate}}
+                                            </h3>
+                                            <pagination-controls (pageChange)="getmarchantdetail($event,'Order')"  style="float:right;" *ngIf="order?.length != 0">
+                                            </pagination-controls>
+                                        </div>
+                                  
+                                    </div>
+                                   
+                                    <div *ngIf="tablehide==false">
+                                        <div class="stand">
+                                            <ul class="crcl">
+                                                <!-- circlStand  active -->
+                                                <li class="circlStand" *ngIf="orderStatus!='Order Placed'">
+                                                    Order Place
+                                                </li>
+                                                <img src="assets/adminLTE/dist/img/images.png" *ngIf="orderStatus!='Order Placed'" class="arowss">
+
+                                                <li class="circlStand circlStand2  active" *ngIf="orderStatus=='Order Placed'">
+                                                    Order Place
+                                                </li>
+                                                <img *ngIf="orderStatus=='Order Placed'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+
+                                                <!-- ******************************************************************** -->
+
+                                                <li class="circlStand" *ngIf="orderStatus!='Order Confirmed'">
+                                                    Order Accepted
+                                                </li>
+                                                <img *ngIf="orderStatus!='Order Confirmed'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+
+                                                <li class="circlStand1" *ngIf="orderStatus=='Order Confirmed'">
+                                                    Order Accepted
+                                                </li>
+                                                <img *ngIf="orderStatus=='Order Confirmed'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                                <!-- ************************************************************************ -->
+
+                                                <li class="circlStand" *ngIf="orderStatus!='Prepared'" >
+                                                    Order Prepared
+                                                </li>
+                                                <img *ngIf="orderStatus!='Prepared'"  src="assets/adminLTE/dist/img/images.png" class="arowss">
+
+                                                <li class="circlStand5" *ngIf="orderStatus=='Prepared'">
+                                                    Order Prepared
+                                                </li>
+                                                <img *ngIf="orderStatus=='Prepared'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                                <!-- ***************************************************************** -->
+
+                                                <li class="circlStand" *ngIf="(orderStatus!='Order Picked')&&(orderStatus!='Driver Assigned')&&(orderStatus!='Out for Delivery')">
+                                                    Order Dispatched
+                                                </li>
+                                                
+                                                <li class="circlStand5" *ngIf="(orderStatus==='Order Picked') || (orderStatus==='Driver Assigned')||(orderStatus==='Out for Delivery')">
+                                                    Order Dispatched
+                                                </li>
+
+
+                                                <img *ngIf="orderStatus!='Delivered'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                                <li class="circlStand" *ngIf="orderStatus!='Delivered'">
+                                                    Order Delivered
+                                                </li>
+
+                                                <img *ngIf="orderStatus=='Delivered'" src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                                <li class="circlStand5" *ngIf="orderStatus=='Delivered'">
+                                                    Order Delivered
+                                                </li>
+                                            </ul>
+                                          
+                                        </div>
+                                        <div class="row sndRow">
+
+                                            <label class="col-md-2 order">Order id</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.order_id}}</p>
+                                            <label class="col-md-2 order">Customer Name</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.customer_first_name}}</p>
+                                            <label class="col-md-2 order">Business Location</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.business_address?.street}},
+                                                {{trackOrder?.business_address?.street}},
+                                                {{trackOrder?.business_address?.city}},
+                                                {{trackOrder?.business_address?.r_province}},
+                                                {{trackOrder?.business_address?.r_country}},
+                                                <!-- {{trackOrder?.business_address?.r_province}}, -->
+                                            </p>
+                                        </div>
+                                        <div class="row sndRow">
+                                            <label class="col-md-2 order">Order Date:</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.created_at | date : 'dd/MM/yyyy, hh:mm'}}</p>
+                                            <label class="col-md-2 order">Customer Eamil/Phone</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.customer_email}}</p>
+                                          
+                                        </div>
+                                        <div class="row sndRow">
+                                            <label class="col-md-2 order">Order total:</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.order_value}}</p>
+                                            <label class="col-md-2 order">Customer Address</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.flat_no}},{{trackOrder?.land_mark}}
+                                            </p>
+                                            <label class="col-md-2 order">Driver Name</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.driver_first_name}}</p>
+                                        </div>
+                                        <div class="row sndRow">
+                                            <label class="col-md-2 order">Tax</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.tax_charges}}</p>
+                                          
+                                            <label class="col-md-2 order">Special Note</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.special_note}}
+                                            </p>
+                                        </div>
+                                        <div class="row sndRow">
+                                            <label class="col-md-2 order">Discount </label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.discount || '--'}}</p>
+                                            <label class="col-md-2 order">Amount Received</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.amount_payable}}
+                                            </p>
+                                            <label class="col-md-2 order">Order Status</label>
+                                            <p class="col-md-2 hundrd">{{trackOrder?.order_status}}
+                                            </p>
+                                        </div>
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr >
+                                                    <th>Order Item Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Order Price</th>
+                                                    <th>Total Price</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of trackOrder?.order_items">
+                                                    <td>{{item?.item_name}}</td>
+                                                    <td>{{item?.quantity}}</td>
+                                                    <td>{{item?.item_price}}</td>
+                                                    <td>{{item?.item_price * item?.quantity}}</td>
+                                                   
+                                                   
+                                                </tr>
+                                             
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="5a">
+                            <div class="row">
+                                <div class="col-md-3 topSpace">
+                                    <div class="form-group has-search">
+                                     
+                                        <input type="text" class="form-control" placeholder="{{'Search'| translate}}" maxlength="50" [(ngModel)]="searchbyName" 
+                                            style="border-radius: 20px;">
+                                        <span class="fa fa-search form-control-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 topSpace">
+                                    <label class="heading-filter">{{'FilterByLocation'| translate}}:</label>
+                                </div>
+                                <div class="col-md-3 data1 topSpace select-data">
+                                    <select class="select" [(ngModel)]="ratingName"   (change)="ratingFilter($event.target.value)">
+                                        <option value="">{{'SelectLocation' | translate}}</option>
+                                        <option value="{{data.id}}"  *ngFor="let data of dropDownLocation">
+                                         
+                                            {{data?.street ||'--'}},{{data?.city ||'--'}}
+                                            ,{{data?.zip_code ||'--'}},{{data?.province ||'--'}},
+                                            {{data?.country ||'--'}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 topSpace select-data">
+                                    <div style="display: flex;">
+                                        <button type="submit" class="subtn" (click)="searchRatingReviews()" style="max-width: 100px;">{{'Submit' | translate}}</button>
+                                        <button class="btnblack" (click)="resetRatings()" style="max-width: 100px;">{{'Reset' | translate}}</button> 
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="rating-box">
+                                
+                                <label>{{'AverageRating'| translate}}: </label>
+                                <span class="rating-star sd-f" >
+                                 
+                                    <rating style=" font-size: 1.1em;" [(ngModel)]="averageRating" [readonly]="true">
+                                  
+                             </rating>
+                                </span>
+                                <span class="rati-ng">({{totalRating}})</span>
+                                
+                            </div>
+                            <div class="container" *ngFor="let data of merchantRating | paginate : {itemsPerPage:10, currentPage:page, totalItems:totalRating}:index as i">
+                                <p>{{data?.customer || '--'}}</p>
+                                <span style="font-size: 10px;">
+                                    <div>
+                                    <rating style=" font-size: 1.1em;" [(ngModel)]="data.rating" [readonly]="true">
+                                    </rating>
+                                    <span style="font-size: 12px;">{{data?.created_at | date : 'dd/MM/yyyy'}}</span>
+                                    <div>
+                                        <p>{{data?.description || '--'}}</p>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                   
+                                </span>
+                               
+                         
+                                <!-- <div  > -->
+                                 
+                            </div>
+                            <h3 *ngIf="merchantRating.length == 0" style="text-align:center">{{'Datanotfound!' | translate}}
+                            </h3>
+                            <div *ngIf="merchantRating">
+                            <pagination-controls (pageChange)="getmarchantdetail($event,'Rating')"  style="float:right;" *ngIf="merchantRating?.length != 0">
+                            </pagination-controls>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="6a">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr >
+                                        <th>{{'CategoryName' | translate}}</th>
+                                        <th>{{'CategoryName' | translate}}</th>
+                                        <th>{{'Status' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of merchantCategory | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalCategory}:index as i">
+                                        <td class="table-width" title="{{data?.name || '--'}}">{{data?.name || '--'}}</td>
+                                        <td>{{data?.created_at|| '--' | date : 'dd/MM/yyyy'}}</td>
+                                        <td *ngIf="data.is_active===true">Active</td>
+                                        <td *ngIf="data.is_active ===false">Inactive</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 *ngIf="merchantCategory.length == 0" style="text-align:center">{{'Datanotfound!' | translate}}
+                            </h3>
+                            <div *ngIf="merchantCategory">
+                            <pagination-controls (pageChange)="categoryPagination($event)"  style="float:right;" *ngIf="merchantCategory?.length != 0">
+                            </pagination-controls>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="7a">
+                            <!-- first View -->
+                            <div *ngIf="tablehide==true">
+                                <div class="filed">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div _ngcontent-tsv-c9="" class="form-group has-search">
+                                            <input _ngcontent-tsv-c9="" type="search" class="form-control ng-pristine ng-valid ng-touched" maxlength="50" placeholder="{{'Searchbyitemname' | translate}}" style="border-radius: 20px;"
+                                                type="text" ng-reflect-maxlength="50" [(ngModel)]="searchItemsname" >
+                                            <span _ngcontent-tsv-c9="" class="fa fa-search form-control-feedback"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-control gender-select" [(ngModel)]="searchByCategory"  (change)="SearchByCatogery($event.target.value)">
+                                            <option value="">{{'SelectCategory' | translate}}</option>
+                                            <option value="{{data.id}}"  *ngFor="let data of itemsCategory">{{data?.name}}</option>
+                                        </select>
+
+                                      
+                                    </div>
+                                    <div class="col-md-3">
+                                     
+                                        <select class="form-control gender-select" [(ngModel)]="item_id"    (change)="itemsFilter($event.target.value)">
+                                            <option value="">{{'SelectLocation' | translate}}</option>
+                                            <option value="{{data.id}}"  *ngFor="let data of dropDownLocation">
+                                 
+                                                {{data?.street ||'--'}},{{data?.city ||'--'}}
+                                                ,{{data?.zip_code ||'--'}},{{data?.province ||'--'}},
+                                                {{data?.country ||'--'}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="selctTag1">
+                                            <button class="btn margin2" style="background-color: #638f00!important;color: white; margin-right: 3px;" (click)="submitItems()">{{'Submit' | translate}}</button>
+                                            <button class="btn margin2" (click)="reset()">{{'Reset' | translate}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered table-striped spctop">
+                                    <thead>
+                                        <tr >
+                                            <th>{{'ItemImage' | translate}}</th>
+                                            <th>{{'ItemName' | translate}}</th>
+                                            <th>{{'Type' | translate}}</th>
+                                            <th>{{'CostPrice' | translate}}</th>
+                                            <th>{{'SellingPrice' | translate}}</th>
+                                            <th>{{'In-stock' | translate}}</th>
+                                            <th>{{'Action' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of itemsMerchat | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalItems}:index as i">
+                                            <td>
+                                                <div class="">
+                                                    <a><img src="{{data?.item_image}}" data-toggle="modal" (click)="imagesUrl(data?.item_image)" data-target="#imageModal3" class="dumyImg"></a>
+                                                </div>
+                                            </td>
+                                            <td class="" class="table-width" title="{{data?.item_name || '--'}}">{{data?.item_name || '--'}}</td>
+                                            <td>{{data?.food_type || '--'}}</td>
+                                            <td>{{data?.cost_price || '--'}}</td>
+                                            <td>{{data?.selling_price || '--'}}</td>
+                                            <td>{{data?.in_stock || '--'}}</td>
+                                            <td>
+                                                <button class="custom-View" (click)="itemsdetails(data?.id)">{{'View' | translate}}</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h3 *ngIf="itemsMerchat?.length==0" style="text-align:center">{{'Datanotfound!' | translate}}
+                                </h3>
+                                <div *ngIf="itemsMerchat">
+                                <pagination-controls (pageChange)="getmarchantdetail($event,'items') " style="float:right;" *ngIf="itemsMerchat?.length != 0">
+                                </pagination-controls>
+                                </div>
+                              
+                            </div>
+                         
+                        
+                            <div *ngIf="tablehide==false">
+                           
+                                        <div class="clickView" >
+                                            <div class="row" >
+                                        <div class="col-md-6">
+                                            <div class="itmImg">
+                                                <img src="{{itemdatainfo?.item_image || 'assets/adminLTE/dist/img/pizaa.jpeg'}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="itemName">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label>{{'ItemName' | translate}}</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <p  >{{itemdatainfo?.item_name || '--'}}</p>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>{{'Cusine' | translate}}</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <p>{{itemdatainfo?.item_type || '--'}}</p>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>{{'Type' | translate}}</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <p>{{itemdatainfo?.item_type|| '--'}}</p>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>{{'SubType' | translate}}</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <p>{{itemdatainfo?.food_type || '--'}}</p>
+                                                    </div>
+                                                    <div class="col-md-4"  *ngIf="itemdatainfo?.allergan_and_ingredients !=''">
+                                                        <label>Allergan</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <p *ngFor="let item of itemdatainfo?.allergan_and_ingredients" class="col-md-8 ss-p" title="{{item?.allergan_name || '--'}}">{{item?.allergan_name || '--'}}</p>
+                                                    </div>
+                                                    <div class="col-md-4" *ngIf="itemdatainfo?.allergan_and_ingredients !=''">
+                                                        <label>{{'Ingredients' | translate}}</label>
+                                                    </div>
+                                                
+                                                    <div class="col-md-8">
+                                                        <p *ngFor="let item of itemdatainfo?.allergan_and_ingredients" class="col-md-8 ab-c " title="{{item?.ingredients || '--'}}">{{item?.ingredients || '--'}} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mar-gin" *ngIf="itemdatainfo?.item_option?.length!=0">
+                                        <table style="width:100%;border:1px solid #638f00;">
+                                            <tr class="size-row">
+                                                <th class="col-md-4">{{'Size' | translate}}</th>
+                                                <td *ngFor="let items of itemdatainfo?.item_option" class="col-md-4" title="{{items?.name || '--'}}">{{items?.name || '--'}}</td>
+                                            </tr>
+                                            <tr class="size-row">
+                                                <th class="col-md-4">{{'Price' | translate}} </th>
+                                                <td *ngFor="let items of itemdatainfo?.item_option" class="col-md-4" title="{{items?.cost_price || '--'}}">{{items?.cost_price || '--'}}</td>
+                                            </tr>
+                                            <tr class="size-row">
+                                                <th class="col-md-4">{{'Quantity' | translate}}</th>
+                                                <td *ngFor="let items of itemdatainfo?.item_option" class="col-md-4" title="{{items?.quantity || '--'}}">{{items?.quantity || '--'}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                  
+                                    <div class="col-md-6" *ngIf="itemdatainfo?.item_modifiers?.length!=0">
+                                        <label>{{'Modifiers' | translate}}:</label>
+                                        <table class="backVew" style="width:100%; border:1px solid #638f00;">
+                                            <tr class="size-row">
+                                                <th class="col-md-6">{{'Name' | translate}}</th>
+                                                <td *ngFor="let item of itemdatainfo?.item_modifiers" class="col-md-6" title="{{item?.name || '--'}}">{{item?.name || '--'}}
+                                                </td>
+                                            </tr>
+                                            <tr class="size-row">
+                                                <th class="col-md-6">{{'Price' | translate}} </th>
+                                                <td *ngFor="let item of itemdatainfo?.item_modifiers" class="col-md-6" title="{{item?.price }}">{{item?.price }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- View button Click nxt page end -->
+                        </div>
+                    </div>
+                    <!-- /contentertererwrwerewewewrewwrewr -->
+                </div>
+                <!-- /tabs -->
+            </section>
+        </div>
+    </section>
+ 
+</div>
+<div class="footer-section">
+    <app-footer></app-footer>
+</div>
+
+<!-- passbook The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content passbook">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{'BankPassbook'| translate}}</h4>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img src="{{passbookImage}}" style="width: 100%;height: 314px;">
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer foot">
+                <button type="button" class="submit" data-dismiss="modal">{{'ok'| translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="imageModal3" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-image">
+                <img [src]="imageUrl">
+            </div>
+        </div>
+    </div>
+</div>
+
+

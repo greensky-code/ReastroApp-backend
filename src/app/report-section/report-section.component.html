@@ -1,0 +1,532 @@
+<app-header>
+
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+
+    <div class="content footer-div">
+        <div class="box-header button-text-div">
+            <h1 class="mt-0 mb-0" style="font-size: 24px;">
+                {{'Report' | translate}}
+
+            </h1>
+            <div class="backbutton" [routerLink]="['/manage-drivers']">
+                <button type="button" class="bkbtn">{{'Back' | translate}}</button>
+            </div>
+        </div>
+
+
+
+        <section class="">
+            <div class="tabs tabs-style-tzoid ">
+                <nav>
+                    <ul>
+                        <li><a href="#1a" (click)="makeActive('1a')" [ngClass]="{'active': (selectedTab == '1a') }"
+                                data-toggle="tab"><span class="amn active" style="color:black">{{'CustomerReport' | translate}}</span></a></li>
+                        <li><a href="#2a" (click)="makeActive('2a')" [ngClass]="{'active': (selectedTab == '2a') }"
+                                data-toggle="tab"><span>{{'BusinessReport' | translate}}</span></a></li>
+                        <li><a href="#3a" (click)="makeActive('3a','bank')"
+                                [ngClass]="{'active': (selectedTab == '3a') }" data-toggle="tab"><span>{{'DriverReport' | translate}}</span></a></li>
+                        <li><a href="#4a" (click)="makeActive('4a','orderHistory')"
+                                [ngClass]="{'active': (selectedTab == '4a') }" data-toggle="tab"><span>Sales
+                                   {{'RepresentativeReport' | translate}}</span></a></li>
+                     
+
+                    </ul>
+                </nav>
+                <div class="tab-content clearfix steps" style="border: solid;">
+                    <div class="tab-pane active" id="1a">
+                        <div class="exp">
+
+                            <select class="form-control" class="filterr" style="max-width: 23%;"  *ngIf="language!='th'"
+                                ([ngModel])="toptenSelect" (change)="topTen($event.target.value)">
+
+                                <option value="{{data?.value}}" *ngFor="let data of topteoArra">{{data?.en}}
+
+                                </option>
+
+                            </select>
+                            <select class="form-control" class="filterr" style="max-width: 23%;"  *ngIf="language=='th'"
+                            ([ngModel])="toptenSelect" (change)="topTen($event.target.value)">
+
+                            <option value="{{data?.value}}" *ngFor="let data of topteoArra">{{data?.th}}
+
+                            </option>
+
+                        </select>
+                            <button type="button" class="bkbtns" (click)="exportAsXLSX('customer')" *ngIf="customer?.length!=0">{{'Export' | translate}}</button>
+                        </div>
+                        <div>
+                            <div class="row sndRow">
+
+                                <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                                    <div class=" has-search">
+                                        <label></label>
+                                        <input type="text" class="form-control" id="12bs" [(ngModel)]="searchCustomer"
+                                            placeholder="{{'Searchbycustomername' | translate}}"
+                                            (keyup)="search($event.target.value,'customer')" maxlength="50"
+                                            style="border-radius: 20px;">
+
+                                        <span class="fa fa-search form-control-feedback"
+                                            style="margin-left: 21px;margin-top: 25px;"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-2 green-col">
+                                    <label>{{'KYCStatus' | translate}}</label>
+                                    <select class="form-control" ([ngModel])="statusAc"
+                                        (change)="selectStatus($event.target.value,'activeStatus')" >
+                                        <option value="">{{'SelectStatus' | translate}}</option>
+                                        <option value="true">{{'Active' | translate}}</option>
+                                        <option value="false">{{'Inactive' | translate}}</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2 green-col">
+                                  
+                                    <label>{{'FromDate'| translate}}</label>
+                                    <input type="date" class="form-control" [(ngModel)]="driver.fromDate"
+                                        (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                                <div class="col-md-2 green-col">
+                                    <label>{{'ToDate'| translate}}</label>
+                                    <input type="date" class="form-control" [(ngModel)]="driver.toDate"
+                                        (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}"
+                                        max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                                <div class="col-md-3" style="padding-top: 0.3%;">
+                                    <label></label>
+                                    <div class="btn-div" style="margin-top: -9px;">
+                                        <button type="button" class="btn bg-olive" (click)="submit()">{{'Submit' | translate}}</button>
+                                     
+                                        <button type="button" class="btn margin margin1"
+                                            (click)="reset('customer')">{{'Reset' | translate}}</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="box-body">
+
+                            <table id="example1" class="table table-bordered table-striped mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>{{'CustomerName' | translate}}</th>
+                                        <th>{{'CustomerPhone' | translate}}</th>
+                                        <th>{{'CustomerEmail' | translate}}</th>
+                                        <th>{{'CreatedAt' | translate}}</th>
+                                        <th>{{'Status' | translate}}</th>
+                                        <th>{{'LastOrderon' | translate}}</th>
+                                        <th>{{'LastOrderAmount' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr
+                                        *ngFor="let data of customer | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}:index as i">
+                                        <td>{{data?.id}}</td>
+                                        <td>{{data?.first_name||'--' }}</td>
+                                        <td>{{data?.mobile || '--'}}</td>
+                                        <td>{{data?.email ||'--'}}</td>
+                                        <td>{{(data?.created_at | date : 'dd/MM/yyyy, hhh:mm') ||'--' }}</td>
+                                        <td *ngIf="data?.is_active==true">Active</td>
+                                        <td *ngIf="data?.is_active==false">Inactive</td>
+                                        <td>{{data?.last_order_date || '--'}}</td>
+                                        <td>{{data?.last_order_amount || '--'}}</td>
+
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <h2 *ngIf="customer?.length == 0" style="text-align: center;"> {{'Datanotfound!' | translate}}</h2>
+                          
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane" id="2a">
+                        <div class="exp">
+
+                            <select class="form-control" class="filterr" style="max-width: 23%;"  *ngIf="language!='th'"
+                                ([ngModel])="toptenSelect" (change)="topTen($event.target.value)">
+
+                                <option value="{{data?.value}}" *ngFor="let data of businessArra">{{data?.en}}
+                                </option>
+
+                            </select>
+                            <select class="form-control" class="filterr" style="max-width: 23%;"  *ngIf="language=='th'"
+                            ([ngModel])="toptenSelect" (change)="topTen($event.target.value)">
+
+                            <option value="{{data?.value}}" *ngFor="let data of businessArra">{{data?.th}}
+                            </option>
+
+                        </select>
+                            <button type="button" class="bkbtns" (click)="exportAsXLSX('business')" *ngIf="businessData?.length!=0">{{'Export' | translate}}</button>
+                        </div>
+
+                        <div>
+                            <div class="row sndRow">
+
+
+                                <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                                    <div class=" has-search">
+                                        <label></label>
+                                        <input type="text" ([ngModel])="busineNames" placeholder="{{'SearchbyBusinessname' | translate}}" 
+                                            (keyup)="search($event.target.value,'business')" id="12ab"
+                                            class="form-control" maxlength="50" style="border-radius: 20px;">
+
+                                        <span class="fa fa-search form-control-feedback"
+                                            style="margin-left: 21px;margin-top: 25px;"></span>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-2 green-col">
+                                    <label>{{'FromDate'| translate}}</label>
+                                    <input type="date" class="form-control" [(ngModel)]="driver.fromDate"
+                                        (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                                <div class="col-md-2 green-col">
+                                    <label>{{'ToDate'| translate}}</label>
+                                    <input type="date" class="form-control" [(ngModel)]="driver.toDate"
+                                        (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}"
+                                        max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                                <div class="col-md-3" style="padding-top: 0.3%;">
+                                    <label></label>
+                                    <div class="btn-div" style="margin-top: -9px;">
+                                        <button type="button" class="btn bg-olive"
+                                            (click)="getBusinessReport()">{{'Submit' | translate}}</button>
+                                       
+                                        <button type="button" class="btn margin margin1"
+                                            (click)="reset('business')">{{'Reset' | translate}}</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="selects">
+
+                              
+                                <select class="form-control" class="filterr" style="max-width: 23%;"  ([ngModel])="submitReject"
+                                (change)="selectStatus($event.target.value,'statusSubmit')">
+                                    <option value="">{{'KYCStatus' | translate}}</option>
+                                    <option value="Submitted">{{'Submitted' | translate}}</option>
+                                    <option value="Rejected">{{'Rejected' | translate}}</option>
+                                    <option value="Approved">{{'Approved' | translate}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="box-body">
+
+                            <table id="example1" class="table table-bordered table-striped mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID{{'' | translate}}</th>
+                                        <th>{{'BusinessName' | translate}}</th>
+                                        <th>{{'email' | translate}}</th>
+                                        <th>{{'Phone' | translate}}</th>
+                                        <th>{{'CreatedBy' | translate}}</th>
+                                        <th>{{'CreatedAt' | translate}}</th>
+                                        <th>{{'Status' | translate}}</th>
+                                        <th>{{'KYCStatus' | translate}}</th>
+                                        <th>{{'KYCSubmitDate' | translate}}</th>
+                                        <th>{{'ApprovedBy/Rejected' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 <!-- fdghfdgkjfhgjfkghfjkdgdjkfgjdfkhjSDFSDFSDFSDFFSDFDSFFDF -->
+                                    <tr
+                                        *ngFor="let data of businessData | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalOrder}:index as i">
+                                        <td>{{data?.id}}</td>
+                                        <td>{{data?.business?.business_name || '--'}}</td>
+                                        <td>{{data?.email ||'--'}}</td>
+                                        <td> {{data?.mobile ||'--'}}</td>
+                                        <td>{{data?.created_by ||'--'}}</td>
+                                        <td>{{(data?.business?.created_at  | date : 'dd/MM/yyyy, hhh:mm') ||  '--'}}
+                                        </td>
+                                        <td *ngIf="data?.is_active==true">Active</td>
+                                        <td *ngIf="data?.is_active==false">Inactive</td>
+                                        <td>{{data?.kyc_status ||'--'}}</td>
+                                        <td>{{(data?.business?.kyc?.updated_at | date : 'dd/MM/yyyy, hhh:mm') ||  '--'}}</td>
+                                        <td>{{data?.business?.kyc?.kyc_updated_by || '--'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <h2 *ngIf="businessData?.length == 0" style="text-align: center;"> {{'Datanotfound!' | translate}}</h2>
+                         
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane" id="3a">
+                        <div class="exp">
+
+                            <select class="form-control" class="filterr" style="max-width: 23%;"  *ngIf="language!='th'"
+                                ([ngModel])="toptenSelect" (change)="topTen($event.target.value)">
+
+                                <option value="{{data?.value}}" *ngFor="let data of driverArray">{{data?.en}}</option>
+
+                            </select>
+                            <select class="form-control" class="filterr" style="max-width: 23%;"  *ngIf="language=='th'"
+                            ([ngModel])="toptenSelect" (change)="topTen($event.target.value)">
+
+                            <option value="{{data?.value}}" *ngFor="let data of driverArray">{{data?.th}}</option>
+
+                        </select>
+                            <button type="button" class="bkbtns" (click)="exportAsXLSX('driver')" *ngIf="driverData?.length!=0">{{'Export' | translate}}</button>
+                        </div>
+
+                        <div>
+                            <div class="row sndRow">
+                              
+
+                                <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                                    <div class=" has-search">
+                                        <label></label>
+                                        <input type="search" class="form-control" id="12ao" placeholder="{{'Searchbydrivername' | translate}}"  ([ngModel])="driverName"  (keyup)="search($event.target.value,'driver')" maxlength="50"
+                                            style="border-radius: 20px;">
+
+                                        <span class="fa fa-search form-control-feedback"
+                                            style="margin-left: 21px;margin-top: 25px;"></span>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-2 green-col">
+                                    <label>{{'FromDate'| translate}}</label>
+                                    <input type="date" class="form-control" [(ngModel)]="driver.fromDate"
+                                        (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                                <div class="col-md-2 green-col">
+                                    <label>{{'ToDate'| translate}}</label>
+                                    <input type="date" class="form-control" [(ngModel)]="driver.toDate"
+                                        (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}"
+                                        max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                                <div class="col-md-3" style="padding-top: 0.3%;">
+                                    <label></label>
+                                    <div class="btn-div" style="margin-top: -9px;">
+                                        <button type="button" class="btn bg-olive"
+                                            (click)="getDrivarReport()">{{'Submit' | translate}}</button>
+                                      
+                                        <button type="button" class="btn margin margin1"
+                                            (click)="reset()">{{'Reset' | translate}}</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="selects">
+
+                              
+                                <select class="form-control" class="filterr" style="max-width: 23%;"  ([ngModel])="driverkyc"
+                                (change)="selectStatus($event.target.value,'driverKYC')">
+                                    <option value="">{{'KYCStatus' | translate}}</option>
+                                    <option value="Submitted">{{'Submitted' | translate}}</option>
+                                    <option value="Rejected">{{'Rejected' | translate}}</option>
+                                    <option value="Approved">{{'Approved' | translate}}</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="box-body">
+
+                            <table id="example1" class="table table-bordered table-striped mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>{{'ID' | translate}}</th>
+                                        <th>{{'DriverName' | translate}}</th>
+                                        <th>{{'Phone' | translate}}</th>
+                                        <th>{{'CreatedAt' | translate}}</th>
+                                        <th>{{'Status' | translate}}</th>
+                                        <th>{{'KYCStatus' | translate}}</th>
+                                        <th>{{'KYCSubmitDate' | translate}}</th>
+                                        <th>{{'ApprovedBy/Rejected' | translate}}</th>
+                                        <th>{{'OnlineStatus' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                    <tr *ngFor="let data of driverData | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalOrder}:index as i">
+                                        <td>{{data?.id}}</td>
+                                         <td>{{data?.driver?.first_name || '--'}}</td>
+                                          <td>{{data?.driver?.mobile || '--'}}</td>
+                                             <td>{{(data?.created_at | date : 'dd/MM/yyyy, hhh:mm') ||'--' }}</td>
+                                             <td *ngIf="data?.is_active==true">Active</td>
+                                             <td *ngIf="data?.is_active==false">Inactive</td>
+                                         <td>{{data?.driver?.driver_kyc?.kyc_status || '--'}}</td>
+                                         <td>{{(data?.driver?.driver_kyc?.updated_at | date : 'dd/MM/yyyy, hhh:mm') ||'--' }}</td>
+                                         <td>{{data?.driver?.driver_kyc?.kyc_updated_by || '--'}}</td>
+                                         <td *ngIf="data?.is_online==true">Active</td>
+                                             <td *ngIf="data?.is_online==false">Inactive</td>
+                                    </tr>
+
+
+                                </tbody>
+                            
+
+                            </table>
+
+
+                            <h2 *ngIf="driverData?.length == 0" style="text-align: center;"> {{'Datanotfound!' | translate}}</h2>
+                        
+                        </div>
+                      
+
+
+                    </div>
+                    <div class="tab-pane" id="4a">
+                        <div class="exp">
+
+                            <select class="form-control" class="filterr" style="max-width: 23%;"   *ngIf="language!='th'"
+                                ([ngModel])="toptenSelect" (change)="topTen($event.target.value)">
+
+                                <option value="{{data?.value}}" *ngFor="let data of saleRepresentative">{{data?.en}}
+                                </option>
+
+                            </select>
+                            <select class="form-control" class="filterr" style="max-width: 23%;"   *ngIf="language=='th'"
+                            ([ngModel])="toptenSelect" (change)="topTen($event.target.value)">
+
+                            <option value="{{data?.value}}" *ngFor="let data of saleRepresentative">{{data?.th}}
+                            </option>
+
+                        </select>
+                            <button type="button" class="bkbtns" (click)="exportAsXLSX('sale')" *ngIf="saleData?.length!=0">{{'Export' | translate}}</button>
+                        </div>
+
+                        <div>
+                            <div class="row sndRow">
+                            
+
+                                <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                                    <div class=" has-search">
+                                        <label></label>
+                                        <input type="text" class="form-control" maxlength="50"  placeholder="{{'Searchbyname' | translate}}" id="12oo" ([ngModel])="salesName"  (keyup)="search($event.target.value,'sale')"
+                                            style="border-radius: 20px;">
+
+                                        <span class="fa fa-search form-control-feedback"
+                                            style="margin-left: 21px;margin-top: 25px;"></span>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-2 green-col">
+                                    <label>{{'FromDate'| translate}}</label>
+                                    <input type="date" class="form-control" [(ngModel)]="driver.fromDate"
+                                        (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                                <div class="col-md-2 green-col">
+                                    <label>{{'ToDate'| translate}}</label>
+                                    <input type="date" class="form-control" [(ngModel)]="driver.toDate"
+                                        (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}"
+                                        max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                                <div class="col-md-3" style="padding-top: 0.3%;">
+                                    <label></label>
+                                    <div class="btn-div" style="margin-top: -9px;">
+                                        <button type="button" class="btn bg-olive"
+                                            (click)="salesRepresentative()">{{'Submit' | translate}}</button>
+                        
+                                        <button type="button" class="btn margin margin1"
+                                            (click)="reset()">{{'Reset' | translate}}</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="box-body">
+
+                            <table id="example1" class="table table-bordered table-striped mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID{{'' | translate}}</th>
+                                        <th>{{'Name' | translate}}</th>
+                                        <th>{{'Phone' | translate}}</th>
+                                        <th>{{'Email' | translate}}</th>
+                                        <th>{{'Status' | translate}}</th>
+                                        <th>{{'CreatedAt' | translate}}</th>
+                                        <th>{{'ReferenceCode' | translate}}</th>
+                                        <th>{{'TotalReference' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                            <tr *ngFor="let data of saleData | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalOrder}:index as i">
+                                            <td>{{data?.id}}</td>
+                                            <td>{{data?.first_name || '--'}}</td>
+                                            <td>{{data?.mobile ||'--'}}</td>
+                                            <td>{{data?.email ||'--'}}</td>
+                                            <td *ngIf="data?.is_active==true">Active</td>
+                                            <td *ngIf="data?.is_active==false">Inactive</td>
+                                            <td>{{(data?.created_at | date : 'dd/MM/yyyy, hhh:mm') ||'--' }}</td> 
+                                            <td>{{data?.reference_code || '--'}}</td>
+                                            <td>{{data?.total_refrence || '0'}}</td>
+                                         
+                                            </tr>
+                                </tbody>
+
+                            </table>
+
+
+                            <h2 *ngIf="saleData?.length == 0" style="text-align: center;"> {{'Datanotfound!' | translate}}</h2>
+                          
+                        </div>
+
+
+
+                    </div>
+                   
+                    <div class="tab-pane" id="6a">
+                        <h3>6</h3>
+                    </div>
+                    <div class="tab-pane" id="7a">
+                        <h3>7</h3>
+                    </div>
+                </div>
+                <!-- /content -->
+            </div>
+            <!-- /tabs -->
+        </section>
+
+        <section>
+        </section>
+    </div>
+</div>
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

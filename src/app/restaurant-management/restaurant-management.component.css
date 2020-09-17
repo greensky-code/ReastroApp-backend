@@ -1,0 +1,86 @@
+.box-header h1 {
+    margin: 0;
+}
+
+.submit {
+    background-color: #638f00;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    height: 27px;
+    max-width: 70px;
+    margin-left: 26px;
+}
+
+.form-control-feedback {
+    top: 24px!important;
+}
+
+.block-btns3{
+    background-color: #fd1b00;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 80px;
+    height: 30px;
+    margin-right: 10px;
+    
+}
+
+.skyblue-btn {
+    background-color: #8d908f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    max-width: 100px;
+    height: 30px;
+    margin-left: 26px;
+}
+
+td.wght.zui-sticky-col button.detail {
+    color: black;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    height: 27px;
+    max-width: 70px;
+}
+.btn.active, .btn:active{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+table#example2 thead tr th:last-child, table#example2 tbody tr td:last-child {
+    /* min-width: 132px !important; */
+    width: 270px;
+}
+
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}

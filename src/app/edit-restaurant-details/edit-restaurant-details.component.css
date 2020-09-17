@@ -1,0 +1,190 @@
+.box-header h1 {
+    margin: 0;
+}
+
+.submit {
+    background-color: #638f00;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    height: 27px;
+    max-width: 70px;
+    margin-left: 26px;
+}
+
+.form-control-feedback {
+    top: 24px!important;
+}
+
+.block-btns3{
+    background-color: #fd1b00;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 80px;
+    height: 30px;
+    margin-right: 10px;
+    
+}
+
+.skyblue-btn {
+    background-color: #8d908f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    max-width: 100px;
+    height: 30px;
+    margin-left: 26px;
+}
+
+td.wght.zui-sticky-col button.detail {
+    color: black;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    height: 27px;
+    max-width: 70px;
+}
+.btn.active, .btn:active{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+table#example2 thead tr th:last-child, table#example2 tbody tr td:last-child {
+    /* min-width: 132px !important; */
+    width: 270px;
+}
+
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}
+
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}
+
+/* tab section */
+.tab-section{
+    /* border: 1px solid #f3eeee;
+    padding: 30px 20px 10px 20px; */
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-weight: 600;
+}
+.tablinks {
+    width: 25%;
+    border: 1px solid #0000001c !important
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    /* background-color: #ddd; */
+    background-image: linear-gradient(to right, #638f00, #4b5533);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    /* background-color: #ccc; */
+    background-color: #638f00;
+    color: #ccc;
+}
+
+.cusine {
+    margin-bottom: 20px;
+}
+
+.error {
+    float: right;
+}
+
+.int {
+    width: 100%;
+    height: 41px;
+    max-width: 453px;
+    ;
+}
+
+.textareaa {
+    width: 100%;
+    max-width: 453px;
+}
+
+.box-header h1 {
+    margin: 0;
+}
+
+.btn-flat{
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    margin-top: 35px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 40px;
+    width: 100%;
+    max-width: 115px;
+}
+.box-hearder-564{
+    width: 100%;
+    max-width: 99%;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    padding: 15px;
+    margin: 10px
+}
+
+
+ button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}

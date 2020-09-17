@@ -1,0 +1,43 @@
+.custom {
+    margin-top: 30px;
+}
+
+.detail {
+    background-color: #e4e419;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    width: 100%;
+    max-width: 100px;
+}
+
+.content-wrap section {
+    display: none;
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.content-wrap section.content-current {
+    display: block;
+}
+
+.content-wrap section p {
+    margin: 0;
+    padding: 0.75em 0;
+    color: rgba(40, 44, 42, 0.05);
+    font-weight: 900;
+    font-size: 4em;
+    line-height: 1;
+}
+
+
+/* Fallback */
+
+.no-js .content-wrap section {
+    display: block;
+    padding-bottom: 2em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+}

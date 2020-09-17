@@ -1,0 +1,217 @@
+<app-header>
+
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                           {{'ManageDrivers' | translate}}
+                        </h1>
+                    </div>
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                            <div class="has-search">
+                                <label></label>
+                                <input type="text" class="form-control" placeholder="{{'Searchbydrivername/email/phone' | translate}}" (keyup)="searchDrivername($event.target.value);" maxlength="50" [(ngModel)]="searchField" style="border-radius: 20px;">
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'FilterbyStatus' | translate}}</label>
+                            <select class="form-control btn drrop-type" [(ngModel)]="driverstatus" class="filterr" (change)="selectStatus($event.target.value)">
+                                <option value="">{{'FilterbyStatus'| translate}}</option>
+                                <option value="Pending">{{'Pending'| translate}}</option>
+                                <option value="Submitted">{{'Submitted'| translate}}</option>
+                                <option value="Approved">{{'Approved'| translate}}</option>
+                                <option value="Rejected">{{'Rejected'| translate}}</option>
+                                            </select>
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'FromDate'| translate}}</label>
+                            <input type="date" class="form-control dt1" [(ngModel)]="driver.fromDate" (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                        </div>
+                        <div class="col-md-2 green-col">
+                            <label>{{'ToDate'| translate}}</label>
+                            <input type="date" class="form-control dt2" [(ngModel)]="driver.toDate" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" >
+                        </div>
+                        <div class="col-md-3" style="padding-top: 2%">
+                            <div class="btn-div">
+                                <button type="button" class="btn bg-olive mr-3" (click)="searchDriver()" [disabled]="disables==false">{{'Submit' | translate}}</button>
+                             
+                                <button type="button" class="btn margin margin1" (click)="resetSearch()">{{'Reset' | translate}}</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="rghtSde">
+                        <div class=" btn two three-btn">
+                            <button type="button" class="btn margin view-btn" style="background-color:green !important" [routerLink]="['/register-driver']">{{'RegisterDriver' | translate}}</button>
+                            <button type="button" class="btn margin margin1 export" (click)="exportAsXLSX()" *ngIf="driverData?.length != 0">{{'Export' | translate}}</button>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'DriverID' | translate}}</th>
+                                    <th>{{'DriverName' | translate}}</th>
+                                    <th>{{'Phone' | translate}} </th>
+                                    <th>{{'Created_at' | translate}}</th>
+                                    <th>{{'Created_by' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                    <th>{{'KYCStatus' | translate}}</th>
+                                    <th>{{'KYCSubmit' | translate}}</th>
+                                    <th>{{'ApprovedBy/Rejected' | translate}}</th>
+                                    <th>{{'OnlineStatus' | translate}}</th>
+                                    <th >{{'Action' | translate}}</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let data of driverData | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total }; index as i">
+                                    <td>{{data?.id}}</td>
+                                    <td class="table-width" title="{{data?.driver?.first_name || '--'}} {{data?.driver?.middle_name}} {{data?.driver?.last_name}}">{{data?.driver?.first_name || '--' }}</td>
+                                    <td>{{data?.mobile || '--' }}</td>
+                                    <td>{{data?.created_at | date:'M/d/yy, H:mm'}}</td>
+                                    <td>{{data?.created_by}}</td>
+                                    <td *ngIf="data?.is_active == true">Active</td>
+                                    <td *ngIf="data?.is_active == false">Inactive</td>
+                                    <td>{{data?.kyc_status || '--' }}</td>
+                                    <td>{{(data?.driver?.driver_kyc?.updated_at | date:'M/d/yy, H:mm') || '--' }}</td>
+
+                                    <td>{{data?.driver?.driver_kyc?.kyc_updated_by || '--' }}</td>
+
+                                    <td *ngIf="data?.is_online == true">Active</td>
+                                    <td *ngIf="data?.is_online == false">Inactive</td> -->
+                                    <tr>
+                                        <td>Dl01</td>
+                                        <td>Rakesh</td>
+                                        <td>9999999999</td>
+                                        <td>13-08-20</td>
+                                        <td>Admin</td>
+                                        <td>Active</td>
+                                        <td>Kyc status</td>
+                                        <td>Kyc submit</td>
+                                        <td>Approved</td>
+                                        <td>Online</td>
+                                    <td style="white-space: nowrap;">
+                                        <button class="submitt" *ngIf="data?.kyc_status == 'Pending'" [routerLink]="['/driver-submit-kyc',data?.id]">{{'SubmitKYC' | translate}}</button>
+                                        <button class="block-btns1" *ngIf="data?.kyc_status!='Pending'" [routerLink]="['/driver-view-kyc',data?.id]">{{'ViewKYC' | translate}}</button>
+                                        <button class="detail" [routerLink]="['/driver-details',data?.id]">{{'Details' | translate}}</button>
+                                        <button class="detail" (click)="openModal(data?.id)" style="margin-left: 9px;background-color: #ff0000;">{{'Delete' | translate}}</button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                        <!-- <h2 *ngIf="driverData?.length == 0" style="text-align:center;">{{'Datanotfound!' | translate}}</h2> -->
+                    
+                    </div>
+
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="getDriverDetail($event,search) "  *ngIf="marchantdata?.length != 0">
+                        </pagination-controls>
+                    </div>
+
+
+
+
+
+
+
+               
+
+
+
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+</div>
+
+
+
+
+<div class="footer-section">
+    <app-footer></app-footer>
+</div>
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 >Delete Driver </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <!-- {{'Areyousureyouwanttounblockthisrole?' | translate}} -->
+                <p >Are you sure you want to delete this driver?</p>
+              
+            </div>
+          
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit" >{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                    <div class="otp-field">
+                      
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

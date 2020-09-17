@@ -1,0 +1,413 @@
+<!-- <app-header>
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'ManageRoles' | translate}}
+                        </h1>
+                    </div>
+                    
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                            <div class=" has-search">
+                                <input type="text" class="form-control" (keyup.enter)="searchSubmit()" placeholder="{{'Searchbyrolename' | translate}}" maxlength="50"
+                                    [(ngModel)]="searchRole" (keyup)="searchRoles($event.target.value)" maxlength="50" style="border-radius: 20px;">
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-9" st>
+                            <div class="btn-div">
+                                <div style="display: flex;width: 31%;">
+                                    <button type="button" class="btn bg-olive" (click)="searchSubmit()" [disabled]="disabled==true">{{'Submit' | translate}}</button>
+                                    <button type="button" class="btn margin margin1" (click)="reset()">{{'Reset' | translate}}</button>
+                                </div>
+                                <div style="display: flex; justify-content: flex-end ">
+                                    <button type="button" class="btn bg-olive margin" style="margin:10px  0px;background-color: #068000!important;" [routerLink]="['/add-new-role']">{{'AddNewRole' | translate}}</button>
+                                    <button type="button" class="btn margin margin1" (click)="export()" *ngIf="manageroles?.length!=0">{{'Export' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'RoleID' | translate}}</th>
+                                    <th>{{'RoleName' | translate}}</th>
+                                    <th>{{'CreatedBy' | translate}}</th>
+                                    <th>{{'CreatedAt' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                    <th style="width: 30%;">{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of manageroles | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <th scope="row">{{data.id}}</th>
+                                    <td class="table-width">{{data?.name || '--'}}</td>
+                                    <td>{{data?.created_by || '--'}}</td>
+                                    <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' ||'--') || '--'}}</td>
+                                    <td *ngIf="data?.is_active ==true">Active</td>
+                                    <td *ngIf="data?.is_active !=true">Inactive</td>
+                                    
+                                       
+                                    <td class="action">
+                                        <button class="skyblue-btn" [routerLink]="['/role-permission',data?.id]" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer') && (data?.name!='Manager') ">{{'Permission' | translate}}</button>
+                                        <button class="block-btn" (click)="block(data?.id,is_active)" *ngIf="(data?.is_active ==true) && (data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer') && (data?.name!='Manager')">{{'Block' | translate}}</button>
+                                        <button class="submit" (click)="unblock(data?.id,is_active)" *ngIf="data?.is_active !=true">{{'Unblock' | translate}}</button>
+                                        
+                                        <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
+                                            [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Permission' | translate}}</button>
+                                        <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
+                                            [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Block' | translate}}</button>
+                                     
+                                        <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
+                                        [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Delete' | translate}}</button>
+                                        <button class="detail" (click)="deleteid(data?.id)" data-toggle="modal" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer')&& (data?.name!='Manager')">{{'Delete' | translate}}</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dnf">
+                            <h3 *ngIf="manageroles?.length==0">Data not found!</h3>
+                        </div>
+                    </div>
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="pagination($event)" style="float:right;" *ngIf="manageroles?.length!=0">
+                        </pagination-controls>
+                    </div>
+                  
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </section>
+ 
+    
+</div>
+<div class="footer-section">
+    <app-footer></app-footer>
+</div> -->
+<!-- -----------------------unblock modal---------------------- -->
+<div class="modal" id="unblockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle"> {{'Unblock' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                {{'Areyousureyouwanttounblockthisrole?' | translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="unblockmodal()" class="submit" >{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- -----------------------unblock modal---------------------- -->
+
+<!-- -----------------------block modal---------------------- -->
+<div class="modal" id="blockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">{{'Block' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                  {{'Areyousureyouwanttoblockthisrole?' | translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" class="submit"  (click)="blockmodals()">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------------------------------------delete modal---------------------------------------------- -->
+<div class="modal" id="exampleModal2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">{{'Delete' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                {{'Areyousureyouwanttodeletethisrole?' | translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" class="submit"  (click)="deletemodal()">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- -------------------------------------Google auth modal---------------- -->
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 Step Verification</h4>
+                <button type="button" class="close" (click)="resets()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">Google Authentication Code</label>
+                    <div class="otp-field">  
+                            <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" 
+                    style="width:57px; height:57px;" [config]="{length:6}" (keypress)="numberOnly($event)" type="number" ></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode" (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Login page Button Issues 
+Reset password Url issues Done -->
+
+
+<!-- 2_food delivery code -->
+
+<app-header>
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+  
+    <!-- Main content -->
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'ROLES MANAGEMENT' | translate}}
+                        </h1>
+                    </div>
+                    <!-- hgghghghg -->
+                    <div class="row sndRow">
+                        <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                            <div class=" has-search">
+                                <input type="text" class="form-control" (keyup.enter)="searchSubmit()" placeholder="{{'Searchbyrolename' | translate}}" maxlength="50"
+                                    [(ngModel)]="searchRole" (keyup)="searchRoles($event.target.value)" maxlength="50" style="border-radius: 20px;">
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-9" st>
+                            <!-- <div class="btn-div"> -->
+                                <!-- <div style="display: flex;width: 31%;">
+                                    <button type="button" class="btn bg-olive" (click)="searchSubmit()" [disabled]="disabled==true">{{'Submit' | translate}}</button>
+                                    <button type="button" class="btn margin margin1" (click)="reset()">{{'Reset' | translate}}</button>
+                                </div> -->
+                                <div style="display: flex; justify-content: flex-end ">
+                                    <button type="button" class="btn bg-olive margin" style="margin:10px  0px;background-color: #068000!important;" [routerLink]="['/add-new-role']">{{'AddNewRole' | translate}}</button>
+                                    <!-- <button type="button" class="btn margin margin1" (click)="export()" *ngIf="manageroles?.length!=0">{{'Export' | translate}}</button> -->
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'RoleID' | translate}}</th>
+                                    <th>{{'RoleName' | translate}}</th>
+                                    <th>{{'CreatedBy' | translate}}</th>
+                                    <th>{{'CreatedAt' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                    <th style="width: 30%;">{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}:index as i" -->
+                                <!-- <tr *ngFor="let data of manageroles | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <th scope="row">{{data.id}}</th>
+                                    <td class="table-width">{{data?.name || '--'}}</td>
+                                    <td>{{data?.created_by || '--'}}</td>
+                                    <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' ||'--') || '--'}}</td>
+                                    <td *ngIf="data?.is_active ==true">Active</td>
+                                    <td *ngIf="data?.is_active !=true">Inactive</td> -->
+                                    <tr>
+                                        <td>R01455</td>
+                                        <td>Supervisor</td>
+                                        <td>Rakesh</td>
+                                        <td>17-8-20</td>
+                                        <td>Active</td>
+                                       
+                                    <td class="action">
+                                        <button class="skyblue-btn" [routerLink]="['/role-permission',data?.id]" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer') && (data?.name!='Manager') ">{{'Edit' | translate}}</button>
+                                        <button class="block-btn" (click)="block(data?.id,is_active)" *ngIf="(data?.is_active ==true) && (data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer') && (data?.name!='Manager')">{{'Block' | translate}}</button>
+                                        <button class="submit" (click)="unblock(data?.id,is_active)" *ngIf="data?.is_active !=true">{{'Unblock' | translate}}</button>
+                                        
+                                        <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
+                                            [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Permission' | translate}}</button>
+                                        <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
+                                            [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Block' | translate}}</button>
+                                     
+                                        <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
+                                        [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Delete' | translate}}</button>
+                                        <button class="detail" (click)="deleteid(data?.id)" data-toggle="modal" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer')&& (data?.name!='Manager')">{{'Delete' | translate}}</button>
+                                    </td>
+                                <!-- </tr> -->
+                            </tbody>
+                        </table>
+                        <div class="dnf">
+                            <!-- <h3 *ngIf="manageroles?.length==0">Data not found!</h3> -->
+                        </div>
+                    </div>
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="pagination($event)" style="float:right;" *ngIf="manageroles?.length!=0">
+                        </pagination-controls>
+                    </div>
+                  
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+ 
+    <!-- /.content -->
+</div>
+<div class="footer-section">
+    <app-footer></app-footer>
+</div>
+<!-- -----------------------unblock modal---------------------- -->
+<div class="modal" id="unblockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle"> {{'Unblock' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                {{'Areyousureyouwanttounblockthisrole?' | translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="unblockmodal()" class="submit" >{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- -----------------------unblock modal---------------------- -->
+
+<!-- -----------------------block modal---------------------- -->
+<div class="modal" id="blockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">{{'Block' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                  {{'Areyousureyouwanttoblockthisrole?' | translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" class="submit"  (click)="blockmodals()">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------------------------------------delete modal---------------------------------------------- -->
+<div class="modal" id="exampleModal2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 class="modalstyle">{{'Delete' | translate}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                {{'Areyousureyouwanttodeletethisrole?' | translate}}
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" class="submit"  (click)="deletemodal()">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- -------------------------------------Google auth modal---------------- -->
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 Step Verification</h4>
+                <button type="button" class="close" (click)="resets()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">Google Authentication Code</label>
+                    <div class="otp-field">  
+                            <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" 
+                    style="width:57px; height:57px;" [config]="{length:6}" (keypress)="numberOnly($event)" type="number" ></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode" (click)="verify()">Verify</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Login page Button Issues 
+Reset password Url issues Done -->

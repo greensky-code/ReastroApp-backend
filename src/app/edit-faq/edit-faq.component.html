@@ -1,0 +1,161 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+                <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'EditFaq' | translate}}
+        
+                        </h1>
+                    </div>
+            <div class="box-header box-hearder-564">
+            <form class="" [formGroup]="topicform">
+                <div class="cusine">
+                    <div class="col-md-12" *ngIf="language=='th'">
+                        <div class="row">
+                        <label class="col-md-4">{{'Language' | translate}}</label>
+                        <p class="col-md-8 int form-control" readonly>Thai</p>
+                      
+                    </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="language!='th'">
+                        <div class="row">
+                        <label class="col-md-4">{{'Topic' | translate}}:</label>
+                        <select class="col-md-8 int form-control" formControlName="topic"  >
+                                            <option value="">Select topic</option>
+                                            <option value="{{data?.id}}" *ngFor="let data of topicList" >{{data?.name}}</option>
+                                        </select>
+                    </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="language=='th'">
+                        <div class="row">
+                        <label class="col-md-4">{{'Topic' | translate}}:</label>
+                        <select class="col-md-8 int form-control" formControlName="topic" style="-webkit-appearance: none;" disabled>
+                                            <option value="">Select topic</option>
+                                            <option value="{{data?.id}}" *ngFor="let data of topicList" >{{data?.name}}</option>
+                                        </select>
+                    </div>
+                    </div>
+                   
+                    <div class="col-md-12">
+                        <div class="row" style="margin-top: 20px;">
+                        <label class="col-md-4">{{'Question' | translate}}:</label>
+                        <textarea type="text" class="col-md-8 int form-control" rows="10"  formControlName="question"  (keypress)="service.preventSpace($event)"></textarea>
+                    </div>
+                    </div>
+                    <div class="col-md-12">
+                        
+                        <div class="col-md-8 error" style="margin-right: 16px;"  *ngIf="topicform.get('question').hasError('required') && topicform.get('question').touched">
+                            <span style="color:red">Question Name is required.</span></div>
+                        <div *ngIf="topicform.get('question').hasError('maxlength') && topicform.get('question').dirty" style="color: red;
+                        display: flex;
+                        justify-content: center;
+                        margin-right: -16%;">
+                            Maxlength of characters should be 256.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 cusine">
+                        <div class="row">
+                    <label class="col-md-4">{{'Answer' | translate}}:</label>
+                    <ck-editor formControlName="answer" id="12b" language="en" 
+                    [fullPage]="true"></ck-editor>
+                    </div>
+                    <div class="col-md-8 error" style="margin-right: 16px;" *ngIf="topicform.get('answer').hasError('required') && topicform.get('answer').touched">
+                        <span style="color:red">Answer  is required.</span></div>
+                </div>
+             
+                    
+                <label class="col-md-12">{{'Sharewith' | translate}}:</label>
+                <div *ngIf="language =='th'">
+                <div class="col-md-8" *ngFor="let data of topicShare" (change)="selectTopic($event.target.value)">
+                <input type="checkbox"  [checked]="topicArray.includes(data?.id)"  value="{{data?.id}}" class="col-md-4" [disabled]="isDisabled">
+                
+                <label readonly>{{data?.user_type}}</label>
+                </div>
+                </div>
+                <div *ngIf="language!='th'">
+                    <div class="col-md-8" *ngFor="let data of topicShare" (change)="selectTopic($event.target.value)" FormControlName="userType">
+                    <input type="checkbox"  [checked]="topicArray.includes(data?.id)"  value="{{data?.id}}" class="col-md-4">
+                    
+                    <label readonly>{{data?.user_type}}</label>
+                    </div>
+                    </div>
+                <div class="bx mt-4-btn" style="display: flex;justify-content: space-evenly;;width: 100%;">
+                    <button type="submit" class="btn  btn-flat cusine btn-flat" [routerLink]="['/manage-faq']" style="background-color:#fd1b00">{{'Cancel' | translate}}</button>
+                    <button type="submit" class="btn  btn-flat cusine btn-flat" [disabled]="!topicform.valid" (click)="generate('faq')">{{'Update' | translate}}</button>
+
+                </div>
+
+            </form>
+        </div>
+        </div>
+
+
+
+
+
+    </section>
+   
+</div>
+<app-footer></app-footer>
+
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 *ngIf="language=='th'">{{'Translate FAQ' | translate}}</h2>
+                <h2 *ngIf="language!='th'">{{'Edit FAQ' | translate}}</h2>
+               
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p *ngIf="language=='th'">{{'Are you sure you want to translate this FAQ?' | translate}}</p>
+
+                <p *ngIf="language!='th'">{{'Are you sure you want to edit this FAQ?' | translate}}</p>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit" style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+                
+
+                    <div class="otp-field">
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" (keypress)="numberOnly($event)" type="number"
+                        style="width:57px; height:57px;" [config]="{length:6}" ></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit"  class="btn btn-primary btn-block btn-flat"  [disabled]="!varificationCode" (click)="verify()">Verify</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

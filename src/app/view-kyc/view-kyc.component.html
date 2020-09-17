@@ -1,0 +1,336 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+ 
+    <section class="content footer-div">
+       
+        <div class="main-top" style="border:0px;">
+            <div class="box-header button-text-div">
+            <h3 >{{'ViewKYC' | translate}}</h3>
+            <div class="backbutton" [routerLink]="['/manage-merchant']" >
+                <button type="button" class="bkbtn">{{'Back' | translate}}</button>
+            </div>
+        </div>
+       
+            <span class="rejected rej-ected" *ngIf="marchantdata?.kyc?.status =='Rejected'">
+                <h4 style="color:red;  margin-top:18px;">{{'Rejected' | translate}} </h4>
+           
+            </span>
+            <h4 class="rejected app-rove" style="    color: green;
+                 text-align: center;
+                " *ngIf="marchantdata?.kyc?.status =='Approved'">{{'Approved' | translate}} </h4>
+        </div>
+     
+        <div class="main-top1">
+            <form class="well form-horizontal">
+                <div class="border-contactilne">
+                    <div>
+                        <h4><b><u style="color:black">{{'BusinessDetails' | translate}}:-</u></b></h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            
+                            <div class="row form-group">
+                                <label class="col-md-4 ">{{'BusinessName' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group" title="{{marchantdata?.business?.business_name}}">
+                                        <p>{{marchantdata?.business_name || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'RegistrationNumber' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group" title="{{marchantdata?.registration_number}}">
+                                        <p>{{marchantdata?.registration_number || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-4 ">{{'BusinessImage' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer text-Break registration-col">
+                                        <div class="">
+                                            <a><img src="{{marchantdata?.business_image}}" data-toggle="modal" data-target="#imageModal1" class="dumyImg"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-md-4 ">{{'RegistrationCertificate/DBD' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer text-Break registration-col">
+                                        <div class="">
+                                            <a><img src="{{marchantdata?.certificate}}" data-toggle="modal" data-target="#imageModal2" class="dumyImg"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-contactilne">
+                    <div style="    margin-top: 0%;">
+                        <h4><b> <u style="color:black">{{'BusinessAddress' | translate}}:-</u></b></h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'Street' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group" title="{{marchantdata?.business_address?.street}}">
+                                        <p>{{marchantdata?.business_address?.street || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'Country' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_address?.r_country || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'ZipCode' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_address?.zip_code || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'Phone' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_address?.contact_phone || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'City' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break registration-col">
+                                    <div class="input-group" title="{{marchantdata?.business?.address?.city}}">
+                                        <p>{{marchantdata?.business_address?.city || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'Province' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break registration-col">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_address?.r_province || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-md-4 ">{{'email' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break registration-col">
+                                    <div class="input-group" title="{{marchantdata?.business?.address?.contact_email}}">
+                                        <p>{{marchantdata?.business_address?.contact_email || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-contactilne border-nonecls">
+                    <div>
+                        <h4><b> <u style="color:black">{{'BusinessOwnerDetails' | translate}}:-</u></b></h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                           
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'BusinessOwnerName' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_owner_details?.owner_name || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 ">{{'BusinessOwnerPhoneNumber' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_owner_details?.phone_number || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="marchantdata?.business_owner_details?.nationality !='93'">
+                                <label class="col-md-4 ">{{'PassportNumber' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_owner_details?.passport_number || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="marchantdata?.business_owner_details?.nationality =='93'">
+                                <label class="col-md-4 ">{{'NationalID' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_owner_details?.national_id || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="marchantdata?.kyc?.status =='Rejected'">
+                                <div class="form-group">
+                                    <label class="col-md-4 ">{{'ReasonofRejection' | translate}}:</label>
+                                    <div class="col-md-8 inputGroupContainer text-Break">
+                                        <div class="input-group">
+                                            <p class="resons" *ngFor="let data of marchantdata?.kyc?.r_reasons">{{data?.reason}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 ">{{'Remark' | translate}}:</label>
+                                    <div class="col-md-4 inputGroupContainer text-Break">
+                                      
+                                         
+                                            <p style="border: 1px solid #8080808c;
+                                            padding: 0 5px;"> {{marchantdata?.kyc?.remark || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row form-group">
+                                <label class="col-md-4 ">{{'BusinessOwnerNationality' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break registration-col">
+                                    <div class="input-group">
+                                        <p>{{marchantdata?.business_owner_details?.r_nationality || '--'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4">{{'BusinessOwnerSelfie' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class=" inputGroupContainer text-Break registration-col">
+                                        <div class="">
+                                            <a><img src="{{marchantdata?.business_owner_details?.selfi}}" data-toggle="modal" data-target="#imageModal3" class="dumyImg"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="marchantdata?.business_owner_details?.nationality=='93'">
+                                <label class="col-md-4 ">{{'NationalIDImage' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="inputGroupContainer text-Break registration-col">
+                                        <div class="">
+                                            <a><img src="{marchantdata?.business_owner_details?.national_id_image}}" data-toggle="modal" data-target="#imageModal4" class="dumyImg"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="marchantdata?.business_owner_details?.nationality!='93'">
+                                <label class="col-md-4 ">{{'PassportImage' | translate}}:</label>
+                                <div class="col-md-8 inputGroupContainer text-Break">
+                                    <div class="inputGroupContainer text-Break registration-col">
+                                        <div class="">
+                                            <a><img src="{{marchantdata?.business_owner_details?.passport_image}}" data-toggle="modal" data-target="#imageModal5" class="dumyImg"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn topSpc" *ngIf="marchantdata?.kyc?.status =='Submitted'">
+                        <button class="bt" (click)="approveKyc()" *ngIf="marchantdata?.kyc?.status!='Admin'">Approve</button>
+                        <button class="bt1" data-toggle="modal" data-target="#exampleModal" (click)="getreason()" *ngIf="marchantdata?.kyc?.status!='Admin'">Reject</button>
+                    </div>
+            </form>
+        </div>
+       
+    </section>
+</div>
+<!-- Modal  -->
+<app-footer></app-footer>
+<!-- Reject Modal  -->
+<div class="modal" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modals" role="document">
+        <form [formGroup]="kycrejectForm" autocomplete="off">
+            <div class="modal-content modals" style="width: 778px;height:auto;border: solid;">
+                 
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                        <label class="col-md-3 reason">{{'ReasonofRejection' | translate}}:</label>
+                        <ng-select class="col-md-8 mdl" [multiple]="true" placeholder="Select Reason" formControlName="reason">
+                            <ng-option disabled> {{'SelectReason' | translate}}</ng-option>
+                            <ng-option value={{item?.id}} *ngFor="let item of reason_list">{{item?.reason || '--'}}</ng-option>
+                        </ng-select>
+                    </div>
+                </div> -->
+                <div class="error" *ngIf="reason.invalid && (reason.dirty || reason.touched)">
+                    <div *ngIf="reason.errors.required" class='danger eror' padding>
+                        *Please select reason.
+                    </div>
+                </div>  
+                <div class="row matg">
+                    <div class="col-md-12 divRemark">
+                        <label class="col-md-3  "> {{'Remark' | translate}}:</label>
+                        <textarea type="text" class="col-md-9 int" maxlength="512" placeholder="Type your message here..." formControlName="message"></textarea>
+                    </div>
+                </div>
+                <div class="error" *ngIf="kycrejectForm.get('message').errors && kycrejectForm.get('message').touched || kycrejectForm.get('message').dirty">
+                    <div *ngIf="kycrejectForm.get('message').hasError('required'); else elseBlock" class="danger eror">*Remark is required</div>
+                 
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat"  [disabled]="!kycrejectForm.valid" (click)="rejectKyc()" data-dismiss="modal">{{'Submit' | translate}}</button>
+                    <button type="button" class="close" class=" btnss" data-dismiss="modal" aria-label="Close">{{'Close' | translate}}
+      </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal" id="imageModal1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-image">
+                <img src="{{marchantdata?.business_image}}">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="imageModal2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-image">
+                <img src="{{marchantdata?.certificate}}">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="imageModal3" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-image">
+                <img src="{{marchantdata?.business_owner_details?.selfi}}">
+            </div>
+        </div>
+    </div>-
+</div>
+<div class="modal" id="imageModal4" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-image">
+                <img src="{{marchantdata?.business_owner_details?.national_id_image}}">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="imageModal5" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-image">
+                <img src="{{marchantdata?.business_owner_details?.passport_image}}">
+            </div>
+        </div>
+    </div>
+</div>

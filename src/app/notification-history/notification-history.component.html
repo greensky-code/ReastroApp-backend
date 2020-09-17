@@ -1,0 +1,131 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+  <div class="content-wrapper">
+    <section class="content footer-div">
+        <div class=" setingTop">
+            <div class="pl-3">
+                <h1 style="font-size: 24px;">
+                    {{'notificationhistory' | translate}}
+                </h1>
+            </div>
+          
+ 
+            <div class="row sndRow pl-3">
+                <div class="col-md-2 green-col">
+                    <label>{{'filterByUser' | translate}}</label>
+                    <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                        <option value="">Select User</option>
+                        <option value="Pending">All User</option>
+                        <option value="Submitted">Customer</option>
+                        <option value="Approved">Driver</option>
+                        <option value="Rejected">Restaurants</option>
+                                    </select>
+                </div>
+                <div class="col-md-2 green-col">
+                    <label>{{'FromDate'| translate}}</label>
+                    <input type="date" class="form-control dt1"  (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                </div>
+                <div class="col-md-2 green-col">
+                    <label>{{'ToDate'| translate}}</label>
+                    <input type="date" class="form-control dt2" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" >
+                </div>
+
+                <div class="col-md-4" style="padding-top: 1.2%;">
+                    <div class="btn-div pt-1">
+                        <button type="button" class="btn bg-olive mr-3"  [disabled]="disables==false">{{'Submit' | translate}}</button>
+                     
+                        <button type="button" class="btn margin margin1" >{{'Reset' | translate}}</button>
+                        <button type="button" class="btn margin margin1" >{{'Back' | translate}}</button>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="box-header  box-hearder-564">
+                <form class="" >
+                    <div class="cusine" >
+                        <div class="col-md-12" >
+
+                            <div class="col-md-12 secTab ">
+                                <div class="col-md-9"> 
+                                    <label> KHUSHKHABRI</label>
+                                    <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                 </p>
+                                </div>
+                               <div class="col-md-3">
+                               <img src = "assets/Images/food images.jpg">
+                               <label> 31/08/2020</label>
+                               <label class="ml-4"> 4:00 PM</label>
+                               </div>
+                            
+                            </div>
+                        </div>  
+                        <div class="col-md-12" >
+
+                            <div class="col-md-12 secTab ">
+                                <div class="col-md-9"> 
+                                    <label> KHUSHKHABRI</label>
+                                    <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                 </p>
+                                </div>
+                               <div class="col-md-3">
+                               <img src = "assets/Images/food images.jpg">
+                               <label> 31/08/2020</label>
+                               <label class="ml-4"> 4:00 PM</label>
+                               </div>
+                            
+                            </div>
+                        </div>  
+                        <div class="col-md-12" >
+
+                            <div class="col-md-12 secTab ">
+                                <div class="col-md-9"> 
+                                    <label> KHUSHKHABRI</label>
+                                    <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Aenean euismod bibendum laoreet.Lorem ipsum dolor sit amet, 
+                                        consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                 </p>
+                                </div>
+                               <div class="col-md-3">
+                               <img src = "assets/Images/food images.jpg">
+                               <label> 31/08/2020</label>
+                               <label class="ml-4"> 4:00 PM</label>
+                               </div>
+                            
+                            </div>
+                        </div>                 
+                    </div>
+                   
+                   
+                </form>
+            </div>
+        </div>
+    </section>
+  </div>
+    <app-footer></app-footer>
+</div>
+
+
+
+

@@ -1,0 +1,582 @@
+<app-header>
+
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+  
+    <div class="content footer-div">
+            <div class="box-header button-text-div">
+        <h1 class="mt-0 mb-0" style="font-size: 24px;">
+                Driver Details
+
+            </h1>
+            <div class="backbutton" [routerLink]="['/manage-drivers']">
+                <button type="button" class="bkbtn">Back</button>
+            </div>
+        </div>
+       
+  
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="userProfile" *ngIf="driverImage">
+                    <img   [src]="driverImage"
+                    data-toggle="modal" data-target="#imageModal5" class="dumyImg">
+                </div>
+                <div class="userProfile" *ngIf="!driverImage" >
+                    <img class="userProfile">
+                    <img class="userProfile"  src="assets/adminLTE/dist/img/userprofile.png">
+                </div>
+             
+            </div>
+            <div class="col-md-10">
+                <section class="merchant ">
+                    <div class="row custom-width">
+
+
+                        <div class="col-md-2">
+                            <label>Driver Id:</label>
+                        </div>
+
+                        <div class="col-md-2">
+                            <p>{{driverData?.id ||'--'}}</p>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label>Phone: </label>
+                        </div>
+
+                        <div class="col-md-2">
+                            <p>{{driverData?.mobile ||'--'}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Nationality:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{driverData?.driver?.r_nationality ||'--'}}</p>
+                        </div>
+                    </div>
+                    <div class="row custom-width">
+                        <div class="col-md-2">
+                            <label>Driver Name:</label>
+                        </div>
+                        <div class="col-md-2">
+                            
+                            <p>{{driverData?.driver?.first_name ||'--'}}   {{driverData?.driver?.middle_name}}   {{driverData?.driver?.last_name}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Gender:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p>{{driverData?.driver?.gender ||'--'}}</p>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label>Address:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="table-width" >{{driverData?.address?.street || '--'}},
+                                {{driverData?.address?.zip_code || '--'}},
+                                {{driverData?.address?.province || '--'}},
+                                {{driverData?.address?.city || '--'}},
+                                {{driverData?.address?.country || '--'}}
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                </section>
+            </div>
+
+        </div>
+        <section class="">
+            <div class="tabs tabs-style-tzoid ">
+                <nav>
+                    <ul>
+                        <li><a href="#1a" (click)="makeActive('1a')" [ngClass]="{'active': (selectedTab == '1a') }" data-toggle="tab"><span class="amn active" style="color:black">Issue By
+                                        Company</span></a></li>
+                        <li><a href="#2a" (click)="makeActive('2a')" [ngClass]="{'active': (selectedTab == '2a') }" data-toggle="tab"><span>Vehicle Details</span></a></li>
+                        <li><a href="#3a" (click)="makeActive('3a','bank')" [ngClass]="{'active': (selectedTab == '3a') }" data-toggle="tab"><span>Bank Account</span></a></li>
+                        <li><a href="#4a" (click)="makeActive('4a','orderHistory')" [ngClass]="{'active': (selectedTab == '4a') }" data-toggle="tab"><span>Order History</span></a></li>
+                        <li><a href="#5a" (click)="makeActive('5a','earning')" [ngClass]="{'active': (selectedTab == '5a') }" data-toggle="tab"><span>Earnings</span></a></li>
+
+                    </ul>
+                </nav>
+                <div class="tab-content clearfix steps" style="border: solid;">
+                    <div class="tab-pane active" id="1a">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div *ngFor="let item of issueItemList; let i=index">
+                                    <label class="col-md-2">
+                                        <input type="checkbox" name="item" [checked]="item.checked" (change)="onCheckboxChange(i)" />
+                                        {{item.item_name}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 cl">
+                            <button  class="btn btn-primary btn-block btn-flat" [disabled]="issueItemList==false"  (click)="issueByCompanyFormSubmit()" >Submit</button>
+
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="2a">
+                        <div class="box" *ngIf="driverData?.vehicle != null">
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Type of Vehicle:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>{{driverData?.vehicle?.type_of_vehicle || '--' }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Vehicle Image:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <img src="{{driverData?.vehicle?.vehicle_image}}" (click)="vechicleImage('vechileImage')" class="vchlimg" >
+                                </div>
+
+
+                             
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Plate Number:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>{{driverData?.vehicle?.plate_number || '--' }}</p>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Licence Number:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>{{driverData?.vehicle?.insurance_number || '--' }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Licence Image:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <img src="{{driverData?.vehicle?.license_image}}" (click)="vechicleImage('licenseImage')"  class="vchlimg">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Insurance Number:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>{{driverData?.vehicle?.insurance_number || '--' }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Insurance Image:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <img src="{{driverData?.vehicle?.insurance_image}}" (click)="vechicleImage('insuranceImage')"  class="vchlimg">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Insurance Company:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>{{driverData?.vehicle?.insurance_company || '--' }}</p>
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- /.box-body -->
+                        </div>
+                        <div class="box" *ngIf="driverData?.vehicle == null">
+                            <h2 style="text-align:center;"> Data not found!</h2>
+
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="3a">
+
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body"  >
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Bank Name</th>
+                                            <th>Bank Holder Name</th>
+                                            <th>Bank Acount Number</th>
+                                            <th>Status</th>
+                                            <th>Passbook</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of bankDetail | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalBank}:index as i">
+                                            <td>{{data?.r_bank_name || '__'}}</td>
+                                            <td>{{data?.account_holder_name|| '__'}}</td>
+                                            <td>{{data?.account_number}}</td>
+                                            <td *ngIf="data?.is_active== true">Active</td>
+                                            <td *ngIf="data?.is_active == false">Inactive</td>
+                                            <td><button class="submit" (click)="passbook(data?.passbook)">View</button>
+
+                                            </td>
+
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                               
+                                <h2 *ngIf="bankDetail?.length == 0" style="text-align: center;"> Data not found!</h2>
+
+                            </div>
+                            <!-- /.box-body -->
+                            <div *ngIf="bankDetail">
+                                <pagination-controls (pageChange)="nankDelpagination($event,'bank')" style="float:right;" *ngIf="bankDetail?.length != 0">
+                                </pagination-controls>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="4a">
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body" *ngIf="!(show)">
+                                <div class="row">
+
+                                    <div class="col-md-12" *ngIf="driverData?.driver?.order_history != '' ">
+                                        <button class="custom-View custom-all">View All orders</button>
+                                    </div>
+
+                                </div>
+                                <table id="example1" class="table table-bordered table-striped mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Id</th>
+                                            <th>Order Date</th>
+                                            <th>Customer Name</th>
+                                            <th>Business Location</th>
+                                            <th>Customer Phone</th>
+                                            <th>Order Amount</th>
+                                            <th>Order Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     
+                                        <tr *ngFor="let data of orderHistorys | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalOrder}:index as i">
+                                            <td>{{data?.id}}</td>
+                                             <td>{{(data?.created_at | date : 'dd/MM/yyyy, hhh:mm') ||'--' }}</td>
+                                             <td>{{data?.customer_first_name}}</td>
+                                             <td>{{data?.business_location?.street ||'--'}}
+                                                ,{{data?.business_location?.city ||'--'}}
+                                                ,{{data?.business_location?.zip_code ||'--'}},{{data?.business_location?.province ||'--'}},
+                                                {{data?.business_location?.country ||'--'}}
+                                             </td>
+                                             <td>{{data?.customer_phone}}</td>
+                                             <td>{{data?.order_value}}</td>
+                                             <td>{{data?.order_status}}</td>
+                                            <td>
+                                                <button class="submit"  mat-raised-button (click)="toggle(data?.id)">View</button>
+                                            </td>
+
+
+                                        </tr>
+
+
+                                    </tbody>
+                                  
+
+                                </table>
+
+
+                                <h2 *ngIf="orderHistorys?.length == 0" style="text-align: center;"> Data not found!</h2>
+                                <div >
+                                    <pagination-controls (pageChange)="nankDelpagination($event,'order')" style="float:right;" *ngIf="orderHistorys?.length != 0">
+                                    </pagination-controls>
+                                </div>
+                            </div>
+                          
+                            <div class="box-body" *ngIf="show">
+                                <div class="backbtn" style="float: right;">
+                                    
+                                </div>
+                              
+
+                                <div *ngIf="orderDetails">
+                                  
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Order id:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.order_id || '--'}}</p>
+                                        <label class="col-md-2 order">Delivery Date time:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.delivery_date_time | date : 'shortDate'}}</p>
+                                        <label class="col-md-2 order">Business Name:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.business_name || '--'}},
+                                            {{trackOrder?.business_address?.street}},
+                                            {{trackOrder?.business_address?.city}},
+                                            {{trackOrder?.business_address?.r_province}},
+                                            {{trackOrder?.business_address?.r_country}},
+                                            <!-- {{trackOrder?.business_address?.r_province}}, -->
+                                        </p>
+                                    </div>
+                                    <div class="row sndRow">
+                                        <label class="col-md-2 order">Order Date:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.created_at | date : 'shortDate'}}</p>
+                                        <label class="col-md-2 order">Order Rating/Review:</label>
+                                        <p class="col-md-2 hundrd"> 
+                                            <rating style=" font-size: 1.1em;" [(ngModel)]="order_rating_review" [readonly]="true"></rating>
+                                       </p>
+                                        <label class="col-md-2 order">Business Location:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.business_location?.street ||'--'}} {{orderDetails?.business_location?.city}}
+                                            {{orderDetails?.business_location?.zip_code}} {{orderDetails?.business_location?.province}}
+                                            {{orderDetails?.business_location?.country}}</p>
+                                    </div>
+                                    <div class="row sndRow">
+                                        <label class="col-md-2 order">Order total:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.order_value || '--'}}</p>
+                                        <label class="col-md-2 order">Driver Rating/Review:</label>
+                                        <p class="col-md-2 hundrd"><rating style=" font-size: 1.1em;" [(ngModel)]="driver_rating_review" [readonly]="true"></rating>
+                                        </p>
+                                        <label class="col-md-2 order">Customer Name:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.customer_first_name || '--'}}</p>
+                                    </div>
+                                    <div class="row sndRow">
+                                        <label class="col-md-2 order">Discount:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.discount || '--'}}</p>
+                                        <label class="col-md-2 order">Amount Recevied:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.amount_payable || '--'}}
+                                        </p>
+                                        <label class="col-md-2 order">Customer Email/Phone:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.customer_email || '--'}}
+                                        </p>
+                                    </div>
+                                    <div class="row sndRow">
+                                        <label class="col-md-2 order">Order status:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.order_status || '--'}}</p>
+                                       
+                                        <label class="col-md-2 order">Customer Address:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.flat_no ||'--'}},{{orderDetails?.land_mark ||'--'}}
+                                            ,{{orderDetails?.location ||'--'}},
+                                           
+                                        </p>
+                                        <label class="col-md-2 order">Special Note:</label>
+                                        <p class="col-md-2 hundrd">{{orderDetails?.special_note}}
+                                        </p>
+                                    </div>
+                              
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr style="background-color: black;">
+                                                <th>Order Item Name</th>
+                                                <th>Quantity</th>
+                                                <th>Order Price</th>
+                                                <th>Total Price</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of orderDetails?.order_items">
+                                                <td>{{item?.item_name}}</td>
+                                                <td>{{item?.quantity}}</td>
+                                                <td>{{item?.item_price}}</td>
+                                                <td>{{item?.item_price * item?.quantity}}</td>
+                                               
+                                               
+                                            </tr>
+                                       
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div *ngIf="!orderDetails">
+                                    <h3 style="text-align: center;">Data not found!</h3>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane" id="5a">
+                        <div class="col-md-12">
+                            <button class="custom-View custom-all">View All orders</button>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <p>Total Orders:</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="para">{{earningData?.total_orders || '0'}}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>Total Earnings:</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="para">{{earningData?.total_earnings || '0'}}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>Pending Payouts:</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="para">{{earningData?.total_payout || '0'}}</p>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr >
+                                        <th>Order id</th>
+                                        <th>Order Date</th>
+                                        <th>Order Status</th>
+                                        <th>Delivery Charges</th>
+                                        <th>Payout Status</th>
+                                    </tr>
+                                </thead>
+                                <!-- | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalOrder}:index as i -->
+                                <tbody>
+                                    <tr *ngFor="let data of earningHistorys | paginate : {itemsPerPage:limit, currentPage:page, totalItems:totalEarning}:index as i">
+                                        <th>{{data?.order_id}}</th>
+                                        <td>{{(data?.order_date | date : 'dd/MM/yyyy, hhh:mm') ||'--' }}</td>
+                                        <th>{{data?.status}}</th>
+                                        <th>{{data?.delivery_charge}}</th>
+
+                                        <td>{{data?.status}}</td>
+
+
+
+                                    </tr>
+
+
+                                </tbody>
+
+                            </table>
+                       
+                        </div>
+                        <h2 *ngIf="earningHistorys.length == 0" style="text-align: center;"> Data not found!</h2>
+                        <div *ngIf="earningHistorys">
+                            <pagination-controls (pageChange)="nankDelpagination($event,'earning')" style="float:right;" *ngIf="earningHistorys?.length != 0">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="6a">
+                        <h3>6</h3>
+                    </div>
+                    <div class="tab-pane" id="7a">
+                        <h3>7</h3>
+                    </div>
+                </div>
+                <!-- /content -->
+            </div>
+            <!-- /tabs -->
+        </section>
+
+        <section>
+        </section>
+    </div>
+</div>
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+<!-- -------------------------passbook modal-------------------------- -->
+
+<div class="modal" id="passbook" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+
+            <div class="modal-body">
+                <div class="imagessss">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <img class="imagesddd"  src="{{passbookImages}}">
+
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="vechicleImage" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+
+            <div class="modal-body">
+                <div class="imagessss">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                    <img class="imagesddd"  src="{{driverData?.vehicle?.vehicle_image}}">
+
+              
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="licenseImage" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+
+            <div class="modal-body">
+                <div class="imagessss">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                    <img class="imagesddd"  src="{{driverData?.vehicle?.license_image}}" >
+
+              
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="insuranceImage" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+    <div class="modal-dialog modal-dialog-centered" role="document">
+       
+       
+        <div class="modal-content modals">
+
+            <div class="modal-body">
+                <div class="imagessss">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                    <img class="imagesddd" src="{{driverData?.vehicle?.insurance_image}}">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="imageModal5" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-image">
+                <img src="{{driverImage}}">
+            </div>
+        </div>
+    </div>
+</div>
+  

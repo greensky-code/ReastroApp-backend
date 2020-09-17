@@ -1,0 +1,298 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div >
+<div class="content-wrapper">
+    <section class="content footer-div" >
+        <div class=" setingTop" *ngIf="values=='banner-text'">
+            <div class="box-header">
+                <h1 style="font-size: 24px;">
+                     {{'BannerText' | translate}}
+
+                </h1>
+            </div>
+            <div class="" >
+                <form class="" [formGroup]="bannerForm">
+                    <div>
+                        <div class="cusine">
+                            <div class="col-md-12" *ngIf="language=='th'">
+                                <div class="row">
+                                    <label class="col-md-2">{{'Language' | translate}}</label>
+                                    <p class="col-md-8 int form-control" >Thai</p>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="row" style="margin-top: 20px;">
+                                    <label class="col-md-2">{{'Title' | translate}}:</label>
+                                    <input type="text" class="col-md-8 int form-control" formControlName="bannertitle">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 cusine mt-3">
+                            <div class="row">
+                                <label class="col-md-2">{{'Description' | translate}}:</label>
+                               <div class="col-md-8 p-0">
+                                <ck-editor id="12b" language="en" [fullPage]="true" formControlName="bannerDescription">
+                                </ck-editor>
+                               </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="bx mt-4-btn mb-5" style="display: flex;justify-content: space-evenly;;width: 100%;">
+                        <button type="submit" class="btn  btn-flat cusine btn-flat" [routerLink]="['/website-home-page']"
+                            style="background-color:#fd1b00">{{'Cancel' | translate}}</button>
+                        <button type="submit" class="btn  btn-flat cusine btn-flat"
+                            (click)="generate('banner')">{{'Update' | translate}}</button>
+            
+                    </div>
+                  
+
+                </form>
+            </div>
+        </div>
+
+        <!-- wr5wwerwerewasdfasasdasd -->
+
+
+
+        <section class="content footer-div" *ngIf="values=='how-it-work'">
+
+            <div class=" setingTop">
+                <div class="box-header">
+                    <h1 style="font-size: 24px;">
+                        {{'HowitWork' | translate}}
+    
+                    </h1>
+                </div>
+                <div class=""   >
+                    <form class="" [formGroup]="howForm">
+                        <div class="cusine">
+                            <div class="col-md-12" *ngIf="language=='th'">
+                                <div class="row">
+                                    <label class="col-md-2">{{'Language' | translate}}</label>
+                                    <p class="col-md-8 int form-control" readonly>Thai</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div >
+                            <div class="cusine">
+                                <div class="col-md-12">
+                                    <div class="row" style="margin-top: 20px;"  >
+                                        <label class="col-md-2">{{'Title' | translate}}:</label>
+                                        <input type="text" class="col-md-8 int form-control" formControlName="howTitle1" readonly>
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <div class="col-md-12 cusine mt-3" >
+                                <div class="row" style="padding-top: 24px;">
+                                    <label class="col-md-2">{{'Description' | translate}}:</label>
+                             <div class="col-md-10 p-0">
+                                <ck-editor id="12b" language="en" [fullPage]="true" [innerHTML] formControlName="howDescription1" >
+                                </ck-editor>
+                             </div>
+                                </div>
+    
+                            </div>
+                        </div>
+
+                        <div >
+                            <div class="cusine">
+                                <div class="col-md-12">
+                                    <div class="row" style="margin-top: 20px;"  >
+                                        <label class="col-md-2">{{'Title' | translate}}:</label>
+                                        <input type="text" class="col-md-8 int form-control" [innerHTML] formControlName="howTitle2" readonly>
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <div class="col-md-12 cusine mt-3" >
+                                <div class="row" style="padding-top: 24px;">
+                                    <label class="col-md-2">{{'Description' | translate}}:</label>
+                                    <div class="col-md-10 p-0">
+                                        <ck-editor id="12b" language="en" [fullPage]="true"[innerHTML]  formControlName="howDescription2" >
+                                        </ck-editor>
+                                    </div>
+                                   
+                                </div>
+    
+                            </div>
+                        </div>
+                        <div >
+                            <div class="cusine">
+                                <div class="col-md-12">
+                                    <div class="row" style="margin-top: 20px;"  >
+                                        <label class="col-md-2">{{'Title' | translate}}:</label>
+                                        <input type="text" class="col-md-8 int form-control" formControlName="howTitle3" readonly>
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <div class="col-md-12 cusine mt-3" >
+                                <div class="row" style="padding-top: 24px;">
+                                    <label class="col-md-2">{{'Description' | translate}}:</label>
+                                    <div class="col-md-10 p-0">
+                                        <ck-editor id="12b" language="en" [fullPage]="true" [innerHTML] formControlName="howDescription3" >
+                                        </ck-editor>
+                                    </div>
+                               
+                                </div>
+    
+                            </div>
+                        </div>
+    
+    
+                        <div class="bx mt-4-btn" style="display: flex;justify-content: space-evenly;;width: 100%;">
+                            <button type="submit" class="btn  btn-flat cusine btn-flat" [routerLink]="['/website-home-page']"
+                                style="background-color:#fd1b00">{{'Cancel' | translate}}</button>
+                            <button type="submit" class="btn  btn-flat cusine btn-flat"
+                                (click)="generate('howitwork')">{{'Update' | translate}}</button>
+    
+                        </div>
+    
+                    </form>
+    
+                </div>
+            </div>
+    
+    
+        </section>
+    </section> 
+ 
+  <section class="content footer-div" *ngIf="values=='Restaurant-in-your-hand'">
+        <div class=" setingTop">
+            <div class="box-header">
+                <h1 style="font-size: 24px;">
+                     {{'Restaurantinyourhand' | translate}}
+
+                </h1>
+            </div>
+            <div class="" >
+                <form class="" [formGroup]="restaurantForm">
+                    <div class="cusine">
+                        <div class="col-md-12" *ngIf="language=='th'">
+                            <div class="row">
+                                <label class="col-md-2">{{'Language' | translate}}</label>
+                                <p class="col-md-8 int form-control" readonly>Thai</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="cusine">
+                          
+
+
+                            <div class="col-md-12">
+                                <div class="row" style="margin-top: 20px;">
+                                    <label class="col-md-2">{{'Title' | translate}}:</label>
+                                    <input type="text" class="col-md-8 int form-control" formControlName="restaurantTitle">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 cusine mt-3">
+                            <div class="row">
+                                <label class="col-md-4">{{'Description' | translate}}:</label>
+                             <div class="col-md-10 p-0">
+                                <ck-editor id="12b" language="en" [fullPage]="true" formControlName="restaurantDescription"></ck-editor>
+                             </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="bx mt-4-btn" style="display: flex;justify-content: space-evenly;;width: 100%;">
+                        <button type="submit" class="btn  btn-flat cusine btn-flat" [routerLink]="['/website-home-page']"
+                            style="background-color:#fd1b00">{{'Cancel' | translate}}</button>
+                        <button type="submit" class="btn  btn-flat cusine btn-flat"
+                            (click)="generate('Restaurant')">{{'Update' | translate}}</button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+    </section>
+</div>
+
+    <app-footer></app-footer>
+</div>
+
+
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h2 *ngIf="language=='Thai'">{{'Translate FAQ' | translate}}</h2>
+                <h2 *ngIf="language!='Thai'">{{'Edit FAQ' | translate}}</h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p *ngIf="language=='Thai'">{{'Are you sure you want to translate this FAQ?' | translate}}</p>
+
+                <p *ngIf="language!='Thai'">{{'Are you sure you want to edit this FAQ?' | translate}}</p>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                <button type="button" data-dismiss="modal" class="submit"
+                    style="background: red;color: #fff;">{{'No' | translate}}</button>
+                <button type="button" (click)="modal()" class="submit"
+                    style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modals">
+            <div class="modal-header">
+                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification' | translate}}</h4>
+                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-box">
+                <div class="ggcode">
+                    <p>{{errorMessage}}</p>
+
+                </div>
+
+                <div class="form-group has-feedback codeSpace">
+                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode' | translate}}</label>
+
+
+                    <div class="otp-field">
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            (keypress)="numberOnly($event)" type="number" style="width:57px; height:57px;"
+                            [config]="{length:6}"></ng-otp-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 lognBrn">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode"
+                            (click)="verify()">{{'Verify' | translate}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

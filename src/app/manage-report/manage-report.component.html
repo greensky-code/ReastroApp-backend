@@ -1,0 +1,1040 @@
+<app-header></app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <div class="standrd">
+
+        <section>
+            <div class="tabs tabs-style-tzoid ">
+                <nav>
+
+
+                    <ul id="myul">
+                        <li><a class="active" (click)="makeActive('1a')" [ngClass]="{'active': (selectedTab == '1a') }" href="#1a" data-toggle="tab"><span>Customer Reports</span></a></li>
+                        <li><a (click)="makeActive('2a')" [ngClass]="{'active': (selectedTab == '2a') }" href="#2a" data-toggle="tab"><span>Business Reports</span></a></li>
+                        <li><a (click)="makeActive('3a')" [ngClass]="{'active': (selectedTab == '3a') }" href="#3a" data-toggle="tab"><span>Drive Reports</span></a></li>
+                        <li><a (click)="[makeActive('4a'), getordertabel()]" [ngClass]="{'active': (selectedTab == '4a') }" href="#4a" data-toggle="tab"><span>Sales Represenlative Reports</span></a></li>
+                        <li><a (click)="makeActive('5a')  " [ngClass]="{'active': (selectedTab == '5a') }" href="#5a" data-toggle="tab"><span>Order Reports</span></a></li>
+
+                    </ul>
+                </nav>
+                <div class="tab-content clearfix steps" style="border: solid;">
+                    <div class="tab-pane active" id="1a">
+                        <div class="row sndRow">
+                            <div class="col-md-2 green-col">
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                          
+                                            background: transparent;
+                                            border: 1px solid #cccccc;height: 32px;">
+                                                <option value="">KYC Status</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Submitted">Submitted</option>
+                                                <option value="Approved">Approved</option>
+                                                <option value="Rejected">Rejected</option>
+                                            </select>
+                            </div>
+                        </div>
+                        <div class="row sndRow">
+                            <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                                <div class=" has-search">
+
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 green-col">
+                             
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <i class="fas fa-calendar-alt"></i>
+
+                            </div>
+                            <div class="col-md-2 green-col">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="btn-div">
+                                   
+                                    <button type="button" class="btn margin margin1" (click)="reset()">Reset</button>
+                                    <button type="button" class="btn margin margin1 export-btn-2" (click)="exportAsXLSX()">Export</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="box-body zui-scroller table-responsive">
+                            <table id="example2" class="table zui-table table-bordered table-hover">
+                                <thead>
+                                    <tr class="idMerchant">
+                                        <th>ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Customer Phone</th>
+                                        <th>Customer Email </th>
+                                        <th>Created At</th>
+                                        <th>Status</th>
+                                        <th>Last Order on</th>
+                                        <th>Last Order Amount</th>
+
+                                        <th class="zui-sticky-col" style="background: #222d32; color: #fff;">Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of marchantdata | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}:index as i">
+                                        <td style="padding: 10px;"></td>
+                                        <td class="table-width" style="padding: 10px;" title="{{data?.business?.business_name ||'--'  }}">{{data?.business?.business_name ||'--'  }}</td>
+                                        <td class="table-width" style="padding: 10px;" title="{{data?.email ||'--' }}">{{data?.email ||'--' }}</td>
+                                        <td style="padding: 10px;">{{data?.mobile ||'--' }}</td>
+                                        <td class="table-width" style="padding: 10px;" title="{{data?.created_by ||'--' }}">{{data?.created_by ||'--' }}</td>
+                                        <td style="padding: 10px;">{{data?.created_at | date : 'dd/MM/yyyy, H:mm' ||'--' }}</td>
+                                        <td *ngIf='data.is_active ===true' style="padding: 10px;">Active</td>
+                                        <td *ngIf='data?.is_active ===false' style="padding: 10px;">Inactive</td>
+                                        <td style="padding: 10px;">{{data?.kyc_status || '--' }}</td>
+
+                                        <td style="padding: 10px;">{{(data?.business?.kyc?.created_at | date : 'dd/MM/yyyy, H:mm') ||'--' }}</td>
+                                        <td style="padding: 10px;">{{data?.business?.kyc?.kyc_updated_by ||'--' }}</td>
+                                        <td class="wght1 zui-sticky-col">
+                                            <button class="submit" *ngIf="data?.kyc_status =='Pending'" [routerLink]="['/submit-kyc',data?.id]">Submit
+                                                            KYC</button>
+                                            <button class="submit" *ngIf="data?.kyc_status !='Pending'" [routerLink]="['/view-kyc',data?.id]">View 
+                                                            KYC</button>
+                                            <button class="detail" [routerLink]="['/merchant-details',data?.id]">Details</button>
+                                    
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                            <h2 *ngIf="marchantdata?.length == 0" style="text-align:center;">No Record Found!</h2>
+                      
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="tab-pane" id="2a">
+                        <div class="row sndRow">
+
+                            <div class="col-md-2 green-col">
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                      
+                                        background: transparent;
+                                        border: 1px solid #cccccc;height: 32px;">
+                                            <option value="">KYC Status</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Submitted">Submitted</option>
+                                            <option value="Approved">Approved</option>
+                                            <option value="Rejected">Rejected</option>
+                                        </select>
+                            </div>
+                            <div class="has-search">
+
+
+                                <input type="text" class="form-control" placeholder="Search by name,email,phone" maxlength="50" [(ngModel)]="driver.searchField" style="border-radius: 20px;">
+                                <span class="fa fa-search form-control-feedback"></span>
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <i class="fas fa-calendar-alt"></i>
+
+                                <input type="date" class="form-control dt1" [(ngModel)]="driver.fromDate" (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <input type="date" class="form-control dt2" [(ngModel)]="driver.toDate" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="btn-div">
+                                    <button type="button" class="btn bg-olive" (click)="getmarchantdetail(1,'search')">Apply</button>
+                             
+                                    <button type="button" class="btn margin margin1" (click)="reset()">Reset</button>
+                                    <button type="button" class="btn margin margin1 export-btn-2" (click)="exportAsXLSX()">Export</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row sndRow">
+                            <label>Filter By Location:</label>
+                            <div class="col-md-2 green-col">
+
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                              
+                                                background: transparent;
+                                                border: 1px solid #cccccc;height: 32px;">
+                                                    <option value="">KYC Status</option>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="Submitted">Submitted</option>
+                                                    <option value="Approved">Approved</option>
+                                                    <option value="Rejected">Rejected</option>
+                                                </select>
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                                  
+                                                    background: transparent;
+                                                    border: 1px solid #cccccc;height: 32px;">
+                                                        <option value="">KYC Status</option>
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Submitted">Submitted</option>
+                                                        <option value="Approved">Approved</option>
+                                                        <option value="Rejected">Rejected</option>
+                                                    </select>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Business Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Created By</th>
+                                            <th>Created At</th>
+                                            <th>Status</th>
+                                            <th>KYC Status</th>
+                                            <th>KYC Submit Date</th>
+                                            <th>Approved By/Reject</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of marchantdata?.business?.restaurant?.location">
+                                            <td>{{item?.street || '--'}}</td>
+                                            <td>{{item?.city || '--'}}</td>
+                                            <td>{{item?.country || '--'}}</td>
+                                            <td>{{item?.city || '--'}}</td>
+                                            <td>{{item?.zip_code || '--'}}</td>
+                                            <td>{{item?.contact_phone || '--'}}</td>
+                                            <td>{{item?.contact_email || '--'}}</td>
+                                      
+                                            <td>
+                                                <select class="form-control" style="border: none!important;">
+
+                                                    <option value="{{data.day}}:{{data.start_time}}-{{data.end_time}}"
+                                                        *ngFor="let data of marchantdata?.business?.restaurant?.hours?.opertion_hours?.opertion_hours">
+                                                        {{data.day}}:{{data.start_time}}-{{data.end_time}} </option>
+                                                </select>
+                                            </td>
+                                          
+                                            <td *ngIf="item?.is_active==true">Active</td>
+                                            <td *ngIf="item?.is_active !=true">Inactive</td>
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="3a">
+                        <div class="row sndRow">
+
+
+                            <div class="col-md-2 green-col">
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                      
+                                        background: transparent;
+                                        border: 1px solid #cccccc;height: 32px;">
+                                            <option value="">KYC Status</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Submitted">Submitted</option>
+                                            <option value="Approved">Approved</option>
+                                            <option value="Rejected">Rejected</option>
+                                        </select>
+                            </div>
+                            <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                                <div class=" has-search">
+                                    <input type="text" class="form-control" placeholder="Search By Name/Email/Phone" maxlength="50" [(ngModel)]="user.searchField" style="border-radius: 20px;">
+
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <i class="fas fa-calendar-alt"></i>
+
+                                <input type="date" class="form-control dt1" [(ngModel)]="driver.fromDate" (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <input type="date" class="form-control dt2" [(ngModel)]="driver.toDate" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="btn-div">
+                                    <button type="button" class="btn bg-olive" (click)="getmarchantdetail(1,'search')">Apply</button>
+                               
+                                    <button type="button" class="btn margin margin1" (click)="reset()">Reset</button>
+                                    <button type="button" class="btn margin margin1 export-btn-2" (click)="exportAsXLSX()">Export</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row sndRow">
+                            <div class="col-md-2 green-col">
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                              
+                                                background: transparent;
+                                                border: 1px solid #cccccc;height: 32px;">
+                                                    <option value="">KYC Status</option>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="Submitted">Submitted</option>
+                                                    <option value="Approved">Approved</option>
+                                                    <option value="Rejected">Rejected</option>
+                                                </select>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Driver ID</th>
+                                            <th>Driver Name</th>
+                                            <th>Phone</th>
+                                            <th>Created At</th>
+                                            <th>Status</th>
+                                            <th>KYC Submit Date</th>
+                                            <th>KYC Approved By</th>
+                                            <th>Online Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of marchantdata?.business?.account;  let i=index">
+                                            <td>{{data?.bank_name ||'--'}}</td>
+                                            <td>{{data?.account_holder_name ||'--'}}</td>
+                                            <td>{{data?.account_number ||'--'}}</td>
+                                            <td *ngIf='data?.is_active ===true'>Active</td>
+                                            <td *ngIf='data?.is_active ===false'>Inactive</td>
+                                            <td>
+                                                <button data-toggle="modal" class="custom-View" data-target="#exampleModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="bankdata(data?.passbook)">View</button></td>
+                                        </tr>
+                                  
+
+                                    
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="4a">
+                        <div class="row sndRow">
+                            <div class="col-md-2 green-col">
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                          
+                                            background: transparent;
+                                            border: 1px solid #cccccc;height: 32px;">
+                                                <option value="">KYC Status</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Submitted">Submitted</option>
+                                                <option value="Approved">Approved</option>
+                                                <option value="Rejected">Rejected</option>
+                                            </select>
+                            </div>
+                        </div>
+                        <div class="row sndRow">
+
+
+
+                            <div class="col-md-3 green-col" style="border-radius: 18px!important">
+                                <div class=" has-search">
+                                    <input type="text" class="form-control" placeholder="Search By Name/Email/Phone" maxlength="50" [(ngModel)]="user.searchField" style="border-radius: 20px;">
+
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <i class="fas fa-calendar-alt"></i>
+
+                                <input type="date" class="form-control dt1" [(ngModel)]="driver.fromDate" (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <input type="date" class="form-control dt2" [(ngModel)]="driver.toDate" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="btn-div">
+                                    <button type="button" class="btn bg-olive" (click)="getmarchantdetail(1,'search')">Apply</button>
+                               
+                                    <button type="button" class="btn margin margin1" (click)="reset()">Reset</button>
+                                    <button type="button" class="btn margin margin1 export-btn-2" (click)="exportAsXLSX()">Export</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                                <th>Created At</th>
+                                                <th>Reference Code</th>
+                                                <th>Total Reference</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of orderlistdata">
+                                                <td>{{data?.order_id ||'--'}}</td>
+                                                <td>{{data?.created_at ||'--' | date : 'dd-MM-yy'}}</td>
+                                                <td>{{data?.name ||'--'}}</td>
+                                                <td>{{data?.place_user?.email ||'--'}}</td>
+                                                <td>{{data?.land_mark ||'--'}}</td>
+                                                <td>{{data?.order_value ||'--'}}</td>
+                                                <td>{{data?.order_status ||'--'}}</td>
+                                                <td>
+                                                    <button (click)="viewOrderdata(data)" class="custom-View">View</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div *ngIf="tablehide==false">
+                                    <div class="stand">
+                                        <ul class="crcl">
+                                            <li class="circlStand circlStand2  active">
+                                                Order Place
+                                            </li>
+                                            <img src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                            <li class="circlStand">
+                                                Order Accepted
+                                            </li>
+                                            <img src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                            <li class="circlStand">
+                                                Order Prepared
+                                            </li>
+                                            <img src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                            <li class="circlStand circlStand1">
+                                                Order Dispatched
+                                            </li>
+                                            <img src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                            <li class="circlStand">
+                                                Order Delivered
+                                            </li>
+                                        </ul>
+                                        <ul class="crcl1">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                            <img src="" class="arowss">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                            <img src="" class="arowss">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                            <img src="" class="arowss">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                            <img src="" class="arowss">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Order id</label>
+                                        <p class="col-md-2 hundrd">{{data?.order_id}}</p>
+                                        <label class="col-md-2 order">Customer Name</label>
+                                        <p class="col-md-2 hundrd">{{data?.place_user?.customer?.first_name}}</p>
+                                        <label class="col-md-2 order">Business Location</label>
+                                        <p class="col-md-2 hundrd">{{data?.land_mark}}</p>
+
+
+                                    </div>
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Order Date:</label>
+                                        <p class="col-md-2 hundrd">{{data?.created_at | date : 'shortDate'}}</p>
+                                        <label class="col-md-2 order">Customer Eamil/Phone</label>
+                                        <p class="col-md-2 hundrd">+{{data?.place_user?.email}}</p>
+                                        <label class="col-md-2 order">Driver Name</label>
+                                        <p class="col-md-2 hundrd">John</p>
+
+
+
+                                    </div>
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Order total:</label>
+                                        <p class="col-md-2 hundrd">{{data?.total_items}}</p>
+                                        <label class="col-md-2 order">Customer Address</label>
+                                        <p class="col-md-2 hundrd">+lorem ipsum loremipsum loremipsum loremipsum loremipsum
+                                        </p>
+                                        <label class="col-md-2 order">Driver Name</label>
+                                        <p class="col-md-2 hundrd">{{data?.driver}}</p>
+
+
+                                    </div>
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Tax</label>
+                                        <p class="col-md-2 hundrd">{{data?.tax_charges}}</p>
+                                        <label class="col-md-2 order">Special Note</label>
+                                        <p class="col-md-2 hundrd">
+                                        </p>
+                                    </div>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Order Id</th>
+                                                <th>Order Date</th>
+                                                <th>Customer Name</th>
+                                                <th>Coustomer Email/Phone</th>
+                                                <th>Business Location</th>
+                                                <th>Order Price</th>
+                                                <th>Order Status</th>
+                                                <th>Action</th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of data?.order_items">
+                                                <td>{{item?.order_id}}</td>
+                                                <td>{{item?.created_at | date : 'shortDate'}}</td>
+                                                <td>Maria</td>
+                                                <td>maria@gmail.com</td>
+                                                <td>loream</td>
+                                                <td>5.00</td>
+                                                <td>Activated</td>
+                                                <td>
+                                                    <button class="custom-View">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="white">
+                                                <td>100</td>
+                                                <td>02/02/2019</td>
+                                                <td>Maria</td>
+                                                <td>maria@gmail.com</td>
+                                                <td>loream</td>
+                                                <td>5.00</td>
+                                                <td>Activated</td>
+                                                <td>
+                                                    <button class="custom-View">View</button>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="tab-pane" id="5a">
+                        <div class="row sndRow">
+                            <div class="col-md-2 green-col">
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                          
+                                            background: transparent;
+                                            border: 1px solid #cccccc;height: 32px;">
+                                                <option value="">KYC Status</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Submitted">Submitted</option>
+                                                <option value="Approved">Approved</option>
+                                                <option value="Rejected">Rejected</option>
+                                            </select>
+                            </div>
+                        </div>
+                        <div class="row sndRow">
+
+                            <div class="col-md-2 green-col">
+                                <select class="btn drrop-type" [(ngModel)]="user.kycRole" style="width:100%;
+                                                  
+                                                    background: transparent;
+                                                    border: 1px solid #cccccc;height: 32px;">
+                                                        <option value="">KYC Status</option>
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Submitted">Submitted</option>
+                                                        <option value="Approved">Approved</option>
+                                                        <option value="Rejected">Rejected</option>
+                                                    </select>
+                            </div>
+
+                            <div class="col-md-2 green-col">
+                                <i class="fas fa-calendar-alt"></i>
+
+                                <input type="date" class="form-control dt1" [(ngModel)]="driver.fromDate" (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            </div>
+                            <div class="col-md-2 green-col">
+                                <input type="date" class="form-control dt2" [(ngModel)]="driver.toDate" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="btn-div">
+                                    <button type="button" class="btn bg-olive" (click)="getmarchantdetail(1,'search')">Apply</button>
+                          
+                                    <button type="button" class="btn margin margin1" (click)="reset()">Reset</button>
+                                    <button type="button" class="btn margin margin1 export-btn-2" (click)="exportAsXLSX()">Export</button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Order Date</th>
+                                                <th>Customer Name</th>
+                                                <th>Customer Email/Phone</th>
+                                                <th>Business Location</th>
+                                                <th>Order Price</th>
+                                                <th>Order Status</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of orderlistdata">
+                                                <td>{{data?.order_id ||'--'}}</td>
+                                                <td>{{data?.created_at ||'--' | date : 'dd-MM-yy'}}</td>
+                                                <td>{{data?.name ||'--'}}</td>
+                                                <td>{{data?.place_user?.email ||'--'}}</td>
+                                                <td>{{data?.land_mark ||'--'}}</td>
+                                                <td>{{data?.order_value ||'--'}}</td>
+                                                <td>{{data?.order_status ||'--'}}</td>
+                                                <td>
+                                                    <button (click)="viewOrderdata(data)" class="custom-View">View</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div *ngIf="tablehide==false">
+                                    <div class="stand">
+                                        <ul class="crcl">
+                                            <li class="circlStand circlStand2  active">
+                                                Order Place
+                                            </li>
+                                            <img src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                            <li class="circlStand">
+                                                Order Accepted
+                                            </li>
+                                            <img src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                            <li class="circlStand">
+                                                Order Prepared
+                                            </li>
+                                            <img src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                            <li class="circlStand circlStand1">
+                                                Order Dispatched
+                                            </li>
+                                            <img src="assets/adminLTE/dist/img/images.png" class="arowss">
+                                            <li class="circlStand">
+                                                Order Delivered
+                                            </li>
+                                        </ul>
+                                        <ul class="crcl1">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                            <img src="" class="arowss">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                            <img src="" class="arowss">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                            <img src="" class="arowss">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                            <img src="" class="arowss">
+                                            <li class="circlStand3">
+                                                <a href="#">Trade Orders</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Order id</label>
+                                        <p class="col-md-2 hundrd">{{data?.order_id}}</p>
+                                        <label class="col-md-2 order">Customer Name</label>
+                                        <p class="col-md-2 hundrd">{{data?.place_user?.customer?.first_name}}</p>
+                                        <label class="col-md-2 order">Business Location</label>
+                                        <p class="col-md-2 hundrd">{{data?.land_mark}}</p>
+
+
+                                    </div>
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Order Date:</label>
+                                        <p class="col-md-2 hundrd">{{data?.created_at | date : 'shortDate'}}</p>
+                                        <label class="col-md-2 order">Customer Eamil/Phone</label>
+                                        <p class="col-md-2 hundrd">+{{data?.place_user?.email}}</p>
+                                        <label class="col-md-2 order">Driver Name</label>
+                                        <p class="col-md-2 hundrd">John</p>
+
+
+
+                                    </div>
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Order total:</label>
+                                        <p class="col-md-2 hundrd">{{data?.total_items}}</p>
+                                        <label class="col-md-2 order">Customer Address</label>
+                                        <p class="col-md-2 hundrd">+lorem ipsum loremipsum loremipsum loremipsum loremipsum
+                                        </p>
+                                        <label class="col-md-2 order">Driver Name</label>
+                                        <p class="col-md-2 hundrd">{{data?.driver}}</p>
+
+
+                                    </div>
+                                    <div class="row sndRow">
+
+                                        <label class="col-md-2 order">Tax</label>
+                                        <p class="col-md-2 hundrd">{{data?.tax_charges}}</p>
+                                        <label class="col-md-2 order">Special Note</label>
+                                        <p class="col-md-2 hundrd">
+                                        </p>
+                                    </div>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Order Id</th>
+                                                <th>Order Date</th>
+                                                <th>Customer Name</th>
+                                                <th>Coustomer Email/Phone</th>
+                                                <th>Business Location</th>
+                                                <th>Order Price</th>
+                                                <th>Order Status</th>
+                                                <th>Action</th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of data?.order_items">
+                                                <td>{{item?.order_id}}</td>
+                                                <td>{{item?.created_at | date : 'shortDate'}}</td>
+                                                <td>Maria</td>
+                                                <td>maria@gmail.com</td>
+                                                <td>loream</td>
+                                                <td>5.00</td>
+                                                <td>Activated</td>
+                                                <td>
+                                                    <button class="custom-View">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="white">
+                                                <td>100</td>
+                                                <td>02/02/2019</td>
+                                                <td>Maria</td>
+                                                <td>maria@gmail.com</td>
+                                                <td>loream</td>
+                                                <td>5.00</td>
+                                                <td>Activated</td>
+                                                <td>
+                                                    <button class="custom-View">View</button>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="tab-pane" id="6a">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Category Name</th>
+                                    <th>Added date</th>
+                                    <th>Status </th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor="let data of marchantdata?.business?.menu_category">
+                                    <td>{{data?.name || '--'}}</td>
+                                    <td>{{data?.created_at|| '--' | date : 'dd/MM/yyyy'}}</td>
+                                    <td *ngIf="data.is_active===true">Active</td>
+                                    <td *ngIf="data.is_active ===false">Inactive</td>
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="7a">
+                        <!-- first View -->
+                        <div *ngIf="tablehide==true">
+                            <div class="filed">
+
+                            
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div _ngcontent-tsv-c9="" class="form-group has-search"><input _ngcontent-tsv-c9="" class="form-control ng-pristine ng-valid ng-touched" maxlength="50" placeholder="Search" style="border-radius: 20px;" type="text" ng-reflect-maxlength="50"><span _ngcontent-tsv-c9="" class="fa fa-search form-control-feedback"></span></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control gender-select " [(ngModel)]="locationsName" (ngModelChange)="onChange($event)">
+                                        <option value="">Select</option>
+                                        <option  *ngFor="let items of menu_category">
+                                            {{items?.name}}</option>
+                                    
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control gender-select " [(ngModel)]="cityLocations" (ngModelChange)="restaurantLocations($event)">
+                                        <option value="">Select Location</option>
+
+                                        <option *ngFor="let data of localtionOrder">{{data?.city}}</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="selctTag1">
+                                        <button class="form-control submit" (click)="submit()">Submit</button>
+
+                                        <button class="btn margin2" (click)="reset()">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <table class="table table-bordered table-striped spctop">
+                                <thead>
+                                    <tr>
+                                        <th>Item Image</th>
+                                        <th>Item Name</th>
+                                        <th>Type</th>
+                                        <th>Cost Price</th>
+                                        <th>Selling Price</th>
+                                        <th>In-stock</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <!-- | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}:index as i" -->
+                                    <tr *ngFor="let data of marchantdataitems">
+
+                                        <td> <img src="{{data?.item_image}}"></td>
+                                        <td>{{data?.item_name || '--'}}</td>
+                                        <td>{{data?.item_type || '--'}}</td>
+                                        <td>{{data?.cost_price || '--'}}</td>
+                                        <td>{{data?.selling_price || '--'}}</td>
+                                        <td>{{data?.quantity || '--'}}</td>
+
+
+                                        <td>
+                                            <button class="custom-View" (click)="Itemsdetails(data?.id)">View</button>
+                                        </td>
+                                    </tr>
+
+
+
+
+                                </tbody>
+
+                            </table>
+                            <h3 *ngIf="marchantdataitems?.length==0" style="text-align:center">Data not found
+                            </h3>
+                       
+                      
+                        </div>
+                        <!-- first View end -->
+                        <!-- View button Click nxt page -->
+                        <div *ngIf="tablehide==false">
+                            <div class="clickView" *ngFor="let data of itemdatainfo">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="itmImg">
+                                            <img src="{{data?.item_image || 'assets/adminLTE/dist/img/pizaa.jpeg'}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="itemName">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Item Name</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{{data?.item_name || '--'}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Cusine</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{{data?.item_type || '--'}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Type</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{{data?.item_type|| '--'}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Sub Type</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{{data?.food_type || '--'}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <table style="width:100%;border:1px solid #638f00;">
+
+
+                                            <tr class="size-row">
+                                                <th>Size</th>
+                                                <td *ngFor="let items of item_option">{{items?.name || '--' }}</td>
+                                              
+                                            </tr>
+                                            <tr class="size-row">
+                                                <th>Price </th>
+                                                <td *ngFor="let items of item_option">{{items?.cost_price || '--' }}</td>
+
+                                            </tr>
+                                            <tr class="size-row">
+                                                <th>Qty.</th>
+                                                <td *ngFor="let items of item_option">{{items?.quantity || '--' }}</td>
+
+                                            </tr>
+
+
+
+
+
+
+
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Allergan</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p *ngFor="let item of allergan">{{item?.allergan_name || '--'}}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Ingredients</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p *ngFor="let item of allergan">{{item?.ingredients || '--'}} </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Modifiers :</label>
+                                        <table class="backVew" style="width:100%; border:1px solid #638f00;">
+
+                                            <tr class="size-row">
+                                                <th>Name</th>
+                                                <td class="border-tableline" *ngFor="let item of itemdatainfo[0].item_modifiers">{{item?.name || '--' }}
+                                                </td>
+                                              
+
+                                             
+                                            </tr>
+                                            <tr class="size-row">
+                                                <th>Price </th>
+                                                <td *ngFor="let item of itemdatainfo[0].item_modifiers"> {{item?.price }}
+                                                </td>
+
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- View button Click nxt page end -->
+                    </div>
+                </div>
+                <!-- /content -->
+            </div>
+            <!-- /tabs -->
+        </section>
+
+        <section>
+
+        </section>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Modal -->
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Bank Passbook</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img src="{{passbookImage}}" style="width: 100%;">
+            </div>
+
+            <!-- Modal footer -->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+            <!-- this button is hidden, used to close from typescript -->
+            <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
+
+        </div>
+    </div>
+</div>

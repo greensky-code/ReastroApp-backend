@@ -1,0 +1,9 @@
+.block-btns {
+    background-color: #fd1b00;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 80px;
+    height: 30px;
+    margin-right: 10px;
+}

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Food Delivery Admin panel</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- gfrytdfsdddssd ewrewrewrrewrewrerwerewrewrwerewrrewrewew erw-->
+  <!-- <link rel="stylesheet" href="assets/adminLTE/bower_components/Ionicons/css/ionicons.min.css"> -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="assets/adminLTE/dist/css/bootstrap-tagsinput.css" rel="stylesheet">
+  <link href="assets/adminLTE/dist/css/bootstrap-tagsinput.css" rel="stylesheet">   
+
+
+
+  <link rel="stylesheet" href="assets/intl-tel-input/css/intlTelInput.css">
+
+
+  <script src="assets/adminLTE/bower_components/chart.js/Chart.js"></script>
+
+  <script>
+    // code to remove th or en into the url when the application load start here
+    window.addEventListener('load', (event) => {      
+      let url = window.location.href;      
+      let urlArr = url.split('/');      
+
+      if (Array.isArray(urlArr)) {
+        let langCurrent = urlArr[urlArr.length - 1];
+        if (langCurrent == "en" || langCurrent == "th") {
+          urlArr.pop();
+          let newUrl = urlArr.join('/');          
+          history.pushState({}, null, newUrl);
+        }
+      }
+      // code to remove th or en into the url when the application load ends here  //sdhjhjas asdasdas   wewew
+    });
+  </script>
+      <style>
+        .bootstrap-tagsinput .tag {
+    margin-right: 2px;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.bootstrap-tagsinput {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+    margin-left: 40px;
+    WIDTH: 100%;
+}
+      </style>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <app-root></app-root>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+  <script src="assets/adminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="assets/adminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/adminLTE/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="assets/adminLTE/bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="assets/adminLTE/dist/js/adminlte.min.js"></script>
+  <script src="assets/adminLTE/dist/js/demo.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script
+    src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+  <!-- mpdal bootsrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+  </script>
+  <!--IntlInput Files-->
+  <script src="assets/intl-tel-input/js/intlTelInput.min.js"></script>
+  <script src="assets/intl-tel-input/js/intlTelInput.js"></script>
+  <script src="assets/intl-tel-input/js/utils.js"></script>
+  <script src="assets/adminLTE/bower_components/chart.js/Chart.js"></script>
+  
+
+  <!-- <script src="assets/adminLTE/dist/js/bootstrap-tagsinput.js"></script>  -->
+
+  <script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
+
+
+  
+</body>
+
+</html>

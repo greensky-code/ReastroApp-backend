@@ -1,0 +1,32 @@
+.secTab{
+    border: 2px solid #80808070;
+    height: 55px;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+}
+.block-btns1{
+    background: #8d908f;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+}
+.block-btns2{
+    background-color: #fda400;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+}
+.midd{
+    padding: 4px 0px;
+}
+.mid{
+    display: flex;
+}

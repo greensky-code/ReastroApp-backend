@@ -1,0 +1,104 @@
+<app-header>
+</app-header>
+<app-menubar></app-menubar>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+  
+    <!-- Main content -->
+    <section class="content footer-div">
+        <div class="">
+            <div class="">
+                <div class="box">
+                    <div class="box-header">
+                        <h1 style="font-size: 24px;">
+                            {{'BANNER MANAGEMENT' | translate}}
+                        </h1>
+                    </div>
+                    <!-- hgghghghg -->
+                    
+                    <div class="box-body zui-scroller table-responsive">
+                        <table id="example2" class="table zui-table table-bordered table-hover">
+                            <thead>
+                                <tr class="idMerchant">
+                                    <th>{{'Banner Image' | translate}}</th>
+                                    <th>{{'Updated At' | translate}}</th>
+                                    <th>{{'Updated By' | translate}}</th>
+                                    <th>{{'Status' | translate}}</th>
+                                    <th style="width: 30%;">{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}:index as i" -->
+                                <!-- <tr *ngFor="let data of manageroles | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
+                                    <th scope="row">{{data.id}}</th>
+                                    <td class="table-width">{{data?.name || '--'}}</td>
+                                    <td>{{data?.created_by || '--'}}</td>
+                                    <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' ||'--') || '--'}}</td>
+                                    <td *ngIf="data?.is_active ==true">Active</td>
+                                    <td *ngIf="data?.is_active !=true">Inactive</td> -->
+                                    <tr>
+                                        <td>Image</td>
+                                        <td>02/02/2020 6:00 PM</td>
+                                        <td>Admin</td>
+                                        <td>Enabled</td>
+                                       
+                                    <td class="action">
+                                        <button class="skyblue-btn" style="background-color: #2196F3;margin-top: 1%;" [routerLink]="['/update-banner']" >{{'Edit' | translate}}</button>
+                                        <label class="switch">
+                                                      <input type="checkbox" (click)="disableModal()">
+                                                      <span class="slider round"></span>
+                                                      </label>
+                                                      
+                                        
+                                    </td>
+                                <!-- </tr> -->
+                            </tbody>
+                        </table>
+                        <div class="dnf">
+                            <!-- <h3 *ngIf="manageroles?.length==0">Data not found!</h3> -->
+                        </div>
+                    </div>
+                    <div class="pageination">
+                        <pagination-controls (pageChange)="pagination($event)" style="float:right;" *ngIf="manageroles?.length!=0">
+                        </pagination-controls>
+                    </div>
+                  
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+ 
+    <!-- /.content -->
+</div>
+<div class="footer-section">
+    <app-footer></app-footer>
+</div>
+
+<!-- modal -->
+<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content modals">
+                          <div class="modal-header">
+                              <h2 *ngIf="language!='Thai'">{{'DISABLE' | translate}}</h2>
+              
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body" style="text-align: center;">
+              
+                              <p *ngIf="language!='Thai'">{{'Are you sure you want to Disable this Banner?' | translate}}</p>
+                          </div>
+                          <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
+                              <button type="button" data-dismiss="modal" class="submit"
+                                  style="background: red;color: #fff;">{{'No' | translate}}</button>
+                              <button type="button" (click)="disable()" class="submit"
+                                  style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' | translate}}</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>

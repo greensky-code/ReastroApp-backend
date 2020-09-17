@@ -1,0 +1,62 @@
+.cusine {
+    margin-top: 20px;
+}
+
+.error {
+    float: right;
+}
+
+.int {
+    width: 100%;
+    height: 41px;
+    max-width: 453px;
+    ;
+}
+
+.textareaa {
+    width: 100%;
+    max-width: 453px;
+}
+
+.box-header h1 {
+    margin: 0;
+}
+
+button.btn.btn-flat.cusine.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    margin-top: 35px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 40px;
+    width: 100%;
+    max-width: 135px;
+}
+.box-hearder-564{
+    width: 100%;
+    max-width: 500px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    padding: 15px;
+    margin: 10px
+}
+button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 44px;
+    width: 100%;
+    max-width: 135px;
+}
+
+
+

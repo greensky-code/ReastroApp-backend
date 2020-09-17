@@ -1,0 +1,51 @@
+.lognBrn button.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    
+
+}
+.lognBrn button.btn.btn-primary.btn-block.btn-flat.active{
+    background: green;
+}
+
+.lognBrn button{
+    font-size: 20px;
+    line-height: 25px;
+    color: #ffffff;
+    font-family: "Adelle";
+    font-weight: bold;
+    height: 40px;
+    border-radius: 4px;
+    /* background-color: #638f00; */
+    background-color: #003B00;
+    width: 100%;
+    max-width:180px;
+    margin-top: 0px;
+    }
+    .intl-tel-input .selected-flag {
+        z-index: 9!important;
+    }
+    button.btn.btn-primary.btn-block.btn-flat {
+        /* border: 1px solid green; */
+        background: green;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        margin-top: 35px;
+        padding: 7px;
+        font-family: "Adelle";
+            font-weight: bold;
+        height: 44px;
+        /* max-width: 123px;; */ 
+     
+        width: 100%;
+        max-width: 135px;
+    }
+    .lb.container.custom-Form {
+        margin: 0px;
+    }
+    .row.no-flex {
+        display: block;
+    }
+    

@@ -1,0 +1,245 @@
+@media (min-width: 1200px) {
+    .container {
+        display: flex;
+        border: solid;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-horizontal .control-label {
+        text-align: left;
+        width: 204px;
+    }
+}
+
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    /* background-color: #f5f5f5; */
+    border: 1px solid #e3e3e3;
+    /* border-radius: 4px; */
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    width: 100%;
+    background-color: white;
+    border: white;
+}
+
+.border-contactilne {
+    border-bottom: 2px solid #608c00;
+    margin-bottom: 4px;
+}
+
+.lb {
+    display: flex;
+    justify-content: start;
+    margin-left: 7%;
+    margin-top: 7%;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    margin-left: -4%;
+}
+
+.bt {
+    width: 14%;
+    background-color: green;
+    color: white;
+    border: black;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.btnss {
+    width: 100%;
+    margin-left: 13px;
+    background-color: red;
+    color: white;
+    border: black;
+    height: 35px;
+    border-radius: 5px;
+    max-width: 95px;
+}
+
+.btns.matg {
+    margin-left: 43px;
+    margin-bottom: 20px;
+}
+
+.btn.btn-primary.btn-block.btn-flat {
+    background: green;
+    border: none;
+    margin-top: 0px;
+    width: 100%;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    font-family: Source Sans Pro !important;
+    font-weight: 400;
+    height: 35px;
+    max-width: 95px;
+}
+
+
+/* new css */
+
+
+/* input.form-control.ng-untouched.ng-pristine.ng-valid {
+        width: 100%;
+        max-width: 80%;
+        margin-left: 69px;
+        border-radius: 0;
+    } */
+
+.rejected {
+    display: flex;
+    margin-left: 25%;
+}
+
+.btnt {
+    margin-left: 7px;
+    height: 27px;
+    border: solid;
+    width: 90px;
+}
+
+.rejected p {
+    color: red;
+}
+
+
+/* .bt{
+        width: 9%;
+        background-color: green;
+        color: white;
+        border: black;
+    } */
+
+.bt1 {
+    width: 15%;
+    background-color: red;
+    color: white;
+    border: black;
+    margin-left: 20px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.rejected {
+    display: flex;
+    margin-left: 36%;
+}
+
+.btnt {
+    margin-left: 7px;
+    height: 27px;
+    border: solid;
+    width: 90px;
+}
+
+.mdl {
+    margin-left: 3px;
+    width: 386px;
+    margin-top: 6%;
+}
+
+.mdldiv {
+    margin-left: 19%;
+}
+
+.int {
+    /* margin-left: 24%; */
+    width: 50%;
+    height: 150px;
+}
+
+.divRemark {
+    margin-left: 13%;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+}
+
+.imgs {
+    widows: 20%;
+    height: 20%;
+}
+
+.resubnt {
+    background: #638f00;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    margin-top: 17px auto;
+    margin: 11px auto;
+    margin-left: 8px;
+}
+
+.dumyImg {
+    width: 100%;
+    max-width: 81px;
+    height: 70px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.new-div {
+    border: 3px solid black;
+    padding: 19px 25px;
+}
+h4.rejected.head-ing {
+    margin: auto;
+    width: 100%;
+    max-width: fit-content;
+    padding: 15px 0px;
+}
+.form-group {
+    margin-bottom: 5px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 93%;
+    }
+}
+
+.border-contactilne.border-nonecls {
+    border-bottom: transparent;
+}
+
+.modal-image img {
+    width: 100%;
+}
+
+.reason {
+    margin-top: 6%;
+    margin-left: 13%;
+}
+
+.eror {
+    color: red;
+    display: flex;
+    justify-content: center;
+}
+.xx{
+    float: right;
+    margin-right: 20px;
+    color: black;
+}
+
+.error {
+    width: 93%;
+}
+
+.matg {
+    margin-top: 19px;
+}
+.remarks{
+    border-style: groove;
+    width: 100%;
+}
