@@ -1,0 +1,132 @@
+[
+    {
+        "id": 1,
+        "name": "Blog Management",
+        "has_permission": true
+    },
+    {
+        "id": 2,
+        "name": "Support Chat",
+        "has_permission": true
+    },
+    {
+        "id": 3,
+        "name": "Manage Cuisines",
+        "has_permission": true
+    },
+    {
+        "id": 4,
+        "name": "Customers Management",
+        "has_permission": true
+    },
+    {
+        "id": 5,
+        "name": "Dashboard",
+        "has_permission": true
+    },
+    {
+        "id": 6,
+        "name": "Delivery Charge",
+        "has_permission": true
+    },
+    {
+        "id": 7,
+        "name": "Drivers Management",
+        "has_permission": true
+    },
+    {
+        "id": 8,
+        "name": "Manage FAQ",
+        "has_permission": true
+    },
+    {
+        "id": 9,
+        "name": "Manage Help Questions",
+        "has_permission": true
+    },
+    {
+        "id": 10,
+        "name": "Inquiries",
+        "has_permission": true
+    },
+    {
+        "id": 11,
+        "name": "Legal, Terms & Conditions",
+        "has_permission": true
+    },
+    {
+        "id": 12,
+        "name": "Master Management",
+        "has_permission": true
+    },
+    {
+        "id": 13,
+        "name": "Merchant Management",
+        "has_permission": true
+    },
+    {
+        "id": 14,
+        "name": "News Management",
+        "has_permission": true
+    },
+    {
+        "id": 15,
+        "name": "Offers Management",
+        "has_permission": true
+    },
+    {
+        "id": 16,
+        "name": "Order History",
+        "has_permission": true
+    },
+    {
+        "id": 17,
+        "name": "Payout Driver",
+        "has_permission": true
+    },
+    {
+        "id": 18,
+        "name": "Report Management",
+        "has_permission": true
+    },
+    {
+        "id": 19,
+        "name": "Report Restaurant",
+        "has_permission": true
+    },
+    {
+        "id": 20,
+        "name": "Roles Management",
+        "has_permission": true
+    },
+    {
+        "id": 21,
+        "name": "Sales Representative",
+        "has_permission": true
+    },
+    {
+        "id": 22,
+        "name": "Sales Representative Payout",
+        "has_permission": true
+    },
+    {
+        "id": 23,
+        "name": "Staff Management",
+        "has_permission": true
+    },
+    {
+        "id": 24,
+        "name": "Subscription Management",
+        "has_permission": true
+    },
+    {
+        "id": 25,
+        "name": "Support Settings",
+        "has_permission": true
+    },
+    {
+        "id": 26,
+        "name": "Tax Settings",
+        "has_permission": true
+    }
+]
