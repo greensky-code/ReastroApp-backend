@@ -16,7 +16,7 @@ const actionCompleteResponse = (res, languageCode, data, message, successCode) =
             responseMessageCode.ACTION_COMPLETE,
             languageCode
         ),
-        status: responseMessageFlags.ACTION_COMPLETE,
+        message_code: responseMessageFlags.ACTION_COMPLETE,
         data: data || {}
     };
     logger.response(JSON.stringify(response));
@@ -74,7 +74,7 @@ const sendError = (res, languageCode, data, msg, errCode) => {
             responseMessageCode.ERROR_IN_EXECUTION,
             languageCode
         ),
-        status: statusCode,
+        message_code: statusCode,
         data: data || {}
     };
     logger.response(JSON.stringify(response));

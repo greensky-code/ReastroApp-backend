@@ -29,8 +29,8 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
-app.use('/v1/api',routes)
-app.get('/v1/api', (req, res) => {
+app.use('/v1',routes)
+app.get('/v1', (req, res) => {
     res.send("Hello world");
 });
 

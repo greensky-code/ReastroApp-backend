@@ -12,7 +12,6 @@ let permissionSchema = new Schema({
 });
 
 mongoose.model('Permission',permissionSchema).findOne({}, (err, res) => {
-    console.log("Static content  saved succesfully......abcdf"+res);
     if (!res) {
         console.log("Static content  saved succesfully.????");
 
