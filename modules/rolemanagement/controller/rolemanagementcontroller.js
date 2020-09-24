@@ -59,20 +59,79 @@ const getpermission = (req, res) => {
 const getrole = (req, res) => {
     const languageCode = req.query.languageCode || 'en';
     const userid = req.user._id || req.body.userid
-    role.find({ is_delete: false }, (err, resdata) => {
-        if (err) {
-            return res.json({ message_code: "500", message: "Internal_server_error" })
-        } else if (resdata.length < 1) {
-            return res.json({ message_code: "404", message: "No Data Found" })
-        } else {
-            let data = {
-                data: resdata,
-                message: "ROLE LIST",
-                message_code: "200"
+    let option = {
+        page: req.query.page || 1,
+        limit: 10,
+    }
+    let quer = {
+        is_delete: false
+    }
+    if(req.query.search){
+        let search = new RegExp("^" + req.query.search)
+        quer.name={ $regex: search, $options: 'i' }
+    }
+    console.log(quer)
+    var aggregate = role.aggregate([{
+        $match: quer
+    },
+    {
+        $lookup: {
+            from: "permissions",
+            localField: "permissions",
+            foreignField: "_id",
+            as: "Permission"
+        }
+    }, {
+        $lookup: {
+            from: "createeditviewprofiles",
+            localField: "created_by",
+            foreignField: "_id",
+            as: "createdby"
+        }
+    },
+
+    {
+        $lookup: {
+            from: "createeditviewprofiles",
+            localField: "updated_by",
+            foreignField: "_id",
+            as: "updatedby",
+
+        }
+    },{
+      $project:{
+          "updatedby.password":0,
+          "createdby.password":0
+      }   
+    },
+    { $sort: { created_at: -1 } }
+    ])
+    role.aggregatePaginate(aggregate, option, (err, result, pages, total) => {
+        if (!err) {
+            const success = {
+                "docs": result,
+                "total": total,
+                "limit": option.limit,
+                "page": option.page,
+                "pages": pages,
             }
-            return res.json(data)
+            if (success) {
+                let data = {
+                    results: success.docs,
+                    message: "ROLE LIST",
+                    message_code: "200",
+                    count: success.total
+                }
+                return res.json(data)
+
+            }
+        }
+        else {
+            return res.json({ message_code: "500", message: "Internal_server_error", err: err })
         }
     })
+
+
 }
 const getrolebyid = (req, res) => {
     const languageCode = req.query.languageCode || 'en';
@@ -163,7 +222,7 @@ const blockrole = (req, res) => {
                 _id: roleid,
             }
             let set = {
-                is_block: true,
+                is_block: req.body.block,
                 updated_at: date,
                 updated_by: userid
             }
@@ -174,7 +233,10 @@ const blockrole = (req, res) => {
                     }
                     return res.json({ message_code: "500", message: "Internal_server_error", err: error })
                 } else {
-                    return res.json({ message_code: "200", message: "Role  Blocked sucessfully" })
+                    if(req.body.block){
+                        return res.json({ message_code: "200", message: "Role  Blocked sucessfully" })
+                    }
+                    return res.json({ message_code: "200", message: "Role  Unblocked sucessfully" })
                 }
             })
         }
@@ -205,9 +267,6 @@ const deleterole = (req, res) => {
             }
             role.findOneAndUpdate(quer, set, { new: true }, (error, updaterole) => {
                 if (error) {
-                    if (error.code == 11000) {
-                        return res.json({ message_code: "500", message: "Role Name Exist", err: error })
-                    }
                     return res.json({ message_code: "500", message: "Internal_server_error", err: error })
                 } else {
                     return res.json({ message_code: "204" })

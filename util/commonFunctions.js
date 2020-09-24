@@ -91,8 +91,14 @@ function sendOtpNexmo(otpDetails) {
 function sendEmailNodemailer(mailOptions) {
    let user = "donotreply.answerlet@gmail.com";
     let pass = "govind220*"
-    var transporter = nodemailer.createTransport('smtps://' + user + ':' + pass + '@smtp.gmail.com');
-
+   // var transporter = nodemailer.createTransport('smtps://' + user + ':' + pass + '@smtp.gmail.com');
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: user, // here use your real email
+          pass: pass // put your password correctly (not in this question please)
+        }
+      });
     transporter.sendMail(mailOptions, function (error, response) {
         if (error) {
             console.log({
