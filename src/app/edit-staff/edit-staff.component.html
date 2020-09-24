@@ -1,267 +1,441 @@
-<app-header>
-
-</app-header>
+<app-header> </app-header>
 <app-menubar></app-menubar>
 <div class="content-wrapper">
-    <div class="content footer-div">
-        <div class="box-header">
-            <h3 class="mt-0 mb-0">{{'EditStaff' | translate}}</h3>
-        </div>
-        <div style="    background-color: #f5f5f5; border: 1px solid #e3e3e3;    padding: 15px;
-    ">
-            <div class="row no-flex">
-             
-
-
-
-
-                <form class=" custom-Form" [formGroup]="editStaffForm">
-                    <div class=" col-md-6">
-                        <div class="row form-group">
-                            <label class="col-md-3 control-label">{{'FirstName'  | translate}}:</label>
-                            <div class="col-md-8 inputGroupContainer">
-                                <div class="input-group">
-                                    <input id="addressLine2" name="addressLine2" 
-                                        formControlName="firstName" class="form-control" (keypress)="service.checkSpace($event)"  required="true" type="text">
-                                </div>
-                                <div
-                                    *ngIf="editStaffForm.get('firstName').hasError('required') && editStaffForm.get('firstName').touched">
-                                    <span style="color:red">Please enter first name. </span></div>
-                                <div *ngIf="editStaffForm.get('firstName').hasError('maxlength') && editStaffForm.get('firstName').dirty"
-                                    style="color:red">
-                                    Maxlength should be 256.
-                                </div>
-                                <div *ngIf="editStaffForm.get('firstName').hasError('pattern') && editStaffForm.get('firstName').dirty"
-                                    style="color:red">
-                                    Please don't use special characters.
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-                        <div class="row form-group">
-                            <label class="col-md-3 control-label">{{'MiddleName'  | translate}}:</label>
-                            <div class="col-md-8 inputGroupContainer">
-                                <div class="input-group"><input id="addressLine2" (keypress)="service.checkSpace($event)"   name="offerCode"
-                                        formControlName="middleName" class="form-control" value="" type="text"></div>
-                             
-                                <div *ngIf="editStaffForm.get('middleName').hasError('maxlength') && editStaffForm.get('middleName').dirty"
-                                    style="color:red">
-                                    Maxlength of offer Code should be 256.
-                                </div>
-                                <div *ngIf="editStaffForm.get('middleName').hasError('pattern') && editStaffForm.get('middleName').dirty"
-                                    style="color:red">
-                                    Please don't use special characters.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-                        <div class="row form-group">
-                            <label class="col-md-3 control-label">{{'LastName'  | translate}}:</label>
-                            <div class="col-md-8 inputGroupContainer">
-                                <div class="input-group"><input id="addressLine2" (keypress)="service.checkSpace($event)"  name="lastName"
-                                        formControlName="lastName" class="form-control" required="true" value=""
-                                        type="text"></div>
-                                <div
-                                    *ngIf="editStaffForm.get('lastName').hasError('required') && editStaffForm.get('lastName').touched">
-                                    <span style="color:red">Last name is required.</span></div>
-                                <div *ngIf="editStaffForm.get('lastName').hasError('maxlength') && editStaffForm.get('lastName').dirty"
-                                    style="color:red">
-                                    Maxlength of offer Code should be 256.
-                                </div>
-                                <div *ngIf="editStaffForm.get('lastName').hasError('pattern') && editStaffForm.get('lastName').dirty"
-                                    style="color:red">
-                                    Please don't use special characters.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-                        <div class="row form-group">
-                            <label class="col-md-3 control-label" for="mobile_number">{{'ContactNumber'  | translate}}:</label>
-                            <div class="col-md-8 inputGroupContainer" (click)="toCheckSpaceChar()">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="" id="phoneNumber"
-                                        (keypress)="isNumber($event)" formControlName="number" maxlength="20"
-                                        (keyup)="toCheckSpaceChar()">
-                                    <div
-                                        *ngIf="editStaffForm.get('number').errors && editStaffForm.get('number').enter || editStaffForm.get('number').dirty">
-                                        <div *ngIf="editStaffForm.get('number').hasError('required'); else elseBlock"
-                                            style="color: red">Phone number is required.</div>
-                                        <ng-template #elseBlock>
-                                            <div *ngIf="isValidNumber == false" style="color: red">Please enter valid
-                                                number.
-                                            </div>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-
-                    </div>
-
-                    <div class=" col-md-6">
-                        <div class="row form-group">
-                            <label class="col-md-3 control-label">{{'email'  | translate}}:</label>
-                            <div class="col-md-8 inputGroupContainer">
-                                <div class="input-group">
-                                    <input id="state" name="state" formControlName="email"
-                                        class="form-control" required="true" value="" type="text"
-                                        (keydown.space)="$event.preventDefault();">
-                                    <div
-                                        *ngIf="editStaffForm.get('email').hasError('required') && editStaffForm.get('email').touched">
-                                        <span style="color:red">Email Is required.</span></div>
-                                    <div *ngIf="editStaffForm.get('email').hasError('maxlength') && editStaffForm.get('email').dirty"
-                                        style="color:red">
-                                        Email maxlength should be 256.
-                                    </div>
-                                    <div *ngIf="editStaffForm.get('email').hasError('pattern') && editStaffForm.get('email').dirty"
-                                        style="color:red">
-                                        Please enter valid email id.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-                        <div class="row form-group">
-                            <label class="col-md-3 control-label" style="padding-top: 0;">{{'Role'  | translate}}:</label>
-                            <div class="col-md-8 inputGroupContainer">
-                                <div class="input-group">
-                                    <select class="form-control select-kyc gender-select" formControlName="role"
-                                        (change)="selects($event)">
-                                        <option value="{{staffData?.role}}" disabled>{{staffData?.role}}</option>
-                                        <option *ngFor="let roles of staffDataroles" value="{{roles?.id}}">
-                                            {{roles?.name}}
-                                        </option>
-                                     
-
-                                    </select>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class=" col-md-6">
-                        <div class="row form-group">
-                            <label class="col-md-3 control-label" style="padding-top: 0;">{{'Gender'  | translate}}:</label>
-                            <div class="col-md-8 inputGroupContainer">
-                                <div class="input-group">
-                                    <select class="form-control select-kyc gender-select" formControlName="gender">
-                                        <option value="{{staffData?.gender}}">{{staffData?.gender}}</option>
-                                        <option value="Male"> {{'Male'  | translate}}</option>
-                                        <option value="Female"> {{'Female'  | translate}}</option>
-
-
-                                    </select>
-
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-           
-
-
-                    <!-- /.col -->
-
-
-
-                    <!-- /.col -->
-
-                    <div class="lognBrn col-md-12">
-
-                        <button type="button" class="btn btn-primary btn-block btn-flat"
-                            style="background-color:red; border: 1px solid red; margin-right: 2%;"
-                            [routerLink]="['/manage-staff']">{{'Cancel'  | translate}}</button>
-                        <button type="submit" class="btn btn-primary btn-block btn-flat"
-                            [disabled]="editStaffForm.invalid" (click)="generate('editStaff')">{{'Submit'  | translate}}</button>
-                    </div>
-                </form>
-
-
-            </div>
-        </div>
-
-
-
+  <div class="content footer-div">
+    <div class="box-header">
+      <h3 class="mt-0 mb-0">{{ "EditStaff" | translate }}</h3>
     </div>
+    <div
+      style="
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        padding: 15px;
+      "
+    >
+      <div class="row no-flex">
+        <form class="custom-Form" [formGroup]="editStaffForm">
+          <div class="col-md-6">
+            <div class="row form-group">
+              <label class="col-md-3 control-label"
+                >{{ "FirstName" | translate }}:</label
+              >
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input
+                    id="addressLine2"
+                    name="addressLine2"
+                    formControlName="firstName"
+                    class="form-control"
+                    (keypress)="service.checkSpace($event)"
+                    required="true"
+                    type="text"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    editStaffForm.get('firstName').hasError('required') &&
+                    editStaffForm.get('firstName').touched
+                  "
+                >
+                  <span style="color: red">Please enter first name. </span>
+                </div>
+                <div
+                  *ngIf="
+                    editStaffForm.get('firstName').hasError('maxlength') &&
+                    editStaffForm.get('firstName').dirty
+                  "
+                  style="color: red"
+                >
+                  Maxlength should be 256.
+                </div>
+                <div
+                  *ngIf="
+                    editStaffForm.get('firstName').hasError('pattern') &&
+                    editStaffForm.get('firstName').dirty
+                  "
+                  style="color: red"
+                >
+                  Please don't use special characters.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row form-group">
+              <label class="col-md-3 control-label"
+                >{{ "MiddleName" | translate }}:</label
+              >
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input
+                    id="addressLine2"
+                    (keypress)="service.checkSpace($event)"
+                    name="offerCode"
+                    formControlName="middleName"
+                    class="form-control"
+                    value=""
+                    type="text"
+                  />
+                </div>
+
+                <div
+                  *ngIf="
+                    editStaffForm.get('middleName').hasError('maxlength') &&
+                    editStaffForm.get('middleName').dirty
+                  "
+                  style="color: red"
+                >
+                  Maxlength of offer Code should be 256.
+                </div>
+                <div
+                  *ngIf="
+                    editStaffForm.get('middleName').hasError('pattern') &&
+                    editStaffForm.get('middleName').dirty
+                  "
+                  style="color: red"
+                >
+                  Please don't use special characters.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row form-group">
+              <label class="col-md-3 control-label"
+                >{{ "LastName" | translate }}:</label
+              >
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input
+                    id="addressLine2"
+                    (keypress)="service.checkSpace($event)"
+                    name="lastName"
+                    formControlName="lastName"
+                    class="form-control"
+                    required="true"
+                    value=""
+                    type="text"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    editStaffForm.get('lastName').hasError('required') &&
+                    editStaffForm.get('lastName').touched
+                  "
+                >
+                  <span style="color: red">Last name is required.</span>
+                </div>
+                <div
+                  *ngIf="
+                    editStaffForm.get('lastName').hasError('maxlength') &&
+                    editStaffForm.get('lastName').dirty
+                  "
+                  style="color: red"
+                >
+                  Maxlength of offer Code should be 256.
+                </div>
+                <div
+                  *ngIf="
+                    editStaffForm.get('lastName').hasError('pattern') &&
+                    editStaffForm.get('lastName').dirty
+                  "
+                  style="color: red"
+                >
+                  Please don't use special characters.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row form-group">
+              <label class="col-md-3 control-label" for="mobile_number"
+                >{{ "ContactNumber" | translate }}:</label
+              >
+              <div
+                class="col-md-8 inputGroupContainer"
+                (click)="toCheckSpaceChar()"
+              >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder=""
+                    id="phoneNumber"
+                    (keypress)="isNumber($event)"
+                    formControlName="number"
+                    maxlength="20"
+                    (keyup)="toCheckSpaceChar()"
+                  />
+                  <div
+                    *ngIf="
+                      (editStaffForm.get('number').errors &&
+                        editStaffForm.get('number').enter) ||
+                      editStaffForm.get('number').dirty
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        editStaffForm.get('number').hasError('required');
+                        else elseBlock
+                      "
+                      style="color: red"
+                    >
+                      Phone number is required.
+                    </div>
+                    <ng-template #elseBlock>
+                      <div *ngIf="isValidNumber == false" style="color: red">
+                        Please enter valid number.
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="row form-group">
+              <label class="col-md-3 control-label"
+                >{{ "email" | translate }}:</label
+              >
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input
+                    id="state"
+                    name="state"
+                    formControlName="email"
+                    class="form-control"
+                    required="true"
+                    value=""
+                    type="text"
+                    (keydown.space)="$event.preventDefault()"
+                  />
+                  <div
+                    *ngIf="
+                      editStaffForm.get('email').hasError('required') &&
+                      editStaffForm.get('email').touched
+                    "
+                  >
+                    <span style="color: red">Email Is required.</span>
+                  </div>
+                  <div
+                    *ngIf="
+                      editStaffForm.get('email').hasError('maxlength') &&
+                      editStaffForm.get('email').dirty
+                    "
+                    style="color: red"
+                  >
+                    Email maxlength should be 256.
+                  </div>
+                  <div
+                    *ngIf="
+                      editStaffForm.get('email').hasError('pattern') &&
+                      editStaffForm.get('email').dirty
+                    "
+                    style="color: red"
+                  >
+                    Please enter valid email id.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row form-group">
+              <label class="col-md-3 control-label" style="padding-top: 0"
+                >{{ "Role" | translate }}:</label
+              >
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <select
+                    class="form-control select-kyc gender-select"
+                    formControlName="role"
+                    (change)="selects($event)"
+                  >
+                    <option value="{{ staffData?.role }}" disabled>
+                      {{ staffData?.role }}
+                    </option>
+                    <option
+                      *ngFor="let roles of staffDataroles"
+                      value="{{ roles?._id }}"
+                    >
+                      {{ roles?.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row form-group">
+              <label class="col-md-3 control-label" style="padding-top: 0"
+                >{{ "Gender" | translate }}:</label
+              >
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <select
+                    class="form-control select-kyc gender-select"
+                    formControlName="gender"
+                  >
+                    <option value="{{ staffData?.gender }}">
+                      {{ staffData?.gender }}
+                    </option>
+                    <option value="Male">{{ "Male" | translate }}</option>
+                    <option value="Female">{{ "Female" | translate }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- /.col -->
+
+          <!-- /.col -->
+
+          <div class="lognBrn col-md-12">
+            <button
+              type="button"
+              class="btn btn-primary btn-block btn-flat"
+              style="
+                background-color: red;
+                border: 1px solid red;
+                margin-right: 2%;
+              "
+              [routerLink]="['/manage-staff']"
+            >
+              {{ "Cancel" | translate }}
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary btn-block btn-flat"
+              [disabled]="editStaffForm.invalid"
+              (click)="generate('editStaff')"
+            >
+              {{ "Submit" | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="footer-section">
-    <app-footer></app-footer>
+  <app-footer></app-footer>
 </div>
 
-<div class="modal" id="comanModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content modals">
-            <div class="modal-header">
-          
-                <h2>Edit staff</h2> 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="text-align: center;">
-                <p >Are you sure you want to edit this staff?</p>
-            </div>
-            <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
-                <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' |  translate}}</button>
-                <button type="button" (click)="modal()" class="submit" style="display: flex; justify-content: space-evenly;border: #638f00;color: #fff;">{{'Yes' |  translate}}</button>
-            </div>
-        </div>
+<div
+  class="modal"
+  id="comanModal"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modals">
+      <div class="modal-header">
+        <h2>Edit staff</h2>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <p>Are you sure you want to edit this staff?</p>
+      </div>
+      <div
+        class="modal-footer"
+        style="display: flex; justify-content: space-evenly"
+      >
+        <button
+          type="button"
+          data-dismiss="modal"
+          class="submit"
+          style="background: red; color: #fff"
+        >
+          {{ "No" | translate }}
+        </button>
+        <button
+          type="button"
+          (click)="modal()"
+          class="submit"
+          style="
+            display: flex;
+            justify-content: space-evenly;
+            border: #638f00;
+            color: #fff;
+          "
+        >
+          {{ "Yes" | translate }}
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- -------------------------------------Google auth modal---------------- -->
-<div class="modal" id="googleauth" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content modals">
-            <div class="modal-header">
-                <h4 class="modalstyle" style="text-align:center">2 {{'StepVerification'  | translate}}</h4>
-                <button type="button" class="close" (click)="reset()" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form class="form-box">
-                <div class="ggcode">
-                    <p>{{errorMessage}}</p>
-
-                </div>
-
-                <div class="form-group has-feedback codeSpace">
-                    <label style="margin-left: 57px;">{{'GoogleAuthenticationCode'  | translate}}</label>
-                    <div class="otp-field">
-                  
-
-
-                         
-
-                            <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" 
-                    style="width:57px; height:57px;" [config]="{length:6}" (keypress)="numberOnly($event)" type="number" ></ng-otp-input>
-
-                         
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- /.col -->
-                    <div class="col-xs-4 lognBrn">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!varificationCode" (click)="verify()">{{'Verify'  | translate}}</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            </form>
+<div
+  class="modal"
+  id="googleauth"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modals">
+      <div class="modal-header">
+        <h4 class="modalstyle" style="text-align: center">
+          2 {{ "StepVerification" | translate }}
+        </h4>
+        <button
+          type="button"
+          class="close"
+          (click)="reset()"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-box">
+        <div class="ggcode">
+          <p>{{ errorMessage }}</p>
         </div>
+
+        <div class="form-group has-feedback codeSpace">
+          <label style="margin-left: 57px">{{
+            "GoogleAuthenticationCode" | translate
+          }}</label>
+          <div class="otp-field">
+            <ng-otp-input
+              #ngOtpInput
+              (onInputChange)="onOtpChange($event)"
+              *ngIf="showOtpComponent"
+              style="width: 57px; height: 57px"
+              [config]="{ length: 6 }"
+              (keypress)="numberOnly($event)"
+              type="number"
+            ></ng-otp-input>
+          </div>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-xs-4 lognBrn">
+            <button
+              type="submit"
+              class="btn btn-primary btn-block btn-flat"
+              [disabled]="!varificationCode"
+              (click)="verify()"
+            >
+              {{ "Verify" | translate }}
+            </button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
     </div>
+  </div>
 </div>
