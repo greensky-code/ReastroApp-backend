@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../api-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-declare var $:any;
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
+
+declare var $: any;
 @Component({
   selector: 'app-role-permission',
   templateUrl: './role-permission.component.html',
@@ -13,7 +15,7 @@ declare var $:any;
 export class RolePermissionComponent implements OnInit {
   // nameForm: FormGroup;
   checkBoxValue: any = false;
-  roleForm:FormGroup;
+  roleForm: FormGroup;
   checkboxData: any;
   CategoryModel = [];
   categoryList = [];
@@ -31,71 +33,77 @@ export class RolePermissionComponent implements OnInit {
   permissionEmpty: boolean = false;
   _id: any;
   permissions: any;
-  rolelist: any=[];
+  rolelist: any = [];
   newarraylist: any;
   showOtpComponent = true;
   roleValue: any;
   varificationCode: any;
   errorMessage: any;
-
-  constructor(private router: Router, private service: ApiServiceService, private tostr: ToastrService,private activateRouter:ActivatedRoute,private formBuilder:FormBuilder,private spinner:NgxSpinnerService) {
-    this.activateRouter.params.subscribe(res=>{
-      this._id=res.id
+  nameForm: FormGroup
+  constructor(private notify: NotificationsService, private fb: FormBuilder, private router: Router, private service: ApiServiceService, private tostr: ToastrService, private activateRouter: ActivatedRoute, private formBuilder: FormBuilder, private spinner: NgxSpinnerService) {
+    this.nameForm = this.fb.group({
+      name: ['', Validators.compose([Validators.required, Validators.maxLength(256)])]
     })
-    this.roleList();
-   }
+  }
 
   ngOnInit() {
     // this.roleForm=this.formBuilder.group({
     //   roles : ['',]
     // })
+    this.activateRouter.params.subscribe(res => {
+      this._id = res.id
+    })
+    this.roleList();
   }
 
 
 
   roleList() {
     this.spinner.show()
-    this.service.getApi('api/permissions',1).subscribe(res => {
+    this.service.getApi('api/permissions', 1).subscribe(res => {
       if (res.status === 200) {
-        this.rolelist =res.body
-        this.editList(); 
+        this.rolelist = res.body
+        this.editList();
       }
-    },err=>{
-      if(err.status == 500){
+    }, err => {
+      if (err.status == 500) {
         this.spinner.hide()
       }
     })
-    
+
 
   }
 
-  
+
   editList() {
-    let object=this._id
-    this.service.getApi('api/role/'+this._id,1).subscribe(res => {
-      if (res.status == 200) {     
+    let object = this._id
+    this.service.getApi('api/role/' + this._id, 1).subscribe(res => {
+      if (res.status == 200) {
         this.spinner.hide()
-        this.name=res.body.name
-        this.rolePermissions =res.body.permissions
-      this.rolelist.forEach((element,index) => {
-        this.rolePermissions.forEach(element2 => {
-          if(element.id == element2.id) {
-            this.rolelist[index]['status']= true;
-          }
+        let data = res.body.data
+        console.log(data)
+        this.name = data[0].name
+        this.nameForm.get('name').setValue(this.name)
+        this.rolePermissions = data[0].Permission
+        this.rolelist.forEach((element, index) => {
+          this.rolePermissions.forEach(element2 => {
+            if (element._id == element2._id) {
+              this.rolelist[index]['status'] = true;
+            }
+          });
         });
-      });
       }
-    },err=>{
+    }, err => {
       this.spinner.hide()
-      if(err.status == 500){
+      if (err.status == 500) {
         this.spinner.hide()
         this.service.toastErr('Internal server error.')
       }
     })
-    
+
 
   }
- 
+
 
   checkAll(ev) {
 
@@ -105,7 +113,8 @@ export class RolePermissionComponent implements OnInit {
   isAllChecked() {
     this.validityOfPermission();
     let count = 0;
-    return this.rolelist.every(_ => _.status);  }
+    return this.rolelist.every(_ => _.status);
+  }
 
   validityOfPermission() {
     let count = 0;
@@ -122,51 +131,67 @@ export class RolePermissionComponent implements OnInit {
   }
 
 
-editpermission() {
-  this.spinner.show()
-  this.arrList = [];
-  this.rolelist.forEach(element => {
-    if (element.status == true) {
-      this.arrList.push(element.id.toString())
-    }
-  })
+  editpermission() {
+    this.spinner.show()
+    this.arrList = [];
+    this.rolelist.forEach(element => {
+      if (element.status == true) {
+        this.arrList.push(element._id.toString())
+      }
+    })
 
-  let object = {
-    "name": this.name,
-    "permissions_list":this.arrList}
+    let object = {
+      "name": this.name,
+      "permissions": this.arrList
+    }
 
-  this.service.putApi('api/role/'+this._id,object, 1).subscribe((data: any) => {
-    if(data.status == 200){
-      this.spinner.hide()
-    this.tostr.success('Role permission updated successfully.')
-    this.router.navigate(['manage-role'])
-    }
-  }, error => {
-    if(error.status == 500){
-      this.tostr.error('Internal server error.')
-    }
-    
-  })
-}
+    this.service.putApi('api/role/' + this._id, object, 1).subscribe((data: any) => {
+      if (data.status == 200) {
+        this.spinner.hide()
+        //  this.tostr.success('Role permission updated successfully.')
+        this.notify.success('', 'Role permission updated successfully.', {
+          timeOut: 5000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true,
+          maxLength: 50
+        })
+        this.router.navigate(['manage-role'])
+      }
+    }, error => {
+      if (error.status == 500) {
+        //  this.tostr.error('Internal server error.')
+        this.notify.error('', 'Internal Server Error', {
+          timeOut: 5000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true,
+          maxLength: 50
+        })
+      }
+
+    })
+  }
 
 
 
   // ----------------Router Link---------------------------------//
-  generate(value){
-    this.roleValue=value
-    if(this.roleValue=='permission'){
-      $('#googleauth').modal({ backdrop: 'static', keyboard: false })
-  
+  generate(value) {
+    this.roleValue = value
+    if (this.roleValue == 'permission') {
+      this.editpermission()
+      //  $('#googleauth').modal({ backdrop: 'static', keyboard: false })
+
     }
-  
+
   }
-  
+
   // google auth
-  onOtpChange(value){
-    this.varificationCode=value
-   }
-  
-   onConfigChange() {
+  onOtpChange(value) {
+    this.varificationCode = value
+  }
+
+  onConfigChange() {
     this.showOtpComponent = false;
     this.varificationCode = null;
     setTimeout(() => {
@@ -177,43 +202,43 @@ editpermission() {
   //   $('#comanModal').modal('hide')
   //   $('#googleauth').modal({ backdrop: 'static', keyboard: false })
   // }
-  
-  verify(){
+
+  verify() {
     let data = {
       "code": this.varificationCode
     }
-    this.service.postApi('api/google-auth-step-verification',data,1).subscribe((res)=>{
-      if(res.status == 200){
+    this.service.postApi('api/google-auth-step-verification', data, 1).subscribe((res) => {
+      if (res.status == 200) {
         this.onConfigChange()
         this.editpermission()
-       $('#googleauth').modal('hide')
-    
-  
+        $('#googleauth').modal('hide')
+
+
       }
-     
-    } ,err=>{
-     if(err.status == 403 || err.status == 401){
-       this.onConfigChange()
-       this.service.logout();
-     }
-     else if (err.status == 400){
-       this.onConfigChange()
-       this.errorMessage=err.error.message
-      //  this.service.toastErr(err.error.message)
-     }
-   })
+
+    }, err => {
+      if (err.status == 403 || err.status == 401) {
+        this.onConfigChange()
+        this.service.logout();
+      }
+      else if (err.status == 400) {
+        this.onConfigChange()
+        this.errorMessage = err.error.message
+        //  this.service.toastErr(err.error.message)
+      }
+    })
   }
- reset(){
-   this.errorMessage='';
-   this.onConfigChange()
- }  
-      // only number Allowed
-      numberOnly(event): boolean {
-        const charCode = (event.which) ? event.which : event.keyCode;
-         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-        }
-       return true;
+  reset() {
+    this.errorMessage = '';
+    this.onConfigChange()
+  }
+  // only number Allowed
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
     }
+    return true;
+  }
 
 }

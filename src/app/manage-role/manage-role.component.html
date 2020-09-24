@@ -96,7 +96,7 @@
     <app-footer></app-footer>
 </div> -->
 <!-- -----------------------unblock modal---------------------- -->
-<div class="modal" id="unblockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal" id="unblockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modals">
             <div class="modal-header">
@@ -114,12 +114,12 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- -----------------------unblock modal---------------------- -->
 
 <!-- -----------------------block modal---------------------- -->
-<div class="modal" id="blockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal" id="blockmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modals">
             <div class="modal-header">
@@ -137,9 +137,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- ----------------------------------------delete modal---------------------------------------------- -->
-<div class="modal" id="exampleModal2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal" id="exampleModal2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modals">
             <div class="modal-header">
@@ -157,7 +157,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <!-- -------------------------------------Google auth modal---------------- -->
@@ -222,7 +222,7 @@ Reset password Url issues Done -->
                     <div class="row sndRow">
                         <div class="col-md-3 green-col" style="border-radius: 18px!important">
                             <div class=" has-search">
-                                <input type="text" class="form-control" (keyup.enter)="searchSubmit()" placeholder="{{'Searchbyrolename' | translate}}" maxlength="50"
+                                <input type="text" class="form-control" (keyup)="searchSubmit()" placeholder="{{'Searchbyrolename' | translate}}" maxlength="50"
                                     [(ngModel)]="searchRole" (keyup)="searchRoles($event.target.value)" maxlength="50" style="border-radius: 20px;">
                                 <span class="fa fa-search form-control-feedback"></span>
                             </div>
@@ -254,24 +254,20 @@ Reset password Url issues Done -->
                             </thead>
                             <tbody>
                                 <!-- | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}:index as i" -->
-                                <!-- <tr *ngFor="let data of manageroles | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
-                                    <th scope="row">{{data.id}}</th>
-                                    <td class="table-width">{{data?.name || '--'}}</td>
-                                    <td>{{data?.created_by || '--'}}</td>
-                                    <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' ||'--') || '--'}}</td>
-                                    <td *ngIf="data?.is_active ==true">Active</td>
-                                    <td *ngIf="data?.is_active !=true">Inactive</td> -->
-                                    <tr>
-                                        <td>R01455</td>
-                                        <td>Supervisor</td>
-                                        <td>Rakesh</td>
-                                        <td>17-8-20</td>
-                                        <td>Active</td>
+                                
+                                    <tr *ngFor="let data of manageroles | paginate: { itemsPerPage: limit, currentPage: page ,totalItems:total}:index as i">
+                                        <td>{{"R0 "+data.role_id}}</td>
+                                        <td>{{data.name}}</td>
+                                        <td>{{data?.createdby[0].first_name+" "+data?.createdby[0].last_name}}</td>
+                                        <td>{{data.created_at|date : 'dd/MM/yyyy, H:mm' ||'--' || '--'}}</td>
+                                        <td *ngIf="data?.is_block!=true">Active</td>
+                                        <td *ngIf="data?.is_block==true">Inactive</td>
+
                                        
                                     <td class="action">
-                                        <button class="skyblue-btn" [routerLink]="['/role-permission',data?.id]" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer') && (data?.name!='Manager') ">{{'Edit' | translate}}</button>
-                                        <button class="block-btn" (click)="block(data?.id,is_active)" *ngIf="(data?.is_active ==true) && (data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer') && (data?.name!='Manager')">{{'Block' | translate}}</button>
-                                        <button class="submit" (click)="unblock(data?.id,is_active)" *ngIf="data?.is_active !=true">{{'Unblock' | translate}}</button>
+                                        <button class="skyblue-btn" [routerLink]="['/role-permission',data?._id]" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer') && (data?.name!='Manager') ">{{'Edit' | translate}}</button>
+                                        <button class="block-btn" (click)="block(data?._id,data?.is_block)" *ngIf="(data?.is_block !=true) && (data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer') && (data?.name!='Manager')">{{'Block' | translate}}</button>
+                                        <button class="submit" (click)="unblock(data?._id,data?.is_block)" *ngIf="data?.is_block ==true">{{'Unblock' | translate}}</button>
                                         
                                         <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
                                             [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Permission' | translate}}</button>
@@ -280,16 +276,18 @@ Reset password Url issues Done -->
                                      
                                         <button class="block-btns" *ngIf="(data?.is_active ==true) && (data?.name==='Driver') || (data?.name==='Sales Representative') || (data?.name==='Merchant') || (data?.name==='Customer') || (data?.name==='Manager')"
                                         [disabled]="(data?.is_active ==true) || (data?.name==='Driver') && (data?.name==='Sales Representative') && (data?.name==='Merchant') && (data?.name==='Customer') && (data?.name==='Manager')">{{'Delete' | translate}}</button>
-                                        <button class="detail" (click)="deleteid(data?.id)" data-toggle="modal" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer')&& (data?.name!='Manager')">{{'Delete' | translate}}</button>
+                                        <button class="detail" (click)="deleteid(data?._id)" data-toggle="modal" *ngIf="(data?.name!='Driver') && (data?.name!='Sales Representative') && (data?.name!='Merchant') && (data?.name!='Customer')&& (data?.name!='Manager')">{{'Delete' | translate}}</button>
                                     </td>
-                                <!-- </tr> -->
+                                   
+                                </tr>
                             </tbody>
                         </table>
                         <div class="dnf">
-                            <!-- <h3 *ngIf="manageroles?.length==0">Data not found!</h3> -->
+                            <h3 *ngIf="manageroles?.length==0">Data not found!</h3>
                         </div>
                     </div>
                     <div class="pageination">
+
                         <pagination-controls (pageChange)="pagination($event)" style="float:right;" *ngIf="manageroles?.length!=0">
                         </pagination-controls>
                     </div>
@@ -323,7 +321,8 @@ Reset password Url issues Done -->
             </div>
             <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
                 <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
-                <button type="button" (click)="unblockmodal()" class="submit" >{{'Yes' | translate}}</button>
+                <!-- <button type="button" (click)="unblockmodal()" class="submit" >{{'Yes' | translate}}</button> -->
+                <button type="button" class="submit"  (click)="unblockFunction()">{{'Yes' | translate}}</button>
             </div>
         </div>
     </div>
@@ -346,7 +345,8 @@ Reset password Url issues Done -->
             </div>
             <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
                 <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
-                <button type="button" class="submit"  (click)="blockmodals()">{{'Yes' | translate}}</button>
+                <!-- <button type="button" class="submit"  (click)="blockmodals()">{{'Yes' | translate}}</button> -->
+                <button type="button" class="submit"  (click)="blockFunction()">{{'Yes' | translate}}</button>
             </div>
         </div>
     </div>
@@ -366,7 +366,9 @@ Reset password Url issues Done -->
             </div>
             <div class="modal-footer" style="display: flex; justify-content: space-evenly;">
                 <button type="button" data-dismiss="modal" class="submit" style="background: red;color: #fff;">{{'No' | translate}}</button>
-                <button type="button" class="submit"  (click)="deletemodal()">{{'Yes' | translate}}</button>
+                <!-- <button type="button" class="submit"  (click)="deletemodal()">{{'Yes' | translate}}</button> -->
+                <button type="button" class="submit"  (click)="deleteRole()">{{'Yes' | translate}}</button>
+                
             </div>
         </div>
     </div>

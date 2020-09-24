@@ -84,21 +84,22 @@ export class HeaderComponent implements OnInit {
 
   logout() {
 
-    this.service.getApi('api/logout', 1).subscribe((data: any) => {
-      if (data.status == 200) {
-        this.spinner.hide()
-        localStorage.removeItem("token");
-        this.router.navigate(['login'])
-        this.tostr.success(data.body.message)
-      }
-    }, error => {
-      if (error.status == 403) {
-        console.log('errorstatus', error.status)
-        this.spinner.hide()
-        this.router.navigate(['login'])
-      }
-    })
-
+    // this.service.getApi('api/logout', 1).subscribe((data: any) => {
+    //   if (data.status == 200) {
+    //     this.spinner.hide()
+    //     localStorage.removeItem("token");
+    //     this.router.navigate(['login'])
+    //     this.tostr.success(data.body.message)
+    //   }
+    // }, error => {
+    //   if (error.status == 403) {
+    //     console.log('errorstatus', error.status)
+    //     this.spinner.hide()
+    //     this.router.navigate(['login'])
+    //   }
+    // })
+    localStorage.removeItem("token");
+    this.router.navigate(['login'])
   }
   // -------------------------------language change------------------------//
   selectlang(event) {

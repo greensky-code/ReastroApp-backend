@@ -7,6 +7,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { splitAtColon } from '@angular/compiler/src/util';
 import { TranslateService } from '@ngx-translate/core';
+import { NotificationsService } from 'angular2-notifications';
+
 declare var $: any;
 @Component({
   selector: 'app-login',
@@ -27,8 +29,8 @@ export class LoginComponent implements OnInit {
   languages: string;
   arry = [{ name: "English", language: "en" }, { name: "Thai", language: "th" }]
   permissions: any = [];
-  constructor(private router: Router, private fb: FormBuilder, private service: ApiServiceService, public toastr: ToastrService,
-     private spinner: NgxSpinnerService, private translate: TranslateService) {
+  constructor(private notify: NotificationsService, private router: Router, private fb: FormBuilder, private service: ApiServiceService, public toastr: ToastrService,
+    private spinner: NgxSpinnerService, private translate: TranslateService) {
     // this.language='en';
 
 
@@ -79,7 +81,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    
+
     // this.spinner.show()
     // if(this.recaptcha!=''){
     var object = {
@@ -88,6 +90,7 @@ export class LoginComponent implements OnInit {
       "url": this.service.websiteUrls
     }
     this.service.postApi('api/login', object, 0).subscribe(res => {
+      console.log(res)
       if (res.status == 200) {
         this.spinner.hide()
         this.router.navigate(['/dashboard'])
@@ -100,28 +103,54 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('keys', this.key)
         localStorage.setItem('language', 'en')
         localStorage.setItem('Authentication', '')
-
+        this.notify.success('', this.data.message, {
+          timeOut: 5000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true,
+          maxLength: 50
+        })
         // this.toastr.success()
         console.log('translate', this.translate)
         localStorage.setItem('token', JSON.stringify(this.data.token))
         localStorage.setItem('tokens', JSON.stringify(this.data.token))
         // this.router.navigate(['/dashboard'])
         let qrCode = this.qr_codes;
-        
+
 
       }
 
     }, err => {
       console.log('errros', err)
       if (err.status == 500) {
+        console.log(err.status)
         this.spinner.hide()
-        this.service.toastErr('Internal server error.')
+        this.notify.error('', err.error.message, {
+          timeOut: 5000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true,
+          maxLength: 50
+        })
+        //  this.service.toastErr(err.error.message)
       } else if (err.status == 400) {
         this.spinner.hide()
-        this.service.toastErr(err.error.message)
+        this.notify.error('', err.error.message, {
+          timeOut: 5000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true,
+          maxLength: 50
+        })
       } else if (err.status == 403) {
         this.spinner.hide()
-        this.service.toastErr(err.error.message)
+        this.notify.error('', err.error.message, {
+          timeOut: 5000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true,
+          maxLength: 50
+        })
       }
     })
 

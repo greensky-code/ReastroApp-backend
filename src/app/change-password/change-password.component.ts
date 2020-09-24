@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiServiceService } from '../api-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-change-password',
@@ -10,56 +11,76 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
-  changePasswordForm:FormGroup;
+  changePasswordForm: FormGroup;
   jwt: string;
-  jwtvalue='JWT';
+  jwtvalue = 'JWT';
   jwtdata: string;
   qrCode: any;
-  show2: boolean=false;
+  show2: boolean = false;
   show1: boolean = false;
-  type :any= "password";
+  type: any = "password";
 
-  show :boolean = false;
-  type2: string="password";
-  type1: string="password";
-  constructor(private router:Router,public fb : FormBuilder, private toastr:ToastrService, private service:ApiServiceService) { }
+  show: boolean = false;
+  type2: string = "password";
+  type1: string = "password";
+  constructor(private notify: NotificationsService, private router: Router, public fb: FormBuilder, private toastr: ToastrService, private service: ApiServiceService) { }
 
   ngOnInit() {
     this.changePasswordForm = this.fb.group({
-      'oldPassword'       : ['',[Validators.required]],
-      'newPassword'       : ['',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i)]],
-      'confirmPassword'   : ['',[Validators.required]]
+      'oldPassword': ['', [Validators.required]],
+      'newPassword': ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i)]],
+      'confirmPassword': ['', [Validators.required]]
     })
-    localStorage.setItem('Authorization',this.jwtvalue)
+    localStorage.setItem('Authorization', this.jwtvalue)
     // Validators.pattern(/^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
     // Validators.pattern(/^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
     // Validators.pattern(/^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
   }
   // Change Password method//
-  submit(){
+  submit() {
     var object = {
-      'old_password'       : this.changePasswordForm.value.oldPassword,
-      'new_password'       : this.changePasswordForm.value.newPassword,
-      'confirm_password'   : this.changePasswordForm.value.confirmPassword
+      'old_password': this.changePasswordForm.value.oldPassword,
+      'new_password': this.changePasswordForm.value.newPassword,
+      'confirm_password': this.changePasswordForm.value.confirmPassword
     }
-    
+
     //////////////////// change password Api//////////////////////
-    if(this.changePasswordForm.value.newPassword == this.changePasswordForm.value.confirmPassword){
-      localStorage.setItem('conformpassword',this.changePasswordForm.value.confirmPassword)
-      this.service.postApi('api/change-password',object,1).subscribe((res:any)=>{
-        this.qrCode=res.message
-        let qrcode=this.qrCode;
-        this.router.navigate(['change-password-verification'])
+    if (this.changePasswordForm.value.newPassword == this.changePasswordForm.value.confirmPassword) {
+      localStorage.setItem('conformpassword', this.changePasswordForm.value.confirmPassword)
+      this.service.postApi('api/change-password', object, 1).subscribe((res: any) => {
+        this.qrCode = res.message
+
+        //let qrcode=this.qrCode;
+        // this.router.navigate(['change-password-verification'])
         // this.router.navigate(['change-password-verification'],{
         // queryParams:{qrCode:JSON.stringify(qrcode)}
         // })
         // queryParams:{qrCode:JSON.stringify(qrCode)}/
-      }  ,err=>{
-        if(err.status == 403 || err.status == 401){
+        this.changePasswordForm.reset()
+        this.notify.success('',"Password updated Successfully",
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true,
+            maxLength: 50
+          }
+        )
+      }, err => {
+        if (err.status == 403 || err.status == 401) {
           this.service.logout();
         }
-        else if (err.status == 400){
-          this.toastr.error(err.error.message)
+        else if (err.status == 400) {
+          // this.toastr.error(err.error.message)
+          this.notify.error('', err.error.message,
+            {
+              timeOut: 5000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true,
+              maxLength: 50
+            }
+          )
         }
       })
     }
@@ -74,7 +95,7 @@ export class ChangePasswordComponent implements OnInit {
       this.type = "password";
     }
   }
-  
+
 
 
   toggleShow1() {
@@ -87,7 +108,7 @@ export class ChangePasswordComponent implements OnInit {
     }
   }
 
- 
+
   toggleShow2() {
     this.show2 = !this.show2;
     if (this.show2) {
@@ -97,9 +118,9 @@ export class ChangePasswordComponent implements OnInit {
       this.type2 = "password";
     }
   }
-  
 
 
-  
+
+
 
 }

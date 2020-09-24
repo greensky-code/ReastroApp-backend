@@ -17,6 +17,7 @@ export class MenubarComponent implements OnInit {
   ngOnInit() {
 
     this.permissions=JSON.parse(localStorage.getItem('permissions'))
+    console.log(this.permissions)
     console.log('permissionsddss',this.permissions[0].has_permission)
 
   }

@@ -20,10 +20,11 @@ export class ApiServiceService {
   socket: any;
   spinner: any
   // baseUrl='http://182.74.213.163:8008/v1/'//ec2 base url
-  baseUrl='http://ec2-13-250-224-209.ap-southeast-1.compute.amazonaws.com:8008/v1/' 
+ // baseUrl='http://ec2-13-250-224-209.ap-southeast-1.compute.amazonaws.com:8008/v1/' 
 
   websiteUrls="http://ec2-35-176-66-190.eu-west-2.compute.amazonaws.com:1637/" 
-  
+  baseUrl='http://localhost:3000/v1/' 
+
 // SERVER_URL ="ws://182.74.213.163:8008/ws/support/sender/2681"
 
 // rewrewrewrewrdsadasdasa
@@ -41,7 +42,7 @@ export class ApiServiceService {
     httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        "Authorization":"JWT "+JSON.parse(localStorage.getItem('token'))
+        "acces_token":JSON.parse(localStorage.getItem('token'))
       }),
       observe: 'response'
     }
@@ -82,7 +83,7 @@ export class ApiServiceService {
       httpOptions = {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
-          "Authorization":"JWT "+JSON.parse(localStorage.getItem('token'))
+          "acces_token":JSON.parse(localStorage.getItem('token'))
         }),
         observe: 'response'
       
@@ -119,7 +120,7 @@ delete(url,id:number,isHeader): Observable<any> {
     httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        "Authorization":"JWT "+JSON.parse(localStorage.getItem('token'))
+        "acces_token":JSON.parse(localStorage.getItem('token'))
       }),
       observe: 'response'
       
@@ -146,7 +147,7 @@ delete(url,id:number,isHeader): Observable<any> {
       httpOptions = {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
-          "Authorization":"JWT "+JSON.parse(localStorage.getItem('token'))
+          "acces_token":JSON.parse(localStorage.getItem('token'))
         }),
         observe: 'response'
       

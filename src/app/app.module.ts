@@ -21,7 +21,7 @@ import { NgMultiSelectDropDownModule} from "ng-multiselect-dropdown"
 // import { NgSelectModule } from '@ng-select/ng-select';
 // import { CKEditorModule } from 'ng2-ckeditor';
 import { CKEditorModule } from 'ngx-ckeditor';
-
+import { SimpleNotificationsModule } from 'angular2-notifications';
 // #############################COMPONENT START ##############################//
 
 import { AppComponent } from './app.component';
@@ -262,6 +262,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     OrderHistoryComponent,
     ManageSaleComponent,
     ManageOfferComponent,
+     
 
     AddSalerepresentativeComponent,
 
@@ -436,7 +437,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxPopoverImageModule,
     InternationalPhoneNumberModule,
     NgOtpInputModule,
-    
+    SimpleNotificationsModule.forRoot(),
     
     // CKEditorModule,
     CKEditorModule,

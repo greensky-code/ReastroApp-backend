@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TranslateService } from '@ngx-translate/core';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,19 +13,19 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-  reserpasswordForm:FormGroup;
+  reserpasswordForm: FormGroup;
   links: string;
   language = "en";
   two_food_delivery: boolean = false;
   languages: string;
   arry = [{ name: "English", language: "en" }, { name: "Thai", language: "th" }]
-  constructor(private service:ApiServiceService,private router:Router,private tostr:ToastrService,private fb:FormBuilder,private spinner:NgxSpinnerService,private translate:TranslateService) {
+  constructor(private notify: NotificationsService, private service: ApiServiceService, private router: Router, private tostr: ToastrService, private fb: FormBuilder, private spinner: NgxSpinnerService, private translate: TranslateService) {
 
     this.language = localStorage.getItem('language')
-     }
-  
-     ngOnChanges() {
-    let pathname = window.location.pathname;    
+  }
+
+  ngOnChanges() {
+    let pathname = window.location.pathname;
     if (!pathname.includes('page-notfound')) {
       let lang = localStorage.getItem('language');
       pathname = lang ? pathname + "/" + lang : pathname;
@@ -40,35 +41,66 @@ export class ForgotPasswordComponent implements OnInit {
       localStorage.setItem('lastUrl', pathname);
     }
 
-    
+
     const url = window.location.href;
     let lang = localStorage.getItem('language');
     let newUrl = lang ? url + "/" + lang : url;
     history.pushState({}, null, newUrl);
 
-    this.reserpasswordForm=this.fb.group({
-      "email"   : ['',Validators.compose([Validators.required,Validators.minLength(2),Validators.maxLength(256),Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
+    this.reserpasswordForm = this.fb.group({
+      "email": ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(256), Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
     })
 
   }
-   forgetPassword(){
-     this.spinner.show()
-      let object={
-        "url":  this.service.websiteUrls+'reset-password',
-        "email":this.reserpasswordForm.value.email
-      }
-      
-      this.service.postApi('api/sent-forget-password-email',object,0).subscribe(res=>{
-        if(res.status==200){
-          this.spinner.hide()
-          this.tostr.success('An email has been send on your registered email.')
-          // this.router.navigate['login']
-          this.router.navigate(['login'])
-        }
-      },error=>{
+  forgetPassword() {
+    this.spinner.show()
+    let object = {
+      "url": this.service.websiteUrls + 'reset-password',
+      "email": this.reserpasswordForm.value.email
+    }
+
+    this.service.postApi('api/sent-forget-password-email', object, 0).subscribe(res => {
+      console.log(res)
+      if (res.body.message_code == 200) {
         this.spinner.hide()
-        this.tostr.error('Please enter your registered email.')
-      })
+        //  this.tostr.success('An email has been send on your registered email.')
+        this.notify.success('', "An email has been send on your registered email.",
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true,
+            maxLength: 50
+          }
+        )
+        // this.router.navigate['login']
+        this.router.navigate(['login'])
+      } else {
+        this.spinner.hide()
+        this.notify.error('', "Please enter your registered email.",
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true,
+            maxLength: 50
+          }
+        )
+
+      }
+    }, error => {
+      this.spinner.hide()
+      // this.tostr.error('Please enter your registered email.')
+      this.notify.error('', "Please enter your registered email.",
+        {
+          timeOut: 5000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true,
+          maxLength: 50
+        }
+      )
+    })
   }
 
   selectlang(event) {
