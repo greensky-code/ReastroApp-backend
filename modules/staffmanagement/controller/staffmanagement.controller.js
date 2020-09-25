@@ -57,56 +57,131 @@ exports.insert = (req, res) => {
 };
 
 exports.list = (req, res) => {
-  staff
-    .aggregate([
-      {
-        $match: { is_delete: false },
+  let option = {
+    page: req.query.page || 1,
+    limit: 10,
+  };
+  let query = {
+    is_delete: false,
+  };
+  let searchQueryList = [];
+  let searchQuery = "";
+  if (req.query.search) {
+    searchQuery = req.query.search;
+  }
+  if (req.query.is_active) {
+    query["is_active"] = req.query.is_active == "true" ? true : false;
+  }
+  if (req.query.role) {
+    query["role"] = ObjectId(req.query.role);
+  }
+  if (req.query.created_at_after) {
+    query["created_at"] = {
+      $gte: new Date(req.query.created_at_after),
+    };
+  }
+  if (req.query.created_at_before) {
+    if (query["created_at"]) {
+      query["created_at"]["$lte"] = new Date(req.query.created_at_before);
+    } else
+      query["created_at"] = {
+        $lte: new Date(req.query.created_at_before),
+      };
+  }
+  console.log("query", query);
+  searchQueryList.push({ first_name: { $regex: `^${searchQuery}` } });
+  searchQueryList.push({ email: { $regex: `^${searchQuery}` } });
+  searchQueryList.push({ mobile: { $regex: `^${searchQuery}` } });
+  var aggregate = staff.aggregate([
+    {
+      $match: {
+        $and: [
+          query,
+          {
+            $or: searchQueryList,
+          },
+        ],
       },
-      {
-        $lookup: {
-          from: "roles",
-          localField: "role",
-          foreignField: "_id",
-          as: "role",
-        },
+    },
+    {
+      $lookup: {
+        from: "roles",
+        let: { role: "$role" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $eq: ["$_id", "$$role"],
+              },
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+            },
+          },
+        ],
+        as: "role",
       },
-      {
-        $project: {
-          first_name: 1,
-          last_name: 1,
-          middle_name: 1,
-          country_code: 1,
-          mobile: 1,
-          email: 1,
-          gender: 1,
-          created_by: 1,
-          updated_by: 1,
-          created_at: 1,
-          updated_at: 1,
-          is_active: 1,
-          "role.name": 1,
-          "role._id": 1,
-        },
+    },
+    {
+      $lookup: {
+        from: "createeditviewprofiles",
+        localField: "created_by",
+        foreignField: "_id",
+        as: "created_by",
       },
-    ])
-    .exec((err, resdata) => {
-      if (err) {
+    },
+    {
+      $lookup: {
+        from: "createeditviewprofiles",
+        localField: "updated_by",
+        foreignField: "_id",
+        as: "updated_by",
+      },
+    },
+    {
+      $project: {
+        "created_by.password": 0,
+        "created_by.created_at": 0,
+        "created_by.updated_at": 0,
+        "created_by.is_active": 0,
+        "updated_by.password": 0,
+        "updated_by.created_at": 0,
+        "updated_by.updated_at": 0,
+        "updated_by.is_active": 0,
+      },
+    },
+    { $sort: { created_at: -1 } },
+  ]);
+  staff.aggregatePaginate(aggregate, option, (err, result, pages, total) => {
+    console.log("err", err);
+    if (!err) {
+      const success = {
+        docs: result,
+        total: total,
+        limit: option.limit,
+        page: option.page,
+        pages: pages,
+      };
+      if (success) {
+        let data = {
+          data: success.docs,
+          message: "STAFF LIST",
+          message_code: "200",
+          count: success.total,
+        };
+        return res.json(data);
+      } else {
         return res.json({
           message_code: "500",
           message: "Internal_server_error",
+          err: err,
         });
-      } else if (resdata.length < 1) {
-        return res.json({ message_code: "404", message: "No Data Found" });
-      } else {
-        let data = {
-          data: resdata,
-          message: "STAFF LIST",
-          message_code: "200",
-          adminName: req.user.first_name,
-        };
-        return res.json(data);
       }
-    });
+    }
+  });
 };
 
 exports.getById = (req, res) => {
@@ -201,6 +276,8 @@ exports.updateById = (req, res) => {
           email: req.body.email,
           role: req.body.role,
           gender: req.body.gender,
+          updated_at: date,
+          updated_by: userid,
         };
         if (req.body.is_active != undefined) {
           if (req.body.is_active) {
@@ -281,13 +358,6 @@ exports.removeById = (req, res) => {
 exports.validateStaff = () => {
   return [
     check("mobile", "mobile doesnt exists").exists(),
-    check(
-      "mobile",
-      "mobile minimum 10 and maximum 20 characters are required"
-    ).isLength({
-      min: 10,
-      max: 20,
-    }),
     check("mobile", "mobile number should be in number format").isInt(),
     check("first_name", "First Name doesnt exists").exists(),
     check(
