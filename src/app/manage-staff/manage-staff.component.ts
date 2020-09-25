@@ -8,6 +8,8 @@ import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { identifierModuleUrl } from "@angular/compiler";
+import { NotificationsService } from 'angular2-notifications';
+import { TranslateService } from '@ngx-translate/core';
 declare var $: any;
 @Component({
   selector: "app-manage-staff",
@@ -59,14 +61,21 @@ export class ManageStaffComponent implements OnInit {
   errorMessage: any;
   disables = false;
   staffRoles = "";
+  filterRole = "";
+  blockStatus;
+  indStaff;
+  blockModalText;
+  blockModalHeader;
 
   constructor(
     private service: ApiServiceService,
+    private notify: NotificationsService,
     private tostr: ToastrService,
     private excelService: ExcelService,
     private router: Router,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.disables = false;
@@ -78,21 +87,12 @@ export class ManageStaffComponent implements OnInit {
   manadeDetails(page) {
     this.page = page;
     this.spinner.show();
-    this.service.getApi("api/staff", 1).subscribe(
+    this.service.getApi(`api/staff?page=${this.page}`, 1).subscribe(
       (res) => {
         if (res.status == 200) {
           this.spinner.hide();
-          let data = res.body.data;
-          let name = res.body.adminName;
-          if (data)
-            data = data.map((staff) => {
-              staff.created_by = name;
-              staff.updated_by = name;
-              return staff;
-            });
-          this.manageStaff = data;
+          this.manageStaff = res.body.data;
           this.total = res.body.count;
-          // this.page=page
           this.limit = 10;
         }
       },
@@ -111,6 +111,7 @@ export class ManageStaffComponent implements OnInit {
 
   orderFilter(event) {
     this.staffRoles = event;
+    this.filterRole = this.manageStaffroles.filter((role) => role.name == event)[0]._id;
     // this.disables=true
     if (this.staffRoles != "") {
       this.disables = true;
@@ -175,7 +176,7 @@ export class ManageStaffComponent implements OnInit {
   getRole() {
     this.service.getApi("api/role", 1).subscribe((res) => {
       if (res.status == 200) {
-        this.manageStaffroles = res.body;
+        this.manageStaffroles = res.body.results;
       }
     });
   }
@@ -184,46 +185,15 @@ export class ManageStaffComponent implements OnInit {
   submitdata() {
     this.disables = false;
     this.spinner.show();
-    if (
-      this.staffRoles &&
-      this.user.kycRole &&
-      this.driver.toDate &&
-      this.driver.fromDate &&
-      this.searchName
-    ) {
-      // this.url=`api/staff?is_active=${this.user.kycRole}&role=${this.staffRoles }&created_at_after=${this.driver.fromDate}&created_at_before=${this.driver.toDate}&search=${this.searchName}`
-      this.url = `api/staff?&search=${this.searchName}&is_active=${this.user.kycRole}&role=${this.staffRoles}&created_at_after=${this.driver.fromDate}&created_at_before=${this.driver.toDate}`;
-    } else if (this.searchName) {
-      this.url = `api/staff?search=` + this.searchName;
-    } else if (this.user.kycRole) {
-      this.url = `api/staff?is_active=` + this.user.kycRole;
-    } else if (this.staffRoles) {
-      this.url = `api/staff?role=` + this.staffRoles;
-    } else if (this.driver.fromDate && this.driver.toDate) {
-      this.url =
-        `api/staff?created_at_after=` +
-        this.driver.fromDate +
-        "&created_at_before=" +
-        this.driver.toDate;
-    }
-    if (this.driver.fromDate == "" && this.driver.toDate) {
-      this.spinner.hide();
-      this.service.toastErr("Please enter from date.");
-    } else if (this.driver.fromDate && this.driver.toDate == "") {
-      this.spinner.hide();
-      this.service.toastErr("Please enter to date.");
-    }
-    //  else{
-    //    this.tostr.error('Please select from and to date.')
-    //  }
-    // fgdfgfdgdfg
+    this.filterRole = this.filterRole
+    this.url = `api/staff?&search=${this.searchName}&is_active=${this.user.kycRole}&role=${this.filterRole}&created_at_after=${this.driver.fromDate}&created_at_before=${this.driver.toDate}`;
 
     this.service.getApi(this.url, 1).subscribe(
       (res) => {
         if (res.status == 200) {
           this.spinner.hide();
           this.disables = true;
-          this.manageStaff = res.body.results;
+          this.manageStaff = res.body.data;
           console.log("manageStaff", this.manageStaff);
           this.total = res.body.count;
         }
@@ -278,15 +248,14 @@ export class ManageStaffComponent implements OnInit {
   }
 
   select(value) {
-    this.searchName = value;
-    console.log("searchNamesearchName==>", this.searchName);
-    // this.disables=true
+    this.service.getApi('api/staff?search=' + value, 1).subscribe(res => {
+      if (res.status == 200) {
+        this.manageStaff = res.body.data;
+        this.total = res.body.count;
+        this.limit = 10;
+      }
 
-    if (this.searchName != "") {
-      this.disables = true;
-    } else if (this.searchName == "") {
-      this.disables = false;
-    }
+    })
   }
   // pagination(page){
   //   this.page=page
@@ -310,8 +279,8 @@ export class ManageStaffComponent implements OnInit {
     this.service
       .getApi(
         `api/staff?search=${this.searchName}&page=${this.page}` ||
-          `api/staff?is_active=${this.user.kycRole}&page=${this.page}` ||
-          `api/staff?role=${this.staffRoles}&page=${this.page}`,
+        `api/staff?is_active=${this.user.kycRole}&page=${this.page}` ||
+        `api/staff?role=${this.staffRoles}&page=${this.page}`,
         1
       )
       .subscribe((res) => {
@@ -325,13 +294,45 @@ export class ManageStaffComponent implements OnInit {
   // ########################## Block Api ##########//
 
   block(data, blockStatus) {
-    let request = { ...data };
-    request.is_active = !blockStatus;
-    request.role = data.role[0]._id;
+    this.indStaff = data;
+    this.blockStatus = blockStatus;
+    let blockText;
+    let blockHeader;
+    if (!blockStatus) {
+      blockText = 'Areyousureyouwanttoblockthisstaff?';
+      blockHeader = "Block"
+    } else {
+      blockText = 'Areyousureyouwanttounblockthisstaff?';
+      blockHeader = "Unblock"
+    }
+    this.translate.get(blockText).subscribe((data) => {
+      this.blockModalText = data
+    });
+    this.translate.get(blockHeader).subscribe((data) => {
+      this.blockModalHeader = data
+    });
+    $('#blockmodal').modal({ backdrop: 'static', keyboard: false })
+
+
+  }
+
+  blockFunction() {
+    $('#blockmodal').modal('hide')
+    let request = this.indStaff;
+    request.is_active = this.blockStatus;
+    request.role = request.role[0]._id;
     this.service.putApi("api/staff/" + request._id, request, 1).subscribe(
       (data: any) => {
         if (data.status == 200) {
-          this.tostr.success(data.body.message);
+          this.notify.success('', data.body.message,
+            {
+              timeOut: 5000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true,
+              maxLength: 50
+            }
+          )
           // this.manageroles=
           this.manadeDetails(1);
         }
@@ -348,10 +349,9 @@ export class ManageStaffComponent implements OnInit {
 
   //   // ############################### Unblock Api #####################//
 
-  unblock(id, is_active) {
-    this.unblockId = id;
-    this.is_active = is_active;
-    this.status = "unblock";
+  unblock(data, blockStatus) {
+    this.indStaff = data;
+    this.blockStatus = blockStatus;
     $("#unblockmodal").modal({ backdrop: "static", keyboard: false });
   }
 
@@ -382,11 +382,10 @@ export class ManageStaffComponent implements OnInit {
 
   deleteFunction(id) {
     this.delete_id = id;
-    this.status = "delete";
-    console.log("DeleteStatus", this.status);
-    this.deleteFunctions();
+    $('#exampleModal2').modal({ backdrop: 'static', keyboard: false })
   }
-  deleteFunctions() {
+  deleteStaff() {
+    $('#exampleModal2').modal('hide');
     this.service.delete("api/staff/", this.delete_id, 1).subscribe(
       (res) => {
         if (res.status == 200) {
@@ -438,65 +437,7 @@ export class ManageStaffComponent implements OnInit {
       this.showOtpComponent = true;
     }, 0);
   }
-  verify() {
-    this.spinner.show();
 
-    let data = {
-      code: this.varificationCode,
-    };
-    this.service
-      .postApi("api/google-auth-step-verification", data, 1)
-      .subscribe(
-        (res) => {
-          if (res.status == 200) {
-            this.spinner.hide();
-            this.onConfigChange();
-
-            if (this.status == "block") {
-              this.onConfigChange();
-            } else if (this.status == "unblock") {
-              this.onConfigChange();
-
-              this.unblockFunction();
-            } else if (this.status == "delete") {
-              console.log("fhdsfgdsfgjhdsfghjfhjfjhfjhfjhdjs");
-              this.onConfigChange();
-              this.deleteFunctions();
-            } else if (this.staff_id == "addStaff") {
-              this.router.navigate(["add-staff"]);
-            } else if (this.addStaff == "editStaff") {
-              this.router.navigate(["edit-staff", { id: this.staff_id }]);
-            }
-
-            $("#googleauth").modal("hide");
-          } else {
-            this.onConfigChange();
-            this.tostr.error();
-          }
-        },
-        (err) => {
-          if (err.status == 403 || err.status == 401) {
-            this.spinner.hide();
-
-            this.onConfigChange();
-            this.service.logout();
-          } else if (err.status == 400) {
-            this.spinner.hide();
-
-            this.onConfigChange();
-            this.errorMessage = err.error.message;
-            //  this.tostr.error(err.error.message)
-          } else if (err.status == 500) {
-            this.spinner.hide();
-
-            this.onConfigChange();
-            this.service.toastErr(err.statusText);
-            //  this.tostr.error(err.error.message)
-          }
-          this.spinner.hide();
-        }
-      );
-  }
   resets() {
     this.errorMessage = "";
     this.onConfigChange();

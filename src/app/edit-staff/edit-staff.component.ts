@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
+import { NotificationsService } from 'angular2-notifications';
 declare var $: any;
 @Component({
   selector: "app-edit-staff",
@@ -34,8 +35,9 @@ export class EditStaffComponent implements OnInit {
     private tostr: ToastrService,
     private forrmBuilder: FormBuilder,
     private activateRouter: ActivatedRoute,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private notify: NotificationsService
+  ) { }
 
   ngOnInit() {
     this.activateRouter.params.subscribe((res) => {
@@ -89,8 +91,8 @@ export class EditStaffComponent implements OnInit {
   getRole() {
     this.service.getApi("api/role", 1).subscribe((res) => {
       if (res.status == 200) {
-        this.staffDataroles = res.body.data;
-        this.rolsList_id = res.body.data;
+        this.staffDataroles = res.body.results;
+        this.rolsList_id = res.body.results;
       }
     });
   }
@@ -153,6 +155,13 @@ export class EditStaffComponent implements OnInit {
         if (res.status == 200) {
           this.spinner.hide();
           this.service.showSuccess(res.body.message);
+          this.notify.success('', "Staff updated successfully.", {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true,
+            maxLength: 50
+          })
           this.router.navigate(["manage-staff"]);
         } else if (res.status == 403 || res.status == 401) {
           this.spinner.hide();

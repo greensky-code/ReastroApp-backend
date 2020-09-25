@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { NgxSpinnerService } from "ngx-spinner";
+import { NotificationsService } from 'angular2-notifications';
 declare var $: any;
 @Component({
   selector: "app-add-staff",
@@ -33,8 +34,9 @@ export class AddStaffComponent implements OnInit {
     private router: Router,
     private tostr: ToastrService,
     private forrmBuilder: FormBuilder,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private notify: NotificationsService
+  ) { }
   ngOnInit() {
     this.addStaffForm = this.forrmBuilder.group({
       firstName: [
@@ -108,7 +110,7 @@ export class AddStaffComponent implements OnInit {
   getRole() {
     this.service.getApi("api/role", 1).subscribe((res) => {
       if (res.status == 200) {
-        let data = res.body.data.map((role) => {
+        let data = res.body.results.map((role) => {
           return { name: role.name, id: role._id };
         });
         this.manageStaffroles = data;
@@ -136,11 +138,25 @@ export class AddStaffComponent implements OnInit {
         if (res.status == 200) {
           this.spinner.hide();
           this.tostr.success(res.body.message);
+          this.notify.success('', "Staff added successfully.", {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true,
+            maxLength: 50
+          })
           this.router.navigate(["manage-staff"]);
         }
       },
       (err) => {
         this.spinner.hide();
+        this.notify.error('', 'Internal Server Error', {
+          timeOut: 5000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true,
+          maxLength: 50
+        })
         if (err.status == 403 || err.status == 401) {
           this.spinner.hide();
           this.service.logout();
