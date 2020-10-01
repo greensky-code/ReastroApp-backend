@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { ApiServiceService } from '../api-service.service';
 import { ToastrService } from 'ngx-toastr';
-
-declare var $:any;
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationsService } from 'angular2-notifications';
+declare var $: any;
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
@@ -13,20 +14,20 @@ declare var $:any;
 export class AddCategoryComponent implements OnInit {
 
   form: FormGroup;
-  showOtpComponent=true;
+  showOtpComponent = true;
   varificationCode: any;
   cusinsValue: any;
   errorMessage: any;
   public formEventData = [
     {
-      category:''
+      category: ''
     }
   ];
-  constructor(private router: Router, private fb: FormBuilder, public service: ApiServiceService, public toastr: ToastrService) { }
+  constructor(private notify: NotificationsService, private spinner: NgxSpinnerService, private router: Router, private fb: FormBuilder, public service: ApiServiceService, public toastr: ToastrService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
-      'category': ['', Validators.compose([Validators.required, Validators.maxLength(256)])],
+      'category': [''],
       'eventArr': this.fb.array([])
 
     });
@@ -35,27 +36,28 @@ export class AddCategoryComponent implements OnInit {
 
   // check event data categry data 
 
-  checkEventCategory(){
+  checkEventCategory() {
     if (this.formEventData) {
       this.formEventData.forEach(categry => {
-          this.addCategory(categry);
+        this.addCategory(categry);
       });
-      } else{
-        this.addCategory()
-      }
+    } else {
+      this.addCategory()
+    }
   }
- 
+
 
   // Add multiple event FormArray
-  addCategory(category ? : any) {
+  addCategory(category?: any) {
     let fg = this.fb.group({
-        'category': [category ? category.category : '',Validators.required]
+      'category': [category ? category.category : '', Validators.required]
     });
-    (<FormArray>this.form.get('eventArr')).push(fg);    
-   }
+    (<FormArray>this.form.get('eventArr')).push(fg);
+    console.log(this.form.value.eventArr)
+  }
 
   // Delete event from any index
-    deleteEvent(index: number) {
+  deleteEvent(index: number) {
     (<FormArray>this.form.get('eventArr')).removeAt(index);
   }
 
@@ -72,58 +74,108 @@ export class AddCategoryComponent implements OnInit {
 
 
 
-   // ----------------Router Link---------------------------------//
-generate(value){
-  this.cusinsValue=value
-  if(this.cusinsValue=='cusins'){
-    $('#googleauth').modal({ backdrop: 'static', keyboard: false })
+  // ----------------Router Link---------------------------------//
+  generate(value) {
+    this.cusinsValue = value
+    if (this.cusinsValue == 'addcat') {
+      this.addcategorypost()
+      //  $('#googleauth').modal({ backdrop: 'static', keyboard: false })
+
+    }
 
   }
+  addcategorypost() {
+    this.spinner.show()
+    let object = {
+      "categoryname": this.form.value.eventArr,
+    }
+    console.log(object)
+    this.service.postApi('api/category', object, 1).subscribe((data: any) => {
+      this.spinner.hide()
+      // this.toastr.success("Role added successfully.")
+      this.notify.success('', "Category added successfully.", {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true,
+        maxLength: 50
+      })
+      this.router.navigate(['category-management'])
+    }, err => {
+      if (err.status == 403 || err.status == 401) {
+        this.spinner.hide()
+        this.service.logout();
+      }
+      else if (err.status == 400) {
+        this.spinner.hide()
+        //   this.toastr.error(err.error.message)
+        this.notify.error('', err.error.message,
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true,
+            maxLength: 50
+          }
+        )
+      } else if (err.status == 500) {
+        //  this.service.toastErr('Internal server error.')
+        this.notify.error('', 'Internal Server Error',
+          {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true,
+            maxLength: 50
+          }
+        )
+      }
 
-}
 
-// google auth
-onOtpChange(value){
-  this.varificationCode=value
- }
-
- onConfigChange() {
-  this.showOtpComponent = false;
-  this.varificationCode = null;
-  setTimeout(() => {
-    this.showOtpComponent = true;
-  }, 0);
-}
-// modal(){
-//   $('#comanModal').modal('hide')
-//   $('#googleauth').modal({ backdrop: 'static', keyboard: false })
-// }
-
-
-
-back(){
-  this.router.navigate(['category-management'])
-}
-
-reset(){
-  this.errorMessage='';
-  this.onConfigChange()
-}
-
-
-   // only number Allowed
- numberOnly(event): boolean {
-
-  const charCode = (event.which) ? event.which : event.keyCode;
-
-  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-
-    return false;
-
+    })
+  }
+  // google auth
+  onOtpChange(value) {
+    this.varificationCode = value
   }
 
-  return true;
+  onConfigChange() {
+    this.showOtpComponent = false;
+    this.varificationCode = null;
+    setTimeout(() => {
+      this.showOtpComponent = true;
+    }, 0);
+  }
+  // modal(){
+  //   $('#comanModal').modal('hide')
+  //   $('#googleauth').modal({ backdrop: 'static', keyboard: false })
+  // }
 
-}
+
+
+  back() {
+    this.router.navigate(['category-management'])
+  }
+
+  reset() {
+    this.errorMessage = '';
+    this.onConfigChange()
+  }
+
+
+  // only number Allowed
+  numberOnly(event): boolean {
+
+    const charCode = (event.which) ? event.which : event.keyCode;
+
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+      return false;
+
+    }
+
+    return true;
+
+  }
 
 }

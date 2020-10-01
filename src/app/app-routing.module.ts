@@ -268,7 +268,7 @@ const routes: Routes = [
   {path:'partner',component:PartnerComponent,canActivate: [AuthGuard] },
   {path:'category-management',component:CategoryManagementComponent },
   {path:'add-category',component:AddCategoryComponent },
-  {path:'edit-category',component:EditCategoryComponent },
+  {path:'edit-category/:id',component:EditCategoryComponent },
   {path:'night-charge-management',component:NightChargeManagementComponent },
   {path:'add-night-charge',component:AddNightChargeComponent },
   {path:'edit-night-charge',component:EditNightChargeComponent },

@@ -11,16 +11,14 @@
             </div>
             <div class="box-header  box-hearder-564">
                 <form class="" [formGroup]="form">
-                    <div class="cusine" formArrayName="eventArr">
-                        <div class="col-md-12" *ngFor="let eventArr of form.controls.eventArr['controls']; let i = index"
-                        formGroupName="{{i}}">
+                    <div class="cusine">
+                       
                             <div class="row mb-3">
                                 <label class="col-md-4"> {{'CategoryName' | translate}}:</label>
                                 <input type="text" class="col-md-8 int form-control"
-                                    (keypress)="service.preventSpace($event)" formControlName="category"
+                                    (keypress)="service.preventSpace($event)"  formControlName="category"
                                     (keypress)="omit_special_char($event)">
                             </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="col-md-8 error" style="margin-right: 16px;"
                                 *ngIf="form.get('category').hasError('required') && form.get('category').touched">
@@ -33,16 +31,16 @@
                                 Maxlength of characters should be 256.
                             </div>
                         </div>
-                        <div class="text-lg-right">
+                        <!-- <div class="text-lg-right">
                             <button type="button" class="btn btn-flat cusine btn-flat" *ngIf="form.controls.eventArr['controls'].length < 20"
                             (click)="addCategory()"
                             >{{'addMore' | translate}}</button>
-                           </div>
+                           </div> -->
                     </div>
                    
                     <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
-                        <button type="submit" class="btn btn-flat cusine btn-flat" [disabled]="!form.valid"
-                            (click)="generate('cusins')">{{'Update' | translate}}</button>
+                        <button type="submit" class="btn btn-flat cusine btn-flat" 
+                            (click)="generate('update')">{{'Update' | translate}}</button>
                             <button type="submit" class="btn btn-flat ml-5 cusine btn-flat" 
                             style="background-color: red"  (click) = "back()"
                            >{{'Cancel' | translate}}</button>

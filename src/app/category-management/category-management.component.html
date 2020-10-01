@@ -17,35 +17,38 @@
                         <div class="col-md-3 green-col" style="border-radius: 18px!important">
                             <div class="has-search">
                                 <label></label>
-                                <input type="text" class="form-control" placeholder="{{'Searchbynameid' | translate}}" (keyup)="searchcuisineName($event.target.value);" maxlength="50"  style="border-radius: 20px;">
+                                <input type="text" class="form-control"  placeholder="{{'Searchbynameid' | translate}}" (keyup)="searchcuisineName($event.target.value);"  [(ngModel)]="searchRole" maxlength="50"  style="border-radius: 20px;">
                                 <span class="fa fa-search form-control-feedback"></span>
                             </div>
                         </div>
+                        
                         <div class="col-md-2 green-col">
                             <label>{{'FilterbyStatus' | translate}}</label>
-                            <select class="form-control btn drrop-type"  class="filterr" (change)="selectStatus($event.target.value)">
+                            <select class="form-control btn drrop-type"  class="filterr"  [(ngModel)]="selectState" (change)="selectStatus($event.target.value)">
                                 <option value="">{{'FilterbyStatus'| translate}}</option>
                                 <option value="Pending">{{'Pending'| translate}}</option>
                                 <option value="Submitted">{{'Submitted'| translate}}</option>
                                 <option value="Approved">{{'Approved'| translate}}</option>
                                 <option value="Rejected">{{'Rejected'| translate}}</option>
-                                            </select>
+                                <option value="Active">{{'Active'| translate}}</option>
+                                </select>
                         </div>
                         <div class="col-md-2 green-col">
                             <label>{{'FromDate'| translate}}</label>
-                            <input type="date" class="form-control dt1"  (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
+                            <input type="date" class="form-control dt1" [(ngModel)]="selectdate" (ngModelChange)="getDate($event)" max="{{toMaxDate | date:'yyyy-MM-dd'}}">
                         </div>
                         <div class="col-md-2 green-col">
                             <label>{{'ToDate'| translate}}</label>
-                            <input type="date" class="form-control dt2" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" >
+                            <input type="date" class="form-control dt2" [(ngModel)]="selectend" (ngModelChange)="fromMaxDate($event)" min="{{formDate | date:'yyyy-MM-dd'}}" >
                         </div>
                         <div class="col-md-3" style="padding-top: 1.2%;">
                             <div class="btn-div">
-                                <button type="button" class="btn bg-olive mr-3"  [disabled]="disables==false">{{'Submit' | translate}}</button>
+                                <button type="button" (click)="filter()" class="btn bg-olive mr-3"  [disabled]="!disables">{{'Submit' | translate}}</button>
                              
-                                <button type="button" class="btn margin margin1" >{{'Reset' | translate}}</button>
+                                <button type="button" (click)=reset() class="btn margin margin1" >{{'Reset' | translate}}</button>
                             </div>
                         </div>
+                    
 
                     </div>
 
@@ -78,32 +81,32 @@
                                 <!-- <tr *ngFor="let data of cousins_list | paginate : {itemsPerPage:limit, currentPage:page, totalItems:total}: index as i">
                                     <td>{{(data?.created_at | date : 'dd/MM/yyyy, H:mm' )|| '--' }}</td>
                                  -->
-                                    <tr>
-                                        <td>C01</td>
-                                        <td>Indian</td>
-                                        <td>06/07/2020, 5:00 PM</td>
-                                        <td>Sales Representative</td>
-                                        <td>06/07/2020, 5:00 PM</td>
-                                        <td>Admin</td>
-                                        <td>Active</td>
+                                    <tr *ngFor="let data of managecategory | paginate: { itemsPerPage: limit, currentPage: page ,totalItems:total}:index as i">
+                                        <td>{{"C"+data.category_id}}</td>
+                                        <td>{{data.category_name}}</td>
+                                        <td>{{data.created_at|date : 'dd/MM/yyyy, H:mm' ||'--' || '--'}}</td>
+                                        <td>{{data?.createdby[0].first_name+" "+data?.createdby[0].last_name}}</td>
+                                        <td>{{data.updated_at|date : 'dd/MM/yyyy, H:mm' ||'--' || '--'}}</td>
+                                        <td>{{data?.updatedby[0].first_name+" "+data?.updatedby[0].last_name}}</td>
+                                        <td>{{data.status}}</td>
                                     <td ><div style="display: flex;">
                                 
-                                        <button class="skyblue-btn" [routerLink]="['/edit-category']">{{'Edit' | translate}}</button>
-                                        <button class="translate" (click)="openModal()" style="background-color: red">{{'Delete' | translate}}</button>
+                                        <button class="skyblue-btn" [routerLink]="['/edit-category',data?._id]">{{'Edit' | translate}}</button>
+                                        <button class="translate" (click)="openModal(data?._id)" style="background-color: red">{{'Delete' | translate}}</button>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <!-- <h2 *ngIf="cousins_list?.length==0 " style="text-align:center; ">{{'Datanotfound!' | translate}}</h2> -->
+                        <h2 *ngIf="managecategory?.length==0 " style="text-align:center; ">{{'Datanotfound!' | translate}}</h2>
                     </div>
                  
 
 
-                    <!-- <div class="pageination ">
-                        <pagination-controls (pageChange)="pagination($event) "  *ngIf="manageStaff?.length !=0 ">
+                    <div class="pageination ">
+                        <pagination-controls (pageChange)="pagination($event) "  *ngIf="managecategory?.length !=0 ">
                         </pagination-controls>
-                    </div> -->
+                    </div>
 
 
                 </div>
