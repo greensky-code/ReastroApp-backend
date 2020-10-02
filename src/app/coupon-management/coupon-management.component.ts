@@ -31,29 +31,35 @@ export class CouponManagementComponent implements OnInit {
   constructor(private service: ApiServiceService, private tostr: ToastrService, private excelService: ExcelService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.getcousins()
   }
   getcousins() {
     this.spinner.show()
-    this.service.getApi('api/cuisines', 1).subscribe((res) => {
-      if (res.status == 200) {
+    this.service.getApi('api/getallcoupon', 1).subscribe((res) => {
+      debugger
+      if (res.body.status == 200) {
         this.spinner.hide()
-        this.cousins_list = res.body
+        this.cousins_list = res.body.data
         console.log('cuisines==>>', this.cousins_list)
+      } else{
+        this.spinner.hide()
+        this.tostr.error(res.body.text)
       }
 
-    },err=>{
-      console.log('erroStaff',err)
-      if(err.status == 403 || err.status == 401){
-        
-        this.spinner.hide()
-        this.service.logout();
-      } else if(err.status == 500){
-        this.spinner.hide()
-        this.service.toastErr(err.statusText)
-
-      }
-      
     })
+  }
+
+  
+  dateconvert(data) {
+    return new Date(data);
+  }
+
+  enddateconvert(data) {
+    return new Date(data);
+  }
+
+  createdateconvert(data) {
+    return new Date(data);
   }
 
   // -------------------- date validation ---------------------------------- //
@@ -127,14 +133,32 @@ export class CouponManagementComponent implements OnInit {
 
 
   }
-
+  index :any
   // -------------------------Driver Delete Api-----------------------//
-  openModal(id) {
+  deletefunction(id,index) {
+    debugger
     this.cusin_id = id
+    this.index = index
     console.log('cusin_id', this.cusin_id)
+    $('#exampleModal2').modal({ backdrop: 'static', keyboard: false })
     // $('#comanModal').modal('hide')
+  }
 
-    $('#comanModal').modal({ backdrop: 'static', keyboard: false })
+  
+  deleteStaff() {
+    $('#exampleModal2').modal('hide');
+    let object :any = {
+       _id: this.cusin_id
+    }
+    debugger
+    this.service.postApi("api/deletecoupon/", object, 4).subscribe(
+      (res) => {
+        if (res.body.status == 200) {
+          this.cousins_list.splice(this.index,1)
+          this.tostr.success("Coupon deleted successfully.");
+        }
+      },
+    );
   }
   // ----------------------Close modal -----------------------------//
   modal() {

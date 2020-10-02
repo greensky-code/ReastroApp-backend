@@ -274,7 +274,7 @@ const routes: Routes = [
   {path:'edit-night-charge',component:EditNightChargeComponent },
   {path:'coupon-management',component:CouponManagementComponent },
    {path:'add-coupon',component:AddCouponComponent },
-   {path:'view-coupon',component:ViewCouponComponent },
+   {path:'view-coupon/:id',component:ViewCouponComponent },
    {path:'reviews-management-restaurent',component:ReviewsManagementRestaurentComponent },
    {path :'reviews-management-driver' ,component : ReviewsManagementDriverComponent},
    {path :'report-management-driver-earning-view' ,component : ReportManagementDriverEarningViewComponent},
