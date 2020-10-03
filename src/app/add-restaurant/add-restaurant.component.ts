@@ -56,10 +56,10 @@ export class AddRestaurantComponent implements OnInit {
           Validators.pattern(/^[a-z]+(?:['_.\s][a-z]+)*$/i),
         ]),
       ],
-      registrationCertificate: ["", Validators.required],
+      registration_certificate: ["", Validators.required],
       registrationNo: ["", Validators.required],
-      image: [""],
-      fcciCertificate: [""],
+      company_image: [""],
+      fcci_certificate: [""],
       address: this.formBuilder.group({
         street: [""],
         city: [""],
@@ -101,7 +101,6 @@ export class AddRestaurantComponent implements OnInit {
       }
       this.addcompanyForm.patchValue(this.restaurantService.companyFormData);
     }
-    this.getcousins();
     this.getCountries();
   }
 
@@ -164,15 +163,15 @@ export class AddRestaurantComponent implements OnInit {
     switch (uploadType) {
       case 'registrationCertificate':
         this.registrationCertificate = <File>event.target.files[0];
-        this.addcompanyForm.get('registrationCertificate').setValue(this.registrationCertificate.name);
+        this.addcompanyForm.get('registration_certificate').setValue(this.registrationCertificate.name);
         break;
       case 'companyImage':
         this.companyImage = <File>event.target.files[0];
-        this.addcompanyForm.get('image').setValue(this.companyImage.name);
+        this.addcompanyForm.get('company_image').setValue(this.companyImage.name);
         break;
       case 'fcciCertificate':
         this.fcciCertificate = <File>event.target.files[0];
-        this.addcompanyForm.get('fcciCertificate').setValue(this.fcciCertificate.name);
+        this.addcompanyForm.get('fcci_certificate').setValue(this.fcciCertificate.name);
         break;
       case 'verification_id_image':
         this.verification_id_image = <File>event.target.files[0];
@@ -185,30 +184,6 @@ export class AddRestaurantComponent implements OnInit {
 
 
     }
-  }
-
-  getcousins() {
-    this.spinner.show()
-    this.service.getApi('api/cuisine', 1).subscribe((res) => {
-      if (res.status == 200) {
-        this.spinner.hide()
-        this.cousins_list = res.body.data;
-        console.log('cuisines==>>', this.cousins_list)
-      }
-
-    }, err => {
-      console.log('erroStaff', err)
-      if (err.status == 403 || err.status == 401) {
-
-        this.spinner.hide()
-        this.service.logout();
-      } else if (err.status == 500) {
-        this.spinner.hide()
-        this.service.toastErr(err.statusText)
-
-      }
-
-    })
   }
 
   // view tab (patient or plasma-donated-patient)
@@ -262,7 +237,6 @@ export class AddRestaurantComponent implements OnInit {
 
   pagination(page) {
     this.page = page
-    this.getcousins()
   }
   exportAsXLSX(): void {
     this.service.getApi(`api/cuisines?pagination=false`, 1).subscribe(res => {
@@ -347,7 +321,6 @@ export class AddRestaurantComponent implements OnInit {
 
         this.onConfigChange()
         this.deleteCuisin()
-        this.getcousins()
 
         $('#googleauth').modal('hide')
 
@@ -384,7 +357,6 @@ export class AddRestaurantComponent implements OnInit {
 
     this.service.delete('api/cuisines/', this.cusin_id, 1).subscribe(res => {
       if (res.status == 204) {
-        this.getcousins()
         // this.deletedata=res
         this.service.showSuccess("Cuisine deleted successfully")
 

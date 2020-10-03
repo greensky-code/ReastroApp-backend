@@ -43,7 +43,7 @@
                                             <span class="col-md-1"> : </span>
                                             <input type="text" class="col-md-6 int form-control" readonly
                                                 placeholder="jpeg/jpg/png 2 MB"
-                                                formControlName="registrationCertificate">
+                                                formControlName="registration_certificate">
                                             <input #registrationCertificate type="file"
                                                 (click)="registrationCertificate.value = null"
                                                 (change)="fileUpload($event,'registrationCertificate')"
@@ -68,7 +68,7 @@
                                             <label class="col-md-3">Company Image</label>
                                             <span class="col-md-1"> : </span>
                                             <input type="text" class="col-md-6 int form-control" readonly
-                                                placeholder="jpeg/jpg/png 2 MB" formControlName="image">
+                                                placeholder="jpeg/jpg/png 2 MB" formControlName="company_image">
                                             <input #companyImage type="file" (click)="companyImage.value = null"
                                                 (change)="fileUpload($event,'companyImage')" style="display:none"
                                                 accept="image/*">
@@ -85,7 +85,7 @@
                                             <label class="col-md-3">FCCI Certificate</label>
                                             <span class="col-md-1"> : </span>
                                             <input type="text" class="col-md-6 int form-control" readonly
-                                                placeholder="jpeg/jpg/png 2 MB" formControlName="fcciCertificate">
+                                                placeholder="jpeg/jpg/png 2 MB" formControlName="fcci_certificate">
                                             <input #fcciCertificate type="file" (click)="fcciCertificate.value = null"
                                                 (change)="fileUpload($event,'fcciCertificate')" style="display:none"
                                                 accept="image/*">
