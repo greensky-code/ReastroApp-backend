@@ -49,8 +49,11 @@ export class AddRestaurantBankDetailsComponent implements OnInit {
     if (this.restaurantService.bankFormData) {
       this.addBankForm.patchValue(this.restaurantService.bankFormData);
     }
-    if (!this.restaurantService.bankMasterData)
+    if (!this.restaurantService.bankMasterData) {
       this.getBank();
+    } else {
+      this.bankList = this.restaurantService.bankMasterData;
+    }
   }
 
   getBank() {

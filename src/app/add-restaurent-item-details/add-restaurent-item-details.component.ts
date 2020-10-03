@@ -64,8 +64,11 @@ export class AddRestaurentItemDetailsComponent implements OnInit {
       this.addItemDetailsForm.patchValue(this.restaurantService.menuItemFormData);
     }
     this.getcuisine();
-    if (!this.restaurantService.menuMasterData)
+    if (!this.restaurantService.menuMasterData) {
       this.getMenu();
+    } else {
+      this.menuList = this.restaurantService.menuMasterData;
+    }
   }
 
   getMenu() {
