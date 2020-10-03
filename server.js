@@ -10,6 +10,8 @@ const cors = require("cors");
 const app = express();
 const { logger } = require("./util");
 const routes = require("./routes");
+// var multer = require("multer");
+// var forms = multer();
 const mongolib = require("./mongoLib/index");
 app.set("port", process.env.PORT);
 app.use(cors());
@@ -26,7 +28,6 @@ app.use(
     limit: "50mb",
   })
 );
-
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/v1", routes);
+app.use(express.static("uploads"));
 app.get("/v1", (req, res) => {
   res.send("Hello world");
 });

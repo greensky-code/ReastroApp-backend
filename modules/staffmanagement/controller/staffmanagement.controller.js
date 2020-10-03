@@ -189,8 +189,9 @@ exports.getById = (req, res) => {
   const staffid = req.params.staffid;
   let query = {
     is_delete: false,
-    _id: ObjectId(staffid),
+    staff_id: parseInt(staffid),
   };
+  console.log("**query", query);
   staff
     .aggregate([
       {
@@ -217,6 +218,7 @@ exports.getById = (req, res) => {
           updated_by: 1,
           created_at: 1,
           updated_at: 1,
+          staff_id: 1,
           "role.name": 1,
           "role._id": 1,
         },

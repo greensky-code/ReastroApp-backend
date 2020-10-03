@@ -1,0 +1,52 @@
+[
+  {
+    "name": "India",
+    "city": "chennai",
+    "province": "TamilNadu"
+  },
+  {
+    "name": "India",
+    "city": "salem",
+    "province": "TamilNadu"
+  },
+  {
+    "name": "India",
+    "city": "trichy",
+    "province": "Kerala"
+  },
+  {
+    "name": "India",
+    "city": "Kochi",
+    "province": "Kerala"
+  },
+  {
+    "name": "India",
+    "city": "Thrissur",
+    "province": "Kerala"
+  },
+  {
+    "name": "USA",
+    "city": "Houstin",
+    "province": "Texas"
+  },
+  {
+    "name": "USA",
+    "city": "Dallas",
+    "province": "Texas"
+  },
+  {
+    "name": "USA",
+    "city": "Los Angeles",
+    "province": "California"
+  },
+  {
+    "name": "USA",
+    "city": "San Diego",
+    "province": "California"
+  },
+  {
+    "name": "USA",
+    "city": "San Francisco",
+    "province": "California"
+  }
+]

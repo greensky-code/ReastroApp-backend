@@ -90,6 +90,10 @@ const getrole = (req, res) => {
     let search = new RegExp("^" + req.query.search);
     quer.name = { $regex: search, $options: "i" };
   }
+  if (req.query.is_active) {
+    quer["is_active"] = req.query.is_active == "true" ? true : false;
+    if (quer["is_active"]) quer["is_block"] = false;
+  }
   console.log(quer);
   var aggregate = role.aggregate([
     {

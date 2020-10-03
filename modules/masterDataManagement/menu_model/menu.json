@@ -1,0 +1,9 @@
+[
+  { "name": "Recommended" },
+  { "name": "Starters" },
+  { "name": "Breakfast" },
+  { "name": "Lunch" },
+  { "name": "Snacks" },
+  { "name": "Dinner" },
+  { "name": "Drinks" }
+]
