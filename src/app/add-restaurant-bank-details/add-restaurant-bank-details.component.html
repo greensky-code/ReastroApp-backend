@@ -11,39 +11,43 @@
                         </h1>
                     </div>
 
-                     <!-- tab section -->
-                     <div class="tab-section">
+                    <!-- tab section -->
+                    <div class="tab-section">
                         <div class="tab">
                             <button class="tablinks" [ngClass]="tabView == 'companyDetails' ? 'active': ''"
                                 (click)="viewTab('companyDetails')">Company Details</button>
                             <button class="tablinks" [ngClass]="tabView == 'restaurentDetails' ? 'active': ''"
                                 (click)="viewTab('restaurentDetails')">Restaurant Details</button>
-                                <button class="tablinks" [ngClass]="tabView == 'itemDetails' ? 'active': ''"
+                            <button class="tablinks" [ngClass]="tabView == 'itemDetails' ? 'active': ''"
                                 (click)="viewTab('itemDetails')">Item Details</button>
-                                 <button class="tablinks" [ngClass]="tabView == 'bankDetails' ? 'active': ''"
+                            <button class="tablinks" [ngClass]="tabView == 'bankDetails' ? 'active': ''"
                                 (click)="viewTab('bankDetails')">Bank Details</button>
                         </div>
                     </div>
 
                     <div class="box-header  box-hearder-564">
-                        <form class="" [formGroup]="form">
+                        <form class="" [formGroup]="addBankForm">
                             <h1 class="text-center m-3">Step 4</h1>
-                            <div class="cusine" >
-                                <div class="col-md-12" >
+                            <div class="cusine">
+                                <div class="col-md-12">
                                     <div class="row mb-3">
                                         <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3"> Bank Name</label>
                                             <span class="col-md-1">:</span>
-                                            <select name="" class="col-md-8 form-control" id="">
+                                            <select formControlName="name" class="col-md-8 form-control">
                                                 <option value="">Select Bank</option>
+                                                <option value="{{bank.bank_item_id}}" *ngFor="let bank of bankList">
+                                                    {{bank.name}}
+                                                </option>
                                             </select>
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
+                                        <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3 text-nowrap"> Account Number</label>
                                             <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-8 int form-control"  placeholder="78787878788878"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                            
+                                            <input type="text" class="col-md-8 int form-control"
+                                                placeholder="78787878788878" (keypress)="service.preventSpace($event)"
+                                                formControlName="account_number">
+
                                         </div>
                                     </div>
 
@@ -51,54 +55,64 @@
                                         <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3"> IFSC Code</label>
                                             <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"  placeholder="NHR4484548"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                            
+                                            <input type="text" class="col-md-8 int form-control"
+                                                placeholder="NHR4484548" (keypress)="service.preventSpace($event)"
+                                                formControlName="ifsc_code">
+
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
+                                        <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3 text-nowrap">Account Holder Name</label>
                                             <span class="col-md-1"> : </span>
                                             <input type="text" class="col-md-8 int form-control" placeholder=""
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                          
+                                                (keypress)="service.preventSpace($event)"
+                                                formControlName="account_holder_name">
+
                                         </div>
-                                       
+
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3"> Select Document</label>
                                             <span class="col-md-1">:</span>
-                                            <select name="" class="col-md-8 form-control" id="">
+                                            <select formControlName="document" class="col-md-8 form-control" id="">
                                                 <option value="">Select Document</option>
                                             </select>
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
+                                        <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3 text-nowrap">Document Image</label>
                                             <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-6 int form-control" readonly placeholder="jpeg/jpg/png 2 MB"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
+                                            <input type="text" class="col-md-6 int form-control" readonly
+                                                placeholder="jpeg/jpg/png 2 MB"
+                                                (keypress)="service.preventSpace($event)"
+                                                formControlName="document_image">
+                                            <input #document_image type="file" (click)="document_image.value = null"
+                                                (change)="fileUpload($event)" style="display:none" accept="image/*">
                                             <div class="col-md-2">
-                                                <button type="submit" style="margin-top: 19px" class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                                <button type="submit" (click)="document_image.click()"
+                                                    style="margin-top: 19px"
+                                                    class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
                                             </div>
-                                          
+
                                         </div>
                                     </div>
                                 </div>
-                               
-                            </div>
-                           
-                            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
-                                <button type="submit" routerLink = "/add-restaurent-item-details" class="btn btn-flat cusine btn-flat">{{'PREVIOUS' | translate}}</button>
 
-                                <button type="submit" routerLink ="/restaurant-management" class="btn btn-flat ml-3 cusine btn-flat">{{'Submit' | translate}}</button>
-                                   
+                            </div>
+
+                            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                                <button type="submit" (click)="addBank('add-restaurent-item-details')"
+                                    class="btn btn-flat cusine btn-flat">{{'PREVIOUS' | translate}}</button>
+
+                                <button type="submit" (click)="addBank()"
+                                    class="btn btn-flat ml-3 cusine btn-flat">{{'Submit' | translate}}</button>
+
                             </div>
                         </form>
                     </div>
-                    
-                 
-                
-                 
+
+
+
+
                 </div>
             </div>
         </div>
@@ -106,7 +120,7 @@
 </div>
 
 <footer class="footer-text ">
-    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong>
+    &nbsp;{{'Allrightsreserved' | translate}}
 
 </footer>
-

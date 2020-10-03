@@ -3,7 +3,7 @@ import { ApiServiceService } from '../api-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ExcelService } from '../services/excel.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-restaurant-management',
@@ -25,42 +25,47 @@ export class RestaurantManagementComponent implements OnInit {
   newDate: any;
   formDate: any;
   disables: boolean = false;
-
+  manageRestaurant;
+  total;
 
 
   constructor(private service: ApiServiceService, private tostr: ToastrService, private excelService: ExcelService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.getRestaurant(1);
   }
-  getcousins() {
-    this.spinner.show()
-    this.service.getApi('api/cuisines', 1).subscribe((res) => {
-      if (res.status == 200) {
-        this.spinner.hide()
-        this.cousins_list = res.body
-        console.log('cuisines==>>', this.cousins_list)
-      }
 
-    },err=>{
-      console.log('erroStaff',err)
-      if(err.status == 403 || err.status == 401){
-        
-        this.spinner.hide()
-        this.service.logout();
-      } else if(err.status == 500){
-        this.spinner.hide()
-        this.service.toastErr(err.statusText)
-
+  getRestaurant(page) {
+    this.page = page;
+    this.spinner.show();
+    this.service.getApi(`api/restaurant?page=${this.page}`, 1).subscribe(
+      (res) => {
+        if (res.status == 200) {
+          this.spinner.hide();
+          this.manageRestaurant = res.body.data;
+          this.total = res.body.count;
+          this.limit = 10;
+        }
+      },
+      (err) => {
+        console.log("erroStaff", err);
+        if (err.status == 403 || err.status == 401) {
+          this.spinner.hide();
+          this.service.logout();
+        } else if (err.status == 500) {
+          this.spinner.hide();
+          this.service.toastErr(err.statusText);
+        }
       }
-      
-    })
+    );
   }
+
 
   // -------------------- date validation ---------------------------------- //
   getDate(event) {
     if (event) {
       this.formDate = event;
-      this.disables=true
+      this.disables = true
     }
     else {
       this.newDate = ''
@@ -69,61 +74,60 @@ export class RestaurantManagementComponent implements OnInit {
   fromMaxDate(event) {
     if (event) {
       this.todayDate = new Date(event)
-      this.disables=true
+      this.disables = true
     }
     else {
       this.todayDate = new Date()
     }
   }
 
-  searchcuisineName(searchcuisineName){
-    console.log('cuisine name',searchcuisineName);
+  searchcuisineName(searchcuisineName) {
+    console.log('cuisine name', searchcuisineName);
   }
 
-  unblock(event,id){
-   console.log('event',event);
-   
+  unblock(event, id) {
+    console.log('event', event);
+
   }
 
 
-  selectStatus(event){
-  console.log('event', event);
-  
+  selectStatus(event) {
+    console.log('event', event);
+
   }
 
   pagination(page) {
     this.page = page
-    this.getcousins()
   }
   exportAsXLSX(): void {
-    this.service.getApi(`api/cuisines?pagination=false`,1).subscribe(res=>{
-      if(res.status == 200 ){
-        this.exports=res.body
-        console.log('exports',this.exports)
+    this.service.getApi(`api/cuisines?pagination=false`, 1).subscribe(res => {
+      if (res.status == 200) {
+        this.exports = res.body
+        console.log('exports', this.exports)
         let dataArr = [];
 
         this.exports.forEach((element => {
-          let d=new Date(element.created_at);
-          let creation=`${d.toLocaleDateString()} ${d.toLocaleTimeString()}`
+          let d = new Date(element.created_at);
+          let creation = `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`
           new Date(element.updated_at);
-          let creations=`${d.toLocaleDateString()} ${d.toLocaleTimeString()}`
+          let creations = `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`
           dataArr.push({
             "ID	": element.id ? element.id : '--',
             "Cusine Name": element.name ? element.name : '--',
-            "Status": element.is_active==true ?'Active': 'Inactive',
+            "Status": element.is_active == true ? 'Active' : 'Inactive',
             "Created At": element.created_at ? creation : '--',
             "Updated At": element.created_at ? creations : '--',
             "Created By": element.created_by ? element.created_by.first_name : '--'
-    
-    
-    
+
+
+
           })
         }))
         this.excelService.exportAsExcelFile(dataArr, 'Cusine List');
 
       }
     })
-  
+
 
 
   }
@@ -178,7 +182,6 @@ export class RestaurantManagementComponent implements OnInit {
 
         this.onConfigChange()
         this.deleteCuisin()
-        this.getcousins()
 
         $('#googleauth').modal('hide')
 
@@ -197,7 +200,7 @@ export class RestaurantManagementComponent implements OnInit {
 
         this.onConfigChange()
 
-        this.errorMessage=err.error.message
+        this.errorMessage = err.error.message
 
 
       }
@@ -205,20 +208,19 @@ export class RestaurantManagementComponent implements OnInit {
     })
 
   }
-reset(){
-  this.errorMessage='';
-  this.onConfigChange()
-}
+  reset() {
+    this.errorMessage = '';
+    this.onConfigChange()
+  }
   // ---------------------Delete Driver------------------------//
 
   deleteCuisin() {
 
-    this.service.delete('api/cuisines/',this.cusin_id, 1).subscribe(res => {
+    this.service.delete('api/cuisines/', this.cusin_id, 1).subscribe(res => {
       if (res.status == 204) {
-        this.getcousins()
         // this.deletedata=res
         this.service.showSuccess("Cuisine deleted successfully")
-        
+
       }
     }, err => {
       if (err.status == 403 || err.status == 401) {
@@ -244,27 +246,27 @@ reset(){
     return true;
 
   }
-// =========modal========//
-delete(){
-  $('#delete').modal('show')
-}
+  // =========modal========//
+  delete() {
+    $('#delete').modal('show')
+  }
 
-deletemodal(){
- $('#delete').modal('hide')
-}
+  deletemodal() {
+    $('#delete').modal('hide')
+  }
 
-terminate(){
- $('#terminate').modal('show')
-}
-terminatemodal(){
- $('#terminate').modal('hide')
-}
-publish(){
-  $('#publish').modal('show')
- }
- publishmodal(){
-  $('#publish').modal('hide')
- }
+  terminate() {
+    $('#terminate').modal('show')
+  }
+  terminatemodal() {
+    $('#terminate').modal('hide')
+  }
+  publish() {
+    $('#publish').modal('show')
+  }
+  publishmodal() {
+    $('#publish').modal('hide')
+  }
 
- 
+
 }

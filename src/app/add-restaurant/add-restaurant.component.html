@@ -11,40 +11,47 @@
                         </h1>
                     </div>
 
-                     <!-- tab section -->
-                     <div class="tab-section">
+                    <!-- tab section -->
+                    <div class="tab-section">
                         <div class="tab">
                             <button class="tablinks" [ngClass]="tabView == 'companyDetails' ? 'active': ''"
                                 (click)="viewTab('companyDetails')">Company Details</button>
                             <button class="tablinks" [ngClass]="tabView == 'restaurentDetails' ? 'active': ''"
                                 (click)="viewTab('restaurentDetails')">Restaurant Details</button>
-                                <button class="tablinks" [ngClass]="tabView == 'itemDetails' ? 'active': ''"
+                            <button class="tablinks" [ngClass]="tabView == 'itemDetails' ? 'active': ''"
                                 (click)="viewTab('itemDetails')">Item Details</button>
-                                 <button class="tablinks" [ngClass]="tabView == 'bankDetails' ? 'active': ''"
+                            <button class="tablinks" [ngClass]="tabView == 'bankDetails' ? 'active': ''"
                                 (click)="viewTab('bankDetails')">Bank Details</button>
                         </div>
                     </div>
 
                     <div class="box-header  box-hearder-564">
-                        <form class="" [formGroup]="form">
+                        <form class="" [formGroup]="addcompanyForm">
                             <h1 class="text-center m-3">Step 1</h1>
                             <h3 class="p-3 pl-5">Company Details</h3>
-                            <div class="cusine" >
-                                <div class="col-md-12" >
+                            <div class="cusine">
+                                <div class="col-md-12">
                                     <div class="row mb-3">
                                         <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3"> Company Name</label>
                                             <span class="col-md-1">:</span>
                                             <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
+                                                (keypress)="service.preventSpace($event)" formControlName="name">
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Registration Certificate</label>
+                                        <div class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3"> Registration Certificate</label>
                                             <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-6 int form-control" readonly placeholder="jpeg/jpg/png 2 MB"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                            <div class="col-md-2">
-                                                <button type="submit" style="margin-top: 19px" class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                            <input type="text" class="col-md-6 int form-control" readonly
+                                                placeholder="jpeg/jpg/png 2 MB"
+                                                formControlName="registrationCertificate">
+                                            <input #registrationCertificate type="file"
+                                                (click)="registrationCertificate.value = null"
+                                                (change)="fileUpload($event,'registrationCertificate')"
+                                                style="display:none" accept="image/*">
+                                            <div class="col-md-3">
+                                                <button type="submit" (click)="registrationCertificate.click()"
+                                                    style="margin-top: 19px"
+                                                    class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -54,170 +61,239 @@
                                             <label class="col-md-3"> Registration No.</label>
                                             <span class="col-md-1">:</span>
                                             <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
+                                                (keypress)="service.preventSpace($event)"
+                                                formControlName="registrationNo">
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Company Image</label>
+                                        <div class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3">Company Image</label>
                                             <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-6 int form-control" readonly placeholder="jpeg/jpg/png 2 MB"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                            <div class="col-md-2">
-                                                <button type="submit" style="margin-top: 19px" class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                            <input type="text" class="col-md-6 int form-control" readonly
+                                                placeholder="jpeg/jpg/png 2 MB" formControlName="image">
+                                            <input #companyImage type="file" (click)="companyImage.value = null"
+                                                (change)="fileUpload($event,'companyImage')" style="display:none"
+                                                accept="image/*">
+                                            <div class="col-md-3">
+                                                <button type="submit" (click)="companyImage.click()"
+                                                    style="margin-top: 19px"
+                                                    class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
                                             </div>
                                         </div>
-                                       
                                     </div>
-
 
                                     <div class="row mb-3">
                                         <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> FCCI Certificate</label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-6 int form-control" readonly placeholder="jpeg/jpg/png 2 MB"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                            <div class="col-md-2">
-                                                <button type="submit" style="margin-top: 19px" class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                            <label class="col-md-3">FCCI Certificate</label>
+                                            <span class="col-md-1"> : </span>
+                                            <input type="text" class="col-md-6 int form-control" readonly
+                                                placeholder="jpeg/jpg/png 2 MB" formControlName="fcciCertificate">
+                                            <input #fcciCertificate type="file" (click)="fcciCertificate.value = null"
+                                                (change)="fileUpload($event,'fcciCertificate')" style="display:none"
+                                                accept="image/*">
+                                            <div class="col-md-3">
+                                                <button type="submit" (click)="fcciCertificate.click()"
+                                                    style="margin-top: 19px"
+                                                    class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
                                             </div>
                                         </div>
+                                        <div class=" col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3">{{'email' | translate}}</label>
+                                            <span class="col-md-1">:</span>
+                                            <div class="col-md-8" style="padding:0">
+                                                <div class="input-group"><input id="state" name="state"
+                                                        formControlName="email" class="form-control" required="true"
+                                                        value="" type="text" (keydown.space)="$event.preventDefault();">
+                                                </div>
+                                                <div
+                                                    *ngIf="addcompanyForm.get('email').hasError('required') && addcompanyForm.get('email').touched">
+                                                    <span style="color:red">Email is required.</span></div>
+                                                <div *ngIf="addcompanyForm.get('email').hasError('maxlength') && addcompanyForm.get('email').dirty"
+                                                    style="color:red">
+                                                    Email maxlength should be 255.
+                                                </div>
+                                                <div *ngIf="addcompanyForm.get('email').hasError('pattern') && addcompanyForm.get('email').dirty"
+                                                    style="color:red">
+                                                    Please enter valid email id.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-5">
+                                        <div class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3"> Phone Number</label>
+                                            <span class="col-md-1">:</span>
+                                            <select formControlName="countrycode" id="" style="height: 41px;"
+                                                class="col-md-2 int form-control">
+                                                <option value="+91">+91</option>
+                                            </select>
+                                            <input type="text" class="col-md-6 int form-control"
+                                                formControlName="mobile" (keypress)="service.preventSpace($event)">
+                                        </div>
+
+
                                     </div>
 
                                     <h3 class="p-3 pl-4">Company Address</h3>
-                                    <div class="row mb-5">
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Street</label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
+                                    <div formGroupName="address">
+                                        <div class="row mb-5">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3"> Street</label>
+                                                <span class="col-md-1">:</span>
+                                                <input type="text" class="col-md-8 int form-control"
+                                                    (keypress)="service.preventSpace($event)" formControlName="street">
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> Province</label>
+                                                <span class="col-md-1"> : </span>
+                                                <select formControlName="province" id=""
+                                                    class="col-md-8 int form-control" (change)="selectProvince($event)">
+                                                    <option value="">Select Province</option>
+                                                    <option value="{{province}}" *ngFor="let province of provinceList">
+                                                        {{province}}
+                                                    </option>
+                                                </select>
+                                            </div>
+
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> City</label>
-                                            <span class="col-md-1"> : </span>
-                                            <select name="" id=""class="col-md-8 int form-control">
-                                                <option value="">Select City</option>
-                                            </select>
+                                        <div class="row mb-5">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> Country</label>
+                                                <span class="col-md-1"> : </span>
+                                                <select formControlName="country" id=""
+                                                    class="col-md-8 int form-control" (change)="selectCountry($event)">
+                                                    <option value="">Select Country</option>
+                                                    <option value="{{country}}" *ngFor="let country of countries">
+                                                        {{country}}
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> City</label>
+                                                <span class="col-md-1"> : </span>
+                                                <select formControlName="city" class="col-md-8 int form-control">
+                                                    <option value="">Select City</option>
+                                                    <option value="{{city.city}}" *ngFor="let city of cityList">
+                                                        {{city.city}}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+
                                         </div>
-                                       
-                                    </div> 
-                                     <div class="row mb-5">
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Country</label>
-                                            <span class="col-md-1"> : </span>
-                                            <select name="" id=""class="col-md-8 int form-control">
-                                                <option value="">Select Country</option>
-                                            </select>
+                                        <div class="row mb-5">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3"> Zipcode</label>
+                                                <span class="col-md-1">:</span>
+                                                <input type="text" class="col-md-8 int form-control"
+                                                    (keypress)="service.preventSpace($event)" formControlName="zipcode">
+                                            </div>
+                                            <!-- <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3"> Email ID</label>
+                                                <span class="col-md-1">:</span>
+                                                <input type="text" class="col-md-8 int form-control"
+                                                (keypress)="service.preventSpace($event)" formControlName="category">
+                                            </div> -->
+
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Province</label>
-                                            <span class="col-md-1"> : </span>
-                                            <select name="" id=""class="col-md-8 int form-control">
-                                                <option value="">Select Province</option>
-                                            </select>
-                                        </div>
-                                       
+
                                     </div>
-                                    <div class="row mb-5">
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Zipcode</label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                        </div>
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Email ID</label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                        </div>
-                                       
-                                    </div>
-                                    <div class="row mb-5">
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Phone Number</label>
-                                            <span class="col-md-1">:</span>
-                                            <select name="" id="" style="height: 41px;" class="col-md-2 int form-control">
-                                                <option value="">+91</option>
-                                            </select>
-                                            <input type="text" class="col-md-6 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                        </div>
-                                       
-                                       
-                                    </div>
+
 
                                     <h3 class="p-3">Company Owner Details</h3>
+                                    <div formGroupName="owner">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3"> Owner Name</label>
+                                                <span class="col-md-1">:</span>
+                                                <input type="text" class="col-md-8 int form-control"
+                                                    (keypress)="service.preventSpace($event)" formControlName="name">
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> Owner Image </label>
+                                                <span class="col-md-1"> : </span>
+                                                <input type="text" class="col-md-6 int form-control" readonly
+                                                    placeholder="jpeg/jpg/png 2 MB"
+                                                    (keypress)="service.preventSpace($event)" formControlName="image">
+                                                <input #ownerImage type="file" (click)="ownerImage.value = null"
+                                                    (change)="fileUpload($event,'ownerImage')" style="display:none"
+                                                    accept="image/*">
+                                                <div class="col-md-3">
+                                                    <button type="submit" style="margin-top: 19px"
+                                                        (click)="ownerImage.click()"
+                                                        class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                                </div>
+                                            </div>
 
-                                    <div class="row mb-3">
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Owner Name</label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Owner Image  </label>
-                                            <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-6 int form-control" readonly placeholder="jpeg/jpg/png 2 MB"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                            <div class="col-md-2">
-                                                <button type="submit" style="margin-top: 19px" class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3"> Phone Number</label>
+                                                <span class="col-md-1">:</span>
+                                                <select formControlName="countrycode" style="height: 41px;"
+                                                    class="col-md-2 int form-control">
+                                                    <option value="+91">+91</option>
+                                                </select>
+                                                <input type="text" class="col-md-6 int form-control"
+                                                    (keypress)="service.preventSpace($event)" formControlName="mobile">
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> ID Verification</label>
+                                                <span class="col-md-1"> : </span>
+                                                <select formControlName="verification_id"
+                                                    class="col-md-8 int form-control">
+                                                    <option value="passport">Passport</option>
+                                                </select>
                                             </div>
                                         </div>
-                                       
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Phone Number</label>
-                                            <span class="col-md-1">:</span>
-                                            <select name="" id="" style="height: 41px;" class="col-md-2 int form-control">
-                                                <option value="">+91</option>
-                                            </select>
-                                            <input type="text" class="col-md-6 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                        </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> ID Verification</label>
-                                            <span class="col-md-1"> : </span>
-                                            <select name="" id=""class="col-md-8 int form-control">
-                                                <option value="">Passport</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> ID Image  </label>
-                                            <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-6 int form-control" readonly placeholder="jpeg/jpg/png 2 MB"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                            <div class="col-md-2">
-                                                <button type="submit" style="margin-top: 19px" class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> ID Image </label>
+                                                <span class="col-md-1"> : </span>
+                                                <input type="text" class="col-md-6 int form-control" readonly
+                                                    placeholder="jpeg/jpg/png 2 MB"
+                                                    (keypress)="service.preventSpace($event)"
+                                                    formControlName="verification_id_image">
+                                                <input #verification_id_image type="file"
+                                                    (click)="verification_id_image.value = null"
+                                                    (change)="fileUpload($event,'verification_id_image')"
+                                                    style="display:none" accept="image/*">
+                                                <div class="col-md-3">
+                                                    <button (click)="verification_id_image.click()" type="submit"
+                                                        style="margin-top: 19px"
+                                                        class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                                </div>
                                             </div>
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3">ID Number </label>
+                                                <span class="col-md-1">:</span>
+                                                <input type="text" class="col-md-8 int form-control"
+                                                    (keypress)="service.preventSpace($event)"
+                                                    formControlName="verification_id_no">
+                                            </div>
+
+
                                         </div>
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3">Passport Number  </label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                        </div>
-                                       
-                                       
                                     </div>
+
+
 
                                 </div>
-                               
+
                             </div>
-                           
+
                             <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
-                                <button type="submit" routerLink = "/add-restaurant-details" class="btn btn-flat cusine btn-flat">{{'NEXT' | translate}}</button>
-                                   
+                                <button type="submit" (click)="addCompany()"
+                                    class="btn btn-flat cusine btn-flat">{{'NEXT' | translate}}</button>
+
                             </div>
                         </form>
                     </div>
-                    
-                 
-                
-                 
+
+
+
+
                 </div>
             </div>
         </div>
@@ -225,7 +301,7 @@
 </div>
 
 <footer class="footer-text ">
-    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong>
+    &nbsp;{{'Allrightsreserved' | translate}}
 
 </footer>
-

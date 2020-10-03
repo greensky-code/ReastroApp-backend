@@ -142,10 +142,10 @@
                                         <td class="table-width">Active</td> -->
 
                   <td class="action">
-                    <button class="block-btns1" [routerLink]="['/staff-view', data?.id]">
+                    <button class="block-btns1" [routerLink]="['/staff-view', data?.staff_id]">
                       {{ "Details" | translate }}
                     </button>
-                    <button class="block-btns2" [routerLink]="['/edit-staff', data?._id]">
+                    <button class="block-btns2" [routerLink]="['/edit-staff', data?.staff_id]">
                       {{ "Edit" | translate }}
                     </button>
                     <button class="block-btns3" (click)="block(data, false)" *ngIf="data?.is_active == true">

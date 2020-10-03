@@ -89,7 +89,7 @@ export class EditStaffComponent implements OnInit {
 
   // ////////////Roles Api///////////
   getRole() {
-    this.service.getApi("api/role", 1).subscribe((res) => {
+    this.service.getApi("api/role?is_active=true", 1).subscribe((res) => {
       if (res.status == 200) {
         this.staffDataroles = res.body.results;
         this.rolsList_id = res.body.results;

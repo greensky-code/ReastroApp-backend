@@ -11,234 +11,314 @@
                         </h1>
                     </div>
 
-                     <!-- tab section -->
-                     <div class="tab-section">
+                    <!-- tab section -->
+                    <div class="tab-section">
                         <div class="tab">
                             <button class="tablinks" [ngClass]="tabView == 'companyDetails' ? 'active': ''"
                                 (click)="viewTab('companyDetails')">Company Details</button>
                             <button class="tablinks" [ngClass]="tabView == 'restaurentDetails' ? 'active': ''"
                                 (click)="viewTab('restaurentDetails')">Restaurant Details</button>
-                                <button class="tablinks" [ngClass]="tabView == 'itemDetails' ? 'active': ''"
+                            <button class="tablinks" [ngClass]="tabView == 'itemDetails' ? 'active': ''"
                                 (click)="viewTab('itemDetails')">Item Details</button>
-                                 <button class="tablinks" [ngClass]="tabView == 'bankDetails' ? 'active': ''"
+                            <button class="tablinks" [ngClass]="tabView == 'bankDetails' ? 'active': ''"
                                 (click)="viewTab('bankDetails')">Bank Details</button>
                         </div>
                     </div>
 
                     <div class="box-header  box-hearder-564">
-                        <form class="" [formGroup]="form">
+                        <form class="" [formGroup]="addRestaurantForm">
                             <h1 class="text-center m-3">Step 2</h1>
                             <h3 class="p-3 pl-5">Restaurant Details</h3>
-                            <div class="cusine" >
-                                <div class="col-md-12" >
+                            <div class="cusine">
+                                <div class="col-md-12">
                                     <div class="row mb-3">
                                         <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3"> Restaurant Name</label>
                                             <span class="col-md-1">:</span>
                                             <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
+                                                (keypress)="service.preventSpace($event)" formControlName="name">
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Restaurant Image                                            </label>
+                                        <div class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3 text-nowrap"> Restaurant Image </label>
                                             <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-6 int form-control" readonly placeholder="jpeg/jpg/png 2 MB"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
+                                            <input type="text" class="col-md-6 int form-control" readonly
+                                                placeholder="jpeg/jpg/png 2 MB"
+                                                (keypress)="service.preventSpace($event)"
+                                                formControlName="restaurant_image">
+                                            <input #restaurant_image type="file" (click)="restaurant_image.value = null"
+                                                (change)="fileUpload($event,'restaurant_image')" style="display:none"
+                                                accept="image/*">
                                             <div class="col-md-2">
-                                                <button type="submit" style="margin-top: 19px" class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                                <button type="submit" style="margin-top: 19px"
+                                                    (click)="restaurant_image.click()"
+                                                    class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3">
+                                    <div class="row mb-5">
                                         <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3"> Select Cuisines</label>
                                             <span class="col-md-1">:</span>
-                                           <select name="" class="col-md-8 form-control" id="">
-                                               <option value="">Select Cuisines</option>
-                                           </select>
+                                            <select formControlName="cuisine" class="col-md-8 form-control">
+                                                <option value="">Select Cuisines</option>
+                                                <option value="{{cuisine?.id}}" *ngFor="let cuisine of cuisineList">
+                                                    {{cuisine?.name}}
+                                                </option>
+                                            </select>
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
+                                        <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3 text-nowrap">Cost Per Person</label>
                                             <span class="col-md-1"> : </span>
                                             <input type="text" class="col-md-8 int form-control" placeholder="INR"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                          
+                                                (keypress)="service.preventSpace($event)"
+                                                formControlName="cost_per_person">
+
                                         </div>
-                                       
+
                                     </div>
-                                    <div class="row mb-3">
-                                        <div  class="col-md-6 d-flex align-items-center">
+                                    <div class="row mb-5">
+                                        <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3 text-nowrap">Order Delivery Time</label>
                                             <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-8 int form-control" placeholder="INR"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">    
+                                            <input type="text" class="col-md-8 int form-control" placeholder="time"
+                                                (keypress)="service.preventSpace($event)"
+                                                formControlName="deliver_time">
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
+                                        <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3 text-nowrap">About Us</label>
                                             <span class="col-md-1"> : </span>
-                                            <input type="text" class="col-md-6 int form-control" readonly placeholder="jpeg/jpg/png 2 MB"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                            <div class="col-md-2">
-                                                <button type="submit" style="margin-top: 19px" class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
-                                            </div>
-                                          
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div  class="col-md-6 align-items-center">
-                                            <label class="col-md-3 text-nowrap">Operation Hours</label>
-                                           
-                                        </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap">Menu Image</label>
-                                            <span class="col-md-1"> : </span>
                                             <input type="text" class="col-md-8 int form-control" placeholder=""
-                                            (keypress)="service.preventSpace($event)" formControlName="category">    
+                                                (keypress)="service.preventSpace($event)" formControlName="aboutUs">
+
+
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3 pl-5">
-                                        <div class="d-flex col-md-6" style="justify-content: space-evenly;margin-left: -4%">
-                                            <label for=""> Mon</label>
-                                            <span>From</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                            <span>To</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                        </div> 
-                                    </div>
-                                    <div class="row mb-3 pl-5">
-                                        <div class="d-flex col-md-6" style="justify-content: space-evenly;margin-left: -4%">
-                                            <label for=""> Tue</label>
-                                            <span>From</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                            <span>To</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                        </div> 
-                                    </div>
-                                   
-                                    <div class="row mb-3 pl-5">
-                                        <div class="d-flex col-md-6" style="justify-content: space-evenly;margin-left: -4%">
-                                            <label for=""> Wed</label>
-                                            <span>From</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                            <span>To</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                        </div> 
-                                    </div>
-                                    <div class="row mb-3 pl-5">
-                                        <div class="d-flex col-md-6" style="justify-content: space-evenly;margin-left: -4%">
-                                            <label for=""> Thu</label>
-                                            <span>From</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                            <span>To</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                        </div> 
-                                    </div>
-                                    <div class="row mb-3 pl-5">
-                                        <div class="d-flex col-md-6" style="justify-content: space-evenly;margin-left: -4%">
-                                            <label for=""> Fri</label>
-                                            <span>From</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                            <span>To</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                        </div> 
-                                    </div>
-                                    <div class="row mb-3 pl-5">
-                                        <div class="d-flex col-md-6" style="justify-content: space-evenly;margin-left: -4%">
-                                            <label for=""> Sat</label>
-                                            <span>From</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                            <span>To</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                        </div> 
-                                    </div>
-                                    <div class="row mb-3 pl-5">
-                                        <div class="d-flex col-md-6" style="justify-content: space-evenly;margin-left: -4%">
-                                            <label for=""> Sun</label>
-                                            <span>From</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                            <span>To</span>
-                                            <input type="time" class="col-md-2" placeholder="HH:MM">
-                                        </div> 
-                                    </div>
-
-                                    <h3 class="p-3 pl-4">Restaurant Address</h3>
-                                    <div class="row mb-5">
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Street</label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                        </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> City</label>
-                                            <span class="col-md-1"> : </span>
-                                            <select name="" id=""class="col-md-8 int form-control">
-                                                <option value="">Select City</option>
-                                            </select>
-                                        </div>
-                                       
-                                    </div> 
-                                     <div class="row mb-5">
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Country</label>
-                                            <span class="col-md-1"> : </span>
-                                            <select name="" id=""class="col-md-8 int form-control">
-                                                <option value="">Select Country</option>
-                                            </select>
-                                        </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Province</label>
-                                            <span class="col-md-1"> : </span>
-                                            <select name="" id=""class="col-md-8 int form-control">
-                                                <option value="">Select Province</option>
-                                            </select>
-                                        </div>
-                                       
-                                    </div>
-                                    <div class="row mb-5">
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Zipcode</label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                        </div>
-                                        <div class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3"> Email ID</label>
-                                            <span class="col-md-1">:</span>
-                                            <input type="text" class="col-md-8 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
-                                        </div>
-                                       
-                                    </div>
                                     <div class="row mb-5">
                                         <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3"> Phone Number</label>
                                             <span class="col-md-1">:</span>
-                                            <select name="" id="" style="height: 41px;" class="col-md-2 int form-control">
+                                            <select name="" id="" style="height: 41px;"
+                                                class="col-md-2 int form-control">
                                                 <option value="">+91</option>
                                             </select>
                                             <input type="text" class="col-md-6 int form-control"
-                                            (keypress)="service.preventSpace($event)" formControlName="category">
+                                                (keypress)="service.preventSpace($event)" formControlName="mobile">
                                         </div>
-                                        <div  class="col-md-6 d-flex align-items-center">
-                                            <label class="col-md-3 text-nowrap"> Delivery Zones</label>
-                                            <span class="col-md-1"> : </span>
-                                            <select name="" id=""class="col-md-8 int form-control">
-                                                <option value="">Select delivery zones</option>
-                                            </select>
-                                        </div>                  
+                                        <div class=" col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3">{{'email' | translate}}</label>
+                                            <span class="col-md-1">:</span>
+                                            <div class="col-md-8" style="padding:0">
+                                                <div class="input-group">
+                                                    <input id="state" name="state" formControlName="email"
+                                                        class="form-control" required="true" value="" type="text"
+                                                        (keydown.space)="$event.preventDefault();">
+                                                </div>
+                                                <div
+                                                    *ngIf="addRestaurantForm.get('email').hasError('required') && addRestaurantForm.get('email').touched">
+                                                    <span style="color:red">Email is required.</span></div>
+                                                <div *ngIf="addRestaurantForm.get('email').hasError('maxlength') && addRestaurantForm.get('email').dirty"
+                                                    style="color:red">
+                                                    Email maxlength should be 255.
+                                                </div>
+                                                <div *ngIf="addRestaurantForm.get('email').hasError('pattern') && addRestaurantForm.get('email').dirty"
+                                                    style="color:red">
+                                                    Please enter valid email id.
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                               
-                            </div>
-                           
-                            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
-                                <button type="submit" routerLink = "/add-restaurant" class="btn btn-flat cusine btn-flat">{{'PREVIOUS' | translate}}</button>
 
-                                <button type="submit" routerLink = "/add-restaurent-item-details" class="btn btn-flat ml-3 cusine btn-flat">{{'NEXT' | translate}}</button>
-                                   
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 align-items-center" style="display: flex;">
+                                            <label class="col-md-3 text-nowrap">Operation Hours</label>
+
+                                        </div>
+                                        <div class="col-md-6 d-flex align-items-center">
+                                            <label class="col-md-3 text-nowrap">Menu Image</label>
+                                            <span class="col-md-1"> : </span>
+                                            <input type="text" class="col-md-6 int form-control" readonly
+                                                placeholder="jpeg/jpg/png 2 MB"
+                                                (keypress)="service.preventSpace($event)" formControlName="menu_image">
+                                            <input #menu_image type="file" (click)="menu_image.value = null"
+                                                (change)="fileUpload($event,'menu_image')" style="display:none"
+                                                accept="image/*">
+                                            <div class="col-md-2">
+                                                <button type="submit" style="margin-top: 19px"
+                                                    (click)="menu_image.click()"
+                                                    class="btn btn-flat cusine btn-flat">{{'Upload' | translate}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div formGroupName="operation_hours">
+
+                                        <div class="row mb-3 pl-5" formGroupName="mon">
+                                            <div class="d-flex col-md-6"
+                                                style="justify-content: space-evenly;margin-left: -4%">
+                                                <label for=""> Mon</label>
+                                                <span>From</span>
+                                                <input type="time" formControlName="from" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                                <span>To</span>
+                                                <input type="time" formControlName="to" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 pl-5" formGroupName="tue">
+                                            <div class="d-flex col-md-6"
+                                                style="justify-content: space-evenly;margin-left: -4%">
+                                                <label for=""> Tue</label>
+                                                <span>From</span>
+                                                <input type="time" formControlName="from" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                                <span>To</span>
+                                                <input type="time" formControlName="to" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 pl-5" formGroupName="wed">
+                                            <div class="d-flex col-md-6"
+                                                style="justify-content: space-evenly;margin-left: -4%">
+                                                <label for=""> Wed</label>
+                                                <span>From</span>
+                                                <input type="time" formControlName="from" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                                <span>To</span>
+                                                <input type="time" formControlName="to" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 pl-5" formGroupName="thu">
+                                            <div class="d-flex col-md-6"
+                                                style="justify-content: space-evenly;margin-left: -4%">
+                                                <label for=""> Thu</label>
+                                                <span>From</span>
+                                                <input type="time" formControlName="from" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                                <span>To</span>
+                                                <input type="time" formControlName="to" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 pl-5" formGroupName="fri">
+                                            <div class="d-flex col-md-6"
+                                                style="justify-content: space-evenly;margin-left: -4%">
+                                                <label for=""> Fri</label>
+                                                <span>From</span>
+                                                <input type="time" formControlName="from" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                                <span>To</span>
+                                                <input type="time" formControlName="to" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 pl-5" formGroupName="sat">
+                                            <div class="d-flex col-md-6"
+                                                style="justify-content: space-evenly;margin-left: -4%">
+                                                <label for=""> Sat</label>
+                                                <span>From</span>
+                                                <input type="time" formControlName="from" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                                <span>To</span>
+                                                <input type="time" formControlName="to" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 pl-5" formGroupName="sun">
+                                            <div class="d-flex col-md-6"
+                                                style="justify-content: space-evenly;margin-left: -4%">
+                                                <label for=""> Sun</label>
+                                                <span>From</span>
+                                                <input type="time" formControlName="from" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                                <span>To</span>
+                                                <input type="time" formControlName="to" class="col-md-2"
+                                                    placeholder="HH:MM">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <h3 class="p-3 pl-4">Restaurant Address</h3>
+                                    <div formGroupName="address">
+                                        <div class="row mb-5">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3"> Street</label>
+                                                <span class="col-md-1">:</span>
+                                                <input type="text" class="col-md-8 int form-control"
+                                                    (keypress)="service.preventSpace($event)" formControlName="street">
+                                            </div>
+
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> Province</label>
+                                                <span class="col-md-1"> : </span>
+                                                <select formControlName="province" id=""
+                                                    class="col-md-8 int form-control" (change)="selectProvince($event)">
+                                                    <option value="">Select Province</option>
+                                                    <option value="{{province}}" *ngFor="let province of provinceList">
+                                                        {{province}}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="row mb-5">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> Country</label>
+                                                <span class="col-md-1"> : </span>
+                                                <select formControlName="country" id=""
+                                                    class="col-md-8 int form-control" (change)="selectCountry($event)">
+                                                    <option value="">Select Country</option>
+                                                    <option value="{{country}}" *ngFor="let country of countries">
+                                                        {{country}}
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> City</label>
+                                                <span class="col-md-1"> : </span>
+                                                <select formControlName="city" class="col-md-8 int form-control">
+                                                    <option value="">Select City</option>
+                                                    <option value="{{city.city}}" *ngFor="let city of cityList">
+                                                        {{city.city}}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="row mb-5">
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3"> Zipcode</label>
+                                                <span class="col-md-1">:</span>
+                                                <input type="text" class="col-md-8 int form-control"
+                                                    (keypress)="service.preventSpace($event)" formControlName="zipcode">
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-center">
+                                                <label class="col-md-3 text-nowrap"> Delivery Zones</label>
+                                                <span class="col-md-1"> : </span>
+                                                <select formControlName="zone" class="col-md-8 int form-control">
+                                                    <option value="">Select delivery zones</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="bx mt-4-btn" style="display: flex;justify-content: center;width: 100%;">
+                                <button type="submit" (click)="addRestauarant('add-restaurant')"
+                                    routerLink="/add-restaurant"
+                                    class="btn btn-flat cusine btn-flat">{{'PREVIOUS' | translate}}</button>
+
+                                <button type="submit" (click)="addRestauarant('add-restaurent-item-details')"
+                                    class="btn btn-flat ml-3 cusine btn-flat">{{'NEXT' | translate}}</button>
+
                             </div>
                         </form>
                     </div>
@@ -249,7 +329,7 @@
 </div>
 
 <footer class="footer-text ">
-    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong> &nbsp;{{'Allrightsreserved' | translate}}
+    <strong> {{'Copyright' | translate}}&copy; 2020 <a href="javascript:; ">{{'FoodDelivery' | translate}}</a></strong>
+    &nbsp;{{'Allrightsreserved' | translate}}
 
 </footer>
-

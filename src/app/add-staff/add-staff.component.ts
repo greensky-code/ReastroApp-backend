@@ -108,7 +108,7 @@ export class AddStaffComponent implements OnInit {
 
   // /////////////Role Api////////////
   getRole() {
-    this.service.getApi("api/role", 1).subscribe((res) => {
+    this.service.getApi("api/role?is_active=true", 1).subscribe((res) => {
       if (res.status == 200) {
         let data = res.body.results.map((role) => {
           return { name: role.name, id: role._id };
@@ -131,7 +131,7 @@ export class AddStaffComponent implements OnInit {
       role: this.selectRole,
       gender: this.addStaffForm.value.gender,
       //  "url"           : "http://172.16.6.245:4200/forgot-password"
-      url: this.service.websiteUrls + "forgot-password",
+      // url: this.service.websiteUrls + "forgot-password",
     };
     this.service.postApi("api/staff", object, 1).subscribe(
       (res) => {
