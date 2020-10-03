@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const { logger } = require('../util');
-require('dotenv').config({ path: 'G:/New Free/dcpfoodadmin/env' });
+require('dotenv').config({ path: 'F:/clientsource/tanmoy/ReastroApp-backend/env' });
 // require('dotenv').config({ path: '/home/ec2-user/insurex_backend/insurex/env' });
 
 
