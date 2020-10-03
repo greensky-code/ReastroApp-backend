@@ -224,7 +224,7 @@ const routes: Routes = [
   { path: 'add-cuisine', component: AddCousinsComponent , canActivate: [AuthGuard]},
   { path: 'manage-allergen', component: ManageAllergnComponent , canActivate: [AuthGuard]},
   { path: 'add-allergen', component: AddAllergnComponent , canActivate: [AuthGuard]},
-  { path: 'edit-cuisine', component: EditCusineComponent },
+  { path: 'edit-cuisine/:id', component: EditCusineComponent },
   { path: 'payout-driver', component: PayoutDriverComponent , canActivate: [AuthGuard]},
   { path: 'payout-driver-details/:id', component: PayoutDriverDetailsComponent, canActivate: [AuthGuard] },
   { path: 'view-allergan/:id/:val', component: ViewAllerganComponent, canActivate: [AuthGuard]},
