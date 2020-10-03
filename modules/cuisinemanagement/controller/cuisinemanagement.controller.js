@@ -46,10 +46,24 @@ exports.insert = (req, res) => {
 };
 
 exports.list = (req, res) => {
-  cuisine
+  const languageCode = req.query.languageCode || 'en';
+  const userid = req.user._id || req.body.userid
+  let option = {
+    page: req.query.page || 1,
+    limit: 10,
+  }
+  let quer = {
+    is_delete: false
+  }
+  if (req.query.search) {
+    let search = new RegExp("^" + req.query.search)
+    quer.cuisine_name = { $regex: search, $options: 'i' }
+  }
+  console.log(quer)
+  var aggregate = cuisine
     .aggregate([
       {
-        $match: { is_delete: false },
+        $match: quer,
       },
       {
         $lookup: {
@@ -81,24 +95,30 @@ exports.list = (req, res) => {
       },
       { $sort: { created_at: -1 } },
     ])
-    .exec((err, resdata) => {
-      console.log("err", err);
-      if (err) {
-        return res.json({
-          message_code: "500",
-          message: "Internal_server_error",
-        });
-      } else if (resdata.length < 1) {
-        return res.json({ message_code: "404", message: "No Data Found" });
-      } else {
-        let data = {
-          data: resdata,
-          message: "Cuisine LIST",
-          message_code: "200",
-        };
-        return res.json(data);
+  cuisine.aggregatePaginate(aggregate, option, (err, result, pages, total) => {
+    if (!err) {
+      const success = {
+        "docs": result,
+        "total": total,
+        "limit": option.limit,
+        "page": option.page,
+        "pages": pages,
       }
-    });
+      if (success) {
+        let data = {
+          results: success.docs,
+          message: "ROLE LIST",
+          message_code: "200",
+          count: success.total
+        }
+        return res.json(data)
+
+      }
+    }
+    else {
+      return res.json({ message_code: "500", message: "Internal_server_error", err: err })
+    }
+  })
 };
 
 exports.getById = (req, res) => {
@@ -231,3 +251,154 @@ exports.removeById = (req, res) => {
     }
   });
 };
+
+
+exports.filterlist = (req, res) => {
+  const languageCode = req.query.languageCode || 'en';
+  const userid = req.user._id || req.body.userid
+  let option = {
+    page: req.query.page || 1,
+    limit: 10,
+  }
+  let quer = {
+    is_delete: false
+  }
+  // quer.$or = [
+  //   { is_active: req.body.status },
+  //   {
+  //     created_at: {
+  //       $gte: req.body.start,
+  //       $lt: req.body.end
+  //     }
+  //   }
+  // ]
+  if (req.body.status) {
+    quer["is_active"] = req.body.status;
+  }
+  if (req.body.start) {
+    quer["created_at"] = {
+      $gte: new Date(req.body.start),
+    };
+  }
+  if (req.body.end) {
+    if (quer["created_at"]) {
+      quer["created_at"]["$lte"] = new Date(req.body.end);
+    } else
+      quer["created_at"] = {
+        $lte: new Date(req.body.end),
+      };
+  }
+  console.log(quer)
+  console.log(quer)
+  var aggregate = cuisine
+    .aggregate([
+      {
+        $match: quer,
+      },
+      {
+        $lookup: {
+          from: "createeditviewprofiles",
+          localField: "created_by",
+          foreignField: "_id",
+          as: "created_by",
+        },
+      },
+      {
+        $lookup: {
+          from: "createeditviewprofiles",
+          localField: "updated_by",
+          foreignField: "_id",
+          as: "updated_by",
+        },
+      },
+      {
+        $project: {
+          "created_by.password": 0,
+          "created_by.created_at": 0,
+          "created_by.updated_at": 0,
+          "created_by.is_active": 0,
+          "updated_by.password": 0,
+          "updated_by.created_at": 0,
+          "updated_by.updated_at": 0,
+          "updated_by.is_active": 0,
+        },
+      },
+      { $sort: { created_at: -1 } },
+    ])
+  cuisine.aggregatePaginate(aggregate, option, (err, result, pages, total) => {
+    if (!err) {
+      const success = {
+        "docs": result,
+        "total": total,
+        "limit": option.limit,
+        "page": option.page,
+        "pages": pages,
+      }
+      if (success) {
+        let data = {
+          results: success.docs,
+          message: "ROLE LIST",
+          message_code: "200",
+          count: success.total
+        }
+        return res.json(data)
+
+      }
+    }
+    else {
+      return res.json({ message_code: "500", message: "Internal_server_error", err: err })
+    }
+  })
+};
+exports.blockcuisine = (req, res) => {
+  const languageCode = req.query.languageCode || "en";
+  const userid = req.user._id || req.body.userid;
+  const id = req.params.id;
+  let query = {
+    _id: userid,
+  };
+  createEditViewProfile.findOne(query, (err, resdata) => {
+    if (err) {
+      return res.json({
+        message_code: "500",
+        message: "Internal_server_error",
+      });
+    } else if (!resdata) {
+      return res.json({
+        message_code: "404",
+        message: "Blocking role not allowed",
+      });
+    } else {
+      let date = new Date();
+      let quer = {
+        _id: id,
+      };
+      let set = {
+        is_active: req.body.block,
+        updated_at: date,
+        updated_by: userid,
+      };
+      cuisine.findOneAndUpdate(quer, set, { new: true }, (error, updaterole) => {
+        if (error) {
+          return res.json({
+            message_code: "500",
+            message: "Internal_server_error",
+            err: error,
+          });
+        } else {
+          if (req.body.block) {
+            return res.json({
+              message_code: "200",
+              message: "Unblocked sucessfully",
+            });
+          }
+          return res.json({
+            message_code: "200",
+            message: "Blocked sucessfully",
+          });
+        }
+      });
+    }
+  });
+}
+

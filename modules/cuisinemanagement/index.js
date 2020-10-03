@@ -2,17 +2,20 @@ const express = require("express");
 const router = express.Router();
 const cuisinecontroller = require("./controller/cuisinemanagement.controller");
 const middleware = require("../middlewares/authMiddleware");
-router.post("/cuisine", middleware.auth, cuisinecontroller.insert);
-router.get("/cuisine", middleware.auth, cuisinecontroller.list);
-router.get("/cuisine/:cuisineid", middleware.auth, cuisinecontroller.getById);
+router.post("/cuisines", middleware.auth, cuisinecontroller.insert);
+router.get("/cuisines", middleware.auth, cuisinecontroller.list);
+router.get("/cuisines/:cuisineid", middleware.auth, cuisinecontroller.getById);
 router.put(
-  "/cuisine/:cuisineid",
+  "/cuisines/:cuisineid",
   middleware.auth,
   cuisinecontroller.updateById
 );
 router.delete(
-  "/cuisine/:cuisineid",
+  "/cuisines/:cuisineid",
   middleware.auth,
   cuisinecontroller.removeById
 );
+router.post('/filtercuisines',middleware.auth, cuisinecontroller.filterlist)
+router.post('/blockcuisine/:id',middleware.auth, cuisinecontroller.blockcuisine)
+
 module.exports = router;
