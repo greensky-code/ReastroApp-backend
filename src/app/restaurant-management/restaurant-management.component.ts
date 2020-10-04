@@ -3,6 +3,7 @@ import { ApiServiceService } from '../api-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ExcelService } from '../services/excel.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationsService } from 'angular2-notifications';
 declare var $: any;
 
 @Component({
@@ -27,9 +28,10 @@ export class RestaurantManagementComponent implements OnInit {
   disables: boolean = false;
   manageRestaurant;
   total;
+  delete_id;
 
 
-  constructor(private service: ApiServiceService, private tostr: ToastrService, private excelService: ExcelService, private spinner: NgxSpinnerService) { }
+  constructor(private service: ApiServiceService, private notify: NotificationsService, private tostr: ToastrService, private excelService: ExcelService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getRestaurant(1);
@@ -247,12 +249,35 @@ export class RestaurantManagementComponent implements OnInit {
 
   }
   // =========modal========//
-  delete() {
-    $('#delete').modal('show')
+  delete(id) {
+    this.delete_id = id;
+    $('#delete').modal('show');
   }
 
   deletemodal() {
-    $('#delete').modal('hide')
+    $('#delete').modal('hide');
+    this.service.delete("api/restaurant/", this.delete_id, 1).subscribe(
+      (res) => {
+        if (res.status == 200) {
+          this.tostr.success("Restaurant deleted successfully.");
+          this.notify.success('', "Restaurant deleted successfully.", {
+            timeOut: 5000,
+            showProgressBar: true,
+            pauseOnHover: true,
+            clickToClose: true,
+            maxLength: 50
+          })
+          this.getRestaurant(1);
+        }
+      },
+      (err) => {
+        if (err.status == 403 || err.status == 401) {
+          this.service.logout();
+        } else if (err.status == 400) {
+          this.tostr.error(err.error.message);
+        }
+      }
+    );
   }
 
   terminate() {

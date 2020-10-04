@@ -391,6 +391,7 @@ export class ManageStaffComponent implements OnInit {
         if (res.status == 200) {
           this.deletedata = res;
           this.tostr.success("Staff deleted successfully.");
+
           this.manadeDetails(1);
         }
       },

@@ -35,7 +35,8 @@
                                         <div class="col-md-6 d-flex align-items-center">
                                             <label class="col-md-3"> Menu Category</label>
                                             <span class="col-md-1">:</span>
-                                            <select formControlName="menu_category" class="col-md-8 form-control">
+                                            <select formControlName="menu_category" (change)="loadSuggestedItem($event)"
+                                                class="col-md-8 form-control">
                                                 <option value="">Select Menu Category</option>
                                                 <option value="{{menu.menu_item_id}}" *ngFor="let menu of menuList">
                                                     {{menu.name}}
@@ -153,6 +154,10 @@
                                             <span class="col-md-1"> : </span>
                                             <select formControlName="suggested_items" class="col-md-8 int form-control">
                                                 <option value="">Select Items</option>
+                                                <option value="{{item.suggested_item_id}}"
+                                                    *ngFor="let item of suggestedItemLiast">
+                                                    {{item.name}}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-md-6  align-items-center" style="margin-top: -8%">

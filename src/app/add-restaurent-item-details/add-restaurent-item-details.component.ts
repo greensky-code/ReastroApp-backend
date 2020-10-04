@@ -33,6 +33,7 @@ export class AddRestaurentItemDetailsComponent implements OnInit {
   addItemDetailsForm: FormGroup;
   item_image: File;
   menuList;
+  suggestedItemLiast;
 
   constructor(public service: ApiServiceService, private tostr: ToastrService, private router: Router,
     private excelService: ExcelService, private spinner: NgxSpinnerService, private restaurantService: RestaurantService, private formBuilder: FormBuilder) { }
@@ -61,6 +62,7 @@ export class AddRestaurentItemDetailsComponent implements OnInit {
       if (this.restaurantService.menuItemFormData.menu_category != "") {
         this.menuList = this.restaurantService.menuMasterData;
       }
+      this.loadSuggestedItem(this.restaurantService.menuItemFormData.menu_category);
       this.addItemDetailsForm.patchValue(this.restaurantService.menuItemFormData);
     }
     this.getcuisine();
@@ -69,6 +71,35 @@ export class AddRestaurentItemDetailsComponent implements OnInit {
     } else {
       this.menuList = this.restaurantService.menuMasterData;
     }
+
+  }
+
+  loadSuggestedItem(event) {
+    let data;
+    if (event.target) {
+      data = event.target.value
+    } else {
+      data = event;
+    }
+    this.service.getApi(`api/suggestedItem/${data}`, 1).subscribe(
+      (res) => {
+        if (res.status == 200) {
+          this.spinner.hide();
+          this.restaurantService.suggestedItemMasterData = res.body;
+          this.suggestedItemLiast = res.body;
+        }
+      },
+      (err) => {
+        console.log("erroItem", err);
+        if (err.status == 403 || err.status == 401) {
+          this.spinner.hide();
+          this.service.logout();
+        } else if (err.status == 500) {
+          this.spinner.hide();
+          this.service.toastErr(err.statusText);
+        }
+      }
+    );
   }
 
   getMenu() {

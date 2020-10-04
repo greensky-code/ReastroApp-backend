@@ -11,6 +11,7 @@ export class RestaurantService {
   public bankFormData;
   public countryMasterData;
   public menuMasterData;
+  public suggestedItemMasterData;
   public bankMasterData;
 
   constructor() { }
