@@ -42,5 +42,9 @@ router.get("/restaurant", middleware.auth, restaurantcontroller.list);
 //   staffcontroller.validateStaff(),
 //   staffcontroller.updateById
 // );
-// router.delete("/staff/:staffid", middleware.auth, staffcontroller.removeById);
+router.delete(
+  "/restaurant/:restaurantid",
+  middleware.auth,
+  restaurantcontroller.removeById
+);
 module.exports = router;

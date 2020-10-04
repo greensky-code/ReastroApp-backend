@@ -1,0 +1,34 @@
+[
+  { "menu_id": 15, "name": "Lunch_suggestedItem1" },
+  { "menu_id": 15, "name": "Lunch_suggestedItem2" },
+  { "menu_id": 16, "name": "Dinner_suggestedItem1" },
+  { "menu_id": 16, "name": "Dinner_suggestedItem2" },
+  { "menu_id": 17, "name": "Snacks_suggestedItem1" },
+  { "menu_id": 17, "name": "Snacks_suggestedItem2" },
+  {
+    "menu_id": 18,
+    "name": "Breakfast_suggestedItem1"
+  },
+  {
+    "menu_id": 18,
+    "name": "Breakfast_suggestedItem2"
+  },
+  {
+    "menu_id": 19,
+    "name": "Recommended_suggestedItem1"
+  },
+  {
+    "menu_id": 19,
+    "name": "Recommended_suggestedItem2"
+  },
+  {
+    "menu_id": 20,
+    "name": "Starters_suggestedItem1"
+  },
+  {
+    "menu_id": 20,
+    "name": "Starters_suggestedItem2"
+  },
+  { "menu_id": 21, "name": "Drinks_suggestedItem1" },
+  { "menu_id": 21, "name": "Drinks_suggestedItem2" }
+]

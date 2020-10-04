@@ -157,3 +157,50 @@ exports.list = (req, res) => {
     }
   );
 };
+
+exports.removeById = (req, res) => {
+  const userid = req.user._id || req.body.userid;
+  const restaurantid = req.params.restaurantid;
+  let query = {
+    _id: userid,
+  };
+  createEditViewProfile.findOne(query, (err, resdata) => {
+    if (err) {
+      return res.json({
+        message_code: "500",
+        message: "Internal_server_error",
+      });
+    } else if (!resdata) {
+      return res.json({
+        message_code: "404",
+        message: "Deleting staff not allowed",
+      });
+    } else {
+      let date = new Date();
+      let query = {
+        restaurant_id: restaurantid,
+      };
+      let set = {
+        is_delete: true,
+        updated_at: date,
+        updated_by: userid,
+      };
+      restaurant.findOneAndUpdate(
+        query,
+        set,
+        { new: true },
+        (error, updaterole) => {
+          if (error) {
+            return res.json({
+              message_code: "500",
+              message: "Internal_server_error",
+              err: error,
+            });
+          } else {
+            return res.json({ message_code: "204" });
+          }
+        }
+      );
+    }
+  });
+};

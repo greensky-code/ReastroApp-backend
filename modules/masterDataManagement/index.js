@@ -6,5 +6,10 @@ const middleware = require("../middlewares/authMiddleware");
 router.get("/country", middleware.auth, masterDataController.countryList);
 router.get("/menu", middleware.auth, masterDataController.menuList);
 router.get("/bank", middleware.auth, masterDataController.bankList);
+router.get(
+  "/suggestedItem/:menuId",
+  middleware.auth,
+  masterDataController.suggestedItemList
+);
 
 module.exports = router;
